@@ -3,7 +3,7 @@
     <!-- Brand/logo -->
     <ul class="navbar-nav mr-auto">
       <!-- <img src="../assets/logo.png" alt="Logo" style="width:40px;"> -->
-      <a class="navbar-brand" href="#">Urban Company</a>
+      <a class="navbar-brand" href="#">UrbanCo</a>
     </ul>
 
     <!-- Links -->
