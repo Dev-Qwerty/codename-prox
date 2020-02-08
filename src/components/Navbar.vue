@@ -23,8 +23,16 @@
       <li class="nav-item">
         <a class="nav-link" href="#">Blog</a>
       </li>
-      <button type="button" class="btn mr-1 btn-dark btn-sm">Login</button>
-      <button type="button" class="btn btn-outline-light text-dark btn-sm">SignUp</button>
+      <li class="nav-item">
+        <button type="button" class="btn btn-light">Login</button>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"> / </a>
+      </li>
+      <li class="nav-item">
+        <button type="button" class="btn btn-light">SignUp</button>
+      </li>
+
     </ul>
   </nav>
 </template>
@@ -33,5 +41,19 @@
 </script>
 
 <style>
-
+  .nav-link {
+    color: #aaa;
+    font-size: 18px;
+  }
+  .btn {
+    color: #aaa;
+    font-size: 18px;
+  }
+  .navbar {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+  .navbar-brand {
+    font-size: 22px;
+  }
 </style>

@@ -32,14 +32,17 @@
 
   .box h3 {
     color: #000;
-    padding: 0 0 20px;
+    padding-bottom: 0px;
     text-align: center;
     font-weight: bold;
   }
   .box h5 {
     margin: 0;
     color: #000;
-    padding: 0 0 20px;
+    padding-bottom: 0px;
     text-align: center;
+  }
+  .input-group {
+    padding-top: 40px;
   }
 </style>
