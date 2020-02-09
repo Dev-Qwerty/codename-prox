@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-sm bg-white navbar-light">
+  <nav class="navbar navbar-expand-sm bg-white navbar-light sticky-top">
     <!-- Brand/logo -->
     <ul class="navbar-nav mr-auto">
       <!-- <img src="../assets/logo.png" alt="Logo" style="width:40px;"> -->
