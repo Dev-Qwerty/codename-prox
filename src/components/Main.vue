@@ -5,6 +5,7 @@
     <Lcontent />  
     <LandingBox />
     <Feat />
+    <Footer />
   </div>
 </template>
 
@@ -14,6 +15,7 @@ import HrLine from '@/components/HrLine'
 import Lcontent from '@/components/LandingContent'
 import LandingBox from '@/components/LandingBox'
 import Feat from '@/components/FeatCards'
+import Footer from '@/components/Footer'
 
 export default {
   components: {
@@ -21,7 +23,8 @@ export default {
     HrLine,
     Lcontent,
     LandingBox,
-    Feat
+    Feat,
+    Footer
   }
 }
 </script>
