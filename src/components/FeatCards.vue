@@ -1,148 +1,101 @@
 <template>
-  <div class="wrapper">
+  <div class="container">
     <h4>Recommended Services</h4>
-    <div class="container">
-      <div class="box1">
-        <!-- <h5>Box-1</h5>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam nisi rem perspiciatis </p> -->
+    <div class="row1">
+      <div class="col one">
       </div>
-      <div class="box2">
+      <div class="col two">
       </div>
-      <div class="box3">
+      <div class="col three">
       </div>
     </div>
 
     <h4>Photography</h4>
-    <div class="container">
-      <div class="box4">
+    <div class="row2">
+      <div class="col four">
       </div>
-      <div class="box5">
+      <div class="col five">
       </div>
     </div>
 
     <h4>Cleaning Services</h4>
-    <div class="container">
-      <div class="box6">
+    <div class="row3">
+      <div class="col six">
       </div>
-      <div class="box7">
+      <div class="col seven">
       </div>
     </div>      
   </div>    
 </template>
 
 <style scoped>
-  .wrapper {
+  .container {
     margin-top: 60px;
     margin-left: 40px;
     margin-right: 40px;
+    padding: 0px;
   }
-  .container {
+  .row1 {
+    width: 100%;
     margin:0px;
-    padding: 40px;
+    padding-left: 35px;
+    padding-right: 40px;
+    padding-bottom: 40px;
+    padding-top: 20px;
     display: flex;
+    justify-content: space-between;
   }
-  /*.container div {
-    border: 1px #ccc solid;
-    padding: 10px;
-  }*/
-  .box1 {
-    height: 200px;
-    width: 400px;
+  .row2 {
+    width: 69%;
+    margin:0px;
+    padding-left: 35px;
+    padding-right: 40px;
+    padding-bottom: 40px;
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .row3 {
+    width: 69%;
+    margin:0px;
+    padding-left: 35px;
+    padding-right: 40px;
+    padding-bottom: 40px;
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .col {
+    flex-grow:1;
+    margin: 10px;
+    height: 170px;
     border-radius: 15px;
     overflow: hidden;
     perspective: 1px;
-    background-image: url('../assets/Pbrush.jpg');
     background-blend-mode: overlay;
     background-repeat: no-repeat;
     background-position: center;
-    background-size: cover;
-    border: 1px #ccc solid;
-    margin-right: 40px;
+    background-size: cover;    
   }
-  .box2 {
-    height: 200px;
-    width: 400px;
-    border-radius: 15px;
-    overflow: hidden;
-    perspective: 1px;    
-    background-image: url('../assets/RectBulb.jpg');
-    background-blend-mode: overlay;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    border: 1px #ccc solid;
-    margin-right: 40px;
+  .col.one {
+    background-image: url('../assets/Plumber.png');
   }
-  .box3 {
-    height: 200px;
-    width: 400px;
-    border-radius: 15px;
-    overflow: hidden;
-    perspective: 1px;      
-    background-image: url('../assets/ManFactory.jpg');
-    background-blend-mode: overlay;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    border: 1px #ccc solid;
+  .col.two {
+    background-image: url('../assets/Plumber.png');
+  }      
+  .col.three {
+    background-image: url('../assets/Plumber.png');
   }
-
-  .box4 {
-    align-self:flex-start;
-    height: 200px;
-    width: 400px;
-    border-radius: 15px;
-    overflow: hidden;
-    perspective: 1px;      
-    background-image: url('../assets/Pbrush.jpg');
-    background-blend-mode: overlay;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    border: 1px #ccc solid;
-    margin-right: 40px;
+  .col.four {
+    background-image: url('../assets/Wedding.jpg');
   }
-
-  .box5 {
-    height: 200px;
-    width: 400px;
-    border-radius: 15px;
-    overflow: hidden;
-    perspective: 1px;      
-    background-image: url('../assets/ManFactory.jpg');
-    background-blend-mode: overlay;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    border: 1px #ccc solid;
+  .col.five {
+    background-image: url('../assets/Photo.jpg');
   }
-  .box6 {
-    align-self:flex-start;
-    height: 200px;
-    width: 400px;
-    border-radius: 15px;
-    overflow: hidden;
-    perspective: 1px;      
-    background-image: url('../assets/ManFactory.jpg');
-    background-blend-mode: overlay;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    border: 1px #ccc solid;
-    margin-right: 40px;
+  .col.six {
+    background-image: url('../assets/Sprayer.jpg');
+  }    
+  .col.seven {
+    background-image: url('../assets/Sprayer1.jpg');
   }
-
-  .box7 {
-    height: 200px;
-    width: 400px;
-    border-radius: 15px;
-    overflow: hidden;
-    perspective: 1px;      
-    background-image: url('../assets/Pbrush.jpg');
-    background-blend-mode: overlay;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    border: 1px #ccc solid;
-  }  
 </style>
