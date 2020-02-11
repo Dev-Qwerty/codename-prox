@@ -78,24 +78,24 @@
     background-size: cover;    
   }
   .col.one {
-    background-image: url('../assets/Plumber.png');
+    background-image: url('../../assets/Plumber.png');
   }
   .col.two {
-    background-image: url('../assets/Plumber.png');
+    background-image: url('../../assets/Plumber.png');
   }      
   .col.three {
-    background-image: url('../assets/Plumber.png');
+    background-image: url('../../assets/Plumber.png');
   }
   .col.four {
-    background-image: url('../assets/Wedding.jpg');
+    background-image: url('../../assets/Wedding.jpg');
   }
   .col.five {
-    background-image: url('../assets/Photo.jpg');
+    background-image: url('../../assets/Photo.jpg');
   }
   .col.six {
-    background-image: url('../assets/Sprayer.jpg');
+    background-image: url('../../assets/Sprayer.jpg');
   }    
   .col.seven {
-    background-image: url('../assets/Sprayer1.jpg');
+    background-image: url('../../assets/Sprayer1.jpg');
   }
 </style>
