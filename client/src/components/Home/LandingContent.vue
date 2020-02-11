@@ -8,7 +8,7 @@
 <style scoped>
   .landing {
     min-height: 650px;
-    background-image: url('../assets/ManFactory.jpg');
+    background-image: url('../../assets/ManFactory.jpg');
     background-blend-mode: overlay;
     background-repeat: no-repeat;
     background-position: center;
