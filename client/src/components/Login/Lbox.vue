@@ -2,14 +2,14 @@
   <div class = "box">
     <form action="" method="POST">
       <div>
-        <input class="input-box" type="text" name="uname" placeholder="Username">
+        <input class="input-box" type="text" name="uname" placeholder="USERNAME">
       </div>
       <div>
-        <input class="input-box" type="Password" name="password" placeholder="Password">
+        <input class="input-box" type="Password" name="password" placeholder="PASSWORD">
       </div>
       <div>
         <label class="clr">Keep me signed in</label>
-        <input type="checkbox" name="vehicle1" value="Bike">
+        <input type="checkbox" name="check1" value="">
       </div>
       <div>
         <input class="sbutton" type="submit" name="" value="Sign in">
@@ -22,7 +22,7 @@
 <style scoped>    
   .box {
     width: 34%;
-    height: 60%;
+    height: 65%;
     background-color: #fff;
     top: 63%;
     left: 50%;
