@@ -1,14 +1,19 @@
 <template>
   <div class = "box">
     <h4>Login</h4>
-    <p>Hello let's get started</p>
+    <p id="one">Hello let's get started</p>
+    <div class="wrapper">
+      <div class="col googleIcon"></div>
+      <div class="col fbookIcon"></div>
+    </div>
+    <p id="two">Login with your social network</p>
   </div>
 </template>
 
 <style scoped>    
   .box {
     width: 28%;
-    height: 150px;
+    height: 170px;
     background-color: #000;
     color: #fff;
     opacity: 0.9;
@@ -18,15 +23,46 @@
     box-sizing: border-box;
     transform: translate(-50%, -50%);
     padding: 0px;
-    border-radius: 20px;
+    border-radius: 10px;
     padding: 20px;
+    border: none;
+    box-shadow: 5px #aaa;
   }
   .box h4 {
     color: #fff;
     margin-bottom: 2px;
   }
-  .box p {
+  #one {
     color: #aaa;
     font-size: 14px;
+  }
+  .wrapper {
+    width: 60%;
+    margin: 0px;
+    padding-left: 0px;
+    padding-right: 5px;
+    padding-bottom: 0px;
+    padding-top: 0px;    
+    display: flex;
+  }
+  .col {
+    margin-right: 15px;
+    height: 25px;
+    background-blend-mode: overlay;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 2px; 
+  }  
+  .col.googleIcon {
+    background-image: url('../../assets/Gicon.jpg');
+  }
+  .col.fbookIcon {
+    background-image: url('../../assets/Fb.jpg');
+  }
+  #two {
+    margin-top: 5px;
+    color: #aaa;
+    font-size: 10px;
   }
 </style>

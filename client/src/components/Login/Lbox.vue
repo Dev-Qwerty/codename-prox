@@ -1,15 +1,15 @@
 <template>
   <div class = "box">
-    <form action="login.php" method="POST">
+    <form action="" method="POST">
       <div>
-        <input class="input-box" type="text" name="uname" placeholder="Username">
+        <input class="input-box" type="text" name="uname" placeholder="USERNAME">
       </div>
       <div>
-        <input class="input-box" type="Password" name="password" placeholder="Password">
+        <input class="input-box" type="Password" name="password" placeholder="PASSWORD">
       </div>
       <div>
         <label class="clr">Keep me signed in</label>
-        <input type="checkbox" name="vehicle1" value="Bike">
+        <input type="checkbox" name="check1" value="">
       </div>
       <div>
         <input class="sbutton" type="submit" name="" value="Sign in">
@@ -21,22 +21,21 @@
 
 <style scoped>    
   .box {
-    width: 35%;
-    height: 60%;
+    width: 34%;
+    height: 65%;
     background-color: #fff;
     top: 63%;
     left: 50%;
     position: absolute;
     box-sizing: border-box;
     transform: translate(-50%, -50%);
-    padding-top: 130px;
+    padding-top: 110px;
     padding-bottom: 5px;
     padding-left: 50px;
     padding-right: 50px;
     border-radius: 10px;
-  }
-  .input-group {
-    padding-top: 40px;
+    border: none;
+    box-shadow: 2px 2px #aaa
   }
   input[type="submit"] {
     width: 100%;
