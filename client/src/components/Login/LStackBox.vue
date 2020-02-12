@@ -1,13 +1,13 @@
 <template>
   <div class = "box">
-    <h5>Get instant access to reliable</h5>
-    <h5>and affordable services</h5>
+    <h4>Login</h4>
+    <p>Hello let's get started</p>
   </div>
 </template>
 
 <style scoped>    
   .box {
-    width: 450px;
+    width: 28%;
     height: 150px;
     background-color: #000;
     color: #fff;
@@ -17,26 +17,16 @@
     position: absolute;
     box-sizing: border-box;
     transform: translate(-50%, -50%);
-    padding-top: 30px;
-    padding-bottom: 5px;
-    padding-left: 30px;
-    padding-right: 30px;
+    padding: 0px;
     border-radius: 20px;
+    padding: 20px;
   }
-
-  .box h3 {
-    color: #000;
-    padding-bottom: 6px;
-    text-align: center;
-    font-weight: bold;
+  .box h4 {
+    color: #fff;
+    margin-bottom: 2px;
   }
-  .box h5 {
-    margin: 0;
-    color: #000;
-    padding-bottom: 0px; 
-    text-align: center;
-  }
-  .input-group {
-    padding-top: 40px;
+  .box p {
+    color: #aaa;
+    font-size: 14px;
   }
 </style>

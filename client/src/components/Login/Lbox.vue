@@ -8,7 +8,7 @@
         <input class="input-box" type="Password" name="password" placeholder="Password">
       </div>
       <div>
-        <label>Keep me signed in</label>
+        <label class="clr">Keep me signed in</label>
         <input type="checkbox" name="vehicle1" value="Bike">
       </div>
       <div>
@@ -45,19 +45,18 @@
     color: #fff;
     height: 40px;
     opacity: 0.9;
-
   }
   .input-box {
     width: 100%;
     padding-left: 10px;
     margin-top: 30px;
     height: 50px;
+    border: 1px solid #aaa;
   }
   .box label {
-    padding-top: 10px;
+    padding-top: 15px;
     padding-right: 12px;
-    padding-bottom: 10px;
+    padding-bottom: 15px;
   }
-
   
 </style>
