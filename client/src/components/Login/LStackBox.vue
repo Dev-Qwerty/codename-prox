@@ -12,8 +12,8 @@
 
 <style scoped>    
   .box {
-    width: 28%;
-    height: 170px;
+    width: 27%;
+    height: 165px;
     background-color: #000;
     color: #fff;
     opacity: 0.9;
@@ -25,10 +25,11 @@
     padding: 0px;
     border-radius: 10px;
     padding: 20px;
-    border: none;
-    box-shadow: 5px #aaa;
+    border: 1px solid #000;
+    box-shadow: 7px 7px #eeefef;
   }
   .box h4 {
+    font-size: 23px;
     color: #fff;
     margin-bottom: 2px;
   }
@@ -37,7 +38,7 @@
     font-size: 14px;
   }
   .wrapper {
-    width: 60%;
+    width: 55%;
     margin: 0px;
     padding-left: 0px;
     padding-right: 5px;
@@ -47,7 +48,7 @@
   }
   .col {
     margin-right: 15px;
-    height: 25px;
+    height: 28px;
     background-blend-mode: overlay;
     background-repeat: no-repeat;
     background-position: center;
