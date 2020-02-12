@@ -1,12 +1,20 @@
 <template>
   <div class = "box">
-      <form action="login.php" method="POST">
-          <p>Username</p>
-          <input type="text" name="uname" placeholder="Enter Username">
-          <p>Password</p>
-          <input type="Password" name="password" placeholder="Enter Password">
-          <input type="submit" name="" value="Sign in">
-      </form>
+    <form action="login.php" method="POST">
+      <div>
+        <input class="input-box" type="text" name="uname" placeholder="Username">
+      </div>
+      <div>
+        <input class="input-box" type="Password" name="password" placeholder="Password">
+      </div>
+      <div>
+        <label class="clr">Keep me signed in</label>
+        <input type="checkbox" name="vehicle1" value="Bike">
+      </div>
+      <div>
+        <input class="sbutton" type="submit" name="" value="Sign in">
+      </div>
+    </form>
           
   </div>
 </template>
@@ -21,28 +29,34 @@
     position: absolute;
     box-sizing: border-box;
     transform: translate(-50%, -50%);
-    padding-top: 150px;
+    padding-top: 130px;
     padding-bottom: 5px;
-    padding-left: 30px;
-    padding-right: 30px;
+    padding-left: 50px;
+    padding-right: 50px;
     border-radius: 10px;
-  }
-
-  .box h3 {
-    color: #000;
-    padding-bottom: 6px;
-    text-align: center;
-    font-weight: bold;
-  }
-  .box h5 {
-    margin: 0;
-    color: #000;
-    padding-bottom: 0px; 
-    text-align: center;
   }
   .input-group {
     padding-top: 40px;
   }
-
+  input[type="submit"] {
+    width: 100%;
+    background-color: #000;
+    border: none;
+    color: #fff;
+    height: 40px;
+    opacity: 0.9;
+  }
+  .input-box {
+    width: 100%;
+    padding-left: 10px;
+    margin-top: 30px;
+    height: 50px;
+    border: 1px solid #aaa;
+  }
+  .box label {
+    padding-top: 15px;
+    padding-right: 12px;
+    padding-bottom: 15px;
+  }
   
 </style>
