@@ -8,7 +8,7 @@
 <style scoped>    
   .box {
     width: 28%;
-    height: 150px;
+    height: 170px;
     background-color: #000;
     color: #fff;
     opacity: 0.9;
@@ -20,6 +20,8 @@
     padding: 0px;
     border-radius: 20px;
     padding: 20px;
+    border: none;
+    box-shadow: 3px #aaa;
   }
   .box h4 {
     color: #fff;

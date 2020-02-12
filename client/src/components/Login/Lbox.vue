@@ -1,6 +1,6 @@
 <template>
   <div class = "box">
-    <form action="login.php" method="POST">
+    <form action="" method="POST">
       <div>
         <input class="input-box" type="text" name="uname" placeholder="Username">
       </div>
@@ -21,7 +21,7 @@
 
 <style scoped>    
   .box {
-    width: 35%;
+    width: 34%;
     height: 60%;
     background-color: #fff;
     top: 63%;
@@ -29,14 +29,13 @@
     position: absolute;
     box-sizing: border-box;
     transform: translate(-50%, -50%);
-    padding-top: 130px;
+    padding-top: 110px;
     padding-bottom: 5px;
     padding-left: 50px;
     padding-right: 50px;
     border-radius: 10px;
-  }
-  .input-group {
-    padding-top: 40px;
+    border: none;
+    box-shadow: 2px 2px #aaa
   }
   input[type="submit"] {
     width: 100%;
