@@ -1,16 +1,17 @@
 <template>
   <div id="app">
-    <Main />
+    <LMain />
   </div>
 </template>
 
 <script>
-import Main from './components/Home/Main.vue'
+//import Main from './components/Home/Main.vue'
+import LMain from './components/Login/LMain.vue'
 
 export default {
   name: 'app',
   components: {
-    Main,
+    LMain,
   }
 }
 </script>
