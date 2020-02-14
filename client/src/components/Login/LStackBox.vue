@@ -4,7 +4,6 @@
     <p id="one">Hello let's get started</p>
     <div class="wrapper">
       <div class="col googleIcon"></div>
-      <div class="col fbookIcon"></div>
     </div>
     <p id="two">Login with your social network</p>
   </div>
@@ -38,7 +37,7 @@
     font-size: 14px;
   }
   .wrapper {
-    width: 55%;
+    width: 25%;
     margin: 0px;
     padding-left: 0px;
     padding-right: 5px;
@@ -48,7 +47,7 @@
   }
   .col {
     margin-right: 15px;
-    height: 28px;
+    height: 25px;
     background-blend-mode: overlay;
     background-repeat: no-repeat;
     background-position: center;
@@ -57,9 +56,6 @@
   }  
   .col.googleIcon {
     background-image: url('../../assets/Gicon.jpg');
-  }
-  .col.fbookIcon {
-    background-image: url('../../assets/Fb.jpg');
   }
   #two {
     margin-top: 5px;
