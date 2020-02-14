@@ -1,17 +1,18 @@
 <template>
   <div id="app">
-    <LMain />
+    <SMain />
   </div>
 </template>
 
 <script>
 //import Main from './components/Home/Main.vue'
-import LMain from './components/Login/LMain.vue'
+//import LMain from './components/Login/LMain.vue'
+import SMain from './components/Signup/SMain.vue'
 
 export default {
   name: 'app',
   components: {
-    LMain,
+    SMain,
   }
 }
 </script>
