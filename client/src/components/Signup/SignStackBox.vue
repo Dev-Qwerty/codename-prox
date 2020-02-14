@@ -1,11 +1,11 @@
 <template>
   <div class = "box">
-    <h4>Login</h4>
+    <h4>Sign up</h4>
     <p id="one">Hello let's get started</p>
     <div class="wrapper">
       <div class="col googleIcon"></div>
     </div>
-    <p id="two">Login with your social network</p>
+    <p id="two">Sign up with your social network</p>
   </div>
 </template>
 
@@ -16,7 +16,7 @@
     background-color: #000;
     color: #fff;
     opacity: 0.9;
-    top: 33%;
+    top: 32%;
     left: 50%;
     position: absolute;
     box-sizing: border-box;
