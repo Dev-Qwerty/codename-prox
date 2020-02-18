@@ -40,7 +40,10 @@
         <img id="pic3" src="../../assets/Warranty.png" alt="">
         <h4>Get verified customer request</h4>
       </div>            
-    </div> 
+    </div>
+    <div class="hrline">
+      <hr>
+    </div>    
   </div>  
 </template>
 
@@ -108,7 +111,7 @@
   }  
   .hrline hr {
     margin-top: 40px;
-    margin-bottom: 60px;
+    margin-bottom: 70px;
     height: 1px;
     border: 0;
     box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);    
