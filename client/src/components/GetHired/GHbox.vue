@@ -29,13 +29,16 @@
     </div>
     <div class="row">
       <div class="col">
-        <div class="Col1Content"></div>
+        <img id="pic1" src="../../assets/Graph.png" alt="">
+        <h4>Grow your business like a pro</h4>
       </div>
       <div class="col">
-        <div class="Col2Content"></div>
+        <img id="pic2" src="../../assets/Accept.png" alt="">
+        <h4>Work on your own terms</h4>
       </div>
       <div class="col">
-        <div class="Col3Content"></div>
+        <img id="pic3" src="../../assets/Warranty.png" alt="">
+        <h4>Get verified customer request</h4>
       </div>            
     </div> 
   </div>  
@@ -136,19 +139,30 @@
     flex-grow: 0;
     flex-shrink: 0;  
     margin: 30px;
-    height: 170px;
+    height: 200px;
     border-radius: 10px;
     background-color: #eeefef;  
   }
-  .Col1Content {
-    background-image: url('../../assets/accept.png');
+  #pic1 {
+    width: 90px;
+    position: absolute;
+    top: 15px;
+    left: calc(50% - 50px);
   }
-  .Col2Content {
+  #pic2 {
+    width: 90px;
+    position: absolute;
+    top: 15px;
+    left: calc(50% - 50px);
+  }
+  #pic3 {
+    width: 90px;
+    position: absolute;
+    top: 15px;
+    left: calc(50% - 50px);
+  }
+  .col h4 {
     text-align: center;
-    background-image: url('../../assets/accept.png');
-  }  
-  .Col3Content {
-    text-align: center;
-    background-image: url('../../assets/accept.png');
-  }      
+    margin-top: 120px;
+  }     
 </style>
