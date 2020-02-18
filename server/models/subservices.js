@@ -6,6 +6,10 @@ const subserviceSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    mainService: {
+        type: String,
+        required: true
+    },
     preInspection: Number,
     averageCost: {
         type: Number,
