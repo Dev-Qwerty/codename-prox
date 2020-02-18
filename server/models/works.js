@@ -30,5 +30,16 @@ const WorkSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    completed: Boolean,
+    completed: {
+        type: Boolean,
+        required: true
+    },
+    paymentCompleted: {
+        type: Boolean,
+        required: true
+    },
+    paymentMethod: {
+        type: String,
+        required: true
+    }
 })

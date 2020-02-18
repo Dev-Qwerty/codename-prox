@@ -20,4 +20,4 @@ const subserviceSchema = new mongoose.Schema({
         type: required
     },
     comments: String
-})
+}) 
