@@ -23,11 +23,6 @@ app.get('/', (req,res) => {
 })
 
 
-// Route for About Us
-app.get('/aboutus', (req, res) => {
-    res.send("About us page")
-})
-
 // Initialze Server
 app.listen(3000, () => {
     console.log("App listening at port 3000");
