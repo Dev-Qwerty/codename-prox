@@ -1,10 +1,10 @@
-import {Router} from "express"
+const express = require('express')
 
 const controller = (req, res) => {
     res.send({message: "ok"})
 }
 
-const router = Router()
+const router = express.Router()
 
 // user/profile
 router
@@ -24,4 +24,4 @@ router
     .post(controller)
 
 
-export default router
+    module.exports = router

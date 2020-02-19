@@ -5,8 +5,6 @@ const passportSetup = require('./config/passport-config')
 const authRouter = require('./routes/auth-router')
 const userRouter = require('./routes/user') 
 const workerRouter = require('./routes/worker') 
-const signinRouter = require('./routes/signin') 
-const signupRouter = require('./routes/signup') 
 
 const app = express();
 
@@ -18,8 +16,6 @@ app.use(passport.session())
 app.use('/auth', authRouter)
 app.use('/user', userRouter)
 app.use('/worker', workerRouter)
-app.use('/signin', signinRouter)
-app.use('/signup', signupRouter)
 
 // Home Route
 app.get('/', (req,res) => {
