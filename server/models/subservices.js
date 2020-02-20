@@ -17,7 +17,9 @@ const subserviceSchema = new mongoose.Schema({
     },
     averageTime: {
         type: String,
-        type: required
+        required: true
     },
     comments: String
-}) 
+})
+
+const subservice = module.exports = mongoose.model('subService', subserviceSchema);
