@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const keys = require('./keys');
 
 // connect to mongodb atlas
-mongoose.connect('mongodb://localhost:27017/codename', {useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(keys.mongodb.mongodbURI, {useNewUrlParser: true, useUnifiedTopology: true });
 
 var db = mongoose.connection;
 
