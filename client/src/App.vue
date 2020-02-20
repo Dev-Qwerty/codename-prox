@@ -1,19 +1,19 @@
 <template>
   <div id="app">
-    <GHMain />
+    <Main />
   </div>
 </template>
 
 <script>
-//import Main from './components/Home/Main.vue'
+import Main from './components/Home/Main.vue'
 //import LMain from './components/Login/LMain.vue'
 //import SMain from './components/Signup/SMain.vue'
-import GHMain from "./components/GetHired/GHMain.vue";
+//import GHMain from "./components/GetHired/GHMain.vue";
 
 export default {
   name: "app",
   components: {
-    GHMain
+    Main
   }
 };
 </script>
