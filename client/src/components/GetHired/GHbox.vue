@@ -116,7 +116,9 @@
     margin-bottom: 20px;
   }
   .img {
-    height: 300px;
+    margin-left: -100px;
+    margin-top: -50px;
+    height: 400px;
     flex-grow:1;
     overflow: hidden;
     perspective: 1px;
