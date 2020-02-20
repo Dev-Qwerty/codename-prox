@@ -1,8 +1,14 @@
 const express = require('express')
 
+// User Model
+const User = require('../models/users')
+
+
+// mock controller
 const controller = (req, res) => {
     res.send({message: "ok"})
 }
+
 
 const router = express.Router()
 
@@ -14,8 +20,23 @@ router
 // /user/editprofile
 router
     .route('/editprofile')
-    .get(controller)
-    .post(controller)
+    .get((req, res) => {
+        res.render('edituserprofile')
+    })
+    .post((req, res) => {
+        let user = new User()
+        user.firstName = req.body.fname
+        user.lastName = req.body.lname
+        user.phone = req.body.phone
+        user.email = req.body.email
+        user.password = req.body.password
+
+        user.save().then(() => {
+            res.send("user created")
+        }).catch((error) => {
+            console.error("error: ", error);
+        })
+    })
 
 // /user/settings
 router
@@ -24,4 +45,4 @@ router
     .post(controller)
 
 
-    module.exports = router
+module.exports = router

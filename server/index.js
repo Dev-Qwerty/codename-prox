@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser')
 const config = require('./config/mongo-connect');
 const passport = require('passport');
 const passportSetup = require('./config/passport-config');
@@ -10,9 +11,12 @@ const adminRouter = require('./routes/admin');
 
 const app = express();
 
+
 app.set('view engine','ejs')
 app.use(passport.initialize())
 app.use(passport.session())
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({extended:false}))
 
 
 // parse application/x-www-form-urlencoded
@@ -31,6 +35,10 @@ app.use('/admin' ,adminRouter)
 // Home Route
 app.get('/', (req,res) => {
     res.render('home')
+})
+
+app.get('/gethired', (req, res) => {
+    res.send({message: "ok"})
 })
 
 
