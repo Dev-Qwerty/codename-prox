@@ -2,10 +2,10 @@
   <div class = "box">
     <form action="" method="POST">
       <div>
-        <input class="input-box" type="text" name="email" placeholder="EMAIL">
+        <input class="input-box" type="email" name="email" placeholder="EMAIL">
       </div>
       <div>
-        <input class="input-box" type="text" name="phoneno" placeholder="PHONENO">
+        <input class="input-box" type="number" name="phoneno" placeholder="PHONENO">
       </div>      
       <div>
         <input class="input-box" type="Password" name="password" placeholder="PASSWORD">
