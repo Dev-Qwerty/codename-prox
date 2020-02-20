@@ -44,17 +44,22 @@
     <div class="hrline">
       <hr>
     </div>
-    <div class="Gmain">
-      <div class="Mbox1"></div>
-      <div class="Gsub">
-        <div class="Sbox1"></div>
-        <div class="Sbox2"></div>
-        <div class="GsubN">
-          <div class="NSbox1"></div>
-          <div class="NSbox2"></div>
+    <div class="Grid1">
+      <div class="Grid1-box1"></div>
+      <div class="Grid2">
+        <div class="Grid2-box1">
+          <p>Get our patners app</p>
+          <input type="submit" value="GET HIRED">
+        </div>
+        <div class="Grid3">
+          <div class="Grid3-box1"></div>
+          <div class="Grid4">
+            <input type="text" value="contact number" class="Grid4-box1">
+            <input type="submit" value="Get link" class="Grid4-box2">
+          </div>
         </div>
       </div>
-      <div class="Mbox2"></div>
+      <div class="Grid1-box2"></div>
     </div>  
   </div>  
 </template>
@@ -180,34 +185,95 @@
     text-align: center;
     margin-top: 120px;
   }
-  .Gmain {
+  .Grid1 {
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-    grid-auto-rows: minmax(300px, auto);
+    grid-template-columns: 3fr 4fr 1fr;
+    grid-auto-rows: minmax(400px, auto);
   }
-  .Gsub {
+  .Grid2 { 
     display: grid;
   }
-  .GsubN {
+  .Grid3 {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-auto-rows: 125px;
+  }
+  .Grid4 {
+    padding-left: 10px;
+    padding-bottom: 14px;
     display: grid;
     grid-template-columns: 1fr 1fr;
   }  
-  .Mbox1 {
-    background-color: red;
+  .Grid1-box1 {
+    background-image: url('../../assets/Phone.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
   }
-  .Sbox1 {
-    background-color: blue;
-  }
-  .Sbox2 {
-    background-color: yellow;
-  }
-  .NSbox1 {
-    background-color: green;
-  }
-  .NSbox2 {
-    background-color: violet;
+  .Grid1-box2 {
+    background-image: url('../../assets/Cworker.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 400px;
+    margin-bottom: 50px;
   }  
-  .Mbox2 {
-    background-color: orange;
+  .Grid2-box1 {
+    padding: 0px;
+    align-self: flex-end;
   }
+  .Grid2-box1 p {
+    font-size: 50px;
+    color: #4d4d4f;
+    font-style: bold;
+    margin: 0px;
+    padding-left: 14px;
+    padding-bottom: 10px;
+  }  
+  .Grid2-box1 input[type="submit"] {
+    border: none;
+    background-color: #4d4d4f;
+    color: #fff;
+    width: 260px;
+    height: 50px;
+    font-family: Arial;
+    font-size: 20px;
+    box-shadow: 3px 3px #dedee0;
+    margin-left: 14px;
+  }  
+  .Grid3-box1 {
+    align-self: flex-end;
+    width: 120px;
+    height: 120px;
+    background-image: url('../../assets/Qrcode.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;      
+  }
+  .Grid4-box1 {
+    padding: 15px;
+    align-self: flex-end;
+    border: none;
+    background-color: #dedee0;
+    color: #aaa;
+    width: 290px;
+    height: 55px;
+    font-family: Arial;
+    font-size: 22px;
+    font-size: 15px;
+  }
+  .Grid4-box2 {
+    padding-left: 15px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;    
+    align-self: flex-end;
+    border: none;
+    background-color: #4d4d4f;
+    color: #fff;
+    width: 110px;
+    height: 55px;
+    font-family: Arial;
+    font-size: 22px;    
+  }  
 </style>
