@@ -1,22 +1,8 @@
 <template>
   <div id="app">
-    <SMain />
+    <router-view />
   </div>
 </template>
-
-<script>
-//import Main from './components/Home/Main.vue'
-//import LMain from './components/Login/LMain.vue'
-import SMain from './components/Signup/SMain.vue'
-//import GHMain from "./components/GetHired/GHMain.vue";
-
-export default {
-  name: "app",
-  components: {
-    SMain
-  }
-};
-</script>
 
 <style>
 #app {
