@@ -11,7 +11,7 @@
 import GHMain from "./components/GetHired/GHMain.vue";
 
 export default {
-  name: "app",
+  name: 'app',
   components: {
     GHMain
   }
