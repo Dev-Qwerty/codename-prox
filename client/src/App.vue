@@ -1,9 +1,10 @@
 <template>
   <div id="app">
-    <GHMain />
+    <router-view />
   </div>
 </template>
 
+<<<<<<< HEAD
 <script>
 //import Main from './components/Home/Main.vue'
 //import LMain from './components/Login/LMain.vue'
@@ -18,6 +19,8 @@ export default {
 };
 </script>
 
+=======
+>>>>>>> fbebbcb9549dbc5dd2f58bac7d25837c44eaa742
 <style>
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
