@@ -17,6 +17,11 @@ router
     .get(controller)
     .post(controller)
 
+// /worker/settings
+router
+    .route('/settings')
+    .get(controller)
+    .post(controller)
 
 
 module.exports = router
