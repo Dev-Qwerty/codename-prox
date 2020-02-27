@@ -38,11 +38,5 @@ router
         })
     })
 
-// /user/settings
-router
-    .route('/settings')
-    .get(controller)
-    .post(controller)
-
 
 module.exports = router
