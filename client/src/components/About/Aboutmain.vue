@@ -7,7 +7,7 @@
 
 <script>
 
-import Nav from "@/components/Services/Nav.vue"
+import Nav from '@/components/Home/Navbar.vue'
 import Aboutsub from '@/components/About/Aboutsub'
 
 export default {

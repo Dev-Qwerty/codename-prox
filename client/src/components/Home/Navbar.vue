@@ -12,7 +12,7 @@
         <router-link class="nav-link" :to="{ path: '/' }">Home</router-link>
       </li>
       <li class="nav-item">
-        <router-link class="nav-link" :to="{ path: '' }">About Us</router-link>
+        <router-link class="nav-link" :to="{ path: '/about' }">About Us</router-link>
       </li>
       <li class="nav-item">
         <router-link class="nav-link" :to="{ path: '' }">Services</router-link>
