@@ -15,7 +15,7 @@
         <router-link class="nav-link" :to="{ path: '/about' }">About Us</router-link>
       </li>
       <li class="nav-item">
-        <router-link class="nav-link" :to="{ path: '' }">Services</router-link>
+        <router-link class="nav-link" :to="{ path: '/services' }">Services</router-link>
       </li>
       <li class="nav-item">
         <router-link class="nav-link" :to="{ path: 'gethired' }">Get Hired</router-link>

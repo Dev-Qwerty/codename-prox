@@ -11,10 +11,11 @@ Vue.use(VueRouter)
 export default new VueRouter({
   mode: 'history',
   routes: [
-    {path: '/', component: Home },
-    {path: '/gethired', component: GetHired },
-    {path: '/signup', component: Signup },
-    {path: '/login', component: Login },  
-    {path: '/about', component: About }      
+    { path: '/', component: Home },
+    { path: '/gethired', component: GetHired },
+    { path: '/signup', component: Signup },
+    { path: '/login', component: Login },  
+    { path: '/about', component: About },
+    { path: '/services', component: Services }              
   ]
 })
