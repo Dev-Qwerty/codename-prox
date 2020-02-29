@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <div class="box1">
+  <div class="Container">
+    <div class="box">
       <h1>QUALITY SERVICES</h1>
       <h1>SERVED WITH PRIDE.</h1>     
     </div>
