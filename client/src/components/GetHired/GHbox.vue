@@ -1,5 +1,5 @@
 <template>
-  <div class="conatiner">
+  <div class="Container">
     <div class="box">
       <h1>GET A STEP FURTHER</h1>
       <h1>JOIN US.</h1>

@@ -1,5 +1,5 @@
 <template>
-  <div class="conatiner">
+  <div class="Container">
     <div class="box">
         <h1>URBAN COMPANY</h1>
         <h2>One stop destination for services</h2>
