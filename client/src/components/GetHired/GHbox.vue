@@ -6,7 +6,7 @@
     </div>
     <div class="workersimg">
     </div>
-    <div class="wrapper">
+    <div class= "Wrapper">
       <div class="textarea">
         <div class="heading">
           <h2>We've made a platform for you to</h2>
@@ -85,7 +85,7 @@
     background-position: center;
     background-size: contain;
   }
-  .wrapper {
+  .Wrapper {
     margin-left: 100px;
     margin-top: 80px;
     margin-bottom: 0px;
