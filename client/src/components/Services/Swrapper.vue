@@ -53,7 +53,13 @@
       </div> 
       <div class="grid6">
         <div class="b3">
-          <div class="iBox1"></div>
+          <div class="iBox1">
+            <div class="hWrap">
+              <h3>PREMIUM CAR WASH</h3>
+              <h4>STARTS @499</h4>
+            </div>
+            
+          </div>
         </div>
         <div class="">
           <div class="iBox1"></div>
@@ -125,7 +131,10 @@
   }    
   .iBox {
     border-radius: 10px;
-    background-color: #aaa;
+    background-image: url(../../assets/CarWash.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     margin-left: 80px;
     margin-top: 60px;
     height: 60%;
@@ -133,11 +142,20 @@
   }
   .iBox1 {
     border-radius: 10px;
-    background-color: #aaa;
-    margin-left: 120px;
+    background-image: url(../../assets/CarWash.jpg), linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5));
+    background-blend-mode: overlay;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;    
+    margin-left: 100px;
     margin-top: 60px;
-    height: 60%;
-    width: 60%;
+    height: 65%;
+    width: 65%;
+  }
+  .hWrap {
+    color: #fff;
+    text-align: center;
+    padding-top: 50px;
   }  
   .hrr {
     border: 1px solid #aaa;
