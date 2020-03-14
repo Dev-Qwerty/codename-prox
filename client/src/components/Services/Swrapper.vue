@@ -53,10 +53,10 @@
       </div> 
       <div class="grid6">
         <div class="b">
-          <div class="b1"></div>
+          <div class="b2"></div>
         </div>
         <div class="b">
-          <div class="b1"></div>
+          <div class="b2"></div>
         </div>      
       </div>           
     </div>
@@ -120,10 +120,18 @@
     border-radius: 10px;
     background-color: #aaa;
     margin-left: 80px;
-    margin-top: 55px;
+    margin-top: 60px;
     height: 60%;
     width: 60%;
   }
+  .b2 {
+    border-radius: 10px;
+    background-color: #aaa;
+    margin-left: 120px;
+    margin-top: 60px;
+    height: 60%;
+    width: 60%;
+  }  
   .hrr {
     border: 1px solid #aaa;
     height: 0px;
