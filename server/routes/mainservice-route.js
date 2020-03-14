@@ -7,6 +7,7 @@ let mainserviceModel = require('../models/mainservice-model')
 
 // routes
 
+// /mainservice/cleaning
 router
     .route('/cleaning')
     .get((req, res) => {
@@ -23,5 +24,27 @@ router
     //         console.log(err);
     //     })
     // })
+
+
+// /mainservice/electronics
+router
+    .route('/electronics')
+    .get((req, res) => {
+        mainserviceModel.findOne({ serviceName: "Electronics" },(err, mainservices) => {
+            console.log(mainservices.subservices);
+            res.send(mainservices.subservices);
+        });
+    })
+
+
+// /mainservice/tradesman
+router
+    .route("/tradesman")
+    .get((req, res) => {
+        mainserviceModel.findOne({serviceName: "Tradesman"},(err, mainservices) => {
+            console.log(mainservices.subservices);
+            res.send(mainservices.subservices);
+        });
+    });
 
 module.exports = router
