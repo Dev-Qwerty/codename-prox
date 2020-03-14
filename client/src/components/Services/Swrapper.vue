@@ -41,8 +41,24 @@
           <div class="b1"></div>
         </div>
         <div class="b">
-          <div class="b1"></div></div>      
-      </div>  
+          <div class="b1"></div>
+        </div>      
+      </div>
+      <div class="grid5">
+        <div class="hrr1"></div>
+        <div class="heading1">
+          <h3>OFFERS</h3>
+        </div>
+        <div class="hrr1"></div>      
+      </div> 
+      <div class="grid6">
+        <div class="b">
+          <div class="b1"></div>
+        </div>
+        <div class="b">
+          <div class="b1"></div>
+        </div>      
+      </div>           
     </div>
         
   </div>    
@@ -62,7 +78,7 @@
     font-size: 45px;
   }
   .Bwrapper {
-    margin-top: 30px;
+    margin-top: 50px;
     margin-left: 70px;
     margin-right: 70px;
   }
@@ -85,11 +101,23 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-auto-rows: minmax(300px, auto);
-  }      
+  }     
+  .grid5 {
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: 4fr 1fr 4fr;
+    margin-bottom: 20px;
+  }   
+  .grid6 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: minmax(300px, auto);
+  }       
   .b {
     border: 1px solid #aaa;
   }
   .b1 {
+    border-radius: 10px;
     background-color: #aaa;
     margin-left: 80px;
     margin-top: 55px;
@@ -99,6 +127,11 @@
   .hrr {
     border: 1px solid #aaa;
     height: 0px;
+  }
+  .hrr1 {
+    border: 1px solid #aaa;
+    height: 0px;
+    background-color: #aaa;
   }
   .heading1 {
     margin-top: -15px;
