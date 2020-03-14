@@ -14,34 +14,34 @@
         <div class="hrr"></div>      
       </div>
       <div class="grid2">
-        <div class="b">
-          <div class="b1"></div>
+        <div class="b1">
+          <div class="iBox"></div>
         </div>
-        <div class="b">
-          <div class="b1"></div>
+        <div class="b1">
+          <div class="iBox"></div>
         </div>
-        <div class="b">
-          <div class="b1"></div></div>      
+        <div class="b2">
+          <div class="iBox"></div></div>      
       </div>
       <div class="grid3">
-        <div class="b">
-          <div class="b1"></div>
+        <div class="b1">
+          <div class="iBox"></div>
         </div>
-        <div class="b">
-          <div class="b1"></div>
+        <div class="b1">
+          <div class="iBox"></div>
         </div>
-        <div class="b">
-          <div class="b1"></div></div>      
+        <div class="b2">
+          <div class="iBox"></div></div>      
       </div>   
       <div class="grid4">
-        <div class="b">
-          <div class="b1"></div>
+        <div class="b3">
+          <div class="iBox"></div>
         </div>
-        <div class="b">
-          <div class="b1"></div>
+        <div class="b3">
+          <div class="iBox"></div>
         </div>
-        <div class="b">
-          <div class="b1"></div>
+        <div class="">
+          <div class="iBox"></div>
         </div>      
       </div>
       <div class="grid5">
@@ -52,11 +52,11 @@
         <div class="hrr1"></div>      
       </div> 
       <div class="grid6">
-        <div class="b">
-          <div class="b2"></div>
+        <div class="b3">
+          <div class="iBox1"></div>
         </div>
-        <div class="b">
-          <div class="b2"></div>
+        <div class="">
+          <div class="iBox1"></div>
         </div>      
       </div>           
     </div>
@@ -113,10 +113,17 @@
     grid-template-columns: 1fr 1fr;
     grid-auto-rows: minmax(300px, auto);
   }       
-  .b {
-    border: 1px solid #aaa;
-  }
   .b1 {
+    border-bottom: 1px solid #aaa;
+    border-right: 1px solid #aaa;
+  }
+  .b2 {
+    border-bottom: 1px solid #aaa;
+  }
+  .b3 {
+    border-right: 1px solid #aaa;
+  }    
+  .iBox {
     border-radius: 10px;
     background-color: #aaa;
     margin-left: 80px;
@@ -124,7 +131,7 @@
     height: 60%;
     width: 60%;
   }
-  .b2 {
+  .iBox1 {
     border-radius: 10px;
     background-color: #aaa;
     margin-left: 120px;
