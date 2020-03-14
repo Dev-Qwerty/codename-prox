@@ -53,10 +53,20 @@
       </div> 
       <div class="grid6">
         <div class="b3">
-          <div class="iBox1"></div>
+          <div class="iBox1 Img1">
+            <div class="hWrap">
+              <h4>PREMIUM CAR WASH</h4>
+              <h5>STARTS @499</h5>
+            </div>      
+          </div>
         </div>
         <div class="">
-          <div class="iBox1"></div>
+          <div class="iBox1 Img2">
+            <div class="hWrap">
+              <h4>INTERIOR DEEP CLEANING</h4>
+              <h5>STARTS @899</h5>
+            </div>            
+          </div>
         </div>      
       </div>           
     </div>
@@ -85,6 +95,7 @@
   .grid1 {
     display: grid;
     grid-template-columns: 4fr 1fr 4fr;
+    margin-top: 100px;
     margin-bottom: 20px;
   }
   .grid2 {
@@ -103,7 +114,7 @@
     grid-auto-rows: minmax(300px, auto);
   }     
   .grid5 {
-    margin-top: 50px;
+    margin-top: 140px;
     display: grid;
     grid-template-columns: 4fr 1fr 4fr;
     margin-bottom: 20px;
@@ -125,7 +136,10 @@
   }    
   .iBox {
     border-radius: 10px;
-    background-color: #aaa;
+    background-image: url(../../assets/CarWash.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     margin-left: 80px;
     margin-top: 60px;
     height: 60%;
@@ -133,15 +147,30 @@
   }
   .iBox1 {
     border-radius: 10px;
-    background-color: #aaa;
-    margin-left: 120px;
+    margin-left: 100px;
     margin-top: 60px;
-    height: 60%;
-    width: 60%;
+    height: 65%;
+    width: 65%;
+    background-blend-mode: overlay;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;      
+  }
+  .Img1 {
+    background-image: url(../../assets/CarWash.jpg), linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5));  
+  }
+  .Img2 {
+    background-image: url(../../assets/IntCleaning.jpg), linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5));
+  }  
+  .hWrap {
+    color: #fff;
+    text-align: center;
+    padding-top: 65px;
   }  
   .hrr {
     border: 1px solid #aaa;
     height: 0px;
+    background-color: #aaa;
   }
   .hrr1 {
     border: 1px solid #aaa;
