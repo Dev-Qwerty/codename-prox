@@ -1,7 +1,7 @@
 const express = require('express')
 
 // User Model
-const User = require('../models/users')
+const User = require('../models/user-model')
 
 
 // mock controller
