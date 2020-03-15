@@ -1,4 +1,12 @@
 const express = require('express')
+const mongoose = require('mongoose')
+
+
+// Fix Deprication Warning
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
+mongoose.set('useUnifiedTopology', true);
 
 // User Model
 const User = require('../models/user-model')
@@ -13,28 +21,50 @@ const controller = (req, res) => {
 const router = express.Router()
 
 // user/profile
+// retrive user profile
 router
-    .route('/profile')
-    .get(controller)
+    .route('/profile/:id')
+    .get((req, res) => {
+        User.findById(req.params.id, (err, user) => {
+            if (err) {
+                console.error(err);
+            } else {
+                res.send(user)
+            }
+        })
+    })
 
 // /user/editprofile
 router
-    .route('/editprofile')
+    .route('/editprofile/:id')
+
+    // Retrive the User profile for editing
     .get((req, res) => {
-        res.render('edituserprofile')
+        User.findById(req.params.id, (err, user) => {
+            if (err) {
+                console.error(err);
+            } else {
+                res.send(user)
+            }
+        })
     })
+
+    // Updates the User
     .post((req, res) => {
-        let user = new User()
+        let user = {}
         user.firstName = req.body.fname
         user.lastName = req.body.lname
         user.phone = req.body.phone
         user.email = req.body.email
         user.password = req.body.password
-
-        user.save().then(() => {
-            res.send("user created")
-        }).catch((error) => {
-            console.error("error: ", error);
+        
+        User.findOneAndUpdate({_id: req.params.id}, {firstName: req.body.fname, lastName:req.body.lname, phone: req.body.phone, email: req.body.email, password: req.body.password}, 
+            (err, result) => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    res.send("profile updated")
+                }
         })
     })
 
