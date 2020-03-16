@@ -58,8 +58,7 @@ router
         user.email = req.body.email
         user.password = req.body.password
         
-        User.findOneAndUpdate({_id: req.params.id}, {firstName: req.body.fname, lastName:req.body.lname, phone: req.body.phone, email: req.body.email, password: req.body.password}, 
-            (err, result) => {
+        User.findOneAndUpdate({_id: req.params.id}, user, (err, result) => {
                 if (err) {
                     console.log(err);
                 } else {

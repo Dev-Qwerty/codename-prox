@@ -48,17 +48,17 @@ router
 
     // Updater the worker's profile
     .post((req, res) => {
-        Worker.Fname = req.body.fname
-        Worker.Lname = req.body.lname
-        Worker.phone = req.body.phone
-        Worker.email = req.body.email
-        Worker.location = req.body.location
-        Worker.timeSlot = req.body.timeslot
-        Worker.Availability = req.body.availability
-        Worker.subService = req.body.subservice
+        let worker = {}
+        worker.Fname = req.body.fname
+        worker.Lname = req.body.lname
+        worker.phone = req.body.phone
+        worker.email = req.body.email
+        worker.location = req.body.location
+        worker.timeSlot = req.body.timeslot
+        worker.Availability = req.body.availability
+        worker.subService = req.body.subservice
 
-        Worker.findOneAndUpdate({_id: req.params.id}, {Fname: req.body.fname, Lname:req.body.lname, phone: req.body.phone, email: req.body.email, location: req.body.location, timeSlot: req.body.timeslot, Availability: req.body.availability, subService :req.body.subservice}, 
-            (err, result) => {
+        Worker.findOneAndUpdate({_id: req.params.id}, worker, (err, result) => {
                 if (err) {
                     console.log(err);
                 } else {
