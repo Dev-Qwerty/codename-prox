@@ -8,7 +8,7 @@ mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
 
-// User Model
+// Import User Model
 const User = require('../models/user-model')
 
 
@@ -21,7 +21,7 @@ const controller = (req, res) => {
 const router = express.Router()
 
 // user/profile
-// retrive user profile
+// retrive the user's profile
 router
     .route('/profile/:id')
     .get((req, res) => {
@@ -49,7 +49,7 @@ router
         })
     })
 
-    // Updates the User
+    // Updates the User's profile
     .post((req, res) => {
         let user = {}
         user.firstName = req.body.fname
