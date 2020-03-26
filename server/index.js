@@ -10,8 +10,8 @@ const app = express();
 app.set('view engine','ejs')
 app.use(passport.initialize())
 app.use(passport.session())
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({extended:false}))
+// // parse application/x-www-form-urlencoded
+// app.use(bodyParser.urlencoded({extended:false}))
 
 
 // parse application/x-www-form-urlencoded

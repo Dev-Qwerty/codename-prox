@@ -52,11 +52,13 @@ router
     // Updates the User's profile
     .post((req, res) => {
         let user = {}
-        user.firstName = req.body.fname
-        user.lastName = req.body.lname
-        user.phone = req.body.phone
-        user.email = req.body.email
-        user.password = req.body.password
+        if(req.body.firstName) user.firstName = req.body.firstName
+        if(req.body.lastName) user.lastName = req.body.lastName
+        if(req.body.phone) user.phone = req.body.phone
+        if(req.body.email) user.email = req.body.email
+        if(req.body.password) user.password = req.body.password
+
+        user = {$set: user}
         
         User.findOneAndUpdate({_id: req.params.id}, user, (err, result) => {
                 if (err) {

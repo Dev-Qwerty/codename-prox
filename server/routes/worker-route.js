@@ -47,16 +47,18 @@ router
     })
 
     // Updater the worker's profile
-    .post((req, res) => {
+    .post( (req, res) => {
         let worker = {}
-        worker.Fname = req.body.fname
-        worker.Lname = req.body.lname
-        worker.phone = req.body.phone
-        worker.email = req.body.email
-        worker.location = req.body.location
-        worker.timeSlot = req.body.timeslot
-        worker.Availability = req.body.availability
-        worker.subService = req.body.subservice
+        if(req.body.fname) worker.Fname = req.body.fname
+        if(req.body.lname) worker.Lname = req.body.lname
+        if(req.body.phone) worker.phone = req.body.phone
+        if(req.body.email) worker.email = req.body.email
+        if(req.body.location) worker.location = req.body.location
+        if(req.body.timeslot) worker.timeSlot = req.body.timeslot
+        if(req.body.availability) worker.Availability = req.body.availability
+        if(req.body.subservice) worker.subService = req.body.subservice
+
+        worker = {$set: worker}
 
         Worker.findOneAndUpdate({_id: req.params.id}, worker, (err, result) => {
                 if (err) {
