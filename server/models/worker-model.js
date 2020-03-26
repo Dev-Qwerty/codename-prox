@@ -45,3 +45,5 @@ const WorkerSchema = new mongoose.Schema({
         max: 5
     }
 })
+
+const worker = module.exports = mongoose.model('workers', WorkerSchema)

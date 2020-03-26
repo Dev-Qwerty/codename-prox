@@ -8,7 +8,7 @@ mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
 
-// User Model
+// Import User Model
 const User = require('../models/user-model')
 
 
@@ -21,7 +21,7 @@ const controller = (req, res) => {
 const router = express.Router()
 
 // user/profile
-// retrive user profile
+// retrive the user's profile
 router
     .route('/profile/:id')
     .get((req, res) => {
@@ -49,17 +49,18 @@ router
         })
     })
 
-    // Updates the User
+    // Updates the User's profile
     .post((req, res) => {
         let user = {}
-        user.firstName = req.body.fname
-        user.lastName = req.body.lname
-        user.phone = req.body.phone
-        user.email = req.body.email
-        user.password = req.body.password
+        if(req.body.firstName) user.firstName = req.body.firstName
+        if(req.body.lastName) user.lastName = req.body.lastName
+        if(req.body.phone) user.phone = req.body.phone
+        if(req.body.email) user.email = req.body.email
+        if(req.body.password) user.password = req.body.password
+
+        user = {$set: user}
         
-        User.findOneAndUpdate({_id: req.params.id}, {firstName: req.body.fname, lastName:req.body.lname, phone: req.body.phone, email: req.body.email, password: req.body.password}, 
-            (err, result) => {
+        User.findOneAndUpdate({_id: req.params.id}, user, (err, result) => {
                 if (err) {
                     console.log(err);
                 } else {
