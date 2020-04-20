@@ -15,33 +15,33 @@
       </div>
       <div class="grid2">
         <div class="b1">
-          <div class="iBox"></div>
+          <div class="iBox i1"></div>
         </div>
         <div class="b1">
-          <div class="iBox"></div>
+          <div class="iBox i2"></div>
         </div>
         <div class="b2">
-          <div class="iBox"></div></div>      
+          <div class="iBox i3"></div></div>      
       </div>
       <div class="grid3">
         <div class="b1">
-          <div class="iBox"></div>
+          <div class="iBox i4"></div>
         </div>
         <div class="b1">
-          <div class="iBox"></div>
+          <div class="iBox i5"></div>
         </div>
         <div class="b2">
-          <div class="iBox"></div></div>      
+          <div class="iBox i6"></div></div>      
       </div>   
       <div class="grid4">
         <div class="b3">
-          <div class="iBox"></div>
+          <div class="iBox i7"></div>
         </div>
         <div class="b3">
-          <div class="iBox"></div>
+          <div class="iBox i8"></div>
         </div>
         <div class="">
-          <div class="iBox"></div>
+          <div class="iBox i9"></div>
         </div>      
       </div>
       <div class="grid5">
@@ -136,7 +136,6 @@
   }    
   .iBox {
     border-radius: 10px;
-    background-image: url(../../assets/CarWash.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -145,6 +144,34 @@
     height: 60%;
     width: 60%;
   }
+  .i1 {
+    background-image: url(../../assets/Painting.png);
+  }
+  .i2 {
+    background-image: url(../../assets/Elec.png);
+  }
+  .i3 {
+    background-image: url(../../assets/Painting.png);
+  }
+  .i4 {
+    background-image: url(../../assets/Painting.png);
+  }
+  .i5 {
+    background-image: url(../../assets/Painting.png);
+  }
+  .i6 {
+    background-image: url(../../assets/Photo.png);
+  }
+  .i7 {
+    background-image: url(../../assets/Painting.png);
+  }
+  .i8 {
+    background-image: url(../../assets/Cleaning.png);
+  }
+  .i9 {
+    background-image: url(../../assets/Painting.png);
+  }          
+        
   .iBox1 {
     border-radius: 10px;
     margin-left: 100px;
