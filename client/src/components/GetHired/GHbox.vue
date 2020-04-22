@@ -33,11 +33,11 @@
         <h4>Grow your business like a pro</h4>
       </div>
       <div class="col">
-        <img id="pic2" src="../../assets/Accept.png" alt="">
+        <img id="pic2" src="../../assets/accept.png" alt="">
         <h4>Work on your own terms</h4>
       </div>
       <div class="col">
-        <img id="pic3" src="../../assets/Warranty.png" alt="">
+        <img id="pic3" src="../../assets/warranty.png" alt="">
         <h4>Get verified customer request</h4>
       </div>            
     </div>

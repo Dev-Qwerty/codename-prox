@@ -1,55 +1,47 @@
 const express = require('express');
-const config = require('./config/mongo-connect');  // import mongoDB configuration
+const bodyParser = require('body-parser')
+const config = require('./config/mongo-connect');
 const passport = require('passport');
 const passportSetup = require('./config/passport-config');
 
 const app = express();
 
-// Middleware for body parsing
-app.use(express.urlencoded({ extended: false }))
-app.use(express.json({ extended: false }))
 
-
-app.set('view engine', 'ejs')
-
-// Passport Middleware
+app.set('view engine','ejs')
 app.use(passport.initialize())
 app.use(passport.session())
+// // parse application/x-www-form-urlencoded
+// app.use(bodyParser.urlencoded({extended:false}))
 
-// import models
-const versionModel = require('./models/version-model')
+// parse application/json encoded bodies
+app.use(bodyParser.json())
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }));
 
+// parse application/json
+app.use(bodyParser.json());
 
 //import routes
 const authRouter = require("./routes/auth-router");
-
+const userRouter = require("./routes/user-route");
+const workerRouter = require("./routes/worker-route");
+const mainserviceRouter = require("./routes/mainservice-route");
 
 // set relative path
 app.use('/auth', authRouter)
-
+app.use('/user', userRouter)
+app.use('/worker', workerRouter)
+app.use('/mainservice', mainserviceRouter)
 
 
 // Home Route
-app.get('/', (req, res) => {
+app.get('/', (req,res) => {
     res.render('home')
 })
 
-
-// version check for mobile app
-app.get('/checkserviceversion', async (req, res) => {
-    let serviceVersion = req.body.serviceVersion
-    let offerVersion = await versionModel.find({}, 'offerVersion -_id')
-    if (serviceVersion === offerVersion[0].offerVersion) {
-        console.log(offerVersion[0].offerVersion + typeof (offerVersion))
-        res.send(offerVersion + " Same Version");
-    } else {
-        // console.log(serviceVersion + typeof (serviceVersion))
-        console.log(offerVersion[0].offerVersion + typeof (offerVersion))
-        res.send(offerVersion + " Version Changed")
-    }
+app.get('/gethired', (req, res) => {
+    res.send({message: "ok"})
 })
-
-
 
 
 // Initialze Server
