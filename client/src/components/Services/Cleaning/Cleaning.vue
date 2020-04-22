@@ -11,7 +11,26 @@
       </div>
       <div class="mid-img"></div>
     </div>
-
+    <div class="bottom">
+      <div class="b-heading">
+        <h3>Cleaning Services</h3>
+        <div class="Line-small"></div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <!--<img id="pic1" src="../../../assets/Graph.png" alt="">
+          <h4>Grow your business like a pro</h4>-->
+        </div>
+        <div class="col">
+          <!--<img id="pic2" src="../../../assets/Accept.png" alt="">
+          <h4>Work on your own terms</h4>-->
+        </div>
+        <div class="col">
+          <!--<img id="pic3" src="../../../assets/Warranty.png" alt="">
+          <h4>Get verified customer request</h4>-->
+        </div>            
+      </div>
+    </div>
   </div>    
 </template>
 
@@ -63,5 +82,52 @@
     width: 340px;
     background-image: url(../../../assets/mbox.png);    
   }
-
+  .bottom {
+    width: 96%;
+    height: 200px;
+    margin-top: 10px;
+    margin-left: 30px;    
+    /*border: 2px solid #000;*/
+  }
+  .b-heading h3 {
+    font-size: 23px;
+    color: #000;
+    font-weight: bold;
+  }
+  .Line-small {
+    margin-top: 3px;
+    width: 70px;
+    height: 2px;
+    background-color: #000;    
+  }
+  .row {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+  }
+  .col {
+    box-sizing: border-box;
+    border: 1px solid #000;
+    margin: 8px;
+    height: 200px;
+    background-color: #eeefef;  
+  }
+  #pic1 {
+    width: 90px;
+    position: absolute;
+    top: 15px;
+    left: calc(50% - 50px);
+  }
+  #pic2 {
+    width: 90px;
+    position: absolute;
+    top: 15px;
+    left: calc(50% - 50px);
+  }
+  #pic3 {
+    width: 90px;
+    position: absolute;
+    top: 15px;
+    left: calc(50% - 50px);
+  }
 </style>
