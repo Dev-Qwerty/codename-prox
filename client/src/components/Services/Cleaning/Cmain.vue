@@ -1,11 +1,11 @@
 <template>
   <div>
-    <Swrapper />
+    <Cleaning />
   </div>
 </template>
 
 <script>
-import Cleaning from '@/components/Services/SubServices/Cleaning'
+import Cleaning from '@/components/Services/Cleaning/Cleaning'
 
 export default {
   components: {
