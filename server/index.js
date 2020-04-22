@@ -16,6 +16,9 @@ app.set('view engine', 'ejs')
 app.use(passport.initialize())
 app.use(passport.session())
 
+// import models
+const versionModel = require('./models/version-model')
+
 
 //import routes
 const authRouter = require("./routes/auth-router");
@@ -29,6 +32,21 @@ app.use('/auth', authRouter)
 // Home Route
 app.get('/', (req, res) => {
     res.render('home')
+})
+
+
+// version check for mobile app
+app.get('/checkserviceversion', async (req, res) => {
+    let serviceVersion = req.body.serviceVersion
+    let offerVersion = await versionModel.find({}, 'offerVersion -_id')
+    if (serviceVersion === offerVersion[0].offerVersion) {
+        console.log(offerVersion[0].offerVersion + typeof (offerVersion))
+        res.send(offerVersion + " Same Version");
+    } else {
+        // console.log(serviceVersion + typeof (serviceVersion))
+        console.log(offerVersion[0].offerVersion + typeof (offerVersion))
+        res.send(offerVersion + " Version Changed")
+    }
 })
 
 

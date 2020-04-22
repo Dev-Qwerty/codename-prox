@@ -11,5 +11,5 @@ const versionSchema = mongoose.Schema({
     }
 })
 
-const version = mongoose.model('version', versionSchema);
+const version = mongoose.model('versions', versionSchema);
 module.exports = version;
