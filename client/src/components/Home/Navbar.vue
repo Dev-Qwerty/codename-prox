@@ -9,28 +9,28 @@
     <!-- Links -->
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a class="nav-link" href="#">Home</a>
+        <router-link class="nav-link" :to="{ path: '/' }">Home</router-link>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">About Us</a>
+        <router-link class="nav-link" :to="{ path: '/about' }">About Us</router-link>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Services</a>
+        <router-link class="nav-link" :to="{ path: '/services' }">Services</router-link>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Get Hired</a>
+        <router-link class="nav-link" :to="{ path: 'gethired' }">Get Hired</router-link>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Blog</a>
       </li>
       <li class="nav-item">
-        <button type="button" class="btn btn-light">Login</button>
+        <router-link class="btn btn-light" :to="{ path: 'login' }" tag="button">Login</router-link>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#"> / </a>
       </li>
       <li class="nav-item">
-        <button type="button" class="btn btn-light">SignUp</button>
+        <router-link class="btn btn-light" :to="{ path: 'signup' }" tag="button">SignUp</router-link>
       </li>
 
     </ul>
