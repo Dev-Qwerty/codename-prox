@@ -21,7 +21,7 @@
     padding-top: 10px;
   }
   .top-box h3 {
-    color: #fff;
+    color: #aaa;
     font-style: italic;
     font-size: 21px;
   }
