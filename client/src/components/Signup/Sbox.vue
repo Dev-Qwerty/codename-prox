@@ -1,26 +1,68 @@
 <template>
   <div class = "box">
-    <form action="" method="POST">
+    <form method="POST">
       <div>
-        <input class="input-box" type="email" name="email" placeholder="EMAIL">
+        <input class="input-box" type="email" name="email" placeholder="EMAIL" v-model="email">
       </div>
       <div>
-        <input class="input-box" type="number" name="phoneno" placeholder="PHONENO">
+        <input class="input-box" type="number" name="phoneno" placeholder="PHONENO" v-model="phone">
       </div>      
       <div>
-        <input class="input-box" type="Password" name="password" placeholder="PASSWORD">
+        <input class="input-box" type="Password" name="password" placeholder="PASSWORD" v-model ="password">
       </div>
       <div>
         <label>Keep me signed in</label>
         <input type="checkbox" name="check1" value="">
       </div>
       <div>
-        <input class="sbutton" type="submit" name="" value="Sign up">
+        <input class="sbutton" type="submit" name="" value="Sign up" @click.prevent="signUp()">
       </div>
     </form>
           
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      email: "",
+      phone: 0,
+      password: ""
+    }
+  },
+  methods: {
+    signUp() {
+      if (this.password.length > 6) {
+        let url = "http://localhost:3000/auth/register";
+        this.$http
+          .post(url, {
+            email: this.email,
+            phone: this.phone,
+            password: this.password
+          })
+          .then(response => {
+            localStorage.setItem("email", JSON.stringify(response.data.email));
+            // localStorage.setItem('jwt',response.data.token)
+            if (localStorage.getItem("email") != null) {
+              this.$emit("loggedIn");
+              if (this.$route.params.nextUrl != null) {
+                this.$router.push(this.$route.params.nextUrl);
+              } else {
+                this.$router.push("/login");
+              }
+            }
+          })
+          .catch(error => {
+            return alert(error);
+          });
+      } else {
+        return alert("Password should be more than 6 characters!");
+      }
+    }
+    }
+  }
+</script>
 
 <style scoped>    
   .box {

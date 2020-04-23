@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const User = require('../models/user-model');
 
+let sess;
 router.post('/register', (req, res) => {
     const { email, phone, password } = req.body;
     let errors = [];
@@ -35,7 +36,7 @@ router.post('/register', (req, res) => {
               newUser
                 .save()
                 .then(user => {
-                  res.send({"status": "Success", "user": user.name, "email": user.email, "category": user.category })
+                  res.send({"status": "Success", "email": user.email })
                 })
                 .catch(err => console.log(err));
             });
@@ -44,5 +45,40 @@ router.post('/register', (req, res) => {
     });
     }
 });
+
+router.post('/login', function(req, res, next) {
+  passport.authenticate('local', function(err, user, info) {
+    if (err) {
+      return next(err); // will generate a 500 error
+    }
+    // Generate a JSON response reflecting authentication status
+    if (! user) {
+      return res.send({ success : false, message : 'authentication failed' });
+    }
+    // ***********************************************************************
+    // "Note that when using a custom callback, it becomes the application's
+    // responsibility to establish a session (by calling req.login()) and send
+    // a response."
+    // Source: http://passportjs.org/docs
+    // ***********************************************************************
+    req.login(user, loginErr => {
+      if (loginErr) {
+        return next(loginErr);
+      }
+      sess = req.session;
+      sess.email = req.body.email;
+      return res.send({ success : true, message : 'authentication succeeded' });
+    });      
+  })(req, res, next);
+});
+  /*router.get('/logout',(req,res) => {
+    req.session.destroy((err) => {
+        if(err) {
+            return console.log(err);
+        }
+        res.send({"component": "home"});
+    });
+
+});*/
 
 module.exports = router;

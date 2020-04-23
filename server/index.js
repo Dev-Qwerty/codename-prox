@@ -1,14 +1,27 @@
 const express = require('express');
 const config = require('./config/mongo-connect');  // import mongoDB configuration
 const passport = require('passport');
-const passportSetup = require('./config/passport-config');
+const session = require('express-session');
+require('./config/passport-config')(passport);
 
 const app = express();
 
+app.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    next();
+    });
 // Middleware for body parsing
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json({ extended: false }))
 
+app.use(session(
+    {secret: 'codenameprox', 
+    saveUninitialized: false,
+    resave: false
+}));
 
 app.set('view engine', 'ejs')
 
@@ -23,16 +36,19 @@ const versionModel = require('./models/version-model')
 //import routes
 const authRouter = require("./routes/auth-router");
 
+app.get('/', function(req, res){
+    if(req.session.page_views){
+       req.session.page_views++;
+       res.send("You visited this page " + req.session.page_views + " times");
+    } else {
+       req.session.page_views = 1;
+       res.send("Welcome to this page for the first time!");
+    }
+ });
+
 
 // set relative path
 app.use('/auth', authRouter)
-
-
-
-// Home Route
-app.get('/', (req, res) => {
-    res.render('home')
-})
 
 
 // version check for mobile app
