@@ -67,18 +67,19 @@ router.post('/login', function(req, res, next) {
       }
       sess = req.session;
       sess.email = req.body.email;
-      return res.send({ success : true, message : 'authentication succeeded' });
+      return res.send({ success : true, message : 'authentication succeeded', email: req.body.email });
     });      
   })(req, res, next);
 });
-  /*router.get('/logout',(req,res) => {
+
+router.get('/logout',(req,res) => {
     req.session.destroy((err) => {
         if(err) {
             return console.log(err);
         }
-        res.send({"component": "home"});
+        res.send({status: "success"});
     });
 
-});*/
+});
 
 module.exports = router;
