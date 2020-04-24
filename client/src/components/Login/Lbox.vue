@@ -2,22 +2,57 @@
   <div class = "box">
     <form action="" method="POST">
       <div>
-        <input class="input-box" type="text" name="uname" placeholder="USERNAME">
+        <input class="input-box" type="text" name="uname" placeholder="USERNAME" v-model="email">
       </div>
       <div>
-        <input class="input-box" type="Password" name="password" placeholder="PASSWORD">
+        <input class="input-box" type="Password" name="password" placeholder="PASSWORD" v-model="password">
       </div>
       <div>
         <label>Keep me signed in</label>
         <input type="checkbox" name="check1" value="">
       </div>
       <div>
-        <input class="sbutton" type="submit" name="" value="Sign in">
+        <input class="sbutton" type="submit" name="" value="Sign in" @click.prevent="login()">
       </div>
     </form>
           
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      email: "",
+      password: ""
+    }
+  },
+  methods: {
+    login() {
+        if (this.password.length > 6) {
+        let url = "http://localhost:3000/auth/login";
+        this.$http
+          .post(url, {
+            email: this.email,
+            password: this.password
+          })
+          .then(response => {
+            localStorage.setItem("email", JSON.stringify(response.data.email));
+            //localStorage.setItem('jwt', response.data.token)
+
+            if (localStorage.getItem("email") != null) {
+              this.$emit("loggedIn");
+              window.location.href = "http://localhost:8080/dashboard";
+            }
+          })
+          .catch(function(error) {
+            alert("Invalid username or password! Please try again." + error);
+          });
+      }
+    }
+  }
+}
+</script>
 
 <style scoped>    
   .box {

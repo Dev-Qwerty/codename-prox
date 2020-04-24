@@ -7,6 +7,7 @@ import Login from '../components/Login/LMain.vue'
 import About from '../components/About/Aboutmain.vue'
 import Services from '../components/ServicesPage/SMain.vue'
 import Cleaning from '@/components/Services/Cleaning/Cmain.vue'
+import Dashboard from '@/components/Dashboard/DMain.vue'
 
 Vue.use(VueRouter)
 
@@ -19,6 +20,7 @@ export default new VueRouter({
     { path: '/login', component: Login },  
     { path: '/about', component: About },
     { path: '/services', component: Services },
-    { path: '/services/cleaning', component: Cleaning }           
+    { path: '/services/cleaning', component: Cleaning },
+    { path: '/dashboard', component: Dashboard }           
   ]
 })
