@@ -1,15 +1,15 @@
 const mongoose = require('mongoose');
 
 const mainserviceSchema = mongoose.Schema({
-    name: {
+    serviceName: {
         type: String,
         required: true
     },
-    image: {
+    imagePath: {
         type: String,
         required: true
     },
-    subservices: {
+    subServices: {
         type: Array
     }
 })
