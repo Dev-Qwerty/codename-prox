@@ -31,6 +31,7 @@ app.use(passport.session())
 
 // import models
 const versionModel = require('./models/version-model')
+const mainservicemodel = require('./models/mainservice-model')
 
 
 //import routes
@@ -53,15 +54,13 @@ app.use('/auth', authRouter)
 
 // version check for mobile app
 app.get('/checkserviceversion', async (req, res) => {
-    let serviceVersion = req.body.serviceVersion
+    let serviceVersion = req.query.serviceVersion;
     let offerVersion = await versionModel.find({}, 'offerVersion -_id')
-    if (serviceVersion === offerVersion[0].offerVersion) {
-        console.log(offerVersion[0].offerVersion + typeof (offerVersion))
-        res.send(offerVersion + " Same Version");
+    if (serviceVersion == offerVersion[0].offerVersion) {
+        res.send({ "versionChange": false });
     } else {
-        // console.log(serviceVersion + typeof (serviceVersion))
-        console.log(offerVersion[0].offerVersion + typeof (offerVersion))
-        res.send(offerVersion + " Version Changed")
+        let mainservice = await mainservicemodel.find({})
+        res.send({ "versionChange": true, "services": mainservice })
     }
 })
 
