@@ -12,16 +12,17 @@ app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     res.setHeader('Access-Control-Allow-Credentials', true);
     next();
-    });
+});
 // Middleware for body parsing
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json({ extended: false }))
 
 app.use(session(
-    {secret: 'codenameprox', 
-    saveUninitialized: false,
-    resave: false
-}));
+    {
+        secret: 'codenameprox',
+        saveUninitialized: false,
+        resave: false
+    }));
 
 app.set('view engine', 'ejs')
 
@@ -30,26 +31,28 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 // import models
-const versionModel = require('./models/version-model')
-const mainservicemodel = require('./models/mainservice-model')
+const versionModel = require('./models/version-model');
+const mainservicemodel = require('./models/mainservice-model');
 
 
 //import routes
 const authRouter = require("./routes/auth-router");
+const subserviceRouter = require('./routes/subservice-router');
 
-app.get('/', function(req, res){
-    if(req.session.page_views){
-       req.session.page_views++;
-       res.send("You visited this page " + req.session.page_views + " times");
+app.get('/', function (req, res) {
+    if (req.session.page_views) {
+        req.session.page_views++;
+        res.send("You visited this page " + req.session.page_views + " times");
     } else {
-       req.session.page_views = 1;
-       res.send("Welcome to this page for the first time!");
+        req.session.page_views = 1;
+        res.send("Welcome to this page for the first time!");
     }
- });
+});
 
 
 // set relative path
 app.use('/auth', authRouter)
+app.use('/services', subserviceRouter)
 
 
 // version check for mobile app
