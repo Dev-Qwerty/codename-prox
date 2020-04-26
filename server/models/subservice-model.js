@@ -5,26 +5,22 @@ const subserviceSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    subservices: {
-        name: {
-            type: String,
-            required: true
-        },
-        description: {
-            type: String,
-            required: true
-        },
-        imagePath: {
-            type: String,
-            required: true
-        }
-
+    name: {
+        type: String,
+        required: true
+    },
+    description: {
+        type: String,
+        required: true
+    },
+    imagePath: {
+        type: String,
+        required: true
     },
     moreDetail: {
         type: String,
         required: true
     }
-
 })
 
 const subservice = mongoose.model('subservices', subserviceSchema);

@@ -52,7 +52,7 @@ app.get('/', function (req, res) {
 
 // set relative path
 app.use('/auth', authRouter)
-app.use('/service', subserviceRouter)
+app.use('/services', subserviceRouter)
 
 
 // version check for mobile app
