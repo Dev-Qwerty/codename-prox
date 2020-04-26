@@ -63,7 +63,7 @@ app.get('/checkserviceversion', async (req, res) => {
         res.send({ "versionChange": false });
     } else {
         let mainservice = await mainservicemodel.find({})
-        res.send({ "versionChange": true, "services": mainservice })
+        res.send({ "versionChange": true, "services": mainservice,"version":offerVersion[0].offerVersion })
     }
 })
 
