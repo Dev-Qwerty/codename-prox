@@ -1,5 +1,16 @@
 const mongoose = require('mongoose');
 
+const categorySchema = mongoose.Schema({
+    category: {
+        type: String,
+        required: true
+    },
+    amount: {
+        type: Number,
+        required: true
+    }
+})
+
 const subserviceSchema = mongoose.Schema({
     mainserviceId: {
         type: String,
@@ -20,7 +31,8 @@ const subserviceSchema = mongoose.Schema({
     moreDetail: {
         type: String,
         required: true
-    }
+    },
+    categories: [categorySchema]
 })
 
 const subservice = mongoose.model('subservices', subserviceSchema);
