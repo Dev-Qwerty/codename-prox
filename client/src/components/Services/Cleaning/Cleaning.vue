@@ -18,6 +18,8 @@
       </div>
       <div class="row">
         <div class="col">
+
+          <div>{{ subArr }}</div>
           <!--<img id="pic1" src="../../../assets/Graph.png" alt="">
           <h4>Grow your business like a pro</h4>-->
         </div>
@@ -36,7 +38,26 @@
 
 <script>
 export default {
-  
+  data() {
+    return {
+      subArr: []
+    }
+  },
+  methods: {
+    apiCall() {
+      let url = 'http://localhost:3000/services/5ea50d377c154d280cf37efb'
+      this.$http.get(url)
+      .then((response) => {
+        this.subArr = response.data[0].name
+      })
+      .catch((error) => {
+        alert(error);
+      })     
+    }
+  },
+  mounted() {
+    this.apiCall()
+  }
 }
 </script>
 
