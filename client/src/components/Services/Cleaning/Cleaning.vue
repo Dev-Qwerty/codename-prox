@@ -17,22 +17,77 @@
         <div class="Line-small"></div>
       </div>
       <div class="row">
-        <div class="col">
-          <!--<img id="pic1" src="../../../assets/Graph.png" alt="">
-          <h4>Grow your business like a pro</h4>-->
-        </div>
-        <div class="col">
-          <!--<img id="pic2" src="../../../assets/Accept.png" alt="">
-          <h4>Work on your own terms</h4>-->
-        </div>
-        <div class="col">
-          <!--<img id="pic3" src="../../../assets/Warranty.png" alt="">
-          <h4>Get verified customer request</h4>-->
-        </div>            
+
+        <!--<div v-for="n in 3" v-bind:key="n">-->
+          <div class="col">
+            <div class="Btop">
+              <img class="Bimg" v-bind:src="'' + subArr[0].imagePath" />
+              <p>{{ subArr[0].name }}</p>
+            </div>
+            <div class="BLine"></div>
+            <div class="Bbottom">
+              <div id="Desc"><p>{{ subArr[0].description }}</p></div>
+              <p id="Vdetails">view details  <span id="Vspan">></span></p>
+              <input type="submit" value="Add to cart">
+            </div>
+          </div> 
+        <!--</div>-->
+
+          <div class="col">
+            <div class="Btop">
+              <img class="Bimg" v-bind:src="'' + subArr[1].imagePath" />
+              <p>{{ subArr[1].name }}</p>
+            </div>
+            <div class="BLine"></div>
+            <div class="Bbottom">
+              <div id="Desc"><p>{{ subArr[1].description }}</p></div>
+              <p id="Vdetails">view details  <span id="Vspan">></span></p>
+              <input type="submit" value="Add to cart">
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="Btop">
+              <img class="Bimg" v-bind:src="'' + subArr[0].imagePath" />
+              <p>{{ subArr[0].name }}</p>
+            </div>
+            <div class="BLine"></div>
+            <div class="Bbottom">
+              <div id="Desc"><p>{{ subArr[0].description }}</p></div>
+              <p id="Vdetails">view details  <span id="Vspan">></span></p>
+              <input type="submit" value="Add to cart">
+            </div>
+          </div>                   
+
       </div>
     </div>
   </div>    
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      subArr: []
+    }
+  },
+  methods: {
+    apiCall() {
+      let url = 'http://localhost:3000/services/5ea50d377c154d280cf37efb'
+      this.$http.get(url)
+      .then((response) => {
+        this.subArr = response.data
+      })
+      .catch((error) => {
+        alert(error);
+      })     
+    }
+  },
+  mounted() {
+    this.apiCall()
+  }
+}
+</script>
 
 <style scoped>
   .top-box {
@@ -103,31 +158,64 @@
   .row {
     margin-top: 10px;
     display: flex;
+    flex-direction: row;
     justify-content: center;
   }
   .col {
+    padding: 0PX;
     box-sizing: border-box;
     border: 1px solid #000;
     margin: 8px;
-    height: 200px;
-    background-color: #eeefef;  
+    height: 460px;
+    background-color: #fff;  
   }
-  #pic1 {
-    width: 90px;
-    position: absolute;
-    top: 15px;
-    left: calc(50% - 50px);
+  .Btop {
+    padding: 10px;
+    height: 100px;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 1fr 3fr; 
   }
-  #pic2 {
-    width: 90px;
-    position: absolute;
-    top: 15px;
-    left: calc(50% - 50px);
+  .Bimg {
+    height: 80px;
+    width: 80px;
   }
-  #pic3 {
-    width: 90px;
-    position: absolute;
-    top: 15px;
-    left: calc(50% - 50px);
+  .Btop p {
+    margin-top: 20px;
+    font-size: 23px;
   }
+  .BLine {
+    width: 100%;
+    background-color: #000;
+    height: 1px;
+  }
+  .Bbottom {
+    padding: 10px;
+  }
+  .Bbottom p {
+    font-size: 17px;
+    margin-bottom: 0px;
+  }
+  #Vdetails {
+    margin: 0px;
+    font-weight: bold;
+    font-size: 15px;
+  }
+  #Vspan {
+
+  }
+  .Bbottom input[type="submit"] {
+    border: none;
+    background-color: #000;
+    color: #fff;
+    margin-top: 17px;
+    margin-left: 130px;
+    width: 120px;
+    height: 50px;
+    font-family: Arial;
+    font-size: 17px;
+    font-style: italic;
+    box-shadow: 3px 3px #dedee0;
+    border-radius: 10px;;
+  }    
 </style>

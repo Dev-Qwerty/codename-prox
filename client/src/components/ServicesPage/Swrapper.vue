@@ -37,8 +37,9 @@
         <div class="b3">
           <div class="iBox i7"></div>
         </div>
-        <div class="b3">
+        <div class="b3" @click="cfn">
           <div class="iBox i8"></div>
+          <!--<router-link class="iBox i8" :to="{ path: 'gethired' }" v-on="cfn()"></router-link>-->
         </div>
         <div class="">
           <div class="iBox i9"></div>
@@ -73,6 +74,21 @@
         
   </div>    
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      a: []
+    }
+  },
+  methods: {
+    cfn() {
+      this.$router.push({path: 'services/cleaning'})
+    }
+  }
+}
+</script>
 
 <style scoped>
   .box {
