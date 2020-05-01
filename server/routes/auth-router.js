@@ -116,5 +116,18 @@ router.post('/sendResetLink', (req,res) => {
   .catch(error => console.log(error));
 });
 
+router.post('/resetPassword', (req,res) => {
+  let email = req.body.email;
+  let newPassword = req.body.password;
+  let confirmNewPassword = req.body.password2;
+  if(newPassword == confirmNewPassword && newPassword.length > 8) {
+    bcrypt.hash(newPassword, 10 , function(err, hash) {
+      newPassword = hash;
+      User.update({email: email}, {password: newPassword}).then(() => {
+        res.send({status: "Success"});
+      }).catch(err => res.send({error: err}));
+  });
+  }
+})
 
 module.exports = router;
