@@ -17,26 +17,48 @@
         <div class="Line-small"></div>
       </div>
       <div class="row">
-        <div class="col">
-          <div class="Btop">
-            <img class="Bimg" v-bind:src="'' + subArr.imagePath" />
-            <p>{{ subArr.name }}</p>
+
+        <!--<div v-for="n in 3" v-bind:key="n">-->
+          <div class="col">
+            <div class="Btop">
+              <img class="Bimg" v-bind:src="'' + subArr[0].imagePath" />
+              <p>{{ subArr[0].name }}</p>
+            </div>
+            <div class="BLine"></div>
+            <div class="Bbottom">
+              <div id="Desc"><p>{{ subArr[0].description }}</p></div>
+              <p id="Vdetails">view details  <span id="Vspan">></span></p>
+              <input type="submit" value="Add to cart">
+            </div>
+          </div> 
+        <!--</div>-->
+
+          <div class="col">
+            <div class="Btop">
+              <img class="Bimg" v-bind:src="'' + subArr[1].imagePath" />
+              <p>{{ subArr[1].name }}</p>
+            </div>
+            <div class="BLine"></div>
+            <div class="Bbottom">
+              <div id="Desc"><p>{{ subArr[1].description }}</p></div>
+              <p id="Vdetails">view details  <span id="Vspan">></span></p>
+              <input type="submit" value="Add to cart">
+            </div>
           </div>
-          <div class="BLine"></div>
-          <div class="Bbottom">
-            <div id="Desc"><p>{{ subArr.description }}</p></div>
-            <p id="Vdetails">view details  <span id="Vspan">></span></p>
-            <input type="submit" value="Add to cart">
-          </div>
-        </div>
-        <div class="col">
-          <!--<img id="pic2" src="../../../assets/Accept.png" alt="">
-          <h4>Work on your own terms</h4>-->
-        </div>
-        <div class="col">
-          <!--<img id="pic3" src="../../../assets/Warranty.png" alt="">
-          <h4>Get verified customer request</h4>-->
-        </div>            
+
+          <div class="col">
+            <div class="Btop">
+              <img class="Bimg" v-bind:src="'' + subArr[0].imagePath" />
+              <p>{{ subArr[0].name }}</p>
+            </div>
+            <div class="BLine"></div>
+            <div class="Bbottom">
+              <div id="Desc"><p>{{ subArr[0].description }}</p></div>
+              <p id="Vdetails">view details  <span id="Vspan">></span></p>
+              <input type="submit" value="Add to cart">
+            </div>
+          </div>                   
+
       </div>
     </div>
   </div>    
@@ -54,7 +76,7 @@ export default {
       let url = 'http://localhost:3000/services/5ea50d377c154d280cf37efb'
       this.$http.get(url)
       .then((response) => {
-        this.subArr = response.data[0]
+        this.subArr = response.data
       })
       .catch((error) => {
         alert(error);
@@ -136,6 +158,7 @@ export default {
   .row {
     margin-top: 10px;
     display: flex;
+    flex-direction: row;
     justify-content: center;
   }
   .col {
