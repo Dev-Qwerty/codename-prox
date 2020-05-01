@@ -96,24 +96,30 @@ router.post('/sendResetLink', (req,res) => {
         pass: keys.gmail.password
     }
   })
-  User.findOne({email: email}).then(user => {
-    var mailOptions = {
-      from: 'atest6533@gmail.com',
-      to: email,
-      subject: 'Reset Password',
-      text: 'Reset Password Link'
-    };
-    transporter.sendMail(mailOptions, function(error, info){
-      if (error) {
-        console.log("Error: "+ error);
-      } else {
-        console.log('Email sent: ' + info.response);
+  User.findOne({email: email}, function(err, document) {
+      if(err) throw err;
+      else {
+        if(document == null) {
+          res.send({status: "email not found"});
+        }
+        else {
+          var mailOptions = {
+            from: 'atest6533@gmail.com',
+            to: email,
+            subject: 'Reset Password',
+            text: 'Reset Password Link'
+          };
+          transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+              console.log(error);
+            } else {
+              console.log('Email sent: ' + info.response);
+            }
+          });
+          res.send({status: "success"});
+        }
       }
-    });
-    res.send({status: "Email sent!"});
-
   })
-  .catch(error => console.log(error));
 });
 
 router.post('/resetPassword', (req,res) => {
@@ -123,9 +129,17 @@ router.post('/resetPassword', (req,res) => {
   if(newPassword == confirmNewPassword && newPassword.length > 8) {
     bcrypt.hash(newPassword, 10 , function(err, hash) {
       newPassword = hash;
-      User.update({email: email}, {password: newPassword}).then(() => {
-        res.send({status: "Success"});
-      }).catch(err => res.send({error: err}));
+      User.update({email: email}, {password: newPassword}, function(err, count, result) {
+        if(err) throw err;
+        else {
+          if(count.n == 0) {
+            res.send({status: "email not found"});
+          }
+          else {
+            res.send({status: "success"});
+          }
+        }
+      });
   });
   }
 })
