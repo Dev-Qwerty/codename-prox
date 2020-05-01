@@ -34,6 +34,12 @@
   </div>    
 </template>
 
+<script>
+export default {
+  
+}
+</script>
+
 <style scoped>
   .top-box {
     height: 50px;
