@@ -18,10 +18,16 @@
       </div>
       <div class="row">
         <div class="col">
-
-          <div>{{ subArr }}</div>
-          <!--<img id="pic1" src="../../../assets/Graph.png" alt="">
-          <h4>Grow your business like a pro</h4>-->
+          <div class="Btop">
+            <img class="Bimg" v-bind:src="'' + subArr.imagePath" />
+            <p>{{ subArr.name }}</p>
+          </div>
+          <div class="BLine"></div>
+          <div class="Bbottom">
+            <div id="Desc"><p>{{ subArr.description }}</p></div>
+            <p id="Vdetails">view details  <span id="Vspan">></span></p>
+            <input type="submit" value="Add to cart">
+          </div>
         </div>
         <div class="col">
           <!--<img id="pic2" src="../../../assets/Accept.png" alt="">
@@ -48,7 +54,7 @@ export default {
       let url = 'http://localhost:3000/services/5ea50d377c154d280cf37efb'
       this.$http.get(url)
       .then((response) => {
-        this.subArr = response.data[0].name
+        this.subArr = response.data[0]
       })
       .catch((error) => {
         alert(error);
@@ -133,28 +139,60 @@ export default {
     justify-content: center;
   }
   .col {
+    padding: 0PX;
     box-sizing: border-box;
     border: 1px solid #000;
     margin: 8px;
-    height: 200px;
-    background-color: #eeefef;  
+    height: 460px;
+    background-color: #fff;  
   }
-  #pic1 {
-    width: 90px;
-    position: absolute;
-    top: 15px;
-    left: calc(50% - 50px);
+  .Btop {
+    padding: 10px;
+    height: 100px;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 1fr 3fr; 
   }
-  #pic2 {
-    width: 90px;
-    position: absolute;
-    top: 15px;
-    left: calc(50% - 50px);
+  .Bimg {
+    height: 80px;
+    width: 80px;
   }
-  #pic3 {
-    width: 90px;
-    position: absolute;
-    top: 15px;
-    left: calc(50% - 50px);
+  .Btop p {
+    margin-top: 20px;
+    font-size: 23px;
   }
+  .BLine {
+    width: 100%;
+    background-color: #000;
+    height: 1px;
+  }
+  .Bbottom {
+    padding: 10px;
+  }
+  .Bbottom p {
+    font-size: 17px;
+    margin-bottom: 0px;
+  }
+  #Vdetails {
+    margin: 0px;
+    font-weight: bold;
+    font-size: 15px;
+  }
+  #Vspan {
+
+  }
+  .Bbottom input[type="submit"] {
+    border: none;
+    background-color: #000;
+    color: #fff;
+    margin-top: 17px;
+    margin-left: 130px;
+    width: 120px;
+    height: 50px;
+    font-family: Arial;
+    font-size: 17px;
+    font-style: italic;
+    box-shadow: 3px 3px #dedee0;
+    border-radius: 10px;;
+  }    
 </style>
