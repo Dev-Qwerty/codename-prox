@@ -3,6 +3,10 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const User = require('../models/user-model');
+const nodemailer = require('nodemailer');
+const keys = require('../config/keys');
+
+
 
 let sess;
 router.post('/register', (req, res) => {
@@ -67,6 +71,7 @@ router.post('/login', function(req, res, next) {
       }
       sess = req.session;
       sess.email = req.body.email;
+      console.log(sess);
       return res.send({ success : true, message : 'authentication succeeded', email: req.body.email });
     });      
   })(req, res, next);
@@ -81,5 +86,35 @@ router.get('/logout',(req,res) => {
     });
 
 });
+
+router.post('/sendResetLink', (req,res) => {
+  let email = req.body.email;
+  let transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'atest6533@gmail.com',
+        pass: keys.gmail.password
+    }
+  })
+  User.findOne({email: email}).then(user => {
+    var mailOptions = {
+      from: 'atest6533@gmail.com',
+      to: email,
+      subject: 'Reset Password',
+      text: 'Reset Password Link'
+    };
+    transporter.sendMail(mailOptions, function(error, info){
+      if (error) {
+        console.log("Error: "+ error);
+      } else {
+        console.log('Email sent: ' + info.response);
+      }
+    });
+    res.send({status: "Email sent!"});
+
+  })
+  .catch(error => console.log(error));
+});
+
 
 module.exports = router;
