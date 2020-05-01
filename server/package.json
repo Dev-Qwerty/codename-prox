@@ -10,10 +10,12 @@
   "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
     "ejs": "^3.0.1",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "mongoose": "^5.8.11",
+    "nodemailer": "^6.4.6",
     "passport": "^0.4.1",
     "passport-google-oauth20": "^2.0.0",
     "passport-local": "^1.0.0"
