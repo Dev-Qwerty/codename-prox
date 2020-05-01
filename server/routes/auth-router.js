@@ -3,6 +3,10 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const User = require('../models/user-model');
+const nodemailer = require('nodemailer');
+const keys = require('../config/keys');
+
+
 
 let sess;
 router.post('/register', (req, res) => {
@@ -67,6 +71,7 @@ router.post('/login', function(req, res, next) {
       }
       sess = req.session;
       sess.email = req.body.email;
+      console.log(sess);
       return res.send({ success : true, message : 'authentication succeeded', email: req.body.email });
     });      
   })(req, res, next);
@@ -81,5 +86,62 @@ router.get('/logout',(req,res) => {
     });
 
 });
+
+router.post('/sendResetLink', (req,res) => {
+  let email = req.body.email;
+  let transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'atest6533@gmail.com',
+        pass: keys.gmail.password
+    }
+  })
+  User.findOne({email: email}, function(err, document) {
+      if(err) throw err;
+      else {
+        if(document == null) {
+          res.send({status: "email not found"});
+        }
+        else {
+          var mailOptions = {
+            from: 'atest6533@gmail.com',
+            to: email,
+            subject: 'Reset Password',
+            text: 'Reset Password Link'
+          };
+          transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+              console.log(error);
+            } else {
+              console.log('Email sent: ' + info.response);
+            }
+          });
+          res.send({status: "success"});
+        }
+      }
+  })
+});
+
+router.post('/resetPassword', (req,res) => {
+  let email = req.body.email;
+  let newPassword = req.body.password;
+  let confirmNewPassword = req.body.password2;
+  if(newPassword == confirmNewPassword && newPassword.length > 8) {
+    bcrypt.hash(newPassword, 10 , function(err, hash) {
+      newPassword = hash;
+      User.update({email: email}, {password: newPassword}, function(err, count, result) {
+        if(err) throw err;
+        else {
+          if(count.n == 0) {
+            res.send({status: "email not found"});
+          }
+          else {
+            res.send({status: "success"});
+          }
+        }
+      });
+  });
+  }
+})
 
 module.exports = router;
