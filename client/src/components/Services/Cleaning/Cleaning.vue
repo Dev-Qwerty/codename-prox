@@ -28,9 +28,9 @@
             <div class="Bbottom">
               <div id="Desc"><p>{{ subArr[n-1].description }}</p></div>
               <p id="Vdetails">view details  <span id="Vspan">></span></p>
-              <input type="submit" value="Add to cart" @click="cfn">
-              <Cmodal />
-              <!--<Cmodal :is="currentCmp"></Cmodal>-->
+              <input type="submit" data-toggle="modal" data-target="#myModal" value="Add to cart" @click="showModal">  
+              <Cmodal v-bind:subArr="subArr"></Cmodal>
+                 
             </div>
           </div> 
         </div>
@@ -52,7 +52,7 @@ export default {
     }
   },
   methods: {
-    cfn() {
+    showModal() {
       
     },
     apiCall() {
