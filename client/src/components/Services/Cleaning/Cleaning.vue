@@ -1,6 +1,7 @@
 <template>
   <div class="Container">
     <div class="top-box">
+      <router-link class="navImg" :to="{ path: '/services' }"></router-link>
       <h3>Back to services</h3>
     </div>
     <div class="mid">
@@ -27,7 +28,9 @@
             <div class="Bbottom">
               <div id="Desc"><p>{{ subArr[n-1].description }}</p></div>
               <p id="Vdetails">view details  <span id="Vspan">></span></p>
-              <input type="submit" value="Add to cart">
+              <input type="submit" value="Add to cart" @click="cfn">
+              <Cmodal />
+              <!--<Cmodal :is="currentCmp"></Cmodal>-->
             </div>
           </div> 
         </div>
@@ -37,13 +40,21 @@
 </template>
 
 <script>
+import Cmodal from '@/components/Services/Cleaning/Cmodal.vue'
+
 export default {
+  components: {
+    Cmodal
+  },
   data() {
     return {
       subArr: []
     }
   },
   methods: {
+    cfn() {
+      
+    },
     apiCall() {
       let url = 'http://localhost:3000/services/5ea50d377c154d280cf37efb'
       this.$http.get(url)
@@ -69,8 +80,20 @@ export default {
     box-sizing: border-box;
     padding-left: 20px;
     padding-top: 10px;
+    display: flex;
+  }
+  .navImg {
+    margin-top: 3px;
+    width: 20px;
+    height: 20px;
+    background-image: url(../../../assets/arrow.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;    
   }
   .top-box h3 {
+    margin-top: 2px;
+    margin-left: 15px;
     color: #aaa;
     font-style: italic;
     font-size: 21px;
