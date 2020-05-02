@@ -17,48 +17,20 @@
         <div class="Line-small"></div>
       </div>
       <div class="row">
-
-        <!--<div v-for="n in 3" v-bind:key="n">-->
+        <div v-for="n in 4" v-bind:key="n">
           <div class="col">
             <div class="Btop">
-              <img class="Bimg" v-bind:src="'' + subArr[0].imagePath" />
-              <p>{{ subArr[0].name }}</p>
+              <img class="Bimg" v-bind:src="'' + subArr[n-1].imagePath" />
+              <p>{{ subArr[n-1].name }}</p>
             </div>
             <div class="BLine"></div>
             <div class="Bbottom">
-              <div id="Desc"><p>{{ subArr[0].description }}</p></div>
+              <div id="Desc"><p>{{ subArr[n-1].description }}</p></div>
               <p id="Vdetails">view details  <span id="Vspan">></span></p>
               <input type="submit" value="Add to cart">
             </div>
           </div> 
-        <!--</div>-->
-
-          <div class="col">
-            <div class="Btop">
-              <img class="Bimg" v-bind:src="'' + subArr[1].imagePath" />
-              <p>{{ subArr[1].name }}</p>
-            </div>
-            <div class="BLine"></div>
-            <div class="Bbottom">
-              <div id="Desc"><p>{{ subArr[1].description }}</p></div>
-              <p id="Vdetails">view details  <span id="Vspan">></span></p>
-              <input type="submit" value="Add to cart">
-            </div>
-          </div>
-
-          <div class="col">
-            <div class="Btop">
-              <img class="Bimg" v-bind:src="'' + subArr[0].imagePath" />
-              <p>{{ subArr[0].name }}</p>
-            </div>
-            <div class="BLine"></div>
-            <div class="Bbottom">
-              <div id="Desc"><p>{{ subArr[0].description }}</p></div>
-              <p id="Vdetails">view details  <span id="Vspan">></span></p>
-              <input type="submit" value="Add to cart">
-            </div>
-          </div>                   
-
+        </div>
       </div>
     </div>
   </div>    
@@ -157,9 +129,9 @@ export default {
   }
   .row {
     margin-top: 10px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 10px;
   }
   .col {
     padding: 0PX;

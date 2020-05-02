@@ -14,7 +14,7 @@ const poolData = {
   ClientId: keys.cognito.clientId
 }
 
-const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+//const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
 
 let sess;
 
