@@ -5,10 +5,78 @@ const passport = require('passport');
 const User = require('../models/user-model');
 const nodemailer = require('nodemailer');
 const keys = require('../config/keys');
+const expressSession = require('express-session');
+const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
+global.fetch = require("node-fetch");
 
+const poolData = {
+  UserPoolId: keys.cognito.userPoolId,
+  ClientId: keys.cognito.clientId
+}
 
+const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
 
 let sess;
+
+router.post('/signup', (req,res) => {
+  const name = req.body.name;
+  const email = req.body.email;
+  const password = req.body.password;
+  const phoneNo = req.body.phoneNo;
+
+  const emailData = {
+    Name: 'email',
+    Value: email
+  };
+
+  const phoneData = {
+    Name: 'phone_number',
+    Value: phoneNo
+  };
+
+  const nameData = {
+    Name: 'given_name',
+    Value: name
+  };
+
+  const emailAttribute = new AmazonCognitoIdentity.CognitoUserAttribute(emailData);
+  const phoneAttribute = new AmazonCognitoIdentity.CognitoUserAttribute(phoneData);
+  const nameAttribute = new AmazonCognitoIdentity.CognitoUserAttribute(nameData);
+
+  userPool.signUp(email, password, [ emailAttribute, phoneAttribute, nameAttribute ], null, (err,data) => {
+    if(err) {
+      return console.log(err);
+    }
+    res.send(data.user);
+  })
+});
+
+router.post('/login', (req,res) => {
+  const LoginData = {
+    Username: req.body.email || req.body.phone,
+    Password: req.body.password
+  }
+  const AuthenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(LoginData);
+
+  const UserData = {
+    Username: req.body.email || req.body.phone,
+    Pool: userPool
+  }
+
+  req.session['login-errors'] = [];
+  
+  const cognitoUser = new AmazonCognitoIdentity.CognitoUser(UserData);
+  cognitoUser.authenticateUser(AuthenticationDetails, {
+    onSuccess: data => {
+      res.send(data);
+    },
+    onFailure: err => {
+      req.session['login-errors'].push(err.message)
+      res.send({status: err.message});
+    }
+  })
+})
+/*
 router.post('/register', (req, res) => {
     const { email, phone, password } = req.body;
     let errors = [];
@@ -49,7 +117,8 @@ router.post('/register', (req, res) => {
     });
     }
 });
-
+*/
+/*
 router.post('/login', function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
     if (err) {
@@ -86,7 +155,7 @@ router.get('/logout',(req,res) => {
     });
 
 });
-
+*/
 router.post('/sendResetLink', (req,res) => {
   let email = req.body.email;
   let transporter = nodemailer.createTransport({
