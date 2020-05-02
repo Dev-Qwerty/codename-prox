@@ -1,6 +1,7 @@
 <template>
   <div class="Container">
     <div class="top-box">
+      <router-link class="navImg" :to="{ path: '/services' }"></router-link>
       <h3>Back to services</h3>
     </div>
     <div class="mid">
@@ -17,61 +18,43 @@
         <div class="Line-small"></div>
       </div>
       <div class="row">
-
-        <!--<div v-for="n in 3" v-bind:key="n">-->
+        <div v-for="n in 4" v-bind:key="n">
           <div class="col">
             <div class="Btop">
-              <img class="Bimg" v-bind:src="'' + subArr[0].imagePath" />
-              <p>{{ subArr[0].name }}</p>
+              <img class="Bimg" v-bind:src="'' + subArr[n-1].imagePath" />
+              <p>{{ subArr[n-1].name }}</p>
             </div>
             <div class="BLine"></div>
             <div class="Bbottom">
-              <div id="Desc"><p>{{ subArr[0].description }}</p></div>
+              <div id="Desc"><p>{{ subArr[n-1].description }}</p></div>
               <p id="Vdetails">view details  <span id="Vspan">></span></p>
-              <input type="submit" value="Add to cart">
+              <input type="submit" data-toggle="modal" data-target="#myModal" value="Add to cart" @click="showModal">  
+              <Cmodal v-bind:subArr="subArr"></Cmodal>
+                 
             </div>
           </div> 
-        <!--</div>-->
-
-          <div class="col">
-            <div class="Btop">
-              <img class="Bimg" v-bind:src="'' + subArr[1].imagePath" />
-              <p>{{ subArr[1].name }}</p>
-            </div>
-            <div class="BLine"></div>
-            <div class="Bbottom">
-              <div id="Desc"><p>{{ subArr[1].description }}</p></div>
-              <p id="Vdetails">view details  <span id="Vspan">></span></p>
-              <input type="submit" value="Add to cart">
-            </div>
-          </div>
-
-          <div class="col">
-            <div class="Btop">
-              <img class="Bimg" v-bind:src="'' + subArr[0].imagePath" />
-              <p>{{ subArr[0].name }}</p>
-            </div>
-            <div class="BLine"></div>
-            <div class="Bbottom">
-              <div id="Desc"><p>{{ subArr[0].description }}</p></div>
-              <p id="Vdetails">view details  <span id="Vspan">></span></p>
-              <input type="submit" value="Add to cart">
-            </div>
-          </div>                   
-
+        </div>
       </div>
     </div>
   </div>    
 </template>
 
 <script>
+import Cmodal from '@/components/Services/Cleaning/Cmodal.vue'
+
 export default {
+  components: {
+    Cmodal
+  },
   data() {
     return {
       subArr: []
     }
   },
   methods: {
+    showModal() {
+      
+    },
     apiCall() {
       let url = 'http://localhost:3000/services/5ea50d377c154d280cf37efb'
       this.$http.get(url)
@@ -97,8 +80,20 @@ export default {
     box-sizing: border-box;
     padding-left: 20px;
     padding-top: 10px;
+    display: flex;
+  }
+  .navImg {
+    margin-top: 3px;
+    width: 20px;
+    height: 20px;
+    background-image: url(../../../assets/arrow.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;    
   }
   .top-box h3 {
+    margin-top: 2px;
+    margin-left: 15px;
     color: #aaa;
     font-style: italic;
     font-size: 21px;
@@ -157,9 +152,9 @@ export default {
   }
   .row {
     margin-top: 10px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 10px;
   }
   .col {
     padding: 0PX;
