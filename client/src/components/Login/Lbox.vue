@@ -2,7 +2,7 @@
   <div class = "box">
     <form action="" method="POST">
       <div>
-        <input class="input-box" type="text" name="uname" placeholder="USERNAME" v-model="email">
+        <input class="input-box" type="text" name="uname" placeholder="USERNAME" v-model="username">
       </div>
       <div>
         <input class="input-box" type="Password" name="password" placeholder="PASSWORD" v-model="password">
@@ -23,7 +23,7 @@
 export default {
   data() {
     return {
-      email: "",
+      username: "",
       password: ""
     }
   },
@@ -33,17 +33,17 @@ export default {
         let url = "http://localhost:3000/auth/login";
         this.$http
           .post(url, {
-            email: this.email,
+            username: this.username,
             password: this.password
           })
           .then(response => {
-            localStorage.setItem("email", JSON.stringify(response.data.email));
-            //localStorage.setItem('jwt', response.data.token)
-
-            if (localStorage.getItem("email") != null) {
-              this.$emit("loggedIn");
-              window.location.href = "http://localhost:8080/dashboard";
+            if(response.data.status != null) {
+              return alert(response.data.status);
             }
+            this.$cookies.set("username", response.data.idToken.payload.sub, '1d');
+            this.$cookies.set("jwt", response.data.idToken.jwtToken, '1d');
+            window.location.href = "http://localhost:8080/dashboard";
+            
           })
           .catch(function(error) {
             alert("Invalid username or password! Please try again." + error);

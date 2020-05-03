@@ -14,7 +14,7 @@ const poolData = {
   ClientId: keys.cognito.clientId
 }
 
-//const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
 
 let sess;
 
@@ -53,13 +53,13 @@ router.post('/signup', (req,res) => {
 
 router.post('/login', (req,res) => {
   const LoginData = {
-    Username: req.body.email || req.body.phone,
+    Username: req.body.username,
     Password: req.body.password
   }
   const AuthenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(LoginData);
 
   const UserData = {
-    Username: req.body.email || req.body.phone,
+    Username: req.body.username,
     Pool: userPool
   }
 
@@ -145,17 +145,12 @@ router.post('/login', function(req, res, next) {
     });      
   })(req, res, next);
 });
-
+*/
 router.get('/logout',(req,res) => {
-    req.session.destroy((err) => {
-        if(err) {
-            return console.log(err);
-        }
-        res.send({status: "success"});
-    });
+   res.send({status: "Success"});
 
 });
-*/
+
 router.post('/sendResetLink', (req,res) => {
   let email = req.body.email;
   let transporter = nodemailer.createTransport({
