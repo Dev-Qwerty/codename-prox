@@ -18,10 +18,10 @@ export default {
         logout() {
             let url = "http://localhost:3000/auth/logout";
             this.$http.get(url, {}).then(response => {
-                alert(response.data.status)
-                localStorage.removeItem('email')
-                window.location.href = "http://localhost:8080/"
-                
+                alert(response.data.status);
+                this.$cookies.remove("username");
+                this.$cookies.remove("jwt");
+                window.location.href = "http://localhost:8080/";
             })
             .catch(function(error) {
                 alert(error)
