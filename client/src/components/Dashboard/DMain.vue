@@ -1,5 +1,6 @@
 <template>
     <div>
+        <Nav />
         <h1>Dashboard</h1>
         <p>To Do</p>
         <button @click="logout()">Logout</button>
@@ -7,7 +8,12 @@
 </template>
 
 <script>
+import Nav from '@/components/Dashboard/Navbar.vue'
+
 export default {
+    components: {
+      Nav
+    },
     methods: {
         logout() {
             let url = "http://localhost:3000/auth/logout";
