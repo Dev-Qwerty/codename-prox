@@ -25,7 +25,7 @@
         <router-link class="nav-link" :to="{ path: '' }">Blog</router-link>
       </li>
       <li class="nav-item">
-        <router-link class="btn btn-light" :to="{ path: 'login' }" tag="button">Logout</router-link>
+        <router-link class="btn btn-light" :to="{ path: '' }" tag="button">Logout</router-link>
       </li>
     </ul>
   </nav>
