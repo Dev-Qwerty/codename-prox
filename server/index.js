@@ -40,6 +40,7 @@ const mainservicemodel = require('./models/mainservice-model');
 //import routes
 const authRouter = require("./routes/auth-router");
 const subserviceRouter = require('./routes/subservice-router');
+const workerRouter = require("./routes/worker-router");
 
 app.get('/', function (req, res) {
     if (req.session.page_views) {
@@ -55,7 +56,7 @@ app.get('/', function (req, res) {
 // set relative path
 app.use('/auth', authRouter)
 app.use('/services', subserviceRouter)
-
+app.use('/worker', workerRouter)
 
 // version check for mobile app
 app.get('/checkserviceversion', async (req, res) => {
