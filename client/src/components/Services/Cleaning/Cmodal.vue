@@ -5,12 +5,12 @@
         <div class="Mcontent">
           <div class="topImg"></div>
           <p class="hding">{{ subArr[1].name }}</p>
-          <div v-for="p in 5" v-bind:key="p">
+          <div v-for="service in subArr" v-bind:key="service._id">
             <div class="Box">
               <div class="Flex">
-                <p id="one">{{ subArr[3].categories[0].category }}<p>
+                <p id="one">{{ service.category }}<p>
                 <div class="Rs"></div>
-                <p id="two">{{ subArr[3].categories[0].amount }}</p>
+                <p id="two">{{ service.amount }}</p>
                 <input type="submit" value="ADD">
               </div>
               <p id="Vdetails">view details  <span id="Vspan">></span></p>

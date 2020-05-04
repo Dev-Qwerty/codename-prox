@@ -18,18 +18,18 @@
         <div class="Line-small"></div>
       </div>
       <div class="row">
-        <div v-for="n in 4" v-bind:key="n">
+        <div v-for="service in subArr" v-bind:key="service._id">
           <div class="col">
             <div class="Btop">
-              <img class="Bimg" v-bind:src="'' + subArr[n-1].imagePath" />
-              <p>{{ subArr[n-1].name }}</p>
+              <img class="Bimg" v-bind:src="'' + service.imagePath" />
+              <p>{{ service.name }}</p>
             </div>
             <div class="BLine"></div>
             <div class="Bbottom">
-              <div id="Desc"><p>{{ subArr[n-1].description }}</p></div>
+              <div id="Desc"><p>{{ service.description }}</p></div>
               <p id="Vdetails">view details  <span id="Vspan">></span></p>
               <input type="submit" data-toggle="modal" data-target="#myModal" value="Add to cart" @click="showModal">  
-              <Cmodal v-bind:subArr="subArr"></Cmodal>
+              <Cmodal v-bind:subArr="service.categories"></Cmodal>
                  
             </div>
           </div> 
