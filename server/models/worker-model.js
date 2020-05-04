@@ -27,13 +27,18 @@ const WorkerSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    password: {
+        type: String,
+        required: true
+    },
     workerType: {
         type: String,
         enum: ['Individual', 'Company'],
         required: true
     },
     companyID: {
-        type: String
+        type: String,
+        default: null
     },
     specialization: {
         type: String,
@@ -50,7 +55,7 @@ const WorkerSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    address: [addressSchema],
+    address: addressSchema,
     rating: {
         type: Number,
         default: 0
