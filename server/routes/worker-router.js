@@ -64,6 +64,38 @@ router.post('/login', (req,res) => {
       });
 })
 
+router.post('/completeProfile', (req,res) => {
+    let editedInfo = {};
+    editedInfo['custom:worker_type'] = req.body.worker_type;
+    if(req.body.company_ID) editedInfo['custom:company_ID'] = req.body.company_ID;
+    editedInfo['custom:specialization'] = req.body.specialization;
+    if(req.body.other_areas) editedInfo['custom:other_areas'] = req.body.other_areas;
+    editedInfo['address'] = JSON.stringify(req.body.address);
+    //updateUserInfo(editedInfo);
+    let attributes = [];
+    for(i in editedInfo) {
+        const attrib_data = {
+            Name: i,
+            Value: editedInfo[i]
+        }
+        const attrib = new AmazonCognitoIdentity.CognitoUserAttribute(attrib_data);
+        attributes.push(attrib);
+    }
+    const currentUser = workerPool.getCurrentUser();
+    currentUser.getSession(function(err,result) {
+        if(result) {
+            currentUser.updateAttributes(attributes, function(err,results) {
+                if(err) {
+                    console.log(err)
+                }
+                res.send(results);
+            })
+        }
+        if(err) {
+            console.log(err);
+        }
+    })
+    
+})
 
 module.exports = router;
-
