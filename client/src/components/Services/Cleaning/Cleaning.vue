@@ -28,8 +28,8 @@
             <div class="Bbottom">
               <div id="Desc"><p>{{ service.description }}</p></div>
               <p id="Vdetails">view details  <span id="Vspan">></span></p>
-              <input type="submit" data-toggle="modal" data-target="#myModal" value="Add to cart" @click="showModal">  
-              <Cmodal v-bind:subArr="service.categories"></Cmodal>
+              <input type="submit" data-toggle="modal" data-target="#myModal" value="Add to cart" @click="showModal(service.categories)">  
+              <!--<Cmodal v-bind:subArr="service.categories"></Cmodal>-->
                  
             </div>
           </div> 
@@ -40,11 +40,11 @@
 </template>
 
 <script>
-import Cmodal from '@/components/Services/Cleaning/Cmodal.vue'
+//import Cmodal from '@/components/Services/Cleaning/Cmodal.vue'
 
 export default {
   components: {
-    Cmodal
+    //Cmodal
   },
   data() {
     return {
@@ -52,8 +52,8 @@ export default {
     }
   },
   methods: {
-    showModal() {
-      
+    showModal(sm) {
+      alert(JSON.stringify(sm))
     },
     apiCall() {
       let url = 'http://localhost:3000/services/5ea50d377c154d280cf37efb'
