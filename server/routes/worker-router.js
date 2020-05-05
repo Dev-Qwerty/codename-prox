@@ -11,76 +11,57 @@ const poolData = {
 const workerPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
 
 router.post('/signup', (req,res) => {
-    const { name, password, workerType, companyID, specialization, otherAreas, phoneNo, email } = req.body;
-    let address = req.body.address;
-    address = JSON.stringify(address);
-    const nameData = {
+    const { name, email, password, phoneNo } = req.body;
+       const nameData = {
         Name: 'given_name',
         Value: name
-    }
-    const typeData = {
-        Name: 'custom:worker_type',
-        Value: workerType
-    }
-    const specializationData = {
-        Name: 'custom:specialization',
-        Value: specialization
-    }
-    let otherData = {}
-    if(otherAreas==null) {
-        otherData = {
-            Name: 'custom:other_areas',
-            Value: null
-        }
-    }
-    else {
-        otherData = {
-            Name: 'custom:other_areas',
-            Value: otherAreas
-        }
     }
     const phoneData = {
         Name: 'phone_number',
         Value: phoneNo
-    }
-    let companyData = {}
-    if( companyID!=null ) {
-        companyData = {
-            Name: 'custom:company_ID',
-            Value: companyID
-        }
-    }
-    else {
-        companyData = {
-            Name: 'custom:company_ID',
-            Value: null
-        }
     }
     const emailData = {
         Name: 'email',
         Value: email
     }
 
-    const addressData = {
-        Name: 'custom:address',
-        Value: address
-    }
-
     const emailAttribute = new AmazonCognitoIdentity.CognitoUserAttribute(emailData);
     const nameAttribute = new AmazonCognitoIdentity.CognitoUserAttribute(nameData);
-    const typeAttribute = new AmazonCognitoIdentity.CognitoUserAttribute(typeData);
-    const specializationAttribute = new AmazonCognitoIdentity.CognitoUserAttribute(specializationData);
-    const otherAttribute = new AmazonCognitoIdentity.CognitoUserAttribute(otherData);
     const phoneAttribute = new AmazonCognitoIdentity.CognitoUserAttribute(phoneData);
-    const companyAttribute = new AmazonCognitoIdentity.CognitoUserAttribute(companyData);
-    const addressAttribute = new AmazonCognitoIdentity.CognitoUserAttribute(addressData);
 
-    workerPool.signUp(email, password, [emailAttribute, nameAttribute, typeAttribute, specializationAttribute, otherAttribute, phoneAttribute, companyAttribute, addressAttribute], null, (err, data) => {
+    workerPool.signUp(email, password, [emailAttribute, nameAttribute, phoneAttribute], null, (err, data) => {
         if(err) {
             console.log(err)
         }
         res.send(data);
     })
+})
+
+router.post('/login', (req,res) => {
+    const authenticationData = {
+        Username: req.body.email,
+        Password: req.body.password,
+      };
+      const authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
+      const userData = {
+        Username: req.body.email,
+        Pool: workerPool
+      };
+      const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+      cognitoUser.authenticateUser(authenticationDetails, {
+        onSuccess: function (session) {
+          const tokens = {
+            accessToken: session.getAccessToken().getJwtToken(),
+            idToken: session.getIdToken().getJwtToken(),
+            refreshToken: session.getRefreshToken().getToken()
+          };
+          cognitoUser['tokens'] = tokens; // Save tokens for later use
+          res.send(cognitoUser);
+        },
+        onFailure: function (err) {
+          console.log(err);
+        },
+      });
 })
 
 
