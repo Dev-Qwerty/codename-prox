@@ -3,6 +3,8 @@
     <div class="Mbg">
       <div class="Mbox">
         <div class="Img"></div>
+        <p class="Heading">{{ $route.params.id }}</p>
+        <div class="sBox"></div>
       </div>
     </div>
   </div>
@@ -20,13 +22,15 @@ export default {
     top: 0%;
     left: 0%;
     background: rgb(128, 128, 128, 0.8);
+    width: 100%;
+    height: 800px;;
   }
   .Mbox {
     position: absolute;
     top: 15%;
     left: 25%;
-    width: 500px;
-    height: 800px;
+    width: 50%;
+    height: 600px;
     background-color: #fff;
   }
   .Img {
@@ -38,68 +42,18 @@ export default {
     background-repeat: no-repeat;
     background-size: cover;        
   }
-  .hding {
+  .Heading {
     color: #000;
     font-size: 28px;
     margin-top: 20px;
     text-align: center;
     margin-bottom: 0px;
   }
-  .Box {
+  .sBox {
     margin-left: 35px;
     margin-top: 20px;
     width: 90%;
     border: 1px solid #000;
     height: 90px;
-  }
-  .Flex {
-    display: flex;
-  }
-  #one {
-    margin-top: 22px;
-    margin-left: 20px;
-    margin-bottom: 0px;
-    font-weight: bold;
-    font-size: 20px;;
-  }
-  .Rs {
-    margin-bottom: 0px;
-    margin-top: 35px;
-    margin-left: 340px;
-    width: 15px;
-    height: 15px;
-    background-image: url(../../../assets/rupee.png);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;       
-  }
-  #two {
-    margin-bottom: 0px;
-    margin-top: 27px;
-    margin-left: 2px;
-    font-weight: bold;
-    font-size: 20px;    
-  }
-  .Bbottom input[type="submit"] {
-    border: none;
-    background-color: #000;
-    color: #fff;
-    margin-bottom: 0px;
-    margin-left: 50px;
-    margin-top: 22px;
-    width: 80px;
-    height: 40px;
-    font-family: Arial;
-    font-size: 15px;
-    box-shadow: 3px 3px #dedee0;
-    border-radius: 10px;;
   } 
-  #Vdetails {
-    margin-bottom: 0px;;
-    margin-top: 1px;
-    margin-left: 20px;
-    font-weight: bold;
-    font-size: 14px;
-    color: blue;
-  }  
 </style>

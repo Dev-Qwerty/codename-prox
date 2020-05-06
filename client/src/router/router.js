@@ -45,7 +45,7 @@ export default new VueRouter({
       children: [{
         path: ':id',
         name: 'modal',
-        component: 'Cmodal'
+        component: Cmodal
       }] 
     },
     { 

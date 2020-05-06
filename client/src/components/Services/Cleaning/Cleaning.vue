@@ -27,24 +27,27 @@
             <div class="BLine"></div>
             <div class="Bbottom">
               <div id="Desc"><p>{{ service.description }}</p></div>
-              <p id="Vdetails">view details  <span id="Vspan">></span></p>
-              <input type="submit" data-toggle="modal" data-target="#myModal" value="Add to cart" @click="showModal(service.categories)">  
-              <!--<Cmodal v-bind:subArr="service.categories"></Cmodal>-->
-                 
+              <p id="Vdetails">view details  <span id="Vspan">></span></p>  
+              <router-link :to="{name: 'modal', params: {id: service._id}}">
+                <input type="submit" value="Add to cart">
+              </router-link>
             </div>
           </div> 
         </div>
       </div>
+      <router-view>
+        <Cmodal />
+      </router-view>
     </div>
   </div>    
 </template>
 
 <script>
-//import Cmodal from '@/components/Services/Cleaning/Cmodal.vue'
+import Cmodal from '@/components/Services/Cleaning/Cmodal.vue'
 
 export default {
   components: {
-    //Cmodal
+    Cmodal
   },
   data() {
     return {
@@ -52,9 +55,6 @@ export default {
     }
   },
   methods: {
-    showModal(sm) {
-      alert(JSON.stringify(sm))
-    },
     apiCall() {
       let url = 'http://localhost:3000/services/5ea50d377c154d280cf37efb'
       this.$http.get(url)
