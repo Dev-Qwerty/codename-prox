@@ -1,8 +1,22 @@
 <template>
-  <div class="Modal">
-    <div class="Mbg">
-      <div class="Mbox">
-        <div class="Img"></div>
+  <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="Mcontent">
+          <div class="topImg"></div>
+          <p class="hding">{{ subArr[1].name }}</p>
+          <div v-for="service in subArr" v-bind:key="service._id">
+            <div class="Box">
+              <div class="Flex">
+                <p id="one">{{ service.category }}<p>
+                <div class="Rs"></div>
+                <p id="two">{{ service.amount }}</p>
+                <input type="submit" value="ADD">
+              </div>
+              <p id="Vdetails">view details  <span id="Vspan">></span></p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -10,26 +24,20 @@
 
 <script>
 export default {
-  name: 'Cmodal'
+  name: 'Cmodal',
+  props: ['subArr']
 }
 </script>
 
 <style scoped>
-  .Mbg {
-    position: absolute;
-    top: 0%;
-    left: 0%;
-    background: rgb(128, 128, 128, 0.8);
+  .modal-lg {
+      margin-top: 50px;
+      max-width: 47%;
   }
-  .Mbox {
-    position: absolute;
-    top: 15%;
-    left: 25%;
-    width: 500px;
-    height: 800px;
-    background-color: #fff;
+  .Mcontent {
+      height: 1000px;
   }
-  .Img {
+  .topImg {
     margin: 0px;
     width: 100%;
     height: 340px;
