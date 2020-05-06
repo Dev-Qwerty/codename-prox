@@ -37,4 +37,31 @@ router.post('/signup', (req,res) => {
     })
 })
 
+router.post('/login', (req,res) => {
+    const authenticationData = {
+        Username: req.body.email,
+        Password: req.body.password,
+      };
+      const authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
+      const userData = {
+        Username: req.body.email,
+        Pool: companyPool
+      };
+      const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+      cognitoUser.authenticateUser(authenticationDetails, {
+        onSuccess: function (session) {
+          const tokens = {
+            accessToken: session.getAccessToken().getJwtToken(),
+            idToken: session.getIdToken().getJwtToken(),
+            refreshToken: session.getRefreshToken().getToken()
+          };
+          cognitoUser['tokens'] = tokens; // Save tokens for later use
+          res.send(cognitoUser);
+        },
+        onFailure: function (err) {
+          console.log(err);
+        },
+      });
+})
+
 module.exports = router;
