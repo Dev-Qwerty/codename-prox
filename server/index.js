@@ -41,22 +41,14 @@ const mainservicemodel = require('./models/mainservice-model');
 const authRouter = require("./routes/auth-router");
 const subserviceRouter = require('./routes/subservice-router');
 const workerRouter = require("./routes/worker-router");
-
-app.get('/', function (req, res) {
-    if (req.session.page_views) {
-        req.session.page_views++;
-        res.send("You visited this page " + req.session.page_views + " times");
-    } else {
-        req.session.page_views = 1;
-        res.send("Welcome to this page for the first time!");
-    }
-});
+const companyRouter = require("./routes/company-router");
 
 
 // set relative path
 app.use('/auth', authRouter)
 app.use('/services', subserviceRouter)
 app.use('/worker', workerRouter)
+app.use('/company', companyRouter)
 
 // version check for mobile app
 app.get('/checkserviceversion', async (req, res) => {
