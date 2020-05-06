@@ -2,7 +2,11 @@
   <div class="Modal">
     <div class="Mbg">
       <div class="Mbox">
-        <div class="Img"></div>
+        <div class="Img">
+          <router-link :to="{ path: '/services/cleaning' }">
+            <div class="cbtn"></div>
+          </router-link>
+        </div>
         <p class="Heading">{{ $route.params.id }}</p>
         <div class="sBox"></div>
       </div>
@@ -42,6 +46,17 @@ export default {
     background-repeat: no-repeat;
     background-size: cover;        
   }
+  .cbtn {
+    position: absolute;
+    top: 2%;
+    left: 94%;
+    width: 30px;
+    height: 30px;
+    background-image: url(../../../assets/closebtn.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;        
+  }  
   .Heading {
     color: #000;
     font-size: 28px;
