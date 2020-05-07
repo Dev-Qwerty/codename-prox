@@ -59,7 +59,7 @@ router.post('/login', (req,res) => {
           res.send(cognitoUser);
         },
         onFailure: function (err) {
-          console.log(err);
+          res.send(err.code);
         },
       });
 })

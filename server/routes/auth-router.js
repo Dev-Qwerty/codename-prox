@@ -72,7 +72,7 @@ router.post('/login', (req,res) => {
     },
     onFailure: err => {
       req.session['login-errors'].push(err.message)
-      res.send({status: err.message});
+      res.send(err.code);
     }
   })
 })
