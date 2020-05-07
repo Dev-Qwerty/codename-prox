@@ -15,7 +15,9 @@
         <input class="sbutton" type="submit" name="" value="Sign in" @click.prevent="login()">
       </div>
     </form>
-          
+      <div v-if="errorstatus" class="errormsg">
+       <span>{{ errormsg }}</span>
+       </div>
   </div>
 </template>
 
@@ -24,7 +26,9 @@ export default {
   data() {
     return {
       username: "",
-      password: ""
+      password: "",
+      errormsg: "",
+      errorstatus: false
     }
   },
   methods: {
@@ -37,8 +41,13 @@ export default {
             password: this.password
           })
           .then(response => {
-            if(response.data.status != null) {
-              return alert(response.data.status);
+            if(response.data == "NotAuthorizedException") {
+              this.errorstatus = true;
+              this.errormsg = "Invalid username or password!";
+            }
+            if(response.data == "UserNotConfirmedException") {
+              this.errorstatus = true;
+              this.errormsg = "Please confirm your email!"
             }
             this.$cookies.set("username", response.data.idToken.payload.sub, '1d');
             this.$cookies.set("jwt", response.data.idToken.jwtToken, '1d');
@@ -46,7 +55,8 @@ export default {
             
           })
           .catch(function(error) {
-            alert("Invalid username or password! Please try again." + error);
+            this.errorstatus = true;
+            this.errormsg = error;
           });
       }
     }
@@ -97,5 +107,13 @@ export default {
     padding-top: 15px;
     padding-right: 12px;
     padding-bottom: 15px;
+  }
+  .errormsg {
+    margin-top: 2vw;
+    color: red;
+    background-color: #FFE0E0;
+    font-weight: bold;
+    width: 16vw;
+    border-radius: 10px;
   }
 </style>
