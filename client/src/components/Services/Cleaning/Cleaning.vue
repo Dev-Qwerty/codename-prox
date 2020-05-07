@@ -28,7 +28,7 @@
             <div class="Bbottom">
               <div id="Desc"><p>{{ service.description }}</p></div>
               <p id="Vdetails">view details  <span id="Vspan">></span></p>  
-              <router-link :to="{name: 'modal', params: {id: service._id}}" @click.native="fn">
+              <router-link :to="{name: 'modal', params: { sarray: service }}" @click.native="fn">
                 <input type="submit" value="Add to cart">
               </router-link>
             </div>

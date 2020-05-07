@@ -7,8 +7,20 @@
             <div class="cbtn"></div>
           </router-link>
         </div>
-        <p class="Heading">{{ $route.params.id }}</p>
-        <div class="sBox"></div>
+        <p class="Heading">{{ sarray.name }}</p>
+        <div v-for="sr in sarray.categories" v-bind:key="sr._id">
+          <div class="sBox">
+            <div class="Flex">
+              <p id="one">{{ sr.category }}<p>
+              <div class="Rs"></div>
+              <p id="two">{{ sr.amount }}</p>
+              <div class="btn">
+                <input type="submit" value="ADD">
+              </div>
+            </div>
+            <p id="Vdetails">view details  <span id="Vspan">></span></p>
+          </div>
+        </div>        
       </div>
     </div>
   </div>
@@ -16,7 +28,16 @@
 
 <script>
 export default {
-  name: 'Cmodal'
+  name: 'Cmodal',
+  data() {
+    return {
+      sarray: this.$route.params.sarray
+    }   
+  },
+  methods: {
+    fn() {
+    }
+  }
 }
 </script>
 
@@ -27,14 +48,14 @@ export default {
     left: 0%;
     background: rgb(128, 128, 128, 0.8);
     width: 100%;
-    height: 800px;;
+    height: 1200px;;
   }
   .Mbox {
     position: absolute;
     top: 15%;
     left: 25%;
     width: 50%;
-    height: 600px;
+    height: 900px;
     background-color: #fff;
   }
   .Img {
@@ -71,4 +92,54 @@ export default {
     border: 1px solid #000;
     height: 90px;
   } 
+  .Flex {
+    display: flex;
+  }
+  #one {
+    margin-top: 22px;
+    margin-left: 20px;
+    margin-bottom: 0px;
+    font-weight: bold;
+    font-size: 20px;;
+  }
+  .Rs {
+    margin-bottom: 0px;
+    margin-top: 35px;
+    margin-left: 340px;
+    width: 15px;
+    height: 15px;
+    background-image: url(../../../assets/rupee.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;       
+  }
+  #two {
+    margin-bottom: 0px;
+    margin-top: 27px;
+    margin-left: 2px;
+    font-weight: bold;
+    font-size: 20px;    
+  }
+  .btn input[type="submit"] {
+    border: none;
+    background-color: #000;
+    color: #fff;
+    margin-bottom: 0px;
+    margin-left: 50px;
+    margin-top: 22px;
+    width: 80px;
+    height: 40px;
+    font-family: Arial;
+    font-size: 15px;
+    box-shadow: 3px 3px #dedee0;
+    border-radius: 10px;;
+  } 
+  #Vdetails {
+    margin-bottom: 0px;;
+    margin-top: 1px;
+    margin-left: 20px;
+    font-weight: bold;
+    font-size: 14px;
+    color: blue;
+  }    
 </style>
