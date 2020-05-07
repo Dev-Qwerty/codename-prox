@@ -48,11 +48,11 @@ export default {
     left: 0%;
     background: rgb(128, 128, 128, 0.8);
     width: 100%;
-    height: 1200px;;
+    height: 197%;
   }
   .Mbox {
     position: absolute;
-    top: 15%;
+    top: 8%;
     left: 25%;
     width: 50%;
     height: 900px;
