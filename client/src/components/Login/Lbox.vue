@@ -14,6 +14,10 @@
       <div>
         <input class="sbutton" type="submit" name="" value="Sign in" @click.prevent="login()">
       </div>
+      <div>
+        <vue-recaptcha sitekey="6LfNavQUAAAAACmS6PTEwTlZYC5MePypnm0JLkd5" :loadRecaptchaScript="true">
+        </vue-recaptcha>
+      </div>
     </form>
       <div v-if="errorstatus" class="errormsg">
        <span>{{ errormsg }}</span>
@@ -22,6 +26,7 @@
 </template>
 
 <script>
+import VueRecaptcha from 'vue-recaptcha';
 export default {
   data() {
     return {
@@ -59,8 +64,9 @@ export default {
             this.errormsg = error;
           });
       }
-    }
-  }
+    },
+  },
+  components: { VueRecaptcha }
 }
 </script>
 
