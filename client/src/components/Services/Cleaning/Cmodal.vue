@@ -15,7 +15,7 @@
               <div class="Rs"></div>
               <p id="two">{{ sr.amount }}</p>
               <div class="btn">
-                <input type="submit" value="ADD" @click="fn(sr._id)">
+                <input type="submit" value="ADD" @click="fn(sr)">
               </div>
             </div>
             <p id="Vdetails">view details  <span id="Vspan">></span></p>
@@ -37,9 +37,8 @@ export default {
     }   
   },
   methods: {
-    fn(id) {
-      //this.$root.$emit('clickk', id)
-      EventBus.$emit('clickk', id)
+    fn(obj) {
+      EventBus.$emit('sub-sub-service', obj)
     }
   }
 }

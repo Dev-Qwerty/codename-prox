@@ -1,8 +1,11 @@
 <template>
   <div class="Container">
     <div class="top-box">
-      <router-link class="navImg" :to="{ path: '/services' }"></router-link>
+      <router-link class="arrowIcon" :to="{ path: '/services' }"></router-link>
       <h3>Back to services</h3>
+      <router-link class="cartbtn" :to="{name: 'cart', params: { cartarray: cartArr}}" @click.native="cartfn">
+        <input type="submit" value="cart">
+      </router-link>
     </div>
     <div class="mid">
       <div class="mid-box">
@@ -16,9 +19,6 @@
       <div class="b-heading">
         <h3>Cleaning Services</h3>
         <div class="Line-small"></div>
-        <div class="tbtn">
-          <input type="submit" value="cart" @click="ffn">
-        </div>
       </div>
       <div class="row">
         <div v-for="service in subArr" v-bind:key="service._id">
@@ -39,32 +39,35 @@
         </div>
       </div>
       <router-view>
-        <Cmodal></Cmodal>
+        <modal />
+        <cart />
       </router-view>
     </div>
   </div>    
 </template>
 
 <script>
-import Cmodal from '@/components/Services/Cleaning/Cmodal.vue'
+import modal from '@/components/Services/Cleaning/Cmodal.vue'
+import cart from '@/components/Services/Cleaning/Ccart.vue'
 import EventBus from '../../../event-bus.js'
 
 export default {
   components: {
-    Cmodal
+    modal,
+    cart
   },
   data() {
     return {
       subArr: [],
-      cartarr: []
+      cartArr: []
     }
   },
   methods: {
-    ffn() {
-      alert(this.cartarr)
+    cartfn() {
+      window.scrollTo(0,0)
     },
     fn() {
-      window.scrollTo(0,0);
+      window.scrollTo(0,0)
     },
     apiCall() {
       let url = 'http://localhost:3000/services/5ea50d377c154d280cf37efb'
@@ -79,7 +82,7 @@ export default {
   },
   created() {
     this.apiCall()
-    EventBus.$on('clickk', (id) => { this.cartarr.push(id) })
+    EventBus.$on('sub-sub-service', (obj) => { this.cartArr.push(obj) })
   }  
 }
 </script>
@@ -94,7 +97,7 @@ export default {
     padding-top: 10px;
     display: flex;
   }
-  .navImg {
+  .arrowIcon {
     margin-top: 3px;
     width: 20px;
     height: 20px;
@@ -110,6 +113,16 @@ export default {
     font-style: italic;
     font-size: 21px;
   }
+  .cartbtn input[type="submit"]{
+    margin-top: 0px;
+    margin-left: 1000px;
+    width: 100px;
+    height: 30px;
+    border: 2px solid #fff;
+    color: #fff;
+    background-color: black;
+    border-radius: 5px;
+  }    
   .mid {
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -148,8 +161,7 @@ export default {
     width: 96%;
     height: 200px;
     margin-top: 10px;
-    margin-left: 30px;    
-    /*border: 2px solid #000;*/
+    margin-left: 30px;
   }
   .b-heading h3 {
     font-size: 23px;
