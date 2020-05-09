@@ -15,7 +15,7 @@
         <input class="sbutton" type="submit" name="" value="Sign in" @click.prevent="login()">
       </div>
       <div>
-        <vue-recaptcha sitekey="6LfNavQUAAAAACmS6PTEwTlZYC5MePypnm0JLkd5" :loadRecaptchaScript="true">
+        <vue-recaptcha sitekey="6LfNavQUAAAAACmS6PTEwTlZYC5MePypnm0JLkd5" :loadRecaptchaScript="true" @verify="captchaVerified()">
         </vue-recaptcha>
       </div>
     </form>
@@ -33,11 +33,20 @@ export default {
       username: "",
       password: "",
       errormsg: "",
-      errorstatus: false
+      errorstatus: false,
+      captchastatus: false
     }
   },
   methods: {
+    captchaVerified() {
+      this.captchastatus = true;
+    },
     login() {
+      if(this.captchastatus == false) {
+        this.errorstatus = true;
+        this.errormsg = "Please select Captcha"
+      }
+      else {
         if (this.password.length > 6) {
         let url = "http://localhost:3000/auth/login";
         this.$http
@@ -63,6 +72,7 @@ export default {
             this.errorstatus = true;
             this.errormsg = error;
           });
+        }
       }
     },
   },
@@ -115,7 +125,7 @@ export default {
     padding-bottom: 15px;
   }
   .errormsg {
-    margin-top: 2vw;
+    margin-top: 0.5vw;
     color: red;
     background-color: #FFE0E0;
     font-weight: bold;
