@@ -15,7 +15,7 @@
               <div class="Rs"></div>
               <p id="two">{{ sr.amount }}</p>
               <div class="btn">
-                <input type="submit" value="ADD">
+                <input type="submit" value="ADD" @click="fn(sr._id)">
               </div>
             </div>
             <p id="Vdetails">view details  <span id="Vspan">></span></p>
@@ -27,6 +27,8 @@
 </template>
 
 <script>
+import EventBus from '../../../event-bus.js'
+
 export default {
   name: 'Cmodal',
   data() {
@@ -35,7 +37,9 @@ export default {
     }   
   },
   methods: {
-    fn() {
+    fn(id) {
+      //this.$root.$emit('clickk', id)
+      EventBus.$emit('clickk', id)
     }
   }
 }

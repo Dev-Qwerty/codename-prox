@@ -16,6 +16,9 @@
       <div class="b-heading">
         <h3>Cleaning Services</h3>
         <div class="Line-small"></div>
+        <div class="tbtn">
+          <input type="submit" value="cart" @click="ffn">
+        </div>
       </div>
       <div class="row">
         <div v-for="service in subArr" v-bind:key="service._id">
@@ -36,7 +39,7 @@
         </div>
       </div>
       <router-view>
-        <Cmodal />
+        <Cmodal></Cmodal>
       </router-view>
     </div>
   </div>    
@@ -44,6 +47,7 @@
 
 <script>
 import Cmodal from '@/components/Services/Cleaning/Cmodal.vue'
+import EventBus from '../../../event-bus.js'
 
 export default {
   components: {
@@ -51,10 +55,14 @@ export default {
   },
   data() {
     return {
-      subArr: []
+      subArr: [],
+      cartarr: []
     }
   },
   methods: {
+    ffn() {
+      alert(this.cartarr)
+    },
     fn() {
       window.scrollTo(0,0);
     },
@@ -69,9 +77,10 @@ export default {
       })     
     }
   },
-  mounted() {
+  created() {
     this.apiCall()
-  }
+    EventBus.$on('clickk', (id) => { this.cartarr.push(id) })
+  }  
 }
 </script>
 
@@ -215,5 +224,19 @@ export default {
     font-style: italic;
     box-shadow: 3px 3px #dedee0;
     border-radius: 10px;;
-  }    
+  }   
+  .tbtn input[type="submit"] {
+    border: none;
+    background-color: #000;
+    color: #fff;
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 120px;
+    height: 50px;
+    font-family: Arial;
+    font-size: 17px;
+    font-style: italic;
+    box-shadow: 3px 3px #dedee0;
+    border-radius: 10px;;
+  }   
 </style>
