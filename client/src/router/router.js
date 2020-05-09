@@ -8,6 +8,7 @@ import About from '../components/About/Aboutmain.vue'
 import Services from '../components/ServicesPage/SMain.vue'
 import Cleaning from '@/components/Services/Cleaning/Cmain.vue'
 import Cmodal from '@/components/Services/Cleaning/Cmodal.vue'
+import Ccart from '@/components/Services/Cleaning/Ccart.vue'
 import Dashboard from '@/components/Dashboard/DMain.vue'
 
 Vue.use(VueRouter)
@@ -42,12 +43,20 @@ export default new VueRouter({
     { 
       path: '/services/cleaning', 
       component: Cleaning,
-      children: [{
-        path: ':id',
-        name: 'modal',
-        component: Cmodal,
-        props: true
-      }] 
+      children: [
+        {
+          path: 'modal',
+          name: 'modal',
+          component: Cmodal,
+          props: true
+        },
+        {
+          path: 'cart',
+          name: 'cart',
+          component: Ccart,
+          props: true
+        },        
+      ] 
     },
     { 
       path: '/dashboard', 
