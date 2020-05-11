@@ -84,10 +84,10 @@ router.post('/login', (req,res) => {
     });
     cognitoUser.forgotPassword({
       onSuccess: function(result) {
-        res.send(result);
+        res.send({status: "Success",  res: result});
       },
       onFailure: function(err) {
-        res.send(err);
+        res.send({status: "Error", error: err});
       }
     });
   });
@@ -107,5 +107,9 @@ router.post('/login', (req,res) => {
         res.send({status: "Error", error: err});
       }
     })
+  })
+
+  router.get('/logout', (req,res) => {
+    res.send({status: "Success"});
   })
 module.exports = router;

@@ -1,7 +1,7 @@
 <template>
   <div class = "box">
     <h4>Forgot Password?</h4>
-    <p id="one">Please enter your registered email.</p>
+    <p id="one">No worries! We can reset it here...</p>
   </div>
 </template>
 
