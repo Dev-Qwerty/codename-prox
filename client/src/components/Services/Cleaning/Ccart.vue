@@ -23,11 +23,13 @@ export default {
   name: 'Cmodal',
   data() {
     return {
-      cartArr: this.$route.params.cartarray
+      cartArr: JSON.parse(this.$cookies.get("cart"))
     }   
   },
   methods: {
-   
+  
+  },
+  created() {
   }   
 }
 </script>
