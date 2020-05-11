@@ -59,8 +59,7 @@ export default {
   data() {
     return {
       subArr: [],
-      cartArr: [],
-      ar: []
+      cartArr: []
     }
   },
   methods: {
