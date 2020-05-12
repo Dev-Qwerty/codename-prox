@@ -11,7 +11,8 @@ const orderSchema = mongoose.Schema({
     },
     workerId: {
         type: String,
-        required: true
+        required: true,
+        default: "no worker assigned"
     },
     service: {
         subserviceId: {

@@ -10,7 +10,6 @@ router
         let newOrder = new orderModel;
         newOrder.orderId = 379884;
         newOrder.userId = "adjfne3";
-        newOrder.workerId = "vgjhsj";
         newOrder.service.subserviceId = "asdfg";
         newOrder.service.categories = req.body.service.categories;
         newOrder.totalAmount = 3434;
