@@ -38,17 +38,17 @@ const mainservicemodel = require('./models/mainservice-model');
 
 
 //import routes
-const authRouter = require("./routes/auth-router");
+// const authRouter = require("./routes/auth-router");
 const subserviceRouter = require('./routes/subservice-router');
-const workerRouter = require("./routes/worker-router");
-const companyRouter = require("./routes/company-router");
+// const workerRouter = require("./routes/worker-router");
+// const companyRouter = require("./routes/company-router");
 
 
 // set relative path
-app.use('/auth', authRouter)
+// app.use('/auth', authRouter)
 app.use('/services', subserviceRouter)
-app.use('/worker', workerRouter)
-app.use('/company', companyRouter)
+// app.use('/worker', workerRouter)
+// app.use('/company', companyRouter)
 
 // version check for mobile app
 app.get('/checkserviceversion', async (req, res) => {
@@ -58,7 +58,7 @@ app.get('/checkserviceversion', async (req, res) => {
         res.send({ "versionChange": false });
     } else {
         let mainservice = await mainservicemodel.find({})
-        res.send({ "versionChange": true, "services": mainservice,"version":offerVersion[0].offerVersion })
+        res.send({ "versionChange": true, "services": mainservice, "version": offerVersion[0].offerVersion })
     }
 })
 
