@@ -64,4 +64,50 @@ router.post('/login', (req,res) => {
       });
 })
 
+router.post('/forgotPassword', (req,res) => {
+    const cognitoUser = new AmazonCognitoIdentity.CognitoUser({
+      Username: req.body.email,
+      Pool: companyPool
+    });
+    cognitoUser.forgotPassword({
+      onSuccess: function(result) {
+        res.send({status: "Success",  res: result});
+      },
+      onFailure: function(err) {
+        res.send({status: "Error", error: err});
+      }
+    });
+  });
+
+  router.post('/confirmFPassword', (req,res) => {
+    const cognitoUser = new AmazonCognitoIdentity.CognitoUser({
+      Username: req.body.email,
+      Pool: companyPool
+    });
+    const verificationCode = req.body.code;
+    const newPassword = req.body.password;
+    cognitoUser.confirmPassword(verificationCode,newPassword, {
+      onSuccess: function(result) {
+        res.send({status: "Success",  res: result});
+      },
+      onFailure: function(err) {
+        res.send({status: "Error", error: err});
+      }
+    })
+  })
+
+  router.post('/confirmEmail', (req,res) => {
+    const cognitoUser = new AmazonCognitoIdentity.CognitoUser({
+      Username: req.body.email,
+      Pool: companyPool
+    })
+    const confirmationCode = req.body.code;
+    cognitoUser.confirmRegistration(confirmationCode, true, function(err,result){
+      if(err) {
+        res.send({status: "Error", error: err});
+      }
+      res.send({status: "Success", res: result});
+    })
+  })
+
 module.exports = router;
