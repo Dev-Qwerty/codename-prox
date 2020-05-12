@@ -42,6 +42,7 @@ const authRouter = require("./routes/auth-router");
 const subserviceRouter = require('./routes/subservice-router');
 const workerRouter = require("./routes/worker-router");
 const companyRouter = require("./routes/company-router");
+const orderRouter = require('./routes/order-router');
 
 
 // set relative path
@@ -49,6 +50,7 @@ app.use('/auth', authRouter)
 app.use('/services', subserviceRouter)
 app.use('/worker', workerRouter)
 app.use('/company', companyRouter)
+app.use('/orders', orderRouter)
 
 // version check for mobile app
 app.get('/checkserviceversion', async (req, res) => {
@@ -58,7 +60,7 @@ app.get('/checkserviceversion', async (req, res) => {
         res.send({ "versionChange": false });
     } else {
         let mainservice = await mainservicemodel.find({})
-        res.send({ "versionChange": true, "services": mainservice,"version":offerVersion[0].offerVersion })
+        res.send({ "versionChange": true, "services": mainservice, "version": offerVersion[0].offerVersion })
     }
 })
 
