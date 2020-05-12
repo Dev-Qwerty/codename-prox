@@ -98,4 +98,36 @@ router.post('/completeProfile', (req,res) => {
     
 })
 
+router.post('/forgotPassword', (req,res) => {
+    const cognitoUser = new AmazonCognitoIdentity.CognitoUser({
+      Username: req.body.email,
+      Pool: workerPool
+    });
+    cognitoUser.forgotPassword({
+      onSuccess: function(result) {
+        res.send({status: "Success",  res: result});
+      },
+      onFailure: function(err) {
+        res.send({status: "Error", error: err});
+      }
+    });
+  });
+
+  router.post('/confirmFPassword', (req,res) => {
+    const cognitoUser = new AmazonCognitoIdentity.CognitoUser({
+      Username: req.body.email,
+      Pool: workerPool
+    });
+    const verificationCode = req.body.code;
+    const newPassword = req.body.password;
+    cognitoUser.confirmPassword(verificationCode,newPassword, {
+      onSuccess: function(result) {
+        res.send({status: "Success",  res: result});
+      },
+      onFailure: function(err) {
+        res.send({status: "Error", error: err});
+      }
+    })
+  })
+
 module.exports = router;
