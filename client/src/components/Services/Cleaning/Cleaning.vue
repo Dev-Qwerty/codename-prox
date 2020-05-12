@@ -3,7 +3,7 @@
     <div class="top-box">
       <router-link class="arrowIcon" :to="{ path: '/services' }"></router-link>
       <h3>Back to services</h3>
-      <router-link class="cartbtn" :to="{name: 'cart', params: { cartarray: cartArr}}" @click.native="cartfn">
+      <router-link class="cartbtn" :to="{name: 'cart'}" @click.native="cartfn">
         <input type="submit" value="cart">
       </router-link>
     </div>
@@ -82,7 +82,11 @@ export default {
   },
   created() {
     this.apiCall()
-    EventBus.$on('sub-sub-service', (obj) => { this.cartArr.push(obj) })
+    EventBus.$on('sub-sub-service', (obj) => { 
+      this.cartArr.push(obj)
+      this.$cookies.set("cart", JSON.stringify(this.cartArr), '1d')    
+    })
+  
   }  
 }
 </script>

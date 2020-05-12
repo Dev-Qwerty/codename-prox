@@ -10,6 +10,7 @@ import Cleaning from '@/components/Services/Cleaning/Cmain.vue'
 import Cmodal from '@/components/Services/Cleaning/Cmodal.vue'
 import Ccart from '@/components/Services/Cleaning/Ccart.vue'
 import Dashboard from '@/components/Dashboard/DMain.vue'
+import ForgotPassword from '@/components/ForgotPassword/FPMain.vue'
 
 Vue.use(VueRouter)
 
@@ -61,6 +62,10 @@ export default new VueRouter({
     { 
       path: '/dashboard', 
       component: Dashboard 
+    },
+    {
+      path: '/forgotPassword',
+      component: ForgotPassword
     }           
   ]
 })
