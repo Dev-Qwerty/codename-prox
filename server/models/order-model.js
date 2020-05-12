@@ -19,6 +19,7 @@ const orderSchema = mongoose.Schema({
             required: true
         },
         categories: [{
+            _id: false,
             categoryId: {
                 type: String,
                 required: true
