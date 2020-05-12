@@ -38,18 +38,18 @@ const mainservicemodel = require('./models/mainservice-model');
 
 
 //import routes
-// const authRouter = require("./routes/auth-router");
+const authRouter = require("./routes/auth-router");
 const subserviceRouter = require('./routes/subservice-router');
-// const workerRouter = require("./routes/worker-router");
-// const companyRouter = require("./routes/company-router");
+const workerRouter = require("./routes/worker-router");
+const companyRouter = require("./routes/company-router");
 const orderRouter = require('./routes/order-router');
 
 
 // set relative path
-// app.use('/auth', authRouter)
+app.use('/auth', authRouter)
 app.use('/services', subserviceRouter)
-// app.use('/worker', workerRouter)
-// app.use('/company', companyRouter)
+app.use('/worker', workerRouter)
+app.use('/company', companyRouter)
 app.use('/orders', orderRouter)
 
 // version check for mobile app
