@@ -28,7 +28,14 @@
         </div>
         <div class="Line"></div>
         <div class="sBottom">
-
+          <div class="sone">
+            <div class="imgOne"></div>
+            <p>My Profile</p>
+          </div>
+          <div class="stwo">
+            <div class="imgTwo"></div>
+            <p>Logout</p>
+          </div>          
         </div>
       </div>
       <div class="Mid">
@@ -80,7 +87,7 @@ export default {
     display: grid;
     grid-template-columns: 15% 95%;
     padding-top: 15px;
-    padding-left: 45px;
+    padding-left: 10px;
   }   
   .SideNav .sMid .one .iOne {
     margin-top: 3px;
@@ -100,7 +107,7 @@ export default {
     display: grid;
     grid-template-columns: 15% 95%;
     padding-top: 15px;
-    padding-left: 45px;
+    padding-left: 10px;
   } 
   .SideNav .sMid .two .iTwo {
     margin-top: 3px;
@@ -120,7 +127,7 @@ export default {
     display: grid;
     grid-template-columns: 15% 95%;
     padding-top: 15px;
-    padding-left: 45px;    
+    padding-left: 10px;    
   } 
   .SideNav .sMid .three .iThree {
     margin-top: 3px;
@@ -140,7 +147,7 @@ export default {
     display: grid;
     grid-template-columns: 15% 95%;
     padding-top: 15px;
-    padding-left: 45px;        
+    padding-left: 10px;        
   } 
   .SideNav .sMid .four .iFour {
     margin-top: 3px;
@@ -160,7 +167,49 @@ export default {
     border-bottom: 1px solid #00000029;
   }    
   .SideNav .sBottom {
+    display: grid;
+    grid-template-rows: 35px 35px;  
+  } 
+  .SideNav .sBottom .sone {
+    display: grid;
+    grid-template-columns: 15% 95%;
+    padding-top: 15px;
+    padding-left: 10px;
   }     
+  .SideNav .sBottom .sone .imgOne {
+    margin-top: 3px;
+    margin-left: 10px;
+    height: 15px;
+    width: 15px;
+    background-image: url('../../assets/Mprofile.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;    
+  }   
+  .SideNav .sBottom .sone p {
+    font-size: 14px;
+    color: #000;
+  }  
+  .SideNav .sBottom .stwo {
+    display: grid;
+    grid-template-columns: 15% 95%;
+    padding-top: 15px;
+    padding-left: 10px;
+  }     
+  .SideNav .sBottom .stwo .imgTwo {
+    margin-top: 3px;
+    margin-left: 10px;
+    height: 15px;
+    width: 15px;
+    background-image: url('../../assets/LogOut.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;    
+  }   
+  .SideNav .sBottom .stwo p {
+    font-size: 14px;
+    color: #000;
+  }              
   .Mid {
     background-color: #F5F5F5;
   }             
