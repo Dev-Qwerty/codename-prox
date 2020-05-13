@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-// Databsae Schema for users
+// Database Schema for users
 const UserSchema = new mongoose.Schema({
     email: {
         type: String,
@@ -13,11 +13,22 @@ const UserSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    
-    password: {
+    userID: {
         type: String,
         required: true,
-        minlength: 6
+        unique: true
+    },
+    addresses: {
+        type: Array,
+        default: null
+    },
+    userRating: {
+        type: Number,
+        default: 100
+    },
+    name: {
+        type: String,
+        default: ""
     }
 });
 
