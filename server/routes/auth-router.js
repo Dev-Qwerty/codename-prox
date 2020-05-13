@@ -137,7 +137,7 @@ router.post('/login', (req,res) => {
 
   router.post('/completeProfile/:id', (req,res) => {
     let id = req.params.id;
-    let user = {}
+    let user = {};
     
     if (req.body.name) user.name = req.body.name;
     if (req.body.addresses) user.addresses = req.body.addresses;
@@ -149,6 +149,26 @@ router.post('/login', (req,res) => {
     }).catch((err) => {
       console.log(err);
     })
+  })
+
+  router.post('/updateProfile/:id', (req,res) => {
+    let id = req.params.id;
+    let accessToken = req.body.accessToken;
+    let user = {};
+    let oldMail = "";
+
+    if (req.body.name) user.name = req.body.name;
+    if (req.body.addresses) user.addresses = req.body.addresses;
+    if (req.body.email) {
+      user.email = req.body.email;
+      User.findOne({userID: id})
+      .then(user => {
+        res.send(user);
+      })
+      .catch(err => console.log(err));
+    }
+
+
   })
 
   router.get('/logout', (req,res) => {
