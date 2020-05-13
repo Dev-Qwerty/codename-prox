@@ -1,5 +1,28 @@
 const mongoose = require('mongoose');
 
+const addressSchema = new mongoose.Schema({
+    line1: {
+        type: String,
+        required: true
+    },
+    line2: {
+        type: String
+    },
+    city: {
+        type: String
+    },
+    district: {
+        type: String
+    },
+    state: {
+        type: String
+    },
+    pinCode: {
+        type: Number
+    }
+})
+
+
 // Database Schema for users
 const UserSchema = new mongoose.Schema({
     email: {
@@ -18,10 +41,7 @@ const UserSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    addresses: {
-        type: Array,
-        default: null
-    },
+    addresses: [addressSchema],
     userRating: {
         type: Number,
         default: 100

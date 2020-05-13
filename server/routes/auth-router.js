@@ -135,6 +135,22 @@ router.post('/login', (req,res) => {
     })
   })
 
+  router.post('/completeProfile/:id', (req,res) => {
+    let id = req.params.id;
+    let user = {}
+    
+    if (req.body.name) user.name = req.body.name;
+    if (req.body.addresses) user.addresses = req.body.addresses;
+    
+    user = { $set: user }
+
+    User.update({userID: id}, user).then(()=> {
+      res.send(user);
+    }).catch((err) => {
+      console.log(err);
+    })
+  })
+
   router.get('/logout', (req,res) => {
     res.send({status: "Success"});
   })
