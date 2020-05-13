@@ -47,7 +47,19 @@ router.post('/signup', (req,res) => {
     if(err) {
       return console.log(err);
     }
-    res.send(data.user);
+    const userID = data.userSub;
+    const phone = phoneNo;
+    const newUser = new User({
+      email,
+      phone,
+      userID
+    })
+    newUser
+    .save()
+    .then((user) => {
+        res.send({user: user, data: data.user});
+    })
+    .catch(err => console.log(err)) 
   })
 });
 

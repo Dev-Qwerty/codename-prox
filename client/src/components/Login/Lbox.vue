@@ -16,9 +16,6 @@
         <input class="sbutton" type="submit" name="" value="Sign in" @click.prevent="login()">
         </vue-recaptcha>
       </div>
-      <div>
-        
-      </div>
     </form>
       <div v-if="errorstatus" class="errormsg">
        <span>{{ errormsg }}</span>
