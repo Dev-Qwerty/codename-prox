@@ -1,44 +1,61 @@
 <template>
-  <div class="Dwrapper">
-    <div class="Top">
+  <div class="dashboard-wrapper">
+    <div class="top-header">
       <p>Associates Dashboard</p>
     </div>
-    <div class="Midwrapper">
-      <div class="SideNav">
-        <div class="sTop">
-
+    <div class="mid-dashboard">
+      <div class="sidenav">
+        <div class="sidenav-top">
+          <div class="sidenav-top-top">
+            <div class="Circle">
+              <p class="circle-inside">G</p>
+            </div>
+            <p class="profile-name">George Samuel</p>
+            <div class="profile-underline"></div>
+          </div>
+          <div class="sidenav-top-mid">
+            <div class="sidenav-top-mid-one">
+              <div class="sidenav-top-mid-one-img"></div>
+              <p class="job-title">Cleaner</p>
+            </div>
+            <div class="sidenav-top-mid-two">
+              <div class="sidenav-top-mid-two-img"></div>
+              <p class="Place">Kottayam</p>
+            </div>
+          </div>
+          <div class="sidenav-top-bottom"></div>
         </div>
-        <div class="sMid">
-          <div class="one">
-            <div class="iOne"></div>
+        <div class="sidenav-mid">
+          <div class="sidenav-mid-one">
+            <div class="sidenav-mid-img1"></div>
             <p>Work Requests</p>
           </div>
-          <div class="two">
-            <div class="iTwo"></div>
+          <div class="sidenav-mid-two">
+            <div class="sidenav-mid-img2"></div>
             <p>Pending Works</p>
           </div>
-          <div class="three">
-            <div class="iThree"></div>
+          <div class="sidenav-mid-three">
+            <div class="sidenav-mid-img3"></div>
             <p>My Works</p>
           </div>
-          <div class="four">
-            <div class="iFour"></div>
+          <div class="sidenav-mid-four">
+            <div class="sidenav-mid-img4"></div>
             <p>My Income</p>
           </div>
         </div>
-        <div class="Line"></div>
-        <div class="sBottom">
-          <div class="sone">
-            <div class="imgOne"></div>
+        <div class="sidenav-line"></div>
+        <div class="sidenav-bottom">
+          <div class="sidenav-bottom-one">
+            <div class="sidenav-bottom-img1"></div>
             <p>My Profile</p>
           </div>
-          <div class="stwo">
-            <div class="imgTwo"></div>
+          <div class="sidenav-bottom-two">
+            <div class="sidenav-bottom-img2"></div>
             <p>Logout</p>
           </div>          
         </div>
       </div>
-      <div class="Mid">
+      <div class="dashboard-body">
       
       </div>
     </div>
@@ -52,7 +69,7 @@ export default {
 </script>
 
 <style scoped>
-  .Top {
+  .top-header {
     box-sizing: border-box;
     width: 100%;
     height: 45px;
@@ -60,38 +77,126 @@ export default {
     text-align: center;
     padding-top: 10px;;
   }
-  .Top p {
+  .top-header p {
     color: #aaa;
     font-size: 17px;
   }
-  .Midwrapper {
+  .mid-dashboard {
     display: grid;
-    grid-template-columns: 19% 81%;
+    grid-template-columns: 20% 80%;
     height: 676px;
   }
-  .SideNav {
-    /*border: 1px solid #F5F5F5;*/
+  .sidenav {
     border-left: 1px solid #00000029;    
     background-color: #fff;
     display: grid;
     grid-template-rows: 40% 32% 20px 20%;
   }
-  .SideNav .sTop {
+  .sidenav-top {
+    padding-left: 5px;
+    display: grid;
+    grid-template-rows: 45% 35% 20%;    
   }
-  .SideNav .sMid {  
+  .sidenav-top-top {
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-rows: 3fr 1fr 1px;
+  }
+  .Circle {
+    padding-top: 10px;
+    padding-left: 20px;
+    margin-top: 20px;
+    margin-left: 85px;
+    width: 70px;
+    height: 70px;
+    background-color: #DBDBDB;
+    border-radius: 50%;
+  }
+  .circle-inside {
+    font-size: 35px;
+  } 
+  .profile-name {
+    font-size: 18px;
+    margin-left: 60px;
+  }  
+  .profile-underline {
+    width: 58%;
+    height: 1px;
+    margin-top: -17px;
+    margin-left: 50px;
+    background-color: #aaa;
+  }     
+  .sidenav-top-mid {
+    display: grid;
+    grid-template-rows: 30px 30px; 
+    padding-left: 60px;  
+    margin-top: -5px;   
+  }
+ .sidenav-top-mid-one {
+    display: grid;
+    grid-template-columns: 15% 95%;
+    padding-top: 15px;
+    padding-left: 10px;
+  }     
+  .sidenav-top-mid-one-img {
+    margin-top: 3px;
+    margin-left: 8px;
+    height: 16px;
+    width: 16px;
+    background-image: url('../../assets/jobTitle.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;    
+  }   
+  .job-title {
+    font-size: 17px;
+    color: #707070;
+  } 
+ .sidenav-top-mid-two {
+    display: grid;
+    grid-template-columns: 15% 95%;
+    padding-top: 15px;
+    padding-left: 10px;
+  }     
+  .sidenav-top-mid-two-img {
+    margin-top: 3px;
+    margin-left: 8px;
+    height: 16px;
+    width: 16px;
+    background-image: url('../../assets/Place.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;    
+  }   
+  .Place {
+    font-size: 17px;
+    color: #707070;
+  }     
+  .sidenav-top-bottom {
+    margin-top: -15px;
+    margin-left: 20px;
+    height: 20px;
+    width: 80%;
+    background-image: url('../../assets/stars.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;      
+  }    
+  .sidenav-mid {  
+    margin-top: -20px;
     display: grid;
     grid-template-rows: 1fr 1fr 1fr 1fr;
   }
-  .SideNav .sMid .one {
+  .sidenav-mid-one {
     background-color: #000;
     display: grid;
     grid-template-columns: 15% 95%;
     padding-top: 15px;
     padding-left: 10px;
   }   
-  .SideNav .sMid .one .iOne {
+  .sidenav-mid-img1{
     margin-top: 3px;
-    margin-left: 10px;
+    margin-left: 18px;
     height: 15px;
     width: 15px;
     background-image: url('../../assets/Wreq.png');
@@ -99,19 +204,19 @@ export default {
     background-position: center;
     background-size: contain;    
   } 
-  .SideNav .sMid .one p {
+  .sidenav-mid-one p {
     font-size: 15px;
     color: #fff;
   }     
-  .SideNav .sMid .two {
+  .sidenav-mid-two {
     display: grid;
     grid-template-columns: 15% 95%;
     padding-top: 15px;
     padding-left: 10px;
   } 
-  .SideNav .sMid .two .iTwo {
+  .sidenav-mid-img2 {
     margin-top: 3px;
-    margin-left: 10px;
+    margin-left: 18px;
     height: 15px;
     width: 15px;
     background-image: url('../../assets/Pwork.png');
@@ -119,19 +224,19 @@ export default {
     background-position: center;
     background-size: contain;    
   }    
-  .SideNav .sMid .two p {
+  .sidenav-mid-two p {
     font-size: 15px;
     color: #000;
   }      
-  .SideNav .sMid .three {
+  .sidenav-mid-three {
     display: grid;
     grid-template-columns: 15% 95%;
     padding-top: 15px;
     padding-left: 10px;    
   } 
-  .SideNav .sMid .three .iThree {
+  .sidenav-mid-img3 {
     margin-top: 3px;
-    margin-left: 10px;
+    margin-left: 18px;
     height: 15px;
     width: 15px;
     background-image: url('../../assets/Mwork.png');
@@ -139,19 +244,19 @@ export default {
     background-position: center;
     background-size: contain;    
   }    
-  .SideNav .sMid .three p {
+  .sidenav-mid-three p {
     font-size: 15px;
     color: #000;
   }      
-  .SideNav .sMid .four {
+  .sidenav-mid-four {
     display: grid;
     grid-template-columns: 15% 95%;
     padding-top: 15px;
     padding-left: 10px;        
   } 
-  .SideNav .sMid .four .iFour {
+  .sidenav-mid-img4 {
     margin-top: 3px;
-    margin-left: 10px;
+    margin-left: 18px;
     height: 15px;
     width: 15px;
     background-image: url('../../assets/Mincome.png');
@@ -159,26 +264,26 @@ export default {
     background-position: center;
     background-size: contain;    
   }    
-  .SideNav .sMid .four p {
+  .sidenav-mid-four p {
     font-size: 15px;
     color: #000;
   }  
-  .SideNav .Line {
+  .sidenav-line {
     border-bottom: 1px solid #00000029;
   }    
-  .SideNav .sBottom {
+  .sidenav-bottom {
     display: grid;
     grid-template-rows: 35px 35px;  
   } 
-  .SideNav .sBottom .sone {
+  .sidenav-bottom-one {
     display: grid;
     grid-template-columns: 15% 95%;
     padding-top: 15px;
     padding-left: 10px;
   }     
-  .SideNav .sBottom .sone .imgOne {
+  .sidenav-bottom-img1 {
     margin-top: 3px;
-    margin-left: 10px;
+    margin-left: 18px;
     height: 15px;
     width: 15px;
     background-image: url('../../assets/Mprofile.png');
@@ -186,19 +291,19 @@ export default {
     background-position: center;
     background-size: contain;    
   }   
-  .SideNav .sBottom .sone p {
+  .sidenav-bottom-one p {
     font-size: 14px;
     color: #000;
   }  
-  .SideNav .sBottom .stwo {
+  .sidenav-bottom-two {
     display: grid;
     grid-template-columns: 15% 95%;
     padding-top: 15px;
     padding-left: 10px;
   }     
-  .SideNav .sBottom .stwo .imgTwo {
+  .sidenav-bottom-img2 {
     margin-top: 3px;
-    margin-left: 10px;
+    margin-left: 18px;
     height: 15px;
     width: 15px;
     background-image: url('../../assets/LogOut.png');
@@ -206,11 +311,11 @@ export default {
     background-position: center;
     background-size: contain;    
   }   
-  .SideNav .sBottom .stwo p {
+  .sidenav-bottom-two p {
     font-size: 14px;
     color: #000;
   }              
-  .Mid {
+  .dashboard-body {
     background-color: #F5F5F5;
   }             
 </style>
