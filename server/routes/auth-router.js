@@ -153,7 +153,7 @@ router.post('/login', (req,res) => {
 
   router.post('/updateProfile/:id', (req,res) => {
     let id = req.params.id;
-    let accessToken = req.body.accessToken;
+   // let accessToken = req.body.accessToken;
     let user = {};
     let oldMail = "";
 
@@ -161,11 +161,21 @@ router.post('/login', (req,res) => {
     if (req.body.addresses) user.addresses = req.body.addresses;
     if (req.body.email) {
       user.email = req.body.email;
-      User.findOne({userID: id})
-      .then(user => {
-        res.send(user);
+      const cognitoUser = userPool.getCurrentUser();
+      const emailAttribute = {
+        Name: 'email',
+        Value: req.body.email
+      }
+      cognitoUser.getSession(function(err,result){
+        if(result) {
+          cognitoUser.updateAttributes(emailAttribute, function(err,results) {
+            if(err) {
+              console.log(err);
+            }
+            res.send(results);
+          })
+        }
       })
-      .catch(err => console.log(err));
     }
 
 
