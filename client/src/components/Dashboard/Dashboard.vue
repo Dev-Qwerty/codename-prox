@@ -9,11 +9,24 @@
 
         </div>
         <div class="sMid">
-          <div class="one"></div>
-          <div class="two"></div>
-          <div class="three"></div>
-          <div class="four"></div>
+          <div class="one">
+            <div class="iOne"></div>
+            <p>Work Requests</p>
+          </div>
+          <div class="two">
+            <div class="iTwo"></div>
+            <p>Pending Works</p>
+          </div>
+          <div class="three">
+            <div class="iThree"></div>
+            <p>My Works</p>
+          </div>
+          <div class="four">
+            <div class="iFour"></div>
+            <p>My Income</p>
+          </div>
         </div>
+        <div class="Line"></div>
         <div class="sBottom">
 
         </div>
@@ -47,37 +60,108 @@ export default {
   .Midwrapper {
     display: grid;
     grid-template-columns: 19% 81%;
-    height: 680px;
+    height: 676px;
   }
   .SideNav {
+    /*border: 1px solid #F5F5F5;*/
+    border-left: 1px solid #00000029;    
     background-color: #fff;
     display: grid;
-    grid-template-rows: 2fr 2fr 1fr;
-  }
-  .Mid {
-    background-color: #F5F5F5;
+    grid-template-rows: 40% 32% 20px 20%;
   }
   .SideNav .sTop {
-    border: 1px solid #707070;
   }
-  .SideNav .sMid {
-    border: 1px solid #707070;
+  .SideNav .sMid {  
     display: grid;
     grid-template-rows: 1fr 1fr 1fr 1fr;
   }
-  .SideNav .sBottom {
-    border: 1px solid #707070;
-  }  
   .SideNav .sMid .one {
-    border: 1px solid red;
+    background-color: #000;
+    display: grid;
+    grid-template-columns: 15% 95%;
+    padding-top: 15px;
+    padding-left: 45px;
+  }   
+  .SideNav .sMid .one .iOne {
+    margin-top: 3px;
+    margin-left: 10px;
+    height: 15px;
+    width: 15px;
+    background-image: url('../../assets/Wreq.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;    
   } 
+  .SideNav .sMid .one p {
+    font-size: 15px;
+    color: #fff;
+  }     
   .SideNav .sMid .two {
-    border: 1px solid red;
-  }  
+    display: grid;
+    grid-template-columns: 15% 95%;
+    padding-top: 15px;
+    padding-left: 45px;
+  } 
+  .SideNav .sMid .two .iTwo {
+    margin-top: 3px;
+    margin-left: 10px;
+    height: 15px;
+    width: 15px;
+    background-image: url('../../assets/Pwork.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;    
+  }    
+  .SideNav .sMid .two p {
+    font-size: 15px;
+    color: #000;
+  }      
   .SideNav .sMid .three {
-    border: 1px solid red;
-  }  
+    display: grid;
+    grid-template-columns: 15% 95%;
+    padding-top: 15px;
+    padding-left: 45px;    
+  } 
+  .SideNav .sMid .three .iThree {
+    margin-top: 3px;
+    margin-left: 10px;
+    height: 15px;
+    width: 15px;
+    background-image: url('../../assets/Mwork.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;    
+  }    
+  .SideNav .sMid .three p {
+    font-size: 15px;
+    color: #000;
+  }      
   .SideNav .sMid .four {
-    border: 1px solid red;
-  }           
+    display: grid;
+    grid-template-columns: 15% 95%;
+    padding-top: 15px;
+    padding-left: 45px;        
+  } 
+  .SideNav .sMid .four .iFour {
+    margin-top: 3px;
+    margin-left: 10px;
+    height: 15px;
+    width: 15px;
+    background-image: url('../../assets/Mincome.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;    
+  }    
+  .SideNav .sMid .four p {
+    font-size: 15px;
+    color: #000;
+  }  
+  .SideNav .Line {
+    border-bottom: 1px solid #00000029;
+  }    
+  .SideNav .sBottom {
+  }     
+  .Mid {
+    background-color: #F5F5F5;
+  }             
 </style>
