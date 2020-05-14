@@ -70,6 +70,7 @@ export default {
 
 <style scoped>
   .top-header {
+    top: 0;
     box-sizing: border-box;
     width: 100%;
     height: 45px;
@@ -84,9 +85,10 @@ export default {
   .mid-dashboard {
     display: grid;
     grid-template-columns: 20% 80%;
-    height: 676px;
+    /*height: 676px;*/
   }
   .sidenav {
+    height: 676px;
     border-left: 1px solid #00000029;    
     background-color: #fff;
     display: grid;
@@ -317,5 +319,6 @@ export default {
   }              
   .dashboard-body {
     background-color: #F5F5F5;
+    height: 800px
   }             
 </style>
