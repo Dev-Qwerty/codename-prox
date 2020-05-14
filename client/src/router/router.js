@@ -63,7 +63,7 @@ export default new VueRouter({
     },
     { 
       path: '/dashboard', 
-      component: Dashboard 
+      component: Dashboard,
       children: [
         {
           path: 'workrequests',

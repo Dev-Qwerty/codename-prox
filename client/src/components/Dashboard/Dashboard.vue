@@ -26,10 +26,12 @@
           <div class="sidenav-top-bottom"></div>
         </div>
         <div class="sidenav-mid">
-          <div class="sidenav-mid-one">
-            <div class="sidenav-mid-img1"></div>
-            <p>Work Requests</p>
-          </div>
+          <router-link :to="{name: 'workrequests'}" @click.native="workreqfn">
+            <div class="sidenav-mid-one">
+              <div class="sidenav-mid-img1"></div>
+              <p>Work Requests</p>
+            </div>
+          </router-link>
           <div class="sidenav-mid-two">
             <div class="sidenav-mid-img2"></div>
             <p>Pending Works</p>
@@ -56,7 +58,9 @@
         </div>
       </div>
       <div class="dashboard-body">
-      
+        <router-view>
+          <workreq />
+        </router-view>       
       </div>
     </div>
   </div>  
