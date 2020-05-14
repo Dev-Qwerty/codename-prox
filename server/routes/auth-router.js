@@ -205,6 +205,43 @@ router.post('/login', (req,res) => {
 
     }
 
+    if(req.body.email) {
+      if(!req.body.password || !req.body.oldEmail) res.send({status: "Error", msg: "Password/Old Email Required!"});
+      const authenticationData = {
+        Username: req.body.oldEmail,
+        Password: req.body.password
+      }
+      const AuthenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
+      const UserData = {
+        Username: req.body.oldEmail,
+        Pool: userPool
+      }
+      const cognitoUser = new AmazonCognitoIdentity.CognitoUser(UserData);
+      cognitoUser.authenticateUser(AuthenticationDetails, {
+        onSuccess: data => {
+          const emailData = {
+            Name: 'email',
+            Value: req.body.email
+          }
+          
+          const emailAttribute = new AmazonCognitoIdentity.CognitoUserAttribute(emailData);
+          
+          cognitoUser.updateAttributes([ emailAttribute ], (err,data) => {
+            if(err) {
+              res.send({status: "Error", error: err});
+            }
+            user = { $set: user };
+            User.update({email: authenticationData.Username}, user).then(() => {
+              res.send({status: "Update Success!", data: data, user: user});
+            })
+          })
+        },
+        onFailure: err => {
+          res.send(err.code);
+        }
+      })
+    }
+
   })
 
   router.get('/logout', (req,res) => {
