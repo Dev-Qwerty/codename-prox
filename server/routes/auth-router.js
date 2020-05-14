@@ -135,6 +135,52 @@ router.post('/login', (req,res) => {
     })
   })
 
+  router.post('/completeProfile/:id', (req,res) => {
+    let id = req.params.id;
+    let user = {};
+    
+    if (req.body.name) user.name = req.body.name;
+    if (req.body.addresses) user.addresses = req.body.addresses;
+    
+    user = { $set: user }
+
+    User.update({userID: id}, user).then(()=> {
+      res.send(user);
+    }).catch((err) => {
+      console.log(err);
+    })
+  })
+
+  router.post('/updateProfile/:id', (req,res) => {
+    let id = req.params.id;
+   // let accessToken = req.body.accessToken;
+    let user = {};
+    let oldMail = "";
+
+    if (req.body.name) user.name = req.body.name;
+    if (req.body.addresses) user.addresses = req.body.addresses;
+    if (req.body.email) {
+      user.email = req.body.email;
+      const cognitoUser = userPool.getCurrentUser();
+      const emailAttribute = {
+        Name: 'email',
+        Value: req.body.email
+      }
+      cognitoUser.getSession(function(err,result){
+        if(result) {
+          cognitoUser.updateAttributes(emailAttribute, function(err,results) {
+            if(err) {
+              console.log(err);
+            }
+            res.send(results);
+          })
+        }
+      })
+    }
+
+
+  })
+
   router.get('/logout', (req,res) => {
     res.send({status: "Success"});
   })
