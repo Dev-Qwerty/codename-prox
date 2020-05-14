@@ -330,6 +330,5 @@ export default {
   }              
   .dashboard-body {
     background-color: #F5F5F5;
-    height: 800px
   }             
 </style>
