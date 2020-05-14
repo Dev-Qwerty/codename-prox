@@ -43,6 +43,7 @@ const subserviceRouter = require('./routes/subservice-router');
 const workerRouter = require("./routes/worker-router");
 const companyRouter = require("./routes/company-router");
 const orderRouter = require('./routes/order-router');
+const workerRequest = require('./routes/workrequest-route')
 
 
 // set relative path
@@ -51,6 +52,7 @@ app.use('/services', subserviceRouter)
 app.use('/worker', workerRouter)
 app.use('/company', companyRouter)
 app.use('/orders', orderRouter)
+app.use('/request', workerRequest)
 
 // version check for mobile app
 app.get('/checkserviceversion', async (req, res) => {

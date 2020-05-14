@@ -30,7 +30,7 @@ const workerRequestSchema = mongoose.Schema({
                 requied: true
             },
             quantity: {
-                type: String,
+                type: Number,
                 requied: true
             }
         }]
@@ -49,5 +49,5 @@ const workerRequestSchema = mongoose.Schema({
     }
 })
 
-const workerRequest = mongoose.model('workrequests', workRequestSchema)
+const workerRequest = mongoose.model('workrequest', workerRequestSchema)
 module.exports = workerRequest 
