@@ -20,7 +20,14 @@
           </div>
         </div>
       </div>
-      <div class="your-schedule"></div>
+      <div class="your-schedule">
+        <p class="ys-header">Your Schedule</p>
+        <div class="ys-box ys-sh-all">
+          <p class="ys-box-one">10th May 2019</p>
+          <p class="ys-box-two">10:30 AM - Kitchen Clean</p>
+          <p class="ys-box-two">10:45 AM - Sofa Clean</p>
+        </div>
+      </div>
     </div>
   </div>    
 </template>
@@ -40,8 +47,10 @@ export default {
   }
   .incomming-req {
     padding-left: 30px;
+    padding-top: 10px;
   }
   .ir-header {
+    font-weight: bold;
     margin-bottom: 5px;
     font-size: 15px;
     color: #000;
@@ -116,6 +125,31 @@ export default {
     background-size: contain;       
   }
   .your-schedule {
-    background-color: lightblue;
+    padding-left: 40px;
+    padding-top: 10px;  
+  }
+  .ys-header {
+    margin-bottom: 5px;
+    font-size: 15px;
+    color: #000;
+    font-weight: bold;
+  }  
+  .ys-box {
+    width: 80%;
+    height: 300px;
+    background-color: #fff;
+    padding: 10px;
+  }
+  .ys-sh-all {
+    box-shadow: 0 0 5px #DBDBDB;
+  } 
+  .ys-box-one {
+    font-size: 15px;
+    margin-bottom: 10px
+  }
+  .ys-box-two {
+    margin-top: 0px;
+    margin: 0;
+    font-size: 14px;
   }
 </style>
