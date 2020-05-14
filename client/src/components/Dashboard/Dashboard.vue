@@ -63,8 +63,15 @@
 </template>
 
 <script>
+import workreq from '@/components/Dashboard/workreq.vue'
+
 export default {
-    
+  components: {
+    workreq
+  },
+  data() {
+
+  }
 }
 </script>
 
