@@ -26,10 +26,12 @@
           <div class="sidenav-top-bottom"></div>
         </div>
         <div class="sidenav-mid">
-          <div class="sidenav-mid-one">
-            <div class="sidenav-mid-img1"></div>
-            <p>Work Requests</p>
-          </div>
+          <router-link :to="{name: 'workrequests'}" @click.native="workreqfn">
+            <div class="sidenav-mid-one">
+              <div class="sidenav-mid-img1"></div>
+              <p>Work Requests</p>
+            </div>
+          </router-link>
           <div class="sidenav-mid-two">
             <div class="sidenav-mid-img2"></div>
             <p>Pending Works</p>
@@ -56,20 +58,30 @@
         </div>
       </div>
       <div class="dashboard-body">
-      
+        <router-view>
+          <workreq />
+        </router-view>       
       </div>
     </div>
   </div>  
 </template>
 
 <script>
+import workreq from '@/components/Dashboard/workreq.vue'
+
 export default {
-    
+  components: {
+    workreq
+  },
+  data() {
+
+  }
 }
 </script>
 
 <style scoped>
   .top-header {
+    top: 0;
     box-sizing: border-box;
     width: 100%;
     height: 45px;
@@ -84,9 +96,10 @@ export default {
   .mid-dashboard {
     display: grid;
     grid-template-columns: 20% 80%;
-    height: 676px;
+    /*height: 676px;*/
   }
   .sidenav {
+    height: 676px;
     border-left: 1px solid #00000029;    
     background-color: #fff;
     display: grid;

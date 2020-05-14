@@ -10,6 +10,7 @@ import Cleaning from '@/components/Services/Cleaning/Cmain.vue'
 import Cmodal from '@/components/Services/Cleaning/Cmodal.vue'
 import Ccart from '@/components/Services/Cleaning/Ccart.vue'
 import Dashboard from '@/components/Dashboard/DMain.vue'
+import workreq from '@/components/Dashboard/workreq.vue'
 import ForgotPassword from '@/components/ForgotPassword/FPMain.vue'
 import UpdateProfile from '@/components/UpdateProfile/UPMain.vue'
 
@@ -62,7 +63,15 @@ export default new VueRouter({
     },
     { 
       path: '/dashboard', 
-      component: Dashboard 
+      component: Dashboard,
+      children: [
+        {
+          path: 'workrequests',
+          name: 'workrequests',
+          component: workreq,
+          props: true
+        }
+      ]
     },
     {
       path: '/forgotPassword',
