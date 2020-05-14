@@ -8,12 +8,25 @@ router
         // const worker = req.params.id
         workerRequest.find({ workerId: req.params.id })
             .then(response => {
-                console.log(response)
+                res.send(response)
             })
             .catch(error => {
                 console.error(error)
             })
     })
-    .post()
+
+router
+    .route('/workrequest')
+    .post((req, res) => {
+        const { requestId, workerId, requestStatus } = req.body
+
+        workerRequest.findOneAndUpdate({requestId: requestId}, {workerId: workerId, requestStatus: requestStatus})
+            .then(() => {
+                res.send('worker assigned')
+            })
+            .catch(error => {
+                console.error(error)
+            })
+    })
 
 module.exports = router
