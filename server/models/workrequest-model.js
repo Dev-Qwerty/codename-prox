@@ -12,7 +12,7 @@ const workerRequestSchema = mongoose.Schema({
     workerId: {
         type: String,
         requied: true,
-        default: 'now worker assigned'
+        default: 'no worker assigned'
     },
     requestStatus: {
         type: String,
@@ -49,5 +49,5 @@ const workerRequestSchema = mongoose.Schema({
     }
 })
 
-const workerRequest = mongoose.model('workrequest', workerRequestSchema)
+const workerRequest = mongoose.model('workrequests', workerRequestSchema)
 module.exports = workerRequest 
