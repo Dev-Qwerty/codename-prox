@@ -74,16 +74,13 @@ router.post('/login', (req,res) => {
     Username: req.body.username,
     Pool: userPool
   }
-
-  req.session['login-errors'] = [];
   
   const cognitoUser = new AmazonCognitoIdentity.CognitoUser(UserData);
   cognitoUser.authenticateUser(AuthenticationDetails, {
     onSuccess: data => {
-      res.send(data);
+      res.send({status: "Success", user: data});
     },
     onFailure: err => {
-      req.session['login-errors'].push(err.message)
       res.send(err.code);
     }
   })

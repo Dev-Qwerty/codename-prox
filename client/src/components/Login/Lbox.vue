@@ -59,10 +59,12 @@ export default {
               this.errorstatus = true;
               this.errormsg = "Please confirm your email!"
             }
+            if(response.data.status == "Success") {
             this.$cookies.set("username", response.data.idToken.payload.sub, '1d');
-            this.$cookies.set("jwt", response.data.idToken.jwtToken, '1d');
+            this.$session.start();
+            this.$session.set('jwt', response.data.user.idToken.jwtToken);
             window.location.href = "http://localhost:8080/dashboard";
-            
+            }
           })
           .catch(function(error) {
             this.errorstatus = true;
