@@ -1,6 +1,29 @@
 const mongoose = require('mongoose');
 
-// Databsae Schema for users
+const addressSchema = new mongoose.Schema({
+    line1: {
+        type: String,
+        required: true
+    },
+    line2: {
+        type: String
+    },
+    city: {
+        type: String
+    },
+    district: {
+        type: String
+    },
+    state: {
+        type: String
+    },
+    pinCode: {
+        type: Number
+    }
+})
+
+
+// Database Schema for users
 const UserSchema = new mongoose.Schema({
     email: {
         type: String,
@@ -13,11 +36,19 @@ const UserSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    
-    password: {
+    userID: {
         type: String,
         required: true,
-        minlength: 6
+        unique: true
+    },
+    addresses: [addressSchema],
+    userRating: {
+        type: Number,
+        default: 100
+    },
+    name: {
+        type: String,
+        default: ""
     }
 });
 

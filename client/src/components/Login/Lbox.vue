@@ -12,10 +12,8 @@
         <input type="checkbox" name="check1" value="">
       </div>
       <div>
+        <vue-recaptcha sitekey="6LfsCfYUAAAAAEKiFDDFZW9yqlCZpd3G3EFoDy2w" size="invisible" :loadRecaptchaScript="true" @verify="captchaVerified()">
         <input class="sbutton" type="submit" name="" value="Sign in" @click.prevent="login()">
-      </div>
-      <div>
-        <vue-recaptcha sitekey="6LfNavQUAAAAACmS6PTEwTlZYC5MePypnm0JLkd5" :loadRecaptchaScript="true" @verify="captchaVerified()">
         </vue-recaptcha>
       </div>
     </form>
@@ -40,8 +38,6 @@ export default {
   methods: {
     captchaVerified() {
       this.captchastatus = true;
-    },
-    login() {
       if(this.captchastatus == false) {
         this.errorstatus = true;
         this.errormsg = "Please select Captcha"
@@ -74,6 +70,9 @@ export default {
           });
         }
       }
+    },
+    login() {
+      this.$refs.recaptcha.execute();
     },
   },
   components: { VueRecaptcha }
