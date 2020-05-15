@@ -17,16 +17,21 @@ router
 
 router
     .route('/workrequest')
-    .post((req, res) => {
-        const { requestId, workerId, requestStatus } = req.body
-
-        workerRequest.findOneAndUpdate({requestId: requestId}, {workerId: workerId, requestStatus: requestStatus})
-            .then(() => {
+    .post( async (req, res) => {
+        try {
+            const { requestId, workerId, requestStatus } = req.body
+    
+            if (requestStatus === 'accepted') {
+                await workerRequest.findOneAndUpdate({requestId: requestId}, {workerId: workerId, requestStatus: requestStatus})
                 res.send('worker assigned')
-            })
-            .catch(error => {
-                console.error(error)
-            })
+            } else {
+                // TODO: create algo for finding worker
+                // TODO: send request to next worker in list
+                res.send('worker declined')
+            }          
+        } catch (error) {
+            console.error(error)
+        }
     })
 
 module.exports = router
