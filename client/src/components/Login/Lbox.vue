@@ -12,9 +12,8 @@
         <input type="checkbox" name="check1" value="">
       </div>
       <div>
-        <vue-recaptcha sitekey="6LfsCfYUAAAAAEKiFDDFZW9yqlCZpd3G3EFoDy2w" size="invisible" :loadRecaptchaScript="true" @verify="captchaVerified()">
         <input class="sbutton" type="submit" name="" value="Sign in" @click.prevent="login()">
-        </vue-recaptcha>
+        <recaptcha ref="recaptcha" @verify="captchaVerified()"></recaptcha>
       </div>
     </form>
       <div v-if="errorstatus" class="errormsg">
@@ -24,7 +23,7 @@
 </template>
 
 <script>
-import VueRecaptcha from 'vue-recaptcha';
+import recaptcha from '@/components/reCaptcha/recaptcha.vue'
 export default {
   data() {
     return {
@@ -60,15 +59,14 @@ export default {
               this.errormsg = "Please confirm your email!"
             }
             if(response.data.status == "Success") {
-            this.$cookies.set("username", response.data.idToken.payload.sub, '1d');
+            this.$cookies.set("username", response.data.user.idToken.payload.sub, '1d');
             this.$session.start();
             this.$session.set('jwt', response.data.user.idToken.jwtToken);
             window.location.href = "http://localhost:8080/dashboard";
             }
           })
           .catch(function(error) {
-            this.errorstatus = true;
-            this.errormsg = error;
+            alert(error);
           });
         }
       }
@@ -77,7 +75,7 @@ export default {
       this.$refs.recaptcha.execute();
     },
   },
-  components: { VueRecaptcha }
+  components: { recaptcha }
 }
 </script>
 
