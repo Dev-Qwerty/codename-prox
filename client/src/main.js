@@ -3,10 +3,14 @@ import App from './App.vue'
 import router from './router/router'
 import Axios from "axios"
 import VueCookies from 'vue-cookies'
+import VueSession from 'vue-session'
 
 //For Cookie Handling
 Vue.use(VueCookies)
 Vue.$cookies.config('7d')
+
+//For sessions
+Vue.use(VueSession)
 
 Vue.prototype.$http = Axios
 

@@ -51,10 +51,10 @@
             <div class="sidenav-bottom-img1"></div>
             <p>My Profile</p>
           </div>
-          <div class="sidenav-bottom-two">
+          <a class="sidenav-bottom-two" @click = "logout()">
             <div class="sidenav-bottom-img2"></div>
             <p>Logout</p>
-          </div>          
+          </a>          
         </div>
       </div>
       <div class="dashboard-body">
@@ -75,11 +75,26 @@ export default {
   },
   data() {
 
+  },
+  methods: {
+    logout() {
+      this.$cookies.remove("username");
+      this.$session.destroy()
+      window.location.href = "http://localhost:8080/"
+    }
+  },
+  beforeCreate: function () {
+    if (!this.$session.exists()) {
+      window.location.href = "http://localhost:8080/"
+    }
   }
 }
 </script>
 
 <style scoped>
+  a:hover {
+    cursor: pointer;
+  }
   .top-header {
     top: 0;
     box-sizing: border-box;
