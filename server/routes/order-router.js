@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const uniqueId = require('../config/unique-id')
 
 // import order model
 const orderModel = require('../models/order-model');
@@ -27,8 +28,8 @@ router
 
 
             // create new orderrs
-            newOrder.orderId = 379884;
-            newOrder.userId = "adjfne3";
+            newOrder.orderId = uniqueId.uniqueOrderId();
+            newOrder.userId = "adjfne3";   // TODO : save original userid
             newOrder.date = req.body.date;
             newOrder.service.subserviceId = service.name;
             newOrder.service.categories = req.body.service.categories;
@@ -40,6 +41,7 @@ router
             res.json({ "message": "Order placed succesfully" })
 
         } catch (error) {
+            // TODO : If error is duplicate orderid create new orderid and save that order to database
             console.log(error)
             res.json({ "message": "Failed to place Order" })
         }
