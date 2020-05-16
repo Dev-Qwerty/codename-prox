@@ -20,13 +20,13 @@ const orderSchema = mongoose.Schema({
         required: true
     },
     service: {
-        subserviceId: {
+        subserviceName: {
             type: String,
             required: true
         },
         categories: [{
             _id: false,
-            categoryId: {
+            categoryName: {
                 type: String,
                 required: true
             },
