@@ -2,8 +2,9 @@ const mongoose = require('mongoose');
 
 const orderSchema = mongoose.Schema({
     orderId: {
-        type: Number,
-        required: true
+        type: String,
+        required: true,
+        unique: true
     },
     userId: {
         type: String,
@@ -19,13 +20,13 @@ const orderSchema = mongoose.Schema({
         required: true
     },
     service: {
-        subserviceId: {
+        subserviceName: {
             type: String,
             required: true
         },
         categories: [{
             _id: false,
-            categoryId: {
+            categoryName: {
                 type: String,
                 required: true
             },
