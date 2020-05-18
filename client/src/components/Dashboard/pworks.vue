@@ -1,5 +1,7 @@
 <template>
+  <div class="pw-wrapper">
     
+  </div>   
 </template>
 
 <script>
