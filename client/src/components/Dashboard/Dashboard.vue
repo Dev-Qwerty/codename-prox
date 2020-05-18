@@ -83,18 +83,15 @@ export default {
       window.location.href = "http://localhost:8080/"
     }
   },
-  beforeCreate: function () {
+  /*beforeCreate: function () {
     if (!this.$session.exists()) {
       window.location.href = "http://localhost:8080/"
     }
-  }
+  }*/
 }
 </script>
 
 <style scoped>
-  a:hover {
-    cursor: pointer;
-  }
   .top-header {
     top: 0;
     box-sizing: border-box;
