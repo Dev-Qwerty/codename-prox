@@ -209,9 +209,6 @@ export default {
   .s-three {
     padding-left: 50px;
     margin-right: -10px;
-  }
-  .row2-col3 {
-  
   }   
   .row3 {
     display: grid;
@@ -248,14 +245,7 @@ export default {
   .wc-row2-col1 {
     padding-top: 5px;
     padding-left: 40px;  
-    /*background-color: aquamarine;*/      
   }  
-  /*.wc-big-circle {
-    width: 70px;
-    height: 70px;
-    background-color: #000;
-    border-radius: 50%;    
-  }*/
   .wc-big-circle {
     height: 70px;
     width: 70px;
