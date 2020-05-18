@@ -11,6 +11,7 @@ import Cmodal from '@/components/Services/Cleaning/Cmodal.vue'
 import Ccart from '@/components/Services/Cleaning/Ccart.vue'
 import Dashboard from '@/components/Dashboard/DMain.vue'
 import workreq from '@/components/Dashboard/workreq.vue'
+import pworks from '@/components/Dashboard/pworks.vue'
 import ForgotPassword from '@/components/ForgotPassword/FPMain.vue'
 import UpdateProfile from '@/components/UpdateProfile/UPMain.vue'
 
@@ -70,7 +71,13 @@ export default new VueRouter({
           name: 'workrequests',
           component: workreq,
           props: true
-        }
+        },
+        {
+          path: 'pendingworks',
+          name: 'pendingworks',
+          component: pworks,
+          props: true
+        }        
       ]
     },
     {

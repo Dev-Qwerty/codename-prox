@@ -32,10 +32,12 @@
               <p>Work Requests</p>
             </div>
           </router-link>
-          <div class="sidenav-mid-two">
-            <div class="sidenav-mid-img2"></div>
-            <p>Pending Works</p>
-          </div>
+          <router-link :to="{name: 'pendingworks'}" @click.native="pworksfn">
+            <div class="sidenav-mid-two">
+              <div class="sidenav-mid-img2"></div>
+              <p>Pending Works</p>
+            </div>
+          </router-link>
           <div class="sidenav-mid-three">
             <div class="sidenav-mid-img3"></div>
             <p>My Works</p>
@@ -60,6 +62,7 @@
       <div class="dashboard-body">
         <router-view>
           <workreq />
+          <pworks />
         </router-view>       
       </div>
     </div>
@@ -68,10 +71,12 @@
 
 <script>
 import workreq from '@/components/Dashboard/workreq.vue'
+import pworks from '@/components/Dashboard/pworks.vue'
 
 export default {
   components: {
-    workreq
+    workreq,
+    pworks
   },
   data() {
 
@@ -83,18 +88,15 @@ export default {
       window.location.href = "http://localhost:8080/"
     }
   },
-  beforeCreate: function () {
+  /*beforeCreate: function () {
     if (!this.$session.exists()) {
       window.location.href = "http://localhost:8080/"
     }
-  }
+  }*/
 }
 </script>
 
 <style scoped>
-  a:hover {
-    cursor: pointer;
-  }
   .top-header {
     top: 0;
     box-sizing: border-box;
