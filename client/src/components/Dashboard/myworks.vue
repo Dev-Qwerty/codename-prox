@@ -3,23 +3,48 @@
     <div class="mw-body">
       <p class="ty-header">Today</p>
       <div class="box-wrapper">
-        <div class="box sh-all">
-          <div class="box-row1">
-            <p class="row1-one">$99</p>
-            <div class="Line"></div>
-          </div>
-          <div class="box-row2">
-            <p class="row2-one">Kitchen Cleaning</p>
-            <p class="row2-two">Kanjirappally, Kottayam</p>
-          </div>
-          <div class="box-row3">
-            <p class="row3-one">8:30 AM</p>
-          </div>
-          <div class="box-row4">
-            <p class="row4-one">Work Details</p>
+        <div v-for="n in 3" v-bind:key="n">
+          <div class="box sh-all">
+            <div class="box-row1">
+              <p class="row1-one">$99</p>
+              <div class="Line"></div>
+            </div>
+            <div class="box-row2">
+              <p class="row2-one">Kitchen Cleaning</p>
+              <p class="row2-two">Kanjirappally, Kottayam</p>
+            </div>
+            <div class="box-row3">
+              <p class="row3-one">8:30 AM</p>
+            </div>
+            <div class="box-row4">
+              <p class="row4-one">Work Details</p>
+            </div>
           </div>
         </div>
       </div>
+
+      <p class="yd-header">Yesterday</p>
+      <div class="box-wrapper">
+        <div v-for="n in 2" v-bind:key="n">
+          <div class="box sh-all">
+            <div class="box-row1">
+              <p class="row1-one">$99</p>
+              <div class="Line"></div>
+            </div>
+            <div class="box-row2">
+              <p class="row2-one">Kitchen Cleaning</p>
+              <p class="row2-two">Kanjirappally, Kottayam</p>
+            </div>
+            <div class="box-row3">
+              <p class="row3-one">8:30 AM</p>
+            </div>
+            <div class="box-row4">
+              <p class="row4-one">Work Details</p>
+            </div>
+          </div>
+        </div>
+      </div>  
+
     </div>
   </div>
 </template>
@@ -38,14 +63,17 @@ export default {
   .ty-header {
     font-weight: bold;
     margin-bottom: -5px;
-    font-size: 15px;
+    font-size: 20px;
     color: #000;    
   }
   .box-wrapper {
+    width: 80%;
     margin-top: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
   }
   .box {
-    width: 25%;
+    width: 250px;
     height: 200px;
     display: grid;
     grid-template-rows: 30% 25% 30% 15%;
@@ -96,5 +124,12 @@ export default {
   }
   .row4-one {
     font-size: 14px;
+  }
+
+  .yd-header {
+    font-weight: bold;
+    margin-top: 50px;
+    font-size: 20px;
+    color: #000;    
   }
 </style>
