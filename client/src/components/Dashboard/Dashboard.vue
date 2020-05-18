@@ -32,7 +32,7 @@
               <p>Work Requests</p>
             </div>
           </router-link>
-          <router-link :to="{name: 'workrequests'}" @click.native="pworksfn">
+          <router-link :to="{name: 'pendingworks'}" @click.native="pworksfn">
             <div class="sidenav-mid-two">
               <div class="sidenav-mid-img2"></div>
               <p>Pending Works</p>
