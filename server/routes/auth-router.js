@@ -241,7 +241,12 @@ router.post('/login', (req,res) => {
 
   })
 
-  router.get('/logout', (req,res) => {
+  router.post('/logout', (req,res) => {
+    const cognitoUser = new AmazonCognitoIdentity.CognitoUser({
+      Username: req.body.email,
+      Pool: userPool
+    })
+    cognitoUser.signOut();
     res.send({status: "Success"});
   })
 module.exports = router;
