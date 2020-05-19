@@ -4,8 +4,8 @@ const keys = require('../config/keys');
 const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
 
 const poolData = {
-    UserPoolId: keys.workerCognito.userPoolId,
-    ClientId: keys.workerCognito.clientId
+    UserPoolId: keys.cognito.userPoolId,
+    ClientId: keys.cognito.clientId
 }
 
 const workerPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
@@ -24,12 +24,17 @@ router.post('/signup', (req,res) => {
         Name: 'email',
         Value: email
     }
+    const categoryData = {
+        Name: 'custom:category',
+        Value: 'Worker'
+    }
 
     const emailAttribute = new AmazonCognitoIdentity.CognitoUserAttribute(emailData);
     const nameAttribute = new AmazonCognitoIdentity.CognitoUserAttribute(nameData);
     const phoneAttribute = new AmazonCognitoIdentity.CognitoUserAttribute(phoneData);
+    const categoryAttribute = new AmazonCognitoIdentity.CognitoUserAttribute(categoryData);
 
-    workerPool.signUp(email, password, [emailAttribute, nameAttribute, phoneAttribute], null, (err, data) => {
+    workerPool.signUp(email, password, [emailAttribute, nameAttribute, phoneAttribute, categoryAttribute], null, (err, data) => {
         if(err) {
             console.log(err)
         }
