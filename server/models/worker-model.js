@@ -26,10 +26,13 @@ const WorkerSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    workerID: {
+        type: String,
+        default: ""
+    },
     workerType: {
         type: String,
         enum: ['Individual', 'Company'],
-        required: true,
         default: 'Individual'
     },
     companyID: {
@@ -38,7 +41,6 @@ const WorkerSchema = new mongoose.Schema({
     },
     specialization: {
         type: String,
-        required: true,
         default: null
     },
     otherAreas: {

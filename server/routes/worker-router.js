@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const keys = require('../config/keys');
 const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
+const Worker = require('../models/worker-model');
 
 const poolData = {
     UserPoolId: keys.cognito.userPoolId,
@@ -38,7 +39,19 @@ router.post('/signup', (req,res) => {
         if(err) {
             console.log(err)
         }
-        res.send(data);
+        const workerID = data.userSub;
+        const newWorker = new Worker({
+          email,
+          phoneNo,
+          workerID,
+          name
+        })
+        newWorker
+        .save()
+        .then((worker) => {
+          res.send({user: worker, data: data.user});
+        })
+        
     })
 })
 
