@@ -23,7 +23,6 @@ router.post('/signup', (req,res) => {
   const email = req.body.email;
   const password = req.body.password;
   const phoneNo = req.body.phoneNo;
-  const category = req.body.category;
 
   const emailData = {
     Name: 'email',
@@ -42,7 +41,7 @@ router.post('/signup', (req,res) => {
 
   const categoryData = {
     Name: 'custom:category',
-    Value: category
+    Value: 'Customer'
   }
 
   const emailAttribute = new AmazonCognitoIdentity.CognitoUserAttribute(emailData);
