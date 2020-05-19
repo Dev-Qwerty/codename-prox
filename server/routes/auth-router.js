@@ -23,6 +23,7 @@ router.post('/signup', (req,res) => {
   const email = req.body.email;
   const password = req.body.password;
   const phoneNo = req.body.phoneNo;
+  const category = req.body.category;
 
   const emailData = {
     Name: 'email',
@@ -39,11 +40,17 @@ router.post('/signup', (req,res) => {
     Value: name
   };
 
+  const categoryData = {
+    Name: 'custom:category',
+    Value: category
+  }
+
   const emailAttribute = new AmazonCognitoIdentity.CognitoUserAttribute(emailData);
   const phoneAttribute = new AmazonCognitoIdentity.CognitoUserAttribute(phoneData);
   const nameAttribute = new AmazonCognitoIdentity.CognitoUserAttribute(nameData);
+  const categoryAttribute = new AmazonCognitoIdentity.CognitoUserAttribute(categoryData);
 
-  userPool.signUp(email, password, [ emailAttribute, phoneAttribute, nameAttribute ], null, (err,data) => {
+  userPool.signUp(email, password, [ emailAttribute, phoneAttribute, nameAttribute, categoryAttribute ], null, (err,data) => {
     if(err) {
       return console.log(err);
     }
