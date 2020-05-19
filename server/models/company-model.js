@@ -22,7 +22,7 @@ const addressSchema = new mongoose.Schema({
 })
 
 
-// Database Schema for users
+// Database Schema for companies
 const CompanySchema = new mongoose.Schema({
     email: {
         type: String,
@@ -30,12 +30,12 @@ const CompanySchema = new mongoose.Schema({
         lowercase: true,
         required: true
     },
-    phone: {
+    phoneNo: {
         type: Number,
         required: true,
         unique: true
     },
-    userID: {
+    companyID: {
         type: String,
         required: true,
         unique: true
