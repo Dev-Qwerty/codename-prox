@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const addressSchema = new mongoose.Schema({
     line1: {
         type: String,
-        required: true
     },
     line2: {
         type: String
@@ -27,14 +26,14 @@ const WorkerSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    password: {
+    workerID: {
         type: String,
-        required: true
+        default: ""
     },
     workerType: {
         type: String,
         enum: ['Individual', 'Company'],
-        required: true
+        default: 'Individual'
     },
     companyID: {
         type: String,
@@ -42,7 +41,7 @@ const WorkerSchema = new mongoose.Schema({
     },
     specialization: {
         type: String,
-        required: true
+        default: null
     },
     otherAreas: {
         type: String
@@ -58,7 +57,7 @@ const WorkerSchema = new mongoose.Schema({
     address: addressSchema,
     rating: {
         type: Number,
-        default: 0
+        default: 3
     }
 })
 
