@@ -3,9 +3,6 @@
     <div class="top-box">
       <router-link class="arrowIcon" :to="{ path: '/services' }"></router-link>
       <h3>Back to services</h3>
-      <!--<router-link class="cartbtn" :to="{name: 'cart'}" @click.native="cartfn">
-        <input type="submit" value="cart">
-      </router-link>-->
     </div>
     <div class="mid">
       <div class="mid-box">

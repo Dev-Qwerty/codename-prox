@@ -22,15 +22,25 @@
           </div>
         </div>        
       </div>
+      <router-link class="cartbtn" :to="{name: 'cart'}" @click.native="cartfn">
+        <input type="submit" value="cart">
+      </router-link>    
+      <router-view>
+        <cart />  
+      </router-view>  
     </div>
   </div>
 </template>
 
 <script>
 import EventBus from '../../../event-bus.js'
+import cart from '@/components/Services/Cleaning/Ccart.vue'
 
 export default {
   name: 'Cmodal',
+  components: {
+    cart
+  },
   data() {
     return {
       sarray: this.$route.params.sarray
