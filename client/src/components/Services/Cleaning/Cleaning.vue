@@ -3,9 +3,9 @@
     <div class="top-box">
       <router-link class="arrowIcon" :to="{ path: '/services' }"></router-link>
       <h3>Back to services</h3>
-      <router-link class="cartbtn" :to="{name: 'cart'}" @click.native="cartfn">
+      <!--<router-link class="cartbtn" :to="{name: 'cart'}" @click.native="cartfn">
         <input type="submit" value="cart">
-      </router-link>
+      </router-link>-->
     </div>
     <div class="mid">
       <div class="mid-box">
@@ -40,7 +40,6 @@
       </div>
       <router-view>
         <modal />
-        <cart />
       </router-view>
     </div>
   </div>    
@@ -48,13 +47,12 @@
 
 <script>
 import modal from '@/components/Services/Cleaning/Cmodal.vue'
-import cart from '@/components/Services/Cleaning/Ccart.vue'
+/*import cart from '@/components/Services/Cleaning/Ccart.vue'*/
 import EventBus from '../../../event-bus.js'
 
 export default {
   components: {
-    modal,
-    cart
+    modal
   },
   data() {
     return {
