@@ -12,7 +12,7 @@
             <p id="one">{{ sr.category }}</p>
           </div>
         </div>   
-        <router-link class="checkoutbtn" :to="{name: 'cart'}" @click.native="checkoutfn">
+        <router-link class="checkoutbtn" :to="{name: 'checkout'}" @click.native="checkoutfn">
           <input type="submit" value="checkout">
         </router-link>             
       </div>
