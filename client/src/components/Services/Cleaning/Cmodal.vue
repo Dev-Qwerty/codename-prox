@@ -74,7 +74,8 @@ export default {
     margin-left: 90%;
     width: 100px;
     height: 40px;
-    border: 4px solid #fff;
+    border: 2px solid #fff;
+    /*border: none;*/
     color: #fff;
     background-color: black;
     border-radius: 5px;
