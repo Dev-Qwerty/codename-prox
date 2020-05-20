@@ -14,7 +14,7 @@
             </router-link> 
           </div>
           <div>
-            <router-link class="paylaterbtn" :to="{name: ''}" @click.native="paylaterfn">
+            <router-link class="paylaterbtn" :to="{name: 'confirm'}" @click.native="paylaterfn">
               <input type="submit" value="Pay Later">
             </router-link>
           </div> 
@@ -34,7 +34,7 @@ export default {
   name: 'checkout',
   components: {
     PayLaterConfirm 
-  }
+  },
   data() {
     return {
       cartArr: JSON.parse(this.$cookies.get("cart"))
@@ -42,7 +42,7 @@ export default {
   },
   methods: {
     paylaterfn() {
-      alert(JSON.stringify(this.cartArr))
+      /*alert(JSON.stringify(this.cartArr))*/
     }
   }
 }
