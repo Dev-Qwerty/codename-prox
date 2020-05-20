@@ -11,7 +11,10 @@
           <div class="sBox">
             <p id="one">{{ sr.category }}</p>
           </div>
-        </div>       
+        </div>   
+        <router-link class="checkoutbtn" :to="{name: 'cart'}" @click.native="checkoutfn">
+          <input type="submit" value="checkout">
+        </router-link>             
       </div>
     </div>
   </div>
@@ -39,7 +42,7 @@ export default {
     position: absolute;
     top: 0%;
     left: 0%;
-    background: rgb(128, 128, 128, 0.8);
+    background: rgb(128, 128, 128, 0.5);
     width: 100%;
     height: 100%;
   }
@@ -95,4 +98,14 @@ export default {
     font-weight: bold;
     font-size: 20px;;
   }
+  .checkoutbtn input[type="submit"]{
+    margin-top: 20px;
+    margin-left: 40%;
+    width: 100px;
+    height: 45px;
+    border: none;
+    color: #fff;
+    background-color: black;
+    border-radius: 5px;
+ }  
 </style>
