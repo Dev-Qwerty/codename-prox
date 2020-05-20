@@ -28,7 +28,17 @@
 
 
 export default {
-  name: 'checkout'
+  name: 'checkout',
+  data() {
+    return {
+      cartArr: JSON.parse(this.$cookies.get("cart"))
+    }
+  },
+  methods: {
+    paylaterfn() {
+      alert(JSON.stringify(this.cartArr))
+    }
+  }
 }
 </script>
 
