@@ -107,17 +107,7 @@ export default {
     color: #aaa;
     font-style: italic;
     font-size: 21px;
-  }
-  .cartbtn input[type="submit"]{
-    margin-top: 0px;
-    margin-left: 1000px;
-    width: 100px;
-    height: 30px;
-    border: 2px solid #fff;
-    color: #fff;
-    background-color: black;
-    border-radius: 5px;
-  }    
+  }   
   .mid {
     display: grid;
     grid-template-columns: 2fr 1fr;

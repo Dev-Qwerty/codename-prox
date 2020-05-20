@@ -66,6 +66,16 @@ export default {
     width: 100%;
     height: 197%;
   }
+  .cartbtn input[type="submit"]{
+    margin-top: 20px;
+    margin-left: 90%;
+    width: 100px;
+    height: 40px;
+    border: 4px solid #fff;
+    color: #fff;
+    background-color: black;
+    border-radius: 5px;
+  }   
   .Mbox {
     position: absolute;
     top: 8%;
@@ -148,7 +158,7 @@ export default {
     font-family: Arial;
     font-size: 15px;
     box-shadow: 3px 3px #dedee0;
-    border-radius: 10px;;
+    border-radius: 10px;
   } 
   #Vdetails {
     margin-bottom: 0px;;
