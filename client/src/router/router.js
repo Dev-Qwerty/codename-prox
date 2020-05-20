@@ -9,6 +9,7 @@ import Services from '../components/ServicesPage/SMain.vue'
 import Cleaning from '@/components/Services/Cleaning/Cmain.vue'
 import Cmodal from '@/components/Services/Cleaning/Cmodal.vue'
 import Ccart from '@/components/Services/Cleaning/Ccart.vue'
+import checkout from '@/components/Services/Cleaning/checkout.vue'
 import Dashboard from '@/components/Dashboard/DMain.vue'
 import workreq from '@/components/Dashboard/workreq.vue'
 import pworks from '@/components/Dashboard/pworks.vue'
@@ -59,9 +60,17 @@ export default new VueRouter({
               path: 'cart',
               name: 'cart',
               component: Ccart,
-              props: true
-          }
-        ]
+              props: true,
+              children: [
+                {
+                  path: 'checkout',
+                  name: 'checkout',
+                  component: checkout,
+                  props: true,              
+                }
+              ]
+            }
+          ]
         },       
       ] 
     },
