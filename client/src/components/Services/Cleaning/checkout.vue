@@ -7,9 +7,18 @@
             <div class="cbtn"></div>
           </router-link>
         </div>  
-        <!--<router-link class="btn" :to="{name: ''}" @click.native="fn">
-          <input type="submit" value="btn">
-        </router-link>-->             
+        <div class="btns">
+          <div>
+            <router-link class="paynowbtn" :to="{name: ''}" @click.native="paynowfn">
+              <input type="submit" value="Pay Now">
+            </router-link> 
+          </div>
+          <div>
+            <router-link class="paylaterbtn" :to="{name: ''}" @click.native="paylaterfn">
+              <input type="submit" value="Pay Later">
+            </router-link>
+          </div> 
+        </div>                 
       </div>
     </div>
   </div>  
@@ -28,7 +37,7 @@ export default {
     position: absolute;
     top: 0%;
     left: 0%;
-    background: rgb(128, 128, 128, 0.5);
+    background: rgb(128, 128, 128, 0.6);
     width: 100%;
     height: 100%;
   }
@@ -37,7 +46,7 @@ export default {
     top: 6%;
     left: 25%;
     width: 50%;
-    height: 900px;
+    height: 600px;
     background-color: #fff;
   }
   .Img {
@@ -67,14 +76,25 @@ export default {
     text-align: center;
     margin-bottom: 0px;
   }
-  .btn input[type="submit"]{
-    margin-top: 20px;
-    margin-left: 40%;
-    width: 100px;
+  .btns {
+    margin-top: 70px;
+    margin-left: 35%;
+  }  
+  .paynowbtn input[type="submit"]{
+    width: 40%;
     height: 45px;
     border: none;
     color: #fff;
     background-color: black;
     border-radius: 5px;
- } 
+  }
+  .paylaterbtn input[type="submit"]{
+    margin-top: 20px;
+    width: 40%;
+    height: 45px;
+    border: none;
+    color: #fff;
+    background-color: black;
+    border-radius: 5px;
+  }    
 </style>
