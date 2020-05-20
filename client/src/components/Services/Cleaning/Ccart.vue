@@ -3,7 +3,7 @@
     <div class="Mbg">
       <div class="Mbox">
         <div class="Img">
-          <router-link :to="{ path: '/services/cleaning' }">
+          <router-link :to="{ path: '/services/cleaning/modal' }">
             <div class="cbtn"></div>
           </router-link>
         </div>
