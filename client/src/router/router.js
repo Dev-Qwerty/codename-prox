@@ -53,14 +53,16 @@ export default new VueRouter({
           path: 'modal',
           name: 'modal',
           component: Cmodal,
-          props: true
-        },
-        {
-          path: 'cart',
-          name: 'cart',
-          component: Ccart,
-          props: true
-        },        
+          props: true,
+          children: [
+            {
+              path: 'cart',
+              name: 'cart',
+              component: Ccart,
+              props: true
+          }
+        ]
+        },       
       ] 
     },
     { 

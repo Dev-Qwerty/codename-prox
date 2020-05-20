@@ -3,7 +3,7 @@
     <div class="Mbg">
       <div class="Mbox">
         <div class="Img">
-          <router-link :to="{ path: '/services/cleaning' }">
+          <router-link :to="{ path: '/services/cleaning' }" @click.native="closefn">
             <div class="cbtn"></div>
           </router-link>
         </div>
@@ -22,23 +22,39 @@
           </div>
         </div>        
       </div>
+      <router-link class="cartbtn" :to="{name: 'cart'}" @click.native="cartfn">
+        <input type="submit" value="cart">
+      </router-link>    
+      <router-view>
+        <cart />  
+      </router-view>  
     </div>
   </div>
 </template>
 
 <script>
-import EventBus from '../../../event-bus.js'
+/*import EventBus from '../../../event-bus.js'*/
+import cart from '@/components/Services/Cleaning/Ccart.vue'
 
 export default {
   name: 'Cmodal',
+  components: {
+    cart
+  },
   data() {
     return {
+      cartArr: [],
       sarray: this.$route.params.sarray
     }   
   },
   methods: {
     fn(obj) {
-      EventBus.$emit('sub-sub-service', obj)
+      this.cartArr.push(obj)
+      this.$cookies.set("cart", JSON.stringify(this.cartArr), '1d')
+      /*EventBus.$emit('sub-sub-service', obj)*/
+    },
+    closefn() {
+      this.$cookies.remove("cart") 
     }
   }
 }
@@ -53,9 +69,19 @@ export default {
     width: 100%;
     height: 197%;
   }
+  .cartbtn input[type="submit"]{
+    margin-top: 20px;
+    margin-left: 90%;
+    width: 100px;
+    height: 40px;
+    border: 4px solid #fff;
+    color: #fff;
+    background-color: black;
+    border-radius: 5px;
+  }   
   .Mbox {
     position: absolute;
-    top: 8%;
+    top: 6%;
     left: 25%;
     width: 50%;
     height: 900px;
@@ -135,7 +161,7 @@ export default {
     font-family: Arial;
     font-size: 15px;
     box-shadow: 3px 3px #dedee0;
-    border-radius: 10px;;
+    border-radius: 10px;
   } 
   #Vdetails {
     margin-bottom: 0px;;
