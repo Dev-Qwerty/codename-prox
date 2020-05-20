@@ -44,8 +44,7 @@
 
 <script>
 import modal from '@/components/Services/Cleaning/Cmodal.vue'
-/*import cart from '@/components/Services/Cleaning/Ccart.vue'*/
-import EventBus from '../../../event-bus.js'
+/*import EventBus from '../../../event-bus.js'*/
 
 export default {
   components: {
@@ -53,8 +52,7 @@ export default {
   },
   data() {
     return {
-      subArr: [],
-      cartArr: []
+      subArr: []
     }
   },
   methods: {
@@ -77,10 +75,8 @@ export default {
   },
   created() {
     this.apiCall()
-    EventBus.$on('sub-sub-service', (obj) => { 
-      this.cartArr.push(obj)
-      this.$cookies.set("cart", JSON.stringify(this.cartArr), '1d')    
-    })
+    /*EventBus.$on('sub-sub-service', (obj) => {     
+    })*/
   
   }  
 }

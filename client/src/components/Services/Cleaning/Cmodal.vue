@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import EventBus from '../../../event-bus.js'
+/*import EventBus from '../../../event-bus.js'*/
 import cart from '@/components/Services/Cleaning/Ccart.vue'
 
 export default {
@@ -43,12 +43,15 @@ export default {
   },
   data() {
     return {
+      cartArr: [],
       sarray: this.$route.params.sarray
     }   
   },
   methods: {
     fn(obj) {
-      EventBus.$emit('sub-sub-service', obj)
+      this.cartArr.push(obj)
+      this.$cookies.set("cart", JSON.stringify(this.cartArr), '1d')
+      /*EventBus.$emit('sub-sub-service', obj)*/
     }
   }
 }
