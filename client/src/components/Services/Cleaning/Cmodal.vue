@@ -3,7 +3,7 @@
     <div class="Mbg">
       <div class="Mbox">
         <div class="Img">
-          <router-link :to="{ path: '/services/cleaning' }">
+          <router-link :to="{ path: '/services/cleaning' }" @click.native="closefn">
             <div class="cbtn"></div>
           </router-link>
         </div>
@@ -52,6 +52,9 @@ export default {
       this.cartArr.push(obj)
       this.$cookies.set("cart", JSON.stringify(this.cartArr), '1d')
       /*EventBus.$emit('sub-sub-service', obj)*/
+    },
+    closefn() {
+      this.$cookies.remove("cart") 
     }
   }
 }
@@ -78,7 +81,7 @@ export default {
   }   
   .Mbox {
     position: absolute;
-    top: 8%;
+    top: 6%;
     left: 25%;
     width: 50%;
     height: 900px;
