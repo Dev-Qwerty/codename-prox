@@ -20,15 +20,21 @@
           </div> 
         </div>                 
       </div>
+      <router-view>
+        <PayLaterConfirm />
+      </router-view>
     </div>
   </div>  
 </template>
 
 <script>
-
+import PayLaterConfirm from '@/components/Services/Cleaning/PayLaterConfirm.vue'
 
 export default {
   name: 'checkout',
+  components: {
+    PayLaterConfirm 
+  }
   data() {
     return {
       cartArr: JSON.parse(this.$cookies.get("cart"))
