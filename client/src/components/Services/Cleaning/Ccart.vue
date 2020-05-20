@@ -16,14 +16,21 @@
           <input type="submit" value="checkout">
         </router-link>             
       </div>
+      <router-view>
+        <checkout />
+      </router-view>
     </div>
   </div>
 </template>
 
 <script>
+import checkout from '@/components/Services/Cleaning/checkout.vue'
 
 export default {
   name: 'Cmodal',
+  components: {
+    checkout
+  },
   data() {
     return {
       cartArr: JSON.parse(this.$cookies.get("cart"))
