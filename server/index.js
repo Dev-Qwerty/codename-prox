@@ -38,7 +38,7 @@ const mainservicemodel = require('./models/mainservice-model');
 
 
 //import routes
-const authRouter = require("./routes/auth-router");
+const customerRouter = require("./routes/customer-router");
 const subserviceRouter = require('./routes/subservice-router');
 const workerRouter = require("./routes/worker-router");
 const companyRouter = require("./routes/company-router");
@@ -47,7 +47,7 @@ const workerRequest = require('./routes/workrequest-route')
 
 
 // set relative path
-app.use('/auth', authRouter)
+app.use('/customer', customerRouter)
 app.use('/services', subserviceRouter)
 app.use('/worker', workerRouter)
 app.use('/company', companyRouter)
