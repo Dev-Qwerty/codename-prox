@@ -255,4 +255,15 @@ router.post('/login', (req,res) => {
     cognitoUser.signOut();
     res.send({status: "Success"});
   })
+
+  router.post('/addAddress', (req,res) => {
+    const newAddress = req.body.address;
+    let user = {};
+    user.address = newAddress;
+    user = { $set: user };
+    User.update({userID: req.body.userID}, user).then(() => {
+      res.send({status: "Success", user: user});
+    })
+    .catch(err => res.send({err: err}))
+  })
 module.exports = router;
