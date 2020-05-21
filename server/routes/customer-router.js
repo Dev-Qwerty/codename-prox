@@ -276,4 +276,16 @@ router.post('/login', (req,res) => {
       res.send({status: "Success", data: results});
     })
   })
+
+  router.post('/verifyCategory', (req,res) => {
+    const userID = req.body.userID;
+    User.findOne({userID: userID}, (err,results) => {
+      if(results) {
+        res.send({status: "Success"});
+      }
+      else{
+        res.send({status: "Not found!"});
+      }
+    })
+  })
 module.exports = router;

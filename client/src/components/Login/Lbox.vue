@@ -19,6 +19,11 @@
       <div v-if="errorstatus" class="errormsg">
        <span>{{ errormsg }}</span>
        </div>
+       <div v-if="invalidCategory">
+         <p>Select your category:</p>
+         <button>Worker</button>
+         <button>Company</button>
+       </div>
   </div>
 </template>
 
@@ -31,7 +36,8 @@ export default {
       password: "",
       errormsg: "",
       errorstatus: false,
-      captchastatus: false
+      captchastatus: false,
+      invalidCategory: false
     }
   },
   methods: {
@@ -43,7 +49,7 @@ export default {
       }
       else {
         if (this.password.length > 6) {
-        let url = "http://localhost:3000/auth/login";
+        let url = "http://localhost:3000/customer/login";
         this.$http
           .post(url, {
             username: this.username,
@@ -59,10 +65,25 @@ export default {
               this.errormsg = "Please confirm your email!"
             }
             if(response.data.status == "Success") {
-            this.$cookies.set("username", response.data.user.idToken.payload.sub, '1d');
-            this.$session.start();
-            this.$session.set('jwt', response.data.user.idToken.jwtToken);
-            window.location.href = "http://localhost:8080/dashboard";
+            let verifyURL = "http://localhost:3000/customer/verifyCategory";
+            const username = response.data.user.idToken.payload.sub;
+            const jwtToken = response.data.user.idToken.jwtToken;
+            this.$http
+            .post(verifyURL, {
+              userID: response.data.user.idToken.payload.sub
+            })
+            .then(responses => {
+              if(responses.data.status == "Success") {
+                this.$cookies.set("username", username, '1d');
+                this.$session.start();
+                this.$session.set('jwt', jwtToken);
+                window.location.href = "http://localhost:8080/dashboard";
+              }
+              else {
+                this.invalidCategory = true;
+              }
+            })
+          
             }
           })
           .catch(function(error) {
