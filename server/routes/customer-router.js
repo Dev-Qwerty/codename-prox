@@ -259,11 +259,21 @@ router.post('/login', (req,res) => {
   router.post('/addAddress', (req,res) => {
     const newAddress = req.body.address;
     let user = {};
-    user.address = newAddress;
-    user = { $set: user };
+    user.addresses = newAddress;
+    user = { $push: user };
     User.update({userID: req.body.userID}, user).then(() => {
       res.send({status: "Success", user: user});
     })
     .catch(err => res.send({err: err}))
+  })
+
+  router.post('/viewProfile', (req,res) => {
+    const userID = req.body.userID;
+    User.findOne({userID: userID}, (err,results) => {
+      if(err) {
+        res.send({status: "Error!", error: err});
+      }
+      res.send({status: "Success", data: results});
+    })
   })
 module.exports = router;
