@@ -21,8 +21,8 @@
        </div>
        <div v-if="invalidCategory">
          <p>Select your category:</p>
-         <button>Worker</button>
-         <button>Company</button>
+         <button class= "category-btn">Worker</button>
+         <button class = "category-btn">Company</button>
        </div>
   </div>
 </template>
@@ -151,5 +151,11 @@ export default {
     font-weight: bold;
     width: 16vw;
     border-radius: 10px;
+  }
+  .category-btn {
+    background: #000;
+    color: #fff;
+    width: 100px;
+    border-radius: 3px;
   }
 </style>
