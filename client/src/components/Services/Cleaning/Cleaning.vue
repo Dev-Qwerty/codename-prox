@@ -3,9 +3,6 @@
     <div class="top-box">
       <router-link class="arrowIcon" :to="{ path: '/services' }"></router-link>
       <h3>Back to services</h3>
-      <router-link class="cartbtn" :to="{name: 'cart'}" @click.native="cartfn">
-        <input type="submit" value="cart">
-      </router-link>
     </div>
     <div class="mid">
       <div class="mid-box">
@@ -40,7 +37,6 @@
       </div>
       <router-view>
         <modal />
-        <cart />
       </router-view>
     </div>
   </div>    
@@ -48,18 +44,15 @@
 
 <script>
 import modal from '@/components/Services/Cleaning/Cmodal.vue'
-import cart from '@/components/Services/Cleaning/Ccart.vue'
-import EventBus from '../../../event-bus.js'
+/*import EventBus from '../../../event-bus.js'*/
 
 export default {
   components: {
-    modal,
-    cart
+    modal
   },
   data() {
     return {
-      subArr: [],
-      cartArr: []
+      subArr: []
     }
   },
   methods: {
@@ -82,10 +75,8 @@ export default {
   },
   created() {
     this.apiCall()
-    EventBus.$on('sub-sub-service', (obj) => { 
-      this.cartArr.push(obj)
-      this.$cookies.set("cart", JSON.stringify(this.cartArr), '1d')    
-    })
+    /*EventBus.$on('sub-sub-service', (obj) => {     
+    })*/
   
   }  
 }
@@ -116,17 +107,7 @@ export default {
     color: #aaa;
     font-style: italic;
     font-size: 21px;
-  }
-  .cartbtn input[type="submit"]{
-    margin-top: 0px;
-    margin-left: 1000px;
-    width: 100px;
-    height: 30px;
-    border: 2px solid #fff;
-    color: #fff;
-    background-color: black;
-    border-radius: 5px;
-  }    
+  }   
   .mid {
     display: grid;
     grid-template-columns: 2fr 1fr;
