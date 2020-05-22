@@ -18,6 +18,9 @@ const addressSchema = new mongoose.Schema({
     },
     pinCode: {
         type: Number
+    },
+    zone: {
+        type: String
     }
 })
 
@@ -39,12 +42,12 @@ const WorkerSchema = new mongoose.Schema({
         type: String,
         default: null
     },
-    specialization: {
-        type: String,
-        default: null
-    },
-    otherAreas: {
+    servie: {
         type: String
+    },
+    specialization: {
+        type: Array,
+        default: null
     },
     phoneNo: {
         type: Number,
@@ -55,6 +58,10 @@ const WorkerSchema = new mongoose.Schema({
         required: true
     },
     address: addressSchema,
+    totalWorks: {
+        type: Number,
+        default: 0
+    },
     rating: {
         type: Number,
         default: 3
