@@ -74,7 +74,6 @@ router.post('/login', (req,res) => {
             refreshToken: session.getRefreshToken().getToken()
           };
           cognitoUser['tokens'] = tokens; // Save tokens for later use
-          res.send(cognitoUser);
         },
         onFailure: function (err) {
           res.send(err.code);
@@ -159,6 +158,18 @@ router.post('/forgotPassword', (req,res) => {
         res.send({status: "Error", error: err});
       }
       res.send({status: "Success", res: result});
+    })
+  })
+
+  router.post('/verifyCategory', (req,res) => {
+    const workerID = req.body.workerID;
+    Worker.findOne({workerID: workerID}, (err,results) => {
+      if(results) {
+        res.send({status: "Success"});
+      }
+      else{
+        res.send({status: "Not found!"});
+      }
     })
   })
 
