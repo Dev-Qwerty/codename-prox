@@ -127,4 +127,17 @@ router.post('/forgotPassword', (req,res) => {
     })
   })
 
+  router.post('/verifyCategory', (req,res) => {
+    const companyID = req.body.companyID;
+    Company.findOne({companyID: companyID}, (err,results) => {
+      if(results) {
+        res.send({status: "Success"});
+      }
+      else{
+        res.send({status: "Not found!"});
+      }
+    })
+  })
+
+
 module.exports = router;
