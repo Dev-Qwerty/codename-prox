@@ -8,8 +8,15 @@ const keys = require('../config/keys');
 const expressSession = require('express-session');
 const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
 const multer = require("multer");
+const aws = require("aws-sdk");
+const fs = require("fs");
+const multerS3 = require("multer-s3")
 global.fetch = require("node-fetch");
 
+const s3 = new aws.S3({
+  accessKeyId: keys.s3.accessKey,
+  secretAccessKey: keys.s3.secret
+});
 
 const fileFilter = (req, file, cb) => {
   const allowedTypes = ["image/jpeg", "image/jpg", "image/png"];
@@ -21,12 +28,15 @@ const fileFilter = (req, file, cb) => {
   cb(null, true);
 }
 
-const upload = multer({
-  dest: './uploads',
-  fileFilter,
-  limits: {
-    fileSize: 5000000
-  }
+let upload = multer({
+  storage: multerS3({
+      s3: s3,
+      bucket: 'codenameprox-pp',
+      key: function (req, file, cb) {
+          //console.log(file);
+          cb(null, JSON.stringify(Date.now())); 
+      }
+  })
 });
 
 const poolData = {
@@ -309,7 +319,7 @@ router.post('/login', (req,res) => {
     })
   })
 
-  router.post('/upload', upload.single('file'), (req, res) => {
+  router.post('/uploadProfilePic', upload.array('file',1), (req, res) => {
     res.json({ file: req.file });
   });
   

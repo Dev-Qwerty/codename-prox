@@ -45,7 +45,7 @@ export default {
       const formData = new FormData();
       formData.append('file',this.file);
       try{
-        await axios.post('http://localhost:3000/customer/upload',formData);
+        await axios.post('http://localhost:3000/customer/uploadProfilePic',formData);
         this.message = 'Uploaded!!'
       }
       catch(err){
