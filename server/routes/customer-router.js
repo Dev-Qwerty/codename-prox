@@ -21,6 +21,14 @@ const fileFilter = (req, file, cb) => {
   cb(null, true);
 }
 
+const upload = multer({
+  dest: './uploads',
+  fileFilter,
+  limits: {
+    fileSize: 5000000
+  }
+});
+
 const poolData = {
   UserPoolId: keys.cognito.userPoolId,
   ClientId: keys.cognito.clientId

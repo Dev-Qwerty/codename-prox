@@ -1,29 +1,58 @@
 <template>
-    <div>
-        <h1>Update Profile Page</h1>
-        <input type="text" name="email" placeholder="Enter new email here" v-model="email">
-        <input type="submit" @click.prevent="updateProfile()">
-    </div>
+  <div class="file">
+   <form @submit.prevent="onSubmit" enctype="multipart/form-data">
+      <div class="fields">
+        <label>Upload File</label><br/>
+        <input 
+          type="file"
+          ref="file"
+          @change="onSelect"
+        />
+      </div>
+      <div class="fields">
+        <button>Submit</button>
+      </div>
+      <div class="message">
+        <h5>{{message}}</h5>
+      </div>
+   </form>
+  </div>
 </template>
 
 <script>
+import axios from 'axios';
 export default {
-    data() {
-        return {
-            email: ""
-        }
+  name: 'FileUpload',
+  data() {
+    return {
+      file:"",
+      message:""
+    }
+  },
+  methods: {
+    onSelect(){
+      const allowedTypes = ["image/jpeg", "image/jpg", "image/png"];
+      const file = this.$refs.file.files[0];
+      this.file = file;
+      if(!allowedTypes.includes(file.type)){
+        this.message = "Filetype is wrong!!"
+      }
+      if(file.size>500000){
+        this.message = 'Too large, max size allowed is 500kb'
+      }
     },
-    methods: {
-        updateProfile() {
-            let url = "localhost:3000/auth/updateProfile/1b1a2be4-4a63-4c2c-81cd-8be1bf6964c0";
-            this.$http.post(url, {
-                email: this.email
-            })
-            .then(response => {
-                alert(response);
-            })
-            .catch(err => alert(err));
-        }
-    },
+    async onSubmit(){
+      const formData = new FormData();
+      formData.append('file',this.file);
+      try{
+        await axios.post('http://localhost:3000/customer/upload',formData);
+        this.message = 'Uploaded!!'
+      }
+      catch(err){
+        //console.log(err);
+        this.message = err.response.data.error
+      }
+    }
+  },
 }
 </script>
