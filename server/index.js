@@ -1,9 +1,8 @@
 const express = require('express');
 const config = require('./config/mongo-connect');  // import mongoDB configuration
-const passport = require('passport');
 const session = require('express-session');
 const cors = require('cors');
-require('./config/passport-config')(passport);
+
 
 const app = express();
 app.use(cors());
@@ -27,10 +26,6 @@ app.use(session(
     }));
 
 app.set('view engine', 'ejs')
-
-// Passport Middleware
-app.use(passport.initialize())
-app.use(passport.session())
 
 // import models
 const versionModel = require('./models/version-model');
