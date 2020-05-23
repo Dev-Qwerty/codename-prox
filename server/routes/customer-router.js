@@ -7,7 +7,19 @@ const nodemailer = require('nodemailer');
 const keys = require('../config/keys');
 const expressSession = require('express-session');
 const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
+const multer = require("multer");
 global.fetch = require("node-fetch");
+
+
+const fileFilter = (req, file, cb) => {
+  const allowedTypes = ["image/jpeg", "image/jpg", "image/png"];
+  if (!allowedTypes.includes(file.mimetype)) {
+    const error = new Error("Incorrect file");
+    error.code = "INCORRECT_FILETYPE";
+    return cb(error, false)
+  }
+  cb(null, true);
+}
 
 const poolData = {
   UserPoolId: keys.cognito.userPoolId,
@@ -288,4 +300,9 @@ router.post('/login', (req,res) => {
       }
     })
   })
+
+  router.post('/upload', upload.single('file'), (req, res) => {
+    res.json({ file: req.file });
+  });
+  
 module.exports = router;
