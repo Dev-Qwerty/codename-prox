@@ -12,8 +12,8 @@ exports.uniqueOrderId = () => {
         month = month.toString()
     }
 
-    var uOrderId = "OD" + year + month + date + time + pid;
-    return uOrderId
+    var uOrderID = "OD" + year + month + date + time + pid;
+    return uOrderID
 }
 
 exports.uniqueRequestId = () => {
@@ -29,6 +29,6 @@ exports.uniqueRequestId = () => {
     }
     // console.log("OD" + year + month + date + time + pid)
     // console.log(("OD" + year + month + date + time + pid).length)
-    var uRequestId = "RQ" + year + month + date + pid + time
-    return uRequestId
+    var uRequestID = "RQ" + year + month + date + pid + time
+    return uRequestID
 }

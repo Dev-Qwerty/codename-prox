@@ -3,7 +3,7 @@ const config = require('./config/mongo-connect');  // import mongoDB configurati
 const passport = require('passport');
 const session = require('express-session');
 const cors = require('cors');
-require('./config/passport-config')(passport);
+// require('./config/passport-config')(passport);
 
 const app = express();
 app.use(cors());

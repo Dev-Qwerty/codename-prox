@@ -1,16 +1,16 @@
 const mongoose = require('mongoose');
 
 const orderSchema = mongoose.Schema({
-    orderId: {
+    orderID: {
         type: String,
         required: true,
         unique: true
     },
-    userId: {
+    userID: {
         type: String,
         required: true
     },
-    workerId: {
+    workerID: {
         type: String,
         required: true,
         default: "no worker assigned"

@@ -12,7 +12,7 @@ const categorySchema = mongoose.Schema({
 })
 
 const subserviceSchema = mongoose.Schema({
-    mainserviceId: {
+    mainserviceID: {
         type: String,
         required: true
     },
