@@ -13,6 +13,8 @@ const fs = require("fs");
 const multerS3 = require("multer-s3")
 global.fetch = require("node-fetch");
 
+let id = "";
+
 const s3 = new aws.S3({
   accessKeyId: keys.s3.accessKey,
   secretAccessKey: keys.s3.secret
@@ -33,8 +35,11 @@ let upload = multer({
       s3: s3,
       bucket: 'codenameprox-pp',
       key: function (req, file, cb) {
-          //console.log(file);
-          cb(null, JSON.stringify(Date.now())); 
+          let user = req. _parsedOriginalUrl.pathname;
+          user = user.slice(27);
+          const newFileName = Date.now() + "-" + file.originalname;
+          const fullPath = 'profilepics/'+ user + '/' + newFileName;
+          cb(null, fullPath); 
       }
   })
 });
@@ -319,7 +324,8 @@ router.post('/login', (req,res) => {
     })
   })
 
-  router.post('/uploadProfilePic', upload.array('file',1), (req, res) => {
+  router.post('/uploadProfilePic/:id', upload.array('file',1), (req, res) => {
+    id = req.params.id;
     res.json({ file: req.file });
   });
   

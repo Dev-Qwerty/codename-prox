@@ -44,8 +44,10 @@ export default {
     async onSubmit(){
       const formData = new FormData();
       formData.append('file',this.file);
+      formData.append('userID', this.$cookies.get("username"));
       try{
-        await axios.post('http://localhost:3000/customer/uploadProfilePic',formData);
+        let url = 'http://localhost:3000/customer/uploadProfilePic/'+ this.$cookies.get("username");
+        await axios.post(url,formData);
         this.message = 'Uploaded!!'
       }
       catch(err){
