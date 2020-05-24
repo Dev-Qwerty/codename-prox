@@ -9,7 +9,7 @@ const workerRequestSchema = mongoose.Schema({
         type: String,
         requied: true
     },
-    workerId: {
+    workerID: {
         type: String,
         requied: true,
         default: 'no worker assigned'

@@ -1,8 +1,10 @@
 const workerZoneModel = require('../models/worker-zone');
 const workerModel = require('../models/worker-model')
+const selectedWorkersModel = require('../models/selectedWorkers-model')
 
 
-exports.assignWorker = async (serviceKeyWords, pin) => {
+
+exports.assignWorker = async (serviceKeyWords, pin, orderID) => {
     global.workerArray = [];
     //let workerZone = await workerZoneModel.findOne({ pincodes: pin }, 'zoneName -_id')  // Find zone of the customer
     for (i = 0; i < serviceKeyWords.length; i++) {
@@ -37,9 +39,16 @@ exports.assignWorker = async (serviceKeyWords, pin) => {
 
         return quickSort(lesserArray).concat(pivot, quickSort(greaterArray));
     }
-    var sortedArray = quickSort(workerArray)
+    var sortedWorkerArray = quickSort(workerArray)
+
+    // save selected workers to database
+    let selectedWorkers = new selectedWorkersModel;
+    selectedWorkers.orderID = orderID;
+    selectedWorkers.selectedWorkers = sortedWorkerArray;
+    selectedWorkers.save()
+
     // console.log(sortedArray)
-    return sortedArray[0].workerID
+    return sortedWorkerArray[0].workerID
 }
 
 // ** NB: Please do not remove the console log statements in this file **
