@@ -66,11 +66,11 @@ export default {
             }
             if(response.data.status == "Success") {
             let verifyURL = "http://localhost:3000/customer/verifyCategory";
-            const username = response.data.user.idToken.payload.sub;
-            const jwtToken = response.data.user.idToken.jwtToken;
+            const username = response.data.username;
+            const jwtToken = response.data.jwt;
             this.$http
             .post(verifyURL, {
-              userID: response.data.user.idToken.payload.sub
+              userID: username
             })
             .then(responses => {
               if(responses.data.status == "Success") {

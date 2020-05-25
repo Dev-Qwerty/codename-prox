@@ -34,7 +34,7 @@ export default {
   methods: {
     signUp() {
       if (this.password.length > 6) {
-        let url = "http://localhost:3000/auth/register";
+        let url = "http://localhost:3000/customer/signup";
         this.$http
           .post(url, {
             email: this.email,
@@ -42,15 +42,11 @@ export default {
             password: this.password
           })
           .then(response => {
-            localStorage.setItem("email", JSON.stringify(response.data.email));
-            // localStorage.setItem('jwt',response.data.token)
-            if (localStorage.getItem("email") != null) {
-              this.$emit("loggedIn");
-              if (this.$route.params.nextUrl != null) {
-                this.$router.push(this.$route.params.nextUrl);
-              } else {
-                this.$router.push("/login");
-              }
+            if(response.data.status == "Success") {
+              window.location.href = "http://localhost:8080/login";
+            }
+            else {
+              alert("Network Error!");
             }
           })
           .catch(error => {

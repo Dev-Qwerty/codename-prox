@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcryptjs');
+const crypto = require('crypto')
 const passport = require('passport');
 const User = require('../models/user-model');
 const nodemailer = require('nodemailer');
@@ -43,6 +43,21 @@ let upload = multer({
       }
   })
 });
+
+function encrypt(text) {
+  var mykey = crypto.createCipher('aes-128-cbc', 'afvbbmhghhh');
+  var mystr = mykey.update(text, 'utf8', 'hex')
+  mystr += mykey.final('hex');
+  return mystr;
+}
+
+function decrypt(text) {
+  var mykey = crypto.createDecipher('aes-128-cbc', 'afvbbmhghhh');
+  var mystr = mykey.update(text, 'hex', 'utf8')
+  mystr += mykey.final('utf8');
+  return mystr;
+}
+
 
 const poolData = {
   UserPoolId: keys.cognito.userPoolId,
@@ -98,7 +113,12 @@ router.post('/signup', (req,res) => {
     newUser
     .save()
     .then((user) => {
-        res.send({user: user, data: data.user});
+        if(user && data.user) {
+          res.send({status: "Success"});
+        }
+        else {
+          res.send({status: "Error"});
+        }
     })
     .catch(err => console.log(err)) 
   })
@@ -119,7 +139,10 @@ router.post('/login', (req,res) => {
   const cognitoUser = new AmazonCognitoIdentity.CognitoUser(UserData);
   cognitoUser.authenticateUser(AuthenticationDetails, {
     onSuccess: data => {
-      res.send({status: "Success", user: data});
+      const jwtToken = encrypt(data.idToken.jwtToken);
+      const username = encrypt(data.idToken.payload.sub);
+      res.send({status: "Success", jwt: jwtToken, username: username});
+
     },
     onFailure: err => {
       res.send(err.code);
@@ -313,7 +336,8 @@ router.post('/login', (req,res) => {
   })
 
   router.post('/verifyCategory', (req,res) => {
-    const userID = req.body.userID;
+    const userIDhash = req.body.userID;
+    const userID = decrypt(userIDhash);
     User.findOne({userID: userID}, (err,results) => {
       if(results) {
         res.send({status: "Success"});

@@ -4,6 +4,7 @@ import router from './router/router'
 import Axios from "axios"
 import VueCookies from 'vue-cookies'
 import VueSession from 'vue-session'
+import VueCryptojs from 'vue-cryptojs'
 
 //For Cookie Handling
 Vue.use(VueCookies)
@@ -11,6 +12,9 @@ Vue.$cookies.config('7d')
 
 //For sessions
 Vue.use(VueSession)
+
+//For encryption
+Vue.use(VueCryptojs)
 
 Vue.prototype.$http = Axios
 
