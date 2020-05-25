@@ -98,7 +98,12 @@ router.post('/signup', (req,res) => {
     newUser
     .save()
     .then((user) => {
-        res.send({user: user, data: data.user});
+        if(user && data.user) {
+          res.send({status: "Success"});
+        }
+        else {
+          res.send({status: "Error"});
+        }
     })
     .catch(err => console.log(err)) 
   })
