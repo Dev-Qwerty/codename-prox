@@ -42,7 +42,7 @@ const WorkerSchema = new mongoose.Schema({
         type: String,
         default: null
     },
-    servie: {
+    service: {
         type: String
     },
     specialization: {
