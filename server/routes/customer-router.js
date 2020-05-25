@@ -146,7 +146,10 @@ router.post('/login', (req,res) => {
   const cognitoUser = new AmazonCognitoIdentity.CognitoUser(UserData);
   cognitoUser.authenticateUser(AuthenticationDetails, {
     onSuccess: data => {
-      
+      const jwtToken = encrypt(data.idToken.jwtToken);
+      const username = encrypt(data.idToken.payload.sub);
+      res.send({status: "Success", jwt: jwtToken, username: username});
+
     },
     onFailure: err => {
       res.send(err.code);
