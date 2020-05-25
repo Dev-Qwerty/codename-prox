@@ -12,11 +12,8 @@ const poolData = {
 const workerPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
 
 router.post('/signup', (req,res) => {
-    const { name, email, password, phoneNo } = req.body;
-       const nameData = {
-        Name: 'given_name',
-        Value: name
-    }
+    const { email, password, phoneNo } = req.body;
+
     const phoneData = {
         Name: 'phone_number',
         Value: phoneNo
@@ -31,11 +28,10 @@ router.post('/signup', (req,res) => {
     }
 
     const emailAttribute = new AmazonCognitoIdentity.CognitoUserAttribute(emailData);
-    const nameAttribute = new AmazonCognitoIdentity.CognitoUserAttribute(nameData);
     const phoneAttribute = new AmazonCognitoIdentity.CognitoUserAttribute(phoneData);
     const categoryAttribute = new AmazonCognitoIdentity.CognitoUserAttribute(categoryData);
 
-    workerPool.signUp(email, password, [emailAttribute, nameAttribute, phoneAttribute, categoryAttribute], null, (err, data) => {
+    workerPool.signUp(email, password, [emailAttribute, phoneAttribute, categoryAttribute], null, (err, data) => {
         if(err) {
             console.log(err)
         }
@@ -43,8 +39,7 @@ router.post('/signup', (req,res) => {
         const newWorker = new Worker({
           email,
           phoneNo,
-          workerID,
-          name
+          workerID
         })
         newWorker
         .save()
