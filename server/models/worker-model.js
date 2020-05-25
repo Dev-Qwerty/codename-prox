@@ -26,8 +26,7 @@ const addressSchema = new mongoose.Schema({
 
 const WorkerSchema = new mongoose.Schema({
     name: {
-        type: String,
-        required: true
+        type: String
     },
     workerID: {
         type: String,
@@ -35,14 +34,13 @@ const WorkerSchema = new mongoose.Schema({
     },
     workerType: {
         type: String,
-        enum: ['Individual', 'Company'],
-        default: 'Individual'
+        default: null
     },
     companyID: {
         type: String,
         default: null
     },
-    servie: {
+    service: {
         type: String
     },
     specialization: {

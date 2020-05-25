@@ -12,11 +12,8 @@ const poolData = {
 const workerPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
 
 router.post('/signup', (req,res) => {
-    const { name, email, password, phoneNo } = req.body;
-       const nameData = {
-        Name: 'given_name',
-        Value: name
-    }
+    const { email, password, phoneNo } = req.body;
+
     const phoneData = {
         Name: 'phone_number',
         Value: phoneNo
@@ -31,11 +28,10 @@ router.post('/signup', (req,res) => {
     }
 
     const emailAttribute = new AmazonCognitoIdentity.CognitoUserAttribute(emailData);
-    const nameAttribute = new AmazonCognitoIdentity.CognitoUserAttribute(nameData);
     const phoneAttribute = new AmazonCognitoIdentity.CognitoUserAttribute(phoneData);
     const categoryAttribute = new AmazonCognitoIdentity.CognitoUserAttribute(categoryData);
 
-    workerPool.signUp(email, password, [emailAttribute, nameAttribute, phoneAttribute, categoryAttribute], null, (err, data) => {
+    workerPool.signUp(email, password, [emailAttribute, phoneAttribute, categoryAttribute], null, (err, data) => {
         if(err) {
             console.log(err)
         }
@@ -43,8 +39,7 @@ router.post('/signup', (req,res) => {
         const newWorker = new Worker({
           email,
           phoneNo,
-          workerID,
-          name
+          workerID
         })
         newWorker
         .save()
@@ -81,38 +76,22 @@ router.post('/login', (req,res) => {
       });
 })
 
-router.post('/completeProfile', (req,res) => {
-    let editedInfo = {};
-    editedInfo['custom:worker_type'] = req.body.worker_type;
-    if(req.body.company_ID) editedInfo['custom:company_ID'] = req.body.company_ID;
-    editedInfo['custom:specialization'] = req.body.specialization;
-    if(req.body.other_areas) editedInfo['custom:other_areas'] = req.body.other_areas;
-    editedInfo['address'] = JSON.stringify(req.body.address);
-    //updateUserInfo(editedInfo);
-    let attributes = [];
-    for(i in editedInfo) {
-        const attrib_data = {
-            Name: i,
-            Value: editedInfo[i]
-        }
-        const attrib = new AmazonCognitoIdentity.CognitoUserAttribute(attrib_data);
-        attributes.push(attrib);
-    }
-    const currentUser = workerPool.getCurrentUser();
-    currentUser.getSession(function(err,result) {
-        if(result) {
-            currentUser.updateAttributes(attributes, function(err,results) {
-                if(err) {
-                    console.log(err)
-                }
-                res.send(results);
-            })
-        }
-        if(err) {
-            console.log(err);
-        }
+router.post('/completeProfile/:id', (req,res) => {
+    const id = req.params.id;
+    let worker = {};
+    worker.name = req.body.name;
+    worker.workerType = req.body.type;
+    worker.companyID = req.body.companyID;
+    worker.specialization = req.body.specialization;
+    worker.address = req.body.address;
+    worker.service = req.body.service;
+
+    worker = { $set: worker };
+
+    Worker.update({workerID: id}, worker).then(() => {
+      res.send({status: "Success!", worker: worker});
     })
-    
+        
 })
 
 router.post('/forgotPassword', (req,res) => {
