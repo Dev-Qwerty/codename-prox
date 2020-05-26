@@ -29,9 +29,11 @@ router
                 res.send('worker assigned')
                 // TODO: Send SMS to customer
             } else {
-                // TODO: create algo for finding worker
-                // TODO: send request to next worker in list
+                let workerDetails = await selectedWorkers.findOne({orderID: orderId}, '-_id')
+                let declinedWorker = workerDetails.selectedWorkers.shift() //Return first worker
+                workerDetails.declinedWorkers.push(declinedWorker) //Add declined worker to declined worker array
                 res.send('worker declined')
+                // TODO: update wokerrequest, selected workers
             }          
         } catch (error) {
             console.error(error)
