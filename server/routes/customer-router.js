@@ -15,10 +15,10 @@ global.fetch = require("node-fetch");
 
 let id = "";
 
-// const s3 = new aws.S3({
-//   accessKeyId: keys.s3.accessKey,
-//   secretAccessKey: keys.s3.secret
-// });
+const s3 = new aws.S3({
+  accessKeyId: keys.s3.accessKey,
+  secretAccessKey: keys.s3.secret
+});
 
 const fileFilter = (req, file, cb) => {
   const allowedTypes = ["image/jpeg", "image/jpg", "image/png"];
@@ -30,19 +30,19 @@ const fileFilter = (req, file, cb) => {
   cb(null, true);
 }
 
-// let upload = multer({
-//   storage: multerS3({
-//     s3: s3,
-//     bucket: 'codenameprox-pp',
-//     key: function (req, file, cb) {
-//       let user = req._parsedOriginalUrl.pathname;
-//       user = user.slice(27);
-//       const newFileName = Date.now() + "-" + file.originalname;
-//       const fullPath = 'profilepics/' + user + '/' + newFileName;
-//       cb(null, fullPath);
-//     }
-//   })
-// });
+let upload = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: 'codenameprox-pp',
+    key: function (req, file, cb) {
+      let user = req._parsedOriginalUrl.pathname;
+      user = user.slice(27);
+      const newFileName = Date.now() + "-" + file.originalname;
+      const fullPath = 'profilepics/' + user + '/' + newFileName;
+      cb(null, fullPath);
+    }
+  })
+});
 
 function encrypt(text) {
   var mykey = crypto.createCipher('aes-128-cbc', 'afvbbmhghhh');
@@ -348,9 +348,9 @@ router.post('/verifyCategory', (req, res) => {
   })
 })
 
-// router.post('/uploadProfilePic/:id', upload.array('file', 1), (req, res) => {
-//   id = req.params.id;
-//   res.json({ file: req.file });
-// });
+router.post('/uploadProfilePic/:id', upload.array('file', 1), (req, res) => {
+  id = req.params.id;
+  res.json({ file: req.file });
+});
 
 module.exports = router;
