@@ -107,8 +107,11 @@ router.get('/fetchtags', async (req, res) => {
     if (subservice[i].categories) {
       // console.log(subservice[i].name)
       // console.log(subservice[i].categories)
-      for (j = 0; j < subservice[i].categories.length; j++)
-        tags.push(subservice[i].categories[j].category) // save name of category
+      if (service != "Cleaning") {
+        for (j = 0; j < subservice[i].categories.length; j++)
+          tags.push(subservice[i].categories[j].category) // save name of category
+      }
+
     }
   }
   // TODO: if mainservice is cleaning the remoove category name from tags
