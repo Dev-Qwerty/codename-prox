@@ -1,6 +1,8 @@
 const express = require('express')
-const workerRequest = require('../models/workrequest-model')
 const router = express.Router()
+// Import Models
+const workerRequest = require('../models/workrequest-model')
+const orders = require('../models/order-model')
 
 router
     .route('/workrequest/:id')
@@ -19,11 +21,13 @@ router
     .route('/workrequest')
     .post( async (req, res) => {
         try {
-            const { requestId, workerId, requestStatus } = req.body
+            const { orderId, requestId, workerId, requestStatus } = req.body
     
             if (requestStatus === 'accepted') {
-                await workerRequest.findOneAndUpdate({requestId: requestId}, {workerId: workerId, requestStatus: requestStatus})
+                await workerRequest.findOneAndUpdate({requestID: requestId}, {workerID: workerId, requestStatus: requestStatus})
+                await orders.findOneAndUpdate({orderID: orderId}, {workerID: workerId})
                 res.send('worker assigned')
+                // TODO: Send SMS to customer
             } else {
                 // TODO: create algo for finding worker
                 // TODO: send request to next worker in list
