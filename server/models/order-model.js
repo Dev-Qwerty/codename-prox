@@ -64,5 +64,5 @@ const orderSchema = mongoose.Schema({
     }
 })
 
-const order = mongoose.model('orders', orderSchema);
-module.exports = order
+const workorder = mongoose.model('workorders', orderSchema);
+module.exports = workorder

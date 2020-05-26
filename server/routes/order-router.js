@@ -23,7 +23,9 @@ router
 
             // calculate total amount and category
             for (i = 0; i < req.body.service.categories.length; i++) {
-                const serviceDetails = await subserviceModel.find({ categories: { $elemMatch: { _id: req.body.service.categories[i].categoryName } } }, { 'categories.$': "5ead369bd1662c51584b7dd5" })
+                console.log(req.body.service.categories[i].categoryName)
+                const serviceDetails = await subserviceModel.find({ categories: { $elemMatch: { _id: req.body.service.categories[i].categoryName } } }, 'categories.$')
+                console.log(serviceDetails)
                 itemAmount = serviceDetails[0].categories[0].amount * req.body.service.categories[i].quantity; // Find amount of each category
                 totalAmount = totalAmount + itemAmount;
                 req.body.service.categories[i].categoryName = serviceDetails[0].categories[0].category  // saving category name replacing categoryId in body of the request
@@ -72,7 +74,7 @@ router
 
         } catch (error) {
             // TODO : If error is duplicate orderid create new orderid and save that order to database
-            console.log(error)
+            console.log(" error occured")
             res.json({ "message": "Failed to place Order" })
         }
 
