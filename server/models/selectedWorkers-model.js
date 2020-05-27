@@ -6,10 +6,10 @@ const selectedWorkersSchema = new mongoose.Schema({
         required: true
     },
     selectedWorkers: {
-        type: [String],
+        type: [Object],
         required: true
     },
-    declinedWorkers: [String]
+    declinedWorkers: [Object]
 })
 
 const selectedWorkers = module.exports = mongoose.model('selectedWorkers', selectedWorkersSchema)
