@@ -8,7 +8,7 @@ import About from '../components/About/Aboutmain.vue'
 import Services from '../components/ServicesPage/SMain.vue'
 import Cleaning from '@/components/Services/Cleaning/Cmain.vue'
 import Cmodal from '@/components/Services/Cleaning/Cmodal.vue'
-import Ccart from '@/components/Services/Cleaning/Ccart.vue'
+import cart from '@/components/Services/Cleaning/cart.vue'
 import checkout from '@/components/Services/Cleaning/checkout.vue'
 import PayLaterConfirm from '@/components/Services/Cleaning/PayLaterConfirm.vue'
 import Dashboard from '@/components/Dashboard/DMain.vue'
@@ -60,7 +60,7 @@ export default new VueRouter({
             {
               path: 'cart',
               name: 'cart',
-              component: Ccart,
+              component: cart,
               props: true,
               children: [
                 {
