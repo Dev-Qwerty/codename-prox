@@ -34,7 +34,7 @@
 
 <script>
 /*import EventBus from '../../../event-bus.js'*/
-import cart from '@/components/Services/Cleaning/Ccart.vue'
+import cart from '@/components/Services/Cleaning/cart.vue'
 
 export default {
   name: 'Cmodal',
