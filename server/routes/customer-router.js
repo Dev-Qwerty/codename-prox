@@ -11,6 +11,7 @@ const multer = require("multer");
 const aws = require("aws-sdk");
 const fs = require("fs");
 const multerS3 = require("multer-s3")
+const Token = require('../models/token');
 global.fetch = require("node-fetch");
 
 let id = "";
@@ -141,8 +142,33 @@ router.post('/login', (req, res) => {
     onSuccess: data => {
       const jwtToken = encrypt(data.idToken.jwtToken);
       const username = encrypt(data.idToken.payload.sub);
-      res.send({ status: "Success", jwt: jwtToken, username: username });
-
+      Token.find({id: username},(err,results) => {
+        //If token doesn't exist, create new token
+        if(results.length == 0) {
+          const newToken = new Token({
+            token: jwtToken,
+            id: username
+          })
+          newToken
+          .save()
+          .then(token => {
+            res.send({ status: "Success", jwt: jwtToken, username: username, token: token });
+          })
+          .catch(err => {
+            console.log(err);
+          })
+        }
+        //Else, update the token on login
+        else {
+          let t = {};
+          t.token = jwtToken;
+          t = {$set: t};
+          Token.update({id: username}, t).then(() => {
+            res.send({status: "Success", jwt: jwtToken, username: username, t: t});
+          })
+        }
+      })
+      
     },
     onFailure: err => {
       res.send(err.code);
@@ -311,7 +337,11 @@ router.post('/logout', (req, res) => {
     Pool: userPool
   })
   cognitoUser.signOut();
-  res.send({ status: "Success" });
+  const id = req.body.userID;
+  Token.deleteOne({id: id}).then(() => {
+    res.send({ status: "Success" });
+  })
+
 })
 
 router.post('/addAddress', (req, res) => {
