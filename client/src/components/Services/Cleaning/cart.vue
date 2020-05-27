@@ -5,9 +5,8 @@
         <router-link class="arrowIcon" :to="{ path: '/services/cleaning/modal' }"></router-link>
       </div>
       <div class="cart-body">
-        <div class="box1">
-
-        </div>
+        <div class="box1"></div>
+        <div class="box2"></div>
       </div>
     </div>
   </div>
@@ -47,9 +46,18 @@ export default {
     background-size: cover;    
   }   
   .cart-body {
+    margin-top: 50px;
     margin-left: 80px;;
     width: 90%;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+  }
+  .box1 {
+    height: 200px;
+    background-color: lightcoral;
+  }
+  .box2 {
     height: 500px;
-    background-color: lawngreen;
+    background-color: aqua;    
   }
 </style>
