@@ -9,7 +9,7 @@ router
     .get(async (req, res) => {
         try {
             let id = req.params.id
-            let subservice = await subserviceModel.find({ mainserviceId: id })
+            let subservice = await subserviceModel.find({ mainserviceID: id })
             res.send(subservice)
         } catch (error) {
             console.log(error)
