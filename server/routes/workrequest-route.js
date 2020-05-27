@@ -3,6 +3,7 @@ const router = express.Router()
 // Import Models
 const workerRequest = require('../models/workrequest-model')
 const orders = require('../models/order-model')
+const selectedWorkers = require('../models/selectedWorkers-model')
 
 router
     .route('/workrequest/:id')
@@ -26,13 +27,14 @@ router
             if (requestStatus === 'accepted') {
                 await workerRequest.findOneAndUpdate({requestID: requestId}, {workerID: workerId, requestStatus: requestStatus})
                 await orders.findOneAndUpdate({orderID: orderId}, {workerID: workerId})
-                res.send('worker assigned')
+                res.send(orders)
                 // TODO: Send SMS to customer
             } else {
                 let workerDetails = await selectedWorkers.findOne({orderID: orderId}, '-_id')
                 let declinedWorker = workerDetails.selectedWorkers.shift() //Return first worker
                 workerDetails.declinedWorkers.push(declinedWorker) //Add declined worker to declined worker array
-                res.send('worker declined')
+                let newWorker = workerDetails.selectedWorkers[0]
+                res.status(200).send({workerDetails, newWorker})
                 // TODO: update wokerrequest, selected workers
             }          
         } catch (error) {
