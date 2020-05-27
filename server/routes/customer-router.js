@@ -11,6 +11,7 @@ const multer = require("multer");
 const aws = require("aws-sdk");
 const fs = require("fs");
 const multerS3 = require("multer-s3")
+const Token = require('../models/token');
 global.fetch = require("node-fetch");
 
 let id = "";
@@ -141,8 +142,18 @@ router.post('/login', (req, res) => {
     onSuccess: data => {
       const jwtToken = encrypt(data.idToken.jwtToken);
       const username = encrypt(data.idToken.payload.sub);
-      res.send({ status: "Success", jwt: jwtToken, username: username });
-
+      const newToken = new Token({
+        token: jwtToken,
+        id: username
+      })
+      newToken
+      .save()
+      .then(token => {
+        res.send({ status: "Success", jwt: jwtToken, username: username });
+      })
+      .catch(err => {
+        console.log(err);
+      })
     },
     onFailure: err => {
       res.send(err.code);
