@@ -142,18 +142,35 @@ router.post('/login', (req, res) => {
     onSuccess: data => {
       const jwtToken = encrypt(data.idToken.jwtToken);
       const username = encrypt(data.idToken.payload.sub);
-      const newToken = new Token({
-        token: jwtToken,
-        id: username
+      Token.find({id: username},(err,results) => {
+        //If token doesn't exist, create new token
+        if(results.length == 0) {
+          console.log("Case 1");
+          const newToken = new Token({
+            token: jwtToken,
+            id: username
+          })
+          newToken
+          .save()
+          .then(token => {
+            res.send({ status: "Success", jwt: jwtToken, username: username, token: token });
+          })
+          .catch(err => {
+            console.log(err);
+          })
+        }
+        //Else, update the token on login
+        else {
+          console.log("Case 2");
+          let t = {};
+          t.token = jwtToken;
+          t = {$set: t};
+          Token.update({id: username}, t).then(() => {
+            res.send({status: "Success", jwt: jwtToken, username: username, t: t});
+          })
+        }
       })
-      newToken
-      .save()
-      .then(token => {
-        res.send({ status: "Success", jwt: jwtToken, username: username });
-      })
-      .catch(err => {
-        console.log(err);
-      })
+      
     },
     onFailure: err => {
       res.send(err.code);
