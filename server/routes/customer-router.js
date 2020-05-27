@@ -145,7 +145,6 @@ router.post('/login', (req, res) => {
       Token.find({id: username},(err,results) => {
         //If token doesn't exist, create new token
         if(results.length == 0) {
-          console.log("Case 1");
           const newToken = new Token({
             token: jwtToken,
             id: username
@@ -161,7 +160,6 @@ router.post('/login', (req, res) => {
         }
         //Else, update the token on login
         else {
-          console.log("Case 2");
           let t = {};
           t.token = jwtToken;
           t = {$set: t};
