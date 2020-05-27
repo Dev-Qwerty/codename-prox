@@ -5,8 +5,18 @@
         <router-link class="arrowIcon" :to="{ path: '/services/cleaning/modal' }"></router-link>
       </div>
       <div class="cart-body">
-        <div class="box1"></div>
-        <div class="box2"></div>
+        <div class="box1">
+          <p>Shopping Cart</p>
+        </div>
+        <div class="box2 sh-all">
+          <div class="b2-1">
+            <p>ORDER SUMMARY</p>
+          </div>
+          <div class="Line"></div>
+          <div class="b2-2"></div>
+          <div class="Line"></div>
+          <div class="b2-3"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -54,10 +64,29 @@ export default {
   }
   .box1 {
     height: 200px;
-    background-color: lightcoral;
+    /*background-color: aliceblue;*/
   }
   .box2 {
-    height: 500px;
-    background-color: aqua;    
+    height: 400px;
+    background-color: #f2f2f2;
+    display: grid;
+    grid-template-rows: 15% 1px 55% 1px 30%;  
+  }
+  .sh-all {
+    box-shadow: 0 0 3px #d9d9d9;
+  } 
+  .b2-1 {
+ 
+  }
+  .Line {
+    margin-left: 15px;
+    width: 90%;
+    background-color: #cecece;
+  }
+  .b2-2 {
+
+  }
+  .b2-3 {
+
   }
 </style>
