@@ -322,7 +322,11 @@ router.post('/logout', (req, res) => {
     Pool: userPool
   })
   cognitoUser.signOut();
-  res.send({ status: "Success" });
+  const id = req.body.userID;
+  Token.deleteOne({id: id}).then(() => {
+    res.send({ status: "Success" });
+  })
+
 })
 
 router.post('/addAddress', (req, res) => {
