@@ -3,7 +3,7 @@ const keys = require('./keys');
 
 // connect to mongodb atlas
 mongoose.connect(keys.mongodb.mongodbURI, {
-    useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true
+    useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false
 });
 
 var db = mongoose.connection;
