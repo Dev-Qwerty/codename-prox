@@ -1,5 +1,6 @@
 <template>
   <div class="Modal">
+    <div class="Mbg">
       <div class="Mbox">
         <div class="Img">
           <router-link :to="{ path: '/services/cleaning/modal' }">
@@ -18,6 +19,7 @@
       <router-view>
         <checkout />
       </router-view>
+    </div>
   </div>
 </template>
 
@@ -43,14 +45,14 @@ export default {
 </script>
 
 <style scoped>
-  /*.Mbg {
+  .Mbg {
     position: absolute;
     top: 0%;
     left: 0%;
     background: rgb(128, 128, 128, 0.5);
     width: 100%;
     height: 100%;
-  }*/
+  }
   .Mbox {
     position: absolute;
     top: 6%;
