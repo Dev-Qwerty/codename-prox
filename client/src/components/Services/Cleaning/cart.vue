@@ -25,12 +25,23 @@
             </div>
             <div class="c1-box-line2"></div>
             <div class="c1-box-dgrid-wrapper">
-              <div class="c1-box-dgrid">
-                <div class="c1-box-col1"></div>
-                <div class="c1-box-col2"></div>
-                <div class="c1-box-col3"></div>
-                <div class="c1-box-col4"></div>
-              </div> 
+              <div v-for="n in 3" v-bind:key="n">
+                <div class="c1-box-dgrid">
+                  <div class="c1-box-col1">
+                    <p>Full House Deep Cleaning</p>
+                    <p>2:45 PM</p>
+                  </div>
+                  <div class="c1-box-col2">
+                    <p>2BHK</p>
+                  </div>
+                  <div class="c1-box-col3">
+                    <p>$299</p>
+                  </div>
+                  <div class="c1-box-col4">
+                    <p>$299</p>
+                  </div>
+                </div> 
+              </div>
             </div>
             <div class="c1-box-line3"></div>
           </div>
@@ -119,7 +130,7 @@ export default {
     height: 200px;
   }
   .c1-p {
-    font-size: 25px;
+    font-size: 23px;
     font-weight: bold;
   }
   .c1-box {
@@ -137,26 +148,23 @@ export default {
     width: 90%;
     display: grid;
     grid-template-columns: 3fr 1fr 1fr 1fr;
+    font-size: 17px;
   }
   .c1-box-c1 {
     padding-left: 10px;
     padding-top: 15px;
-    font-size: 18px;
   }
   .c1-box-c2 {
     /*padding-left: 10px;*/
     padding-top: 15px;
-    font-size: 18px;
   }
   .c1-box-c3 {
     /*padding-left: 10px;*/
     padding-top: 15px;
-    font-size: 18px;
   }
   .c1-box-c4 {
     /*padding-left: 10px;*/
     padding-top: 15px;
-    font-size: 18px;
   }
   .c1-box-line2 {
     width: 90%;
@@ -164,22 +172,28 @@ export default {
     background-color: #cecece;
   }    
   .c1-box-dgrid {
-    height: 50px;
+    padding-top: 5px;
+    height: 60px;
     width: 90%;
     display: grid;
     grid-template-columns: 3fr 1fr 1fr 1fr;
+    font-size: 16px;
   }
   .c1-box-col1 {
-    background-color: brown;
+    padding-left: 10px;
+  }
+  .c1-box-col1 p {
+    margin: 0px;
+    padding: 0px;
   }
   .c1-box-col2 {
-    background-color: red;
+   padding-top: 10px; 
   }
   .c1-box-col3 {
-    background-color: yellow;
+   padding-top: 10px; 
   }
   .c1-box-col4 {
-    background-color: orange;
+    padding-top: 10px;
   }  
   .c1-box-line3 {
     width: 90%;
