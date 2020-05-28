@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import Vue from 'vue';
 export default {
   data() {
     return {
@@ -46,14 +47,27 @@ export default {
               window.location.href = "http://localhost:8080/login";
             }
             else {
-              alert("Network Error!");
+              Vue.$toast.open({
+                  message: 'Network Error!',
+                  type: 'error',
+                  position: 'bottom-left'
+              });
             }
           })
           .catch(error => {
-            return alert(error);
+            Vue.$toast.open({
+                  message: error,
+                  type: 'error',
+                  position: 'bottom-left'
+              });
           });
-      } else {
-        return alert("Password should be more than 6 characters!");
+      } 
+      else {
+              Vue.$toast.open({
+                  message: 'Password should be more than 6 characters!',
+                  type: 'warning',
+                  position: 'bottom-left'
+              });
       }
     }
     }
