@@ -36,8 +36,11 @@
               </div>
             </div> 
             <div class="c2-r3-btn">
-              <p class="c3-r2-p">CHECKOUT</p>
-            </div>           
+              <p class="c3-r3-p">CHECKOUT</p>
+            </div>  
+            <div class="c2-r3-pcode">
+              <p class="c2-r3-p">PROMOTIONAL CODE</p>
+            </div> 
           </div>
         </div>
       </div>
@@ -90,10 +93,10 @@ export default {
     /*background-color: aliceblue;*/
   }
   .col2 {
-    height: 400px;
+    height: 450px;
     background-color: #f2f2f2;
     display: grid;
-    grid-template-rows: 15% 1px 55% 1px 30%;  
+    grid-template-rows: 15% 1px 52% 1px 33%;  
   }
   .sh-all {
     box-shadow: 0 0 3px #d9d9d9;
@@ -153,8 +156,14 @@ export default {
     text-align: center;
     padding-top: 6px;
   }
-  .c3-r2-p {
+  .c3-r3-p {
     font-size: 16px;
     font-weight: bold;
+  }
+  .c2-r3-pcode {
+    padding-top: 10px;
+  }
+  .c2-r3-p {
+    font-size: 14px;
   }
 </style>
