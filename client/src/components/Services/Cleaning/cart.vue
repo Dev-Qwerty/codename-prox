@@ -27,9 +27,9 @@
           </div>
           <div class="Line"></div>
           <div class="col2-row3">
-            <div class="items-wrapper">
+            <div class="totcost-wrapper">
               <div class="col2-row3-col1">
-                <p class="col2-row3-col1-p">items 1</p>
+                <p class="col2-row3-col1-p">Total Cost</p>
               </div>
               <div class="col2-row3-col2">
                 <p class="col2-row3-col2-p">$299.00</p>
@@ -125,7 +125,21 @@ export default {
     font-size: 16;
     margin: 0px;
   }  
+  .totcost-wrapper {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    margin-bottom: 10px;    
+  }  
   .col2-row3 {
-
+    padding-top: 10px;
+    padding-left: 15px;
   }
+  .col2-row3-col1-p {
+    font-size: 18;
+    margin: 0px;
+  }
+  .col2-row3-col2-p {
+    font-size: 18;
+    margin: 0px;
+  }    
 </style>
