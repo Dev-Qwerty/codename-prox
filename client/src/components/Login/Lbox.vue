@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import recaptcha from '@/components/reCaptcha/recaptcha.vue'
 export default {
   data() {
@@ -44,8 +45,11 @@ export default {
     captchaVerified() {
       this.captchastatus = true;
       if(this.captchastatus == false) {
-        this.errorstatus = true;
-        this.errormsg = "Please select Captcha"
+        Vue.$toast.open({
+          message: 'Please select captcha',
+          type: 'error',
+          position: 'bottom-left'
+        });
       }
       else {
         if (this.password.length > 6) {
@@ -57,12 +61,18 @@ export default {
           })
           .then(response => {
             if(response.data == "NotAuthorizedException") {
-              this.errorstatus = true;
-              this.errormsg = "Invalid username or password!";
+              Vue.$toast.open({
+                message: 'Invalid username or password!',
+                type: 'error',
+                position: 'bottom-left'
+              });
             }
             if(response.data == "UserNotConfirmedException") {
-              this.errorstatus = true;
-              this.errormsg = "Please confirm your email!"
+              Vue.$toast.open({
+                message: 'Please confirm your email!',
+                type: 'warning',
+                position: 'bottom-left'
+              });
             }
             if(response.data.status == "Success") {
             let verifyURL = "http://localhost:3000/customer/verifyCategory";
@@ -81,13 +91,22 @@ export default {
               }
               else {
                 this.invalidCategory = true;
+                Vue.$toast.open({
+                  message: 'Invalid category!',
+                  type: 'error',
+                  position: 'bottom-left'
+              });
               }
             })
           
             }
           })
           .catch(function(error) {
-            alert(error);
+            Vue.$toast.open({
+                  message: error,
+                  type: 'error',
+                  position: 'bottom-left'
+              });
           });
         }
       }
