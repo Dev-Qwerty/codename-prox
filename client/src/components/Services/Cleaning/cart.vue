@@ -10,18 +10,29 @@
           <div class="c1-box">
             <div class="c1-box-line1"></div>
             <div class="c1-box-hgrid">
-              <div class="c1-box-c1"></div>
-              <div class="c1-box-c2"></div>
-              <div class="c1-box-c3"></div>
-              <div class="c1-box-c4"></div>
+              <div class="c1-box-c1">
+                <p>Service details</p>
+              </div>
+              <div class="c1-box-c2">
+                <p>Quantity</p>
+              </div>
+              <div class="c1-box-c3">
+                <p>Price</p>
+              </div>
+              <div class="c1-box-c4">
+                <p>Total</p>
+              </div>
             </div>
             <div class="c1-box-line2"></div>
-            <div class="c1-box-dgrid">
-              <div class="c1-box-col1"></div>
-              <div class="c1-box-col2"></div>
-              <div class="c1-box-col3"></div>
-              <div class="c1-box-col4"></div>
-            </div>            
+            <div class="c1-box-dgrid-wrapper">
+              <div class="c1-box-dgrid">
+                <div class="c1-box-col1"></div>
+                <div class="c1-box-col2"></div>
+                <div class="c1-box-col3"></div>
+                <div class="c1-box-col4"></div>
+              </div> 
+            </div>
+            <div class="c1-box-line3"></div>
           </div>
         </div>
         <div class="col2-checkout-box sh-all">
@@ -113,12 +124,13 @@ export default {
   }
   .c1-box {
     height: 300px;
-    background-color: blue;
+    display: grid;
+    grid-template-rows: 2px 17% 2px 83% 2px;
   }
   .c1-box-line1 {
     width: 90%;
     height: 2px;
-    background-color: #000;
+    background-color: #cecece;
   }  
   .c1-box-hgrid {
     height: 50px;
@@ -127,21 +139,29 @@ export default {
     grid-template-columns: 3fr 1fr 1fr 1fr;
   }
   .c1-box-c1 {
-    background-color: brown;
+    padding-left: 10px;
+    padding-top: 15px;
+    font-size: 18px;
   }
   .c1-box-c2 {
-    background-color: red;
+    /*padding-left: 10px;*/
+    padding-top: 15px;
+    font-size: 18px;
   }
   .c1-box-c3 {
-    background-color: yellow;
+    /*padding-left: 10px;*/
+    padding-top: 15px;
+    font-size: 18px;
   }
   .c1-box-c4 {
-    background-color: orange;
+    /*padding-left: 10px;*/
+    padding-top: 15px;
+    font-size: 18px;
   }
   .c1-box-line2 {
     width: 90%;
-    height: 1px;
-    background-color: #000;
+    height: 2px;
+    background-color: #cecece;
   }    
   .c1-box-dgrid {
     height: 50px;
@@ -161,6 +181,11 @@ export default {
   .c1-box-col4 {
     background-color: orange;
   }  
+  .c1-box-line3 {
+    width: 90%;
+    height: 2px;
+    background-color: #cecece;
+  }   
   .col2-checkout-box {
     height: 450px;
     background-color: #f2f2f2;
