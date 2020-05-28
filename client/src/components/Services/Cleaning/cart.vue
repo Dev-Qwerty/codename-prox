@@ -148,7 +148,7 @@ export default {
     width: 90%;
     display: grid;
     grid-template-columns: 3fr 1fr 1fr 1fr;
-    font-size: 17px;
+    font-size: 18px;
   }
   .c1-box-c1 {
     padding-left: 10px;
@@ -177,7 +177,7 @@ export default {
     width: 90%;
     display: grid;
     grid-template-columns: 3fr 1fr 1fr 1fr;
-    font-size: 16px;
+    font-size: 17px;
   }
   .c1-box-col1 {
     padding-left: 10px;
@@ -214,7 +214,7 @@ export default {
     padding-top: 26px;
   }
   .col2-row1-p {
-    font-size: 17px;
+    font-size: 18px;
     font-weight: bold;
   }
   .Line {
@@ -232,11 +232,11 @@ export default {
     margin-bottom: 10px;    
   }
   .col2-row2-col1-p {
-    font-size: 16;
+    font-size: 17px;
     margin: 0px;
   }
   .col2-row2-col2-p {
-    font-size: 16;
+    font-size: 17px;
     margin: 0px;
   }  
   .totcost-wrapper {
