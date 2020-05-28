@@ -34,7 +34,10 @@
               <div class="col2-row3-col2">
                 <p class="col2-row3-col2-p">$299.00</p>
               </div>
-            </div>            
+            </div> 
+            <div class="c2-r3-btn">
+              <p class="c3-r2-p">CHECKOUT</p>
+            </div>           
           </div>
         </div>
       </div>
@@ -142,4 +145,16 @@ export default {
     font-size: 18;
     margin: 0px;
   }    
+  .c2-r3-btn {
+    width: 94%;
+    height: 40px;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    padding-top: 6px;
+  }
+  .c3-r2-p {
+    font-size: 16px;
+    font-weight: bold;
+  }
 </style>
