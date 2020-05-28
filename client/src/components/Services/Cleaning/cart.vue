@@ -5,10 +5,26 @@
         <router-link class="arrowIcon" :to="{ path: '/services/cleaning/modal' }"></router-link>
       </div>
       <div class="cart-body">
-        <div class="col1">
-          <p>Shopping Cart</p>
+        <div class="col1-cart">
+          <p class="c1-p">Shopping Cart</p>
+          <div class="c1-box">
+            <div class="c1-box-line1"></div>
+            <div class="c1-box-hgrid">
+              <div class="c1-box-c1"></div>
+              <div class="c1-box-c2"></div>
+              <div class="c1-box-c3"></div>
+              <div class="c1-box-c4"></div>
+            </div>
+            <div class="c1-box-line2"></div>
+            <div class="c1-box-dgrid">
+              <div class="c1-box-col1"></div>
+              <div class="c1-box-col2"></div>
+              <div class="c1-box-col3"></div>
+              <div class="c1-box-col4"></div>
+            </div>            
+          </div>
         </div>
-        <div class="col2 sh-all">
+        <div class="col2-checkout-box sh-all">
           <div class="col2-row1">
             <p class="col2-row1-p">ORDER SUMMARY</p>
           </div>
@@ -17,7 +33,7 @@
             <div v-for="n in 3" v-bind:key="n">
               <div class="items-wrapper">
                 <div class="col2-row2-col1">
-                  <p class="col2-row2-col1-p">items 1</p>
+                  <p class="col2-row2-col1-p">item 1</p>
                 </div>
                 <div class="col2-row2-col2">
                   <p class="col2-row2-col2-p">$299.00</p>
@@ -88,11 +104,64 @@ export default {
     display: grid;
     grid-template-columns: 3fr 1fr;
   }
-  .col1 {
+  .col1-cart {
     height: 200px;
-    /*background-color: aliceblue;*/
   }
-  .col2 {
+  .c1-p {
+    font-size: 25px;
+    font-weight: bold;
+  }
+  .c1-box {
+    height: 300px;
+    background-color: blue;
+  }
+  .c1-box-line1 {
+    width: 90%;
+    height: 2px;
+    background-color: #000;
+  }  
+  .c1-box-hgrid {
+    height: 50px;
+    width: 90%;
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr 1fr;
+  }
+  .c1-box-c1 {
+    background-color: brown;
+  }
+  .c1-box-c2 {
+    background-color: red;
+  }
+  .c1-box-c3 {
+    background-color: yellow;
+  }
+  .c1-box-c4 {
+    background-color: orange;
+  }
+  .c1-box-line2 {
+    width: 90%;
+    height: 1px;
+    background-color: #000;
+  }    
+  .c1-box-dgrid {
+    height: 50px;
+    width: 90%;
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr 1fr;
+  }
+  .c1-box-col1 {
+    background-color: brown;
+  }
+  .c1-box-col2 {
+    background-color: red;
+  }
+  .c1-box-col3 {
+    background-color: yellow;
+  }
+  .c1-box-col4 {
+    background-color: orange;
+  }  
+  .col2-checkout-box {
     height: 450px;
     background-color: #f2f2f2;
     display: grid;
