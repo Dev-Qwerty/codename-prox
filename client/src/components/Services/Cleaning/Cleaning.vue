@@ -146,34 +146,35 @@ export default {
     background-image: url(../../../assets/mbox.png);    
   }
   .bottom {
-    width: 92%;
+    width: 85%;
     height: 200px;
-    margin-top: 50px;
-    margin-left: 60px;
+    margin-top: 60px;
+    margin-left: 80px;
   }
   .b-heading h3 {
-    font-size: 28px;
+    font-size: 30px;
     color: #000;
     font-weight: bold;
   }
   .Line-small {
     margin-top: 0px;
-    width: 70px;
+    width: 90px;
     height: 2px;
     background-color: #000;    
   }
   .row {
+    margin-left: 20px;
     margin-top: 20px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 20px;
+    grid-gap: 35px;
   }
   .col {
     padding: 0PX;
     box-sizing: border-box;
     border: 1px solid #000;
     margin: 8px;
-    height: 450px;
+    height: 480px;
     background-color: #fff;  
   }
   .Btop {
@@ -215,7 +216,7 @@ export default {
     border: none;
     background-color: #000;
     color: #fff;
-    margin-top: 17px;
+    margin-top: 5px;
     margin-left: 130px;
     width: 120px;
     height: 50px;
@@ -224,19 +225,5 @@ export default {
     font-style: italic;
     box-shadow: 3px 3px #dedee0;
     border-radius: 10px;;
-  }   
-  .tbtn input[type="submit"] {
-    border: none;
-    background-color: #000;
-    color: #fff;
-    margin-top: 10px;
-    margin-left: 10px;
-    width: 120px;
-    height: 50px;
-    font-family: Arial;
-    font-size: 17px;
-    font-style: italic;
-    box-shadow: 3px 3px #dedee0;
-    border-radius: 10px;;
-  }   
+  }    
 </style>
