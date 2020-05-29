@@ -16,7 +16,11 @@ const orderSchema = mongoose.Schema({
         default: "no worker assigned"
     },
     date: {
-        type: Date,
+        type: String,
+        required: true
+    },
+    time: {
+        type: String,
         required: true
     },
     service: {
