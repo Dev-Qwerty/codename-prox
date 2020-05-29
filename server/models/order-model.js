@@ -19,6 +19,10 @@ const orderSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    time: {
+        type: String,
+        required: true
+    },
     service: {
         subserviceName: {
             type: String,
