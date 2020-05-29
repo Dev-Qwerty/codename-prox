@@ -181,12 +181,20 @@ router.post('/verifyCategory', (req, res) => {
 router
 	.route('/myworks')
 	.get(async (req, res) => {
+		global.totalEarning = 0
+		global.todaysWork = []
+		global.today = new Date().getDate().toString() + "-" + (new Date().getMonth() + 1).toString() + "-" + new Date().getFullYear().toString()
+		// console.log(today)
 		let id = "no worker assigned" //TODO : find workerID from cookies
 		let completedWorks = await workOrderModel.find({ workerID: id, completed: true }, 'service address date totalAmount -_id')
 		let upcommingWorks = await workOrderModel.find({ workerID: id, completed: false }, 'service address date totalAmount -_id')
-		res.json({ "completedWorks": completedWorks, "upcommingWorks": upcommingWorks })
+		for (i = 0; i < upcommingWorks.length; i++) {
+			if (upcommingWorks[i].date.localeCompare(today) == 0) {
+				todaysWork.push(upcommingWorks[i])
+			}
+			totalEarning = totalEarning + parseInt(upcommingWorks[i].totalAmount)
+		}
+		res.json({ "completedWorks": completedWorks, "upcommingWorks": upcommingWorks, "todaysWork": todaysWork, "totalEarning": totalEarning, "totalWorks": completedWorks.length })
 	})
-
-// TODO: show today's work
 
 module.exports = router;
