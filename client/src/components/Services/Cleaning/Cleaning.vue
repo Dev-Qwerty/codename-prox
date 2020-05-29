@@ -113,7 +113,7 @@ export default {
     grid-template-columns: 2fr 1fr;
     background-color: #eeefef;
     width: 100%;
-    height:350px;
+    height:400px;
   }
   .mid-box {
     padding-top: 100px;
