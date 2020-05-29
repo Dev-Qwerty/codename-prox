@@ -113,33 +113,36 @@ export default {
     grid-template-columns: 2fr 1fr;
     background-color: #eeefef;
     width: 100%;
-    height:400px;
+    height:420px;
   }
   .mid-box {
-    padding-top: 100px;
+    padding-top: 125px;
     padding-bottom: 100px;
-    padding-left: 40px;
+    padding-left: 70px;
   } 
   .mid-box h1 {
     margin: 0px;
-    padding: 0px;
-    font-size: 60px;
+    padding-bottom: 0px;
+    padding-top: 0;
+    padding-left: 0;
+    font-size: 59px;
     color: #000;
     font-weight: bold;
   }  
   .Line {
-    margin-top: 10px;
+    margin-top: 15px;
     width: 250px;
     height: 5px;
     background-color: #000;
   }
   .mid-img {
-    margin-top: 5px;
+    margin-left: 80px;
+    margin-top: 26px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 340px;
-    width: 340px;
+    height: 370px;
+    width: 370px;
     background-image: url(../../../assets/mbox.png);    
   }
   .bottom {
