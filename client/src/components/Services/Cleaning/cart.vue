@@ -120,7 +120,7 @@ export default {
     background-size: cover;    
   }   
   .cart-body {
-    margin-top: 50px;
+    margin-top: 80px;
     margin-left: 80px;;
     width: 90%;
     display: grid;
@@ -130,7 +130,7 @@ export default {
     height: 200px;
   }
   .c1-p {
-    font-size: 23px;
+    font-size: 28px;
     font-weight: bold;
   }
   .c1-box {
@@ -144,27 +144,27 @@ export default {
     background-color: #cecece;
   }  
   .c1-box-hgrid {
-    height: 50px;
+    height: 60px;
     width: 90%;
     display: grid;
     grid-template-columns: 3fr 1fr 1fr 1fr;
-    font-size: 18px;
+    font-size: 20px;
   }
   .c1-box-c1 {
     padding-left: 10px;
-    padding-top: 15px;
+    padding-top: 10px;
   }
   .c1-box-c2 {
     /*padding-left: 10px;*/
-    padding-top: 15px;
+    padding-top: 10px;
   }
   .c1-box-c3 {
     /*padding-left: 10px;*/
-    padding-top: 15px;
+    padding-top: 10px;
   }
   .c1-box-c4 {
     /*padding-left: 10px;*/
-    padding-top: 15px;
+    padding-top: 10px;
   }
   .c1-box-line2 {
     width: 90%;
@@ -172,12 +172,13 @@ export default {
     background-color: #cecece;
   }    
   .c1-box-dgrid {
-    padding-top: 5px;
+    margin-top: 10px;
+    padding-top: 10px;
     height: 60px;
     width: 90%;
     display: grid;
     grid-template-columns: 3fr 1fr 1fr 1fr;
-    font-size: 17px;
+    font-size: 18px;
   }
   .c1-box-col1 {
     padding-left: 10px;
