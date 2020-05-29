@@ -118,11 +118,11 @@ export default {
   .mid-box {
     padding-top: 125px;
     padding-bottom: 100px;
-    padding-left: 70px;
+    padding-left: 60px;
   } 
   .mid-box h1 {
     margin: 0px;
-    padding-bottom: 0px;
+    padding-bottom: 3px;
     padding-top: 0;
     padding-left: 0;
     font-size: 59px;
@@ -130,13 +130,13 @@ export default {
     font-weight: bold;
   }  
   .Line {
-    margin-top: 15px;
+    margin-top: 20px;
     width: 250px;
     height: 5px;
     background-color: #000;
   }
   .mid-img {
-    margin-left: 80px;
+    margin-left: 0px;
     margin-top: 26px;
     background-position: center;
     background-repeat: no-repeat;
@@ -146,34 +146,34 @@ export default {
     background-image: url(../../../assets/mbox.png);    
   }
   .bottom {
-    width: 96%;
+    width: 92%;
     height: 200px;
-    margin-top: 10px;
-    margin-left: 30px;
+    margin-top: 50px;
+    margin-left: 60px;
   }
   .b-heading h3 {
-    font-size: 23px;
+    font-size: 28px;
     color: #000;
     font-weight: bold;
   }
   .Line-small {
-    margin-top: 3px;
+    margin-top: 0px;
     width: 70px;
     height: 2px;
     background-color: #000;    
   }
   .row {
-    margin-top: 10px;
+    margin-top: 20px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 10px;
+    grid-gap: 20px;
   }
   .col {
     padding: 0PX;
     box-sizing: border-box;
     border: 1px solid #000;
     margin: 8px;
-    height: 460px;
+    height: 450px;
     background-color: #fff;  
   }
   .Btop {
