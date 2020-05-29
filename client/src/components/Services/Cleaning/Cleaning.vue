@@ -113,64 +113,68 @@ export default {
     grid-template-columns: 2fr 1fr;
     background-color: #eeefef;
     width: 100%;
-    height:350px;
+    height:420px;
   }
   .mid-box {
-    padding-top: 100px;
+    padding-top: 125px;
     padding-bottom: 100px;
-    padding-left: 40px;
+    padding-left: 60px;
   } 
   .mid-box h1 {
     margin: 0px;
-    padding: 0px;
-    font-size: 60px;
+    padding-bottom: 3px;
+    padding-top: 0;
+    padding-left: 0;
+    font-size: 59px;
     color: #000;
     font-weight: bold;
   }  
   .Line {
-    margin-top: 10px;
+    margin-top: 20px;
     width: 250px;
     height: 5px;
     background-color: #000;
   }
   .mid-img {
-    margin-top: 5px;
+    margin-left: 0px;
+    margin-top: 26px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 340px;
-    width: 340px;
+    height: 370px;
+    width: 370px;
     background-image: url(../../../assets/mbox.png);    
   }
   .bottom {
-    width: 96%;
+    width: 85%;
     height: 200px;
-    margin-top: 10px;
-    margin-left: 30px;
+    margin-top: 60px;
+    margin-left: 80px;
   }
   .b-heading h3 {
-    font-size: 23px;
+    font-size: 30px;
     color: #000;
     font-weight: bold;
   }
   .Line-small {
-    margin-top: 3px;
-    width: 70px;
+    margin-top: 0px;
+    width: 90px;
     height: 2px;
     background-color: #000;    
   }
   .row {
-    margin-top: 10px;
+    margin-left: 20px;
+    margin-top: 20px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 10px;
+    grid-gap: 35px;
   }
   .col {
     padding: 0PX;
     box-sizing: border-box;
     border: 1px solid #000;
     margin: 8px;
-    height: 460px;
+    height: 480px;
     background-color: #fff;  
   }
   .Btop {
@@ -212,7 +216,7 @@ export default {
     border: none;
     background-color: #000;
     color: #fff;
-    margin-top: 17px;
+    margin-top: 5px;
     margin-left: 130px;
     width: 120px;
     height: 50px;
@@ -221,19 +225,5 @@ export default {
     font-style: italic;
     box-shadow: 3px 3px #dedee0;
     border-radius: 10px;;
-  }   
-  .tbtn input[type="submit"] {
-    border: none;
-    background-color: #000;
-    color: #fff;
-    margin-top: 10px;
-    margin-left: 10px;
-    width: 120px;
-    height: 50px;
-    font-family: Arial;
-    font-size: 17px;
-    font-style: italic;
-    box-shadow: 3px 3px #dedee0;
-    border-radius: 10px;;
-  }   
+  }    
 </style>
