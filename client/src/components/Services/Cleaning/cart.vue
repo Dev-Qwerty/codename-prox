@@ -11,7 +11,7 @@
             <div class="c1-box-line1"></div>
             <div class="c1-box-hgrid">
               <div class="c1-box-c1">
-                <p>Service details</p>
+                <p>Category</p>
               </div>
               <div class="c1-box-c2">
                 <p>Quantity</p>
@@ -25,17 +25,18 @@
             </div>
             <div class="c1-box-line2"></div>
             <div class="c1-box-dgrid-wrapper">
-              <div v-for="n in 3" v-bind:key="n">
+              <div v-for="sr in cartArr" v-bind:key="sr._id">
                 <div class="c1-box-dgrid">
                   <div class="c1-box-col1">
-                    <p>Full House Deep Cleaning</p>
-                    <p>2:45 PM</p>
+                    <!--<p>Full House Deep Cleaning</p>
+                    <p>2:45 PM</p>-->
+                    <p>{{ sr.category }}</p>
                   </div>
                   <div class="c1-box-col2">
-                    <p>2BHK</p>
+                    <!--<p>{{ sr.category }}</p>-->
                   </div>
                   <div class="c1-box-col3">
-                    <p>$299</p>
+                    <p>{{ sr.amount }}</p>
                   </div>
                   <div class="c1-box-col4">
                     <p>$299</p>
@@ -206,7 +207,7 @@ export default {
   }
   .c1-box-col1 p {
     margin: 0px;
-    padding: 0px;
+    padding-top: 10px; 
   }
   .c1-box-col2 {
    padding-top: 10px; 
