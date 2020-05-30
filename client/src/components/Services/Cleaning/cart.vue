@@ -73,9 +73,11 @@
                 <p class="col2-row3-col2-p">$299.00</p>
               </div>
             </div> 
-            <div class="c2-r3-btn">
-              <p class="c3-r3-p">CHECKOUT</p>
-            </div>  
+            <router-link class="" :to="{name: 'checkout'}" @click.native="checkoutfn">
+              <div class="c2-r3-btn">
+                <p class="c3-r3-p">CHECKOUT</p>
+              </div>  
+            </router-link>  
             <div class="c2-r3-pcode">
               <p class="c2-r3-p">PROMOTIONAL CODE</p>
             </div> 
@@ -83,12 +85,30 @@
         </div>
       </div>
     </div>
+    <router-view>
+      <checkout />
+    </router-view>    
   </div>
 </template>
 
 <script>
+import checkout from '@/components/Services/Cleaning/checkout.vue'
+
 export default {
-    
+  name: 'cart',
+  components: {
+    checkout
+  },
+  data() {
+    return {
+      cartArr: JSON.parse(this.$cookies.get("cart"))
+    }   
+  },
+  methods: {
+  
+  },
+  created() {
+  }   
 }
 </script>
 
