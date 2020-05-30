@@ -2,7 +2,7 @@
   <div class="Modal">
     <div class="Mbg">
       <div class="Mbox">
-        <div class="Img">
+        <div class="closebtn">
           <router-link :to="{ path: '/services/cleaning/modal/cart' }">
             <div class="cbtn"></div>
           </router-link>
@@ -64,15 +64,6 @@ export default {
     width: 50%;
     height: 600px;
     background-color: #fff;
-  }
-  .Img {
-    margin: 0px;
-    width: 100%;
-    height: 340px;
-    background-image: url(../../../assets/cout3.png);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;        
   }
   .cbtn {
     position: absolute;
