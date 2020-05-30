@@ -12,7 +12,7 @@
         </div>
         <div class="address">
           <p>Address</p>
-          <form action="" method="">
+          <form class="addr" action="" method="">
             <div>
               <input class="input-box" type="text" name="uname" placeholder="Full Name" v-model="username">
             </div>
@@ -118,7 +118,24 @@ export default {
     text-align: center;
     margin-bottom: 0px;
   }
+  .address {
+    margin-left: 50px;
+    margin-top: 25px;
+  }
+  .input-box {
+    width: 70%;
+    margin-top: 20px;
+    border-right: none;
+    border-top: none;
+    border-left: none; 
+    border-bottom: 1px solid #aaa;
+  }
+  .td {
+    margin-left: 50px;
+    margin-top: 25px;
+  }  
   .btns {
+    margin-top: 25px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     padding-left: 23%;
