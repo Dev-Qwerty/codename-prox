@@ -66,7 +66,8 @@ router
             newWorkRequest.service = newOrder.service;
             newWorkRequest.place = req.body.address.line2;
             newWorkRequest.amount = newOrder.totalAmount;
-            newWorkRequest.duration = '1 hour';
+            newWorkRequest.date = req.body.date;
+            newWorkRequest.time = req.body.time;
 
             newWorkRequest.save()
 

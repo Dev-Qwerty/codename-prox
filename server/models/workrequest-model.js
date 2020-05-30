@@ -44,9 +44,13 @@ const workerRequestSchema = mongoose.Schema({
         type: Number,
         required: true
     },
-    duration: {
+    date: {
         type: String,
         required: true
+    },
+    time: {
+        type: String,
+        require: true
     }
 })
 
