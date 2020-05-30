@@ -2,7 +2,7 @@
   <div class="Modal">
     <div class="Mbg">
       <div class="Mbox">
-        <div class="closebtn">
+        <div class="mainheader">
           <router-link :to="{ path: '/services/cleaning/modal/cart' }">
             <div class="cbtn"></div>
           </router-link>
@@ -65,6 +65,11 @@ export default {
     height: 600px;
     background-color: #fff;
   }
+  .mainheader {
+    width: 100%;
+    height: 50px;
+    background-color: #f2f2f2;
+  }
   .cbtn {
     position: absolute;
     top: 2%;
@@ -84,8 +89,9 @@ export default {
     margin-bottom: 0px;
   }
   .btns {
-    margin-top: 70px;
-    margin-left: 35%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-left: 23%;
   }  
   .paynowbtn input[type="submit"]{
     width: 40%;
@@ -96,7 +102,6 @@ export default {
     border-radius: 5px;
   }
   .paylaterbtn input[type="submit"]{
-    margin-top: 20px;
     width: 40%;
     height: 45px;
     border: none;
