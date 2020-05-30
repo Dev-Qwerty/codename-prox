@@ -48,6 +48,7 @@ router
             newOrder.totalAmount = totalAmount;
             newOrder.paid = false;
             newOrder.address = req.body.address;
+            newOrder.time = req.body.time;
 
             newOrder.save()
             res.json({ "message": "Order placed succesfully" })
