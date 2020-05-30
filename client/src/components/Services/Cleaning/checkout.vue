@@ -6,6 +6,28 @@
           <router-link :to="{ path: '/services/cleaning/modal/cart' }">
             <div class="cbtn"></div>
           </router-link>
+        </div>
+        <div class="address">
+          <form action="" method="">
+            <div>
+              <input class="input-box" type="text" name="uname" placeholder="USERNAME" v-model="username">
+            </div>
+            <div>
+              <input class="input-box" type="Password" name="password" placeholder="PASSWORD" v-model="password">
+            </div>
+            <div>
+              <input class="input-box" type="text" name="uname" placeholder="USERNAME" v-model="username">
+            </div>
+            <div>
+              <input class="input-box" type="Password" name="password" placeholder="PASSWORD" v-model="password">
+            </div>
+            <div>
+              <input class="input-box" type="text" name="uname" placeholder="USERNAME" v-model="username">
+            </div>
+            <div>
+              <input class="input-box" type="Password" name="password" placeholder="PASSWORD" v-model="password">
+            </div>                        
+          </form>          
         </div>  
         <div class="btns">
           <div>
