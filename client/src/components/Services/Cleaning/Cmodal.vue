@@ -67,7 +67,7 @@ export default {
     left: 0%;
     background: rgb(128, 128, 128, 0.8);
     width: 100%;
-    height: 197%;
+    height: 225%;
   }
   .cartbtn input[type="submit"]{
     margin-top: 20px;

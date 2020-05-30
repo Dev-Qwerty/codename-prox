@@ -120,7 +120,7 @@ export default {
     background-size: cover;    
   }   
   .cart-body {
-    margin-top: 50px;
+    margin-top: 80px;
     margin-left: 80px;;
     width: 90%;
     display: grid;
@@ -130,11 +130,12 @@ export default {
     height: 200px;
   }
   .c1-p {
-    font-size: 23px;
+    font-size: 28px;
     font-weight: bold;
+    margin-bottom: 20px;
   }
   .c1-box {
-    height: 300px;
+    height: 350px;
     display: grid;
     grid-template-rows: 2px 17% 2px 83% 2px;
   }
@@ -144,27 +145,27 @@ export default {
     background-color: #cecece;
   }  
   .c1-box-hgrid {
-    height: 50px;
+    height: 60px;
     width: 90%;
     display: grid;
     grid-template-columns: 3fr 1fr 1fr 1fr;
-    font-size: 18px;
+    font-size: 20px;
   }
   .c1-box-c1 {
     padding-left: 10px;
-    padding-top: 15px;
+    padding-top: 10px;
   }
   .c1-box-c2 {
     /*padding-left: 10px;*/
-    padding-top: 15px;
+    padding-top: 10px;
   }
   .c1-box-c3 {
     /*padding-left: 10px;*/
-    padding-top: 15px;
+    padding-top: 10px;
   }
   .c1-box-c4 {
     /*padding-left: 10px;*/
-    padding-top: 15px;
+    padding-top: 10px;
   }
   .c1-box-line2 {
     width: 90%;
@@ -172,12 +173,13 @@ export default {
     background-color: #cecece;
   }    
   .c1-box-dgrid {
-    padding-top: 5px;
+    margin-top: 10px;
+    padding-top: 10px;
     height: 60px;
     width: 90%;
     display: grid;
     grid-template-columns: 3fr 1fr 1fr 1fr;
-    font-size: 17px;
+    font-size: 18px;
   }
   .c1-box-col1 {
     padding-left: 10px;
@@ -214,7 +216,7 @@ export default {
     padding-top: 26px;
   }
   .col2-row1-p {
-    font-size: 18px;
+    font-size: 19px;
     font-weight: bold;
   }
   .Line {
@@ -229,14 +231,13 @@ export default {
   .items-wrapper {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    margin-bottom: 10px;    
+    margin-bottom: 10px;  
+    font-size: 18px;  
   }
   .col2-row2-col1-p {
-    font-size: 17px;
     margin: 0px;
   }
   .col2-row2-col2-p {
-    font-size: 17px;
     margin: 0px;
   }  
   .totcost-wrapper {
@@ -249,11 +250,11 @@ export default {
     padding-left: 15px;
   }
   .col2-row3-col1-p {
-    font-size: 18;
+    font-size: 19px;
     margin: 0px;
   }
   .col2-row3-col2-p {
-    font-size: 18;
+    font-size: 19px;
     margin: 0px;
   }    
   .c2-r3-btn {
