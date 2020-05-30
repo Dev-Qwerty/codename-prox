@@ -3,15 +3,21 @@
     <div class="Mbg">
       <div class="Mbox">
         <div class="mainheader">
-          <router-link :to="{ path: '/services/cleaning/modal/cart' }">
-            <div class="cbtn"></div>
-          </router-link>
+          <div>
+            <p class="header-p">CHECKOUT</p>
+          </div>
+          <div>
+            <router-link :to="{ path: '/services/cleaning/modal/cart' }">
+              <div class="cbtn"></div>
+            </router-link>
+          </div>
+
         </div>
         <div>
 
         </div>
         <div class="address">
-          <p>Address</p>
+          <p class="addrheader">Address</p>
           <form class="addr" action="" method="">
             <div>
               <input class="input-box" type="text" name="uname" placeholder="Full Name" v-model="username">
@@ -34,8 +40,12 @@
           </form>          
         </div> 
         <div class="td">
-          <p>Current date and time</p>
-          <input type="datetime-local" class="tdfield" value="2018-06-12T19:30" min="2018-06-07T00:00" max="2018-06-14T00:00">          
+          <div>
+            <p class="tdheader">Current date and time</p>
+          </div>
+          <div>
+            <input type="datetime-local" class="tdfield" value="2018-06-12T19:30" min="2018-06-07T00:00" max="2018-06-14T00:00">
+          </div>          
         </div> 
         <div class="btns">
           <div>
@@ -89,16 +99,24 @@ export default {
   }
   .Mbox {
     position: absolute;
-    top: 6%;
+    top: 5%;
     left: 25%;
     width: 50%;
-    height: 600px;
+    height: 610px;
     background-color: #fff;
   }
   .mainheader {
     width: 100%;
     height: 50px;
     background-color: #f2f2f2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;    
+  }
+  .header-p {
+    font-size: 20px;
+    padding-left: 5%;
+    padding-top: 3%;
+    font-weight: bold;
   }
   .cbtn {
     position: absolute;
@@ -119,11 +137,17 @@ export default {
     margin-bottom: 0px;
   }
   .address {
-    margin-left: 50px;
+    margin-left: 100px;
     margin-top: 25px;
   }
+  .addrheader {
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
+  }
   .input-box {
-    width: 70%;
+    font-size: 18px;
+    width: 80%;
     margin-top: 20px;
     border-right: none;
     border-top: none;
@@ -131,11 +155,16 @@ export default {
     border-bottom: 1px solid #aaa;
   }
   .td {
-    margin-left: 50px;
-    margin-top: 25px;
+    margin-left: 100px;
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: 35% 65%;
   }  
+  .tdheader {
+    font-size: 18px;
+  }
   .btns {
-    margin-top: 25px;
+    margin-top: 40px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     padding-left: 23%;
