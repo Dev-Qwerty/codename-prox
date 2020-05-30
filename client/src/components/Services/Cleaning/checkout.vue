@@ -7,28 +7,36 @@
             <div class="cbtn"></div>
           </router-link>
         </div>
+        <div>
+
+        </div>
         <div class="address">
+          <p>Address</p>
           <form action="" method="">
             <div>
-              <input class="input-box" type="text" name="uname" placeholder="USERNAME" v-model="username">
+              <input class="input-box" type="text" name="uname" placeholder="Full Name" v-model="username">
             </div>
             <div>
-              <input class="input-box" type="Password" name="password" placeholder="PASSWORD" v-model="password">
+              <input class="input-box" type="text" name="contactno" placeholder="Contact Number" v-model="password">
             </div>
             <div>
-              <input class="input-box" type="text" name="uname" placeholder="USERNAME" v-model="username">
+              <input class="input-box" type="text" name="flatname" placeholder="Flat name/no." v-model="username">
             </div>
             <div>
-              <input class="input-box" type="Password" name="password" placeholder="PASSWORD" v-model="password">
+              <input class="input-box" type="text" name="saddr" placeholder="Street Address" v-model="password">
             </div>
             <div>
-              <input class="input-box" type="text" name="uname" placeholder="USERNAME" v-model="username">
+              <input class="input-box" type="text" name="district" placeholder="District" v-model="username">
             </div>
             <div>
-              <input class="input-box" type="Password" name="password" placeholder="PASSWORD" v-model="password">
+              <input class="input-box" type="text" name="pincode" placeholder="Pincode" v-model="password">
             </div>                        
           </form>          
-        </div>  
+        </div> 
+        <div class="td">
+          <p>Current date and time</p>
+          <input type="datetime-local" class="tdfield" value="2018-06-12T19:30" min="2018-06-07T00:00" max="2018-06-14T00:00">          
+        </div> 
         <div class="btns">
           <div>
             <router-link class="paynowbtn" :to="{name: ''}" @click.native="paynowfn">
