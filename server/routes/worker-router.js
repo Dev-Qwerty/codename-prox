@@ -136,8 +136,9 @@ router.post('/completeProfile/:id', (req, res) => {
 // fetch tags while worker signup
 router.get('/fetchtags', async (req, res) => {
 	const t = req.body.token;
-	Token.findOne({token: t}, (err,result) => {
-		if(result.length == 0) {
+	let result = await Token.findOne({token: t});
+	console.log(result);
+		if(result == null) {
 			res.send({status: "Error!", code: "Invalid token!"});
 		}
 		else {
@@ -161,7 +162,6 @@ router.get('/fetchtags', async (req, res) => {
 			res.send({ tags })
 		
 		}
-	})
 })
 
 router.post('/forgotPassword', (req, res) => {
@@ -227,8 +227,8 @@ router
 	.route('/myworks')
 	.get(async (req, res) => {
 		const t = req.body.token;
-		Token.findOne({token: t}, (err,results) => {
-			if(results.length == 0) {
+		results = await Token.findOne({token: t});
+			if(results == null) {
 				res.send({status: "Error!", code: "Invalid token!"});				
 			}
 			else {
@@ -247,7 +247,6 @@ router
 				}
 				res.json({ "completedWorks": completedWorks, "upcommingWorks": upcommingWorks, "todaysWork": todaysWork, "totalEarning": totalEarning, "totalWorks": completedWorks.length })
 			}
-		})
 	})
 
 module.exports = router;
