@@ -57,7 +57,27 @@ export default new VueRouter({
     },
     { 
       path: '/login', 
-      component: Login 
+      component: Login,
+      children: [
+        {
+          path: 'user',
+          name: 'user',
+          component: Cmodal,
+          props: true,      
+        },
+        {
+          path: 'worker',
+          name: 'worker',
+          component: Cmodal,
+          props: true,      
+        },
+        {
+          path: 'company',
+          name: 'company',
+          component: Cmodal,
+          props: true,      
+        }                
+      ]      
     },  
     { 
       path: '/about', 
