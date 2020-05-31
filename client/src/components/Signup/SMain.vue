@@ -2,23 +2,23 @@
   <div>
     <Nav />
     <Swrapper />
-    <Sbox />
-    <SignStackBox />
+    <box />
+    <StackBox />
   </div>
 </template>
 
 <script>
 import Nav from '@/components/Home/Navbar'
 import Swrapper from '@/components/Signup/Swrapper'
-import Sbox from '@/components/Signup/Sbox'
-import SignStackBox from '@/components/Signup/SignStackBox'
+import box from '@/components/Signup/box'
+import StackBox from '@/components/Signup/StackBox'
 
 export default {
   components: {
     Nav,
     Swrapper,
-    Sbox,
-    SignStackBox
+    box,
+    StackBox
   }
 }
 </script>
