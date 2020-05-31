@@ -26,6 +26,6 @@
     font-size: 30px;
     color: #fff;
     margin-left: 20px;
-    margin-top: 30px;
+    margin-top: 45px;
   }
 </style>
