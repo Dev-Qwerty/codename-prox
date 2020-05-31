@@ -6,6 +6,7 @@ const Worker = require('../models/worker-model');
 const mainserviceModel = require('../models/mainservice-model');
 const subserviceModel = require('../models/subservice-model');
 const workOrderModel = require('../models/order-model');
+const Token = require('../models/token');
 
 const poolData = {
 	UserPoolId: keys.cognito.userPoolId,
@@ -54,69 +55,113 @@ router.post('/signup', (req, res) => {
 })
 
 router.post('/login', (req, res) => {
-	const authenticationData = {
-		Username: req.body.email,
-		Password: req.body.password,
-	};
-	const authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
-	const userData = {
-		Username: req.body.email,
-		Pool: workerPool
-	};
-	const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
-	cognitoUser.authenticateUser(authenticationDetails, {
-		onSuccess: function (session) {
-			const tokens = {
-				accessToken: session.getAccessToken().getJwtToken(),
-				idToken: session.getIdToken().getJwtToken(),
-				refreshToken: session.getRefreshToken().getToken()
-			};
-			cognitoUser['tokens'] = tokens; // Save tokens for later use
-		},
-		onFailure: function (err) {
-			res.send(err.code);
-		},
-	});
-})
+	const LoginData = {
+	  Username: req.body.username,
+	  Password: req.body.password
+	}
+	const AuthenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(LoginData);
+  
+	const UserData = {
+	  Username: req.body.username,
+	  Pool: workerPool
+	}
+  
+	const cognitoUser = new AmazonCognitoIdentity.CognitoUser(UserData);
+	cognitoUser.authenticateUser(AuthenticationDetails, {
+	  onSuccess: data => {
+		const username = encrypt(data.idToken.payload.sub);
+		const pidToken = encrypt(Math.random().toString(36).slice(2)); 
+		Token.find({id: username},(err,results) => {
+		  //If token doesn't exist, create new token
+		  if(results.length == 0) {
+			const newToken = new Token({
+			  token: pidToken,
+			  id: username
+			})
+			newToken
+			.save()
+			.then(token => {
+			  res.send({ status: "Success", jwt: pidToken, username: username, token: token });
+			})
+			.catch(err => {
+			  console.log(err);
+			})
+		  }
+		  //Else, update the token on login
+		  else {
+			let t = {};
+			t.token = pidToken;
+			t = {$set: t};
+			Token.update({id: username}, t).then(() => {
+			  res.send({status: "Success", jwt: pidToken, username: username, t: t});
+			})
+		  }
+		})
+		
+	  },
+	  onFailure: err => {
+		res.send(err.code);
+	  }
+	})
+  })
 
 router.post('/completeProfile/:id', (req, res) => {
-	const id = req.params.id;
-	let worker = {};
-	worker.name = req.body.name;
-	worker.workerType = req.body.type;
-	worker.companyID = req.body.companyID;
-	worker.specialization = req.body.specialization;
-	worker.address = req.body.address;
-	worker.service = req.body.service;
+	const t = req.body.token;
+	Token.findOne({token: t}, (err,result) => {
+		if(result.length == 0) {
+			res.send({status: "Error!", code: "Invalid token!"});
+		}
+		else {
+			const id = req.params.id;
+			let worker = {};
+			worker.name = req.body.name;
+			worker.workerType = req.body.type;
+			worker.companyID = req.body.companyID;
+			worker.specialization = req.body.specialization;
+			worker.address = req.body.address;
+			worker.service = req.body.service;
 
-	worker = { $set: worker };
+			worker = { $set: worker };
 
-	Worker.update({ workerID: id }, worker).then(() => {
-		res.send({ status: "Success!", worker: worker });
+			Worker.update({ workerID: id }, worker).then(() => {
+				res.send({ status: "Success!", worker: worker });
+			})
+
+
+		}
 	})
-
+	
 })
 
 // fetch tags while worker signup
 router.get('/fetchtags', async (req, res) => {
-	service = req.query.service
-	let tags = []
-	let serviceID = await mainserviceModel.findOne({ serviceName: service }, '_id') // fetch id of mainservice
-	let subservice = await subserviceModel.find({ mainserviceID: serviceID._id }, 'name categories.category -_id') // fetdh subservice name and category names of corresponding mainservice
-	for (i = 0; i < subservice.length; i++) {
-		tags.push(subservice[i].name); // save name of subservice
-		if (subservice[i].categories) {
-			// console.log(subservice[i].name)
-			// console.log(subservice[i].categories)
-			if (service != "Cleaning") {
-				for (j = 0; j < subservice[i].categories.length; j++)
-					tags.push(subservice[i].categories[j].category) // save name of category
-			}
-
+	const t = req.body.token;
+	Token.findOne({token: t}, (err,result) => {
+		if(result.length == 0) {
+			res.send({status: "Error!", code: "Invalid token!"});
 		}
-	}
-	// TODO: if mainservice is cleaning the remoove category name from tags
-	res.send({ tags })
+		else {
+			service = req.query.service
+			let tags = []
+			let serviceID = await mainserviceModel.findOne({ serviceName: service }, '_id') // fetch id of mainservice
+			let subservice = await subserviceModel.find({ mainserviceID: serviceID._id }, 'name categories.category -_id') // fetdh subservice name and category names of corresponding mainservice
+			for (i = 0; i < subservice.length; i++) {
+				tags.push(subservice[i].name); // save name of subservice
+				if (subservice[i].categories) {
+					// console.log(subservice[i].name)
+					// console.log(subservice[i].categories)
+					if (service != "Cleaning") {
+						for (j = 0; j < subservice[i].categories.length; j++)
+							tags.push(subservice[i].categories[j].category) // save name of category
+					}
+				
+				}
+			}
+			// TODO: if mainservice is cleaning the remoove category name from tags
+			res.send({ tags })
+		
+		}
+	})
 })
 
 router.post('/forgotPassword', (req, res) => {
@@ -181,20 +226,28 @@ router.post('/verifyCategory', (req, res) => {
 router
 	.route('/myworks')
 	.get(async (req, res) => {
-		global.totalEarning = 0
-		global.todaysWork = []
-		global.today = new Date().getDate().toString() + "-" + (new Date().getMonth() + 1).toString() + "-" + new Date().getFullYear().toString()
-		// console.log(today)
-		let id = "no worker assigned" //TODO : find workerID from cookies
-		let completedWorks = await workOrderModel.find({ workerID: id, completed: true }, 'service address date totalAmount -_id')
-		let upcommingWorks = await workOrderModel.find({ workerID: id, completed: false }, 'service address date totalAmount -_id')
-		for (i = 0; i < upcommingWorks.length; i++) {
-			if (upcommingWorks[i].date.localeCompare(today) == 0) {
-				todaysWork.push(upcommingWorks[i])
+		const t = req.body.token;
+		Token.findOne({token: t}, (err,results) => {
+			if(results.length == 0) {
+				res.send({status: "Error!", code: "Invalid token!"});				
 			}
-			totalEarning = totalEarning + parseInt(upcommingWorks[i].totalAmount)
-		}
-		res.json({ "completedWorks": completedWorks, "upcommingWorks": upcommingWorks, "todaysWork": todaysWork, "totalEarning": totalEarning, "totalWorks": completedWorks.length })
+			else {
+				global.totalEarning = 0
+				global.todaysWork = []
+				global.today = new Date().getDate().toString() + "-" + (new Date().getMonth() + 1).toString() + "-" + new Date().getFullYear().toString()
+				// console.log(today)
+				let id = "no worker assigned" //TODO : find workerID from cookies
+				let completedWorks = await workOrderModel.find({ workerID: id, completed: true }, 'service address date totalAmount -_id')
+				let upcommingWorks = await workOrderModel.find({ workerID: id, completed: false }, 'service address date totalAmount -_id')
+				for (i = 0; i < upcommingWorks.length; i++) {
+					if (upcommingWorks[i].date.localeCompare(today) == 0) {
+						todaysWork.push(upcommingWorks[i])
+					}
+					totalEarning = totalEarning + parseInt(upcommingWorks[i].totalAmount)
+				}
+				res.json({ "completedWorks": completedWorks, "upcommingWorks": upcommingWorks, "todaysWork": todaysWork, "totalEarning": totalEarning, "totalWorks": completedWorks.length })
+			}
+		})
 	})
 
 module.exports = router;
