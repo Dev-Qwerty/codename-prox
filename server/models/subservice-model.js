@@ -32,6 +32,8 @@ const subserviceSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    supportImages: [String],
+    supportVideos: [String],
     categories: [categorySchema]
 })
 
