@@ -33,7 +33,27 @@ export default new VueRouter({
     },
     { 
       path: '/signup', 
-      component: Signup 
+      component: Signup,
+      children: [
+        {
+          path: 'user',
+          name: 'user',
+          component: Cmodal,
+          props: true,      
+        },
+        {
+          path: 'worker',
+          name: 'worker',
+          component: Cmodal,
+          props: true,      
+        },
+        {
+          path: 'company',
+          name: 'company',
+          component: Cmodal,
+          props: true,      
+        }                
+      ]      
     },
     { 
       path: '/login', 
