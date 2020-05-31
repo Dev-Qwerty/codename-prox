@@ -140,19 +140,19 @@ router.post('/login', (req, res) => {
   const cognitoUser = new AmazonCognitoIdentity.CognitoUser(UserData);
   cognitoUser.authenticateUser(AuthenticationDetails, {
     onSuccess: data => {
-      const jwtToken = encrypt(data.idToken.jwtToken);
       const username = encrypt(data.idToken.payload.sub);
+      const pidToken = encrypt(Math.random().toString(36).slice(2)); 
       Token.find({id: username},(err,results) => {
         //If token doesn't exist, create new token
         if(results.length == 0) {
           const newToken = new Token({
-            token: jwtToken,
+            token: pidToken,
             id: username
           })
           newToken
           .save()
           .then(token => {
-            res.send({ status: "Success", jwt: jwtToken, username: username, token: token });
+            res.send({ status: "Success", jwt: pidToken, username: username, token: token });
           })
           .catch(err => {
             console.log(err);
@@ -161,10 +161,10 @@ router.post('/login', (req, res) => {
         //Else, update the token on login
         else {
           let t = {};
-          t.token = jwtToken;
+          t.token = pidToken;
           t = {$set: t};
           Token.update({id: username}, t).then(() => {
-            res.send({status: "Success", jwt: jwtToken, username: username, t: t});
+            res.send({status: "Success", jwt: pidToken, username: username, t: t});
           })
         }
       })
