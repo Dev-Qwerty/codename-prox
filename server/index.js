@@ -48,7 +48,7 @@ app.use('/worker', workerRouter)
 app.use('/company', companyRouter)
 app.use('/orders', orderRouter)
 app.use('/request', workerRequest)
-app.use('/login', loginRouter)
+app.use('/auth', loginRouter)
 
 // version check for mobile app
 app.get('/checkserviceversion', async (req, res) => {

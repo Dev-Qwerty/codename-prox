@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const Token = require('../models/token');
 const keys = require('../config/keys');
+const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
+const crypto = require('crypto');
 
 const poolData = {
     UserPoolId: keys.cognito.userPoolId,
@@ -36,7 +38,7 @@ router.post('/login', (req,res) => {
         Username: req.body.username,
         Pool: userPool
       }
-    
+      console.log("Reached here!");
       const cognitoUser = new AmazonCognitoIdentity.CognitoUser(UserData);
       cognitoUser.authenticateUser(AuthenticationDetails, {
         onSuccess: data => {
@@ -72,7 +74,9 @@ router.post('/login', (req,res) => {
           
         },
         onFailure: err => {
-          res.send(err.code);
+          console.log(err);
         }
       })
 })
+
+module.exports = router;
