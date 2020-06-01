@@ -16,7 +16,7 @@
     background-color: #000;
     color: #fff;
     opacity: 0.9;
-    top: 30%;
+    top: 28%;
     left: 50%;
     position: absolute;
     box-sizing: border-box;
