@@ -18,7 +18,9 @@
         <input class="sbutton" type="submit" name="" value="Sign up" @click.prevent="signUp()">
       </div>
       <div>
-        <p class="prof">Are you a proffessional?</p>
+        <router-link class="arrowIcon" :to="{ path: '/gethired' }">
+          <p class="prof">Are you a proffessional?</p>
+        </router-link>  
       </div>
     </form>
           
@@ -124,5 +126,6 @@ export default {
   .prof {
     margin-top: 10px;
     font-size: 15px;
+    color: #000;
   }
 </style>
