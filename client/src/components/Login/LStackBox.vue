@@ -12,7 +12,7 @@
 <style scoped>    
   .box {
     width: 27%;
-    height: 165px;
+    height: 175px;
     background-color: #000;
     color: #fff;
     opacity: 0.9;
@@ -28,13 +28,13 @@
     box-shadow: 7px 7px #eeefef;
   }
   .box h4 {
-    font-size: 23px;
+    font-size: 30px;
     color: #fff;
     margin-bottom: 2px;
   }
   #one {
     color: #aaa;
-    font-size: 14px;
+    font-size: 15px;
   }
   .wrapper {
     width: 25%;
@@ -60,6 +60,6 @@
   #two {
     margin-top: 5px;
     color: #aaa;
-    font-size: 10px;
+    font-size: 13px;
   }
 </style>
