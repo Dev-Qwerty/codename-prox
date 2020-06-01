@@ -54,57 +54,6 @@ router.post('/signup', (req, res) => {
 	})
 })
 
-router.post('/login', (req, res) => {
-	const LoginData = {
-	  Username: req.body.username,
-	  Password: req.body.password
-	}
-	const AuthenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(LoginData);
-  
-	const UserData = {
-	  Username: req.body.username,
-	  Pool: workerPool
-	}
-  
-	const cognitoUser = new AmazonCognitoIdentity.CognitoUser(UserData);
-	cognitoUser.authenticateUser(AuthenticationDetails, {
-	  onSuccess: data => {
-		const username = encrypt(data.idToken.payload.sub);
-		const pidToken = encrypt(Math.random().toString(36).slice(2)); 
-		Token.find({id: username},(err,results) => {
-		  //If token doesn't exist, create new token
-		  if(results.length == 0) {
-			const newToken = new Token({
-			  token: pidToken,
-			  id: username
-			})
-			newToken
-			.save()
-			.then(token => {
-			  res.send({ status: "Success", jwt: pidToken, username: username, token: token });
-			})
-			.catch(err => {
-			  console.log(err);
-			})
-		  }
-		  //Else, update the token on login
-		  else {
-			let t = {};
-			t.token = pidToken;
-			t = {$set: t};
-			Token.update({id: username}, t).then(() => {
-			  res.send({status: "Success", jwt: pidToken, username: username, t: t});
-			})
-		  }
-		})
-		
-	  },
-	  onFailure: err => {
-		res.send(err.code);
-	  }
-	})
-  })
-
 router.post('/completeProfile/:id', (req, res) => {
 	const t = req.body.token;
 	Token.findOne({token: t}, (err,result) => {
