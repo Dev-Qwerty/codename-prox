@@ -28,7 +28,7 @@
     box-shadow: 7px 7px #eeefef;
   }
   .box h4 {
-    font-size: 30px;
+    font-size: 28px;
     color: #fff;
     margin-bottom: 2px;
   }
