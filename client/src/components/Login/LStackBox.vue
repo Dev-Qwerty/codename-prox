@@ -1,6 +1,11 @@
 <template>
   <div class = "box">
-    <h4>Login as</h4>
+    <h4>Login</h4>
+    <p id="one">Hello let's get started</p>
+    <div class="wrapper">
+      <div class="col googleIcon"></div>
+    </div>
+    <p id="two">Login with your social network</p>
   </div>
 </template>
 
@@ -23,9 +28,38 @@
     box-shadow: 7px 7px #eeefef;
   }
   .box h4 {
-    font-size: 30px;
+    font-size: 23px;
     color: #fff;
-    margin-left: 20px;
-    margin-top: 45px;
+    margin-bottom: 2px;
+  }
+  #one {
+    color: #aaa;
+    font-size: 14px;
+  }
+  .wrapper {
+    width: 25%;
+    margin: 0px;
+    padding-left: 0px;
+    padding-right: 5px;
+    padding-bottom: 0px;
+    padding-top: 0px;    
+    display: flex;
+  }
+  .col {
+    margin-right: 15px;
+    height: 25px;
+    background-blend-mode: overlay;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 2px; 
+  }  
+  .col.googleIcon {
+    background-image: url('../../assets/Gicon.jpg');
+  }
+  #two {
+    margin-top: 5px;
+    color: #aaa;
+    font-size: 10px;
   }
 </style>
