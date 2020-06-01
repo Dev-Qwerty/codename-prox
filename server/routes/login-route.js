@@ -74,7 +74,7 @@ router.post('/login', (req,res) => {
           
         },
         onFailure: err => {
-          console.log(err);
+          res.send({error: err});
         }
       })
 })
