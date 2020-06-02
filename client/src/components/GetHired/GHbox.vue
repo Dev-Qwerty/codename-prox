@@ -79,7 +79,8 @@
     font-size: 58px;
   }
   .workersimg {
-    height: 380px;
+    margin-top: 30px;
+    height: 430px;
     width: 100%;
     background-image: url('../../assets/Workers.png');
     background-repeat: no-repeat;
