@@ -66,19 +66,21 @@
 
 <style scoped>
   .box {
-    padding: 100px;
+    padding-top: 129px;
+    padding-left: 100px;
     width: 100%;
-    height:300px;
+    height:400px;
     background-color: #eeefef;
   }
   .box h1 {
     margin: 0px;
-    padding: 0px;
+    padding-bottom: 2px;
     font-family: 'Times New Roman';
-    font-size: 45px;
+    font-size: 58px;
   }
   .workersimg {
-    height: 380px;
+    margin-top:20px;
+    height: 430px;
     width: 100%;
     background-image: url('../../assets/Workers.png');
     background-repeat: no-repeat;
@@ -86,7 +88,7 @@
     background-size: contain;
   }
   .Wrapper {
-    margin-left: 100px;
+    margin-left: 12%;
     margin-top: 80px;
     margin-bottom: 0px;
     width: 100%;
@@ -94,12 +96,12 @@
   }
   .textarea h2 {
     margin: 0px;
-    font-size: 35px;
+    font-size: 38px;
     font-style: bold;
   }
   .textarea p {
     margin: 0px;
-    font-size: 18px;
+    font-size: 20px;
   }
   .textarea input[type="submit"] {
     border: none;
@@ -145,7 +147,8 @@
     font-style: bold;    
   }
  .FeatHeadings h5 {
-    margin: 0px;
+    margin-left: -15px;
+    font-size: 23px;
   }
   .row {
     margin: 0px;
@@ -219,6 +222,7 @@
     background-size: cover;
     width: 400px;
     margin-bottom: 50px;
+    margin-right: 80px;
   }  
   .Grid2-box1 {
     padding: 0px;
@@ -258,7 +262,7 @@
     border: none;
     background-color: #dedee0;
     color: #aaa;
-    width: 290px;
+    width: 400px;
     height: 55px;
     font-family: Arial;
     font-size: 22px;
