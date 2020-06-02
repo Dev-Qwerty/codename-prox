@@ -66,16 +66,17 @@
 
 <style scoped>
   .box {
-    padding: 100px;
+    padding-top: 129px;
+    padding-left: 100px;
     width: 100%;
-    height:300px;
+    height:400px;
     background-color: #eeefef;
   }
   .box h1 {
     margin: 0px;
-    padding: 0px;
+    padding-bottom: 2px;
     font-family: 'Times New Roman';
-    font-size: 45px;
+    font-size: 58px;
   }
   .workersimg {
     height: 380px;
