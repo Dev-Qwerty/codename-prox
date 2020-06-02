@@ -79,7 +79,7 @@
     font-size: 58px;
   }
   .workersimg {
-    margin-top: 30px;
+    margin-top:20px;
     height: 430px;
     width: 100%;
     background-image: url('../../assets/Workers.png');
@@ -88,7 +88,7 @@
     background-size: contain;
   }
   .Wrapper {
-    margin-left: 100px;
+    margin-left: 12%;
     margin-top: 80px;
     margin-bottom: 0px;
     width: 100%;
@@ -96,12 +96,12 @@
   }
   .textarea h2 {
     margin: 0px;
-    font-size: 35px;
+    font-size: 38px;
     font-style: bold;
   }
   .textarea p {
     margin: 0px;
-    font-size: 18px;
+    font-size: 20px;
   }
   .textarea input[type="submit"] {
     border: none;
@@ -147,7 +147,8 @@
     font-style: bold;    
   }
  .FeatHeadings h5 {
-    margin: 0px;
+    margin-left: -15px;
+    font-size: 23px;
   }
   .row {
     margin: 0px;
