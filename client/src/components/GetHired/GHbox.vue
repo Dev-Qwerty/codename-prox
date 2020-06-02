@@ -222,6 +222,7 @@
     background-size: cover;
     width: 400px;
     margin-bottom: 50px;
+    margin-right: 80px;
   }  
   .Grid2-box1 {
     padding: 0px;
@@ -261,7 +262,7 @@
     border: none;
     background-color: #dedee0;
     color: #aaa;
-    width: 290px;
+    width: 400px;
     height: 55px;
     font-family: Arial;
     font-size: 22px;
