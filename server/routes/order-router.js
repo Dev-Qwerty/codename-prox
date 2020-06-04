@@ -1,7 +1,14 @@
 const express = require('express');
+const http = require('http')
+const https = require('https')
+const qs = require('querystring')
 const router = express.Router();
 const uniqueId = require('../misc/unique-id')
 const assignWorker = require('../misc/assign-worker')
+
+// express body parser
+const expressUrl = express.urlencoded({ extended: false })
+const expressJson =  express.json({ extended: false })
 
 // import order model
 const orderModel = require('../models/order-model');
@@ -9,7 +16,8 @@ const subserviceModel = require('../models/subservice-model');
 const workRequestModel = require('../models/workrequest-model');
 const mainserviceModel = require('../models/mainservice-model')
 
-const paytmconfig = require('../config/paymentgateway/paytmconfig')
+const paytm = require('../config/paymentgateway/paytmconfig')
+const checksum_lib = require('../config/paymentgateway/checksum')
 
 
 router
@@ -84,137 +92,136 @@ router
 
 router
     .route('/placeorder/paynow')
+    // For payment testing
     .get((req, res) => {
+        res.render('payment')
+    })
+    .post((req, res) => {
         var orderId = uniqueId.uniqueOrderId()
         var paymentDetails = {
-            // amount: req.body.amount,
-            // customerId: req.body.customerId,
-            // customerEmail: req.body.customerEmail,
-            // customerPhone: req.body.customerPhone
-            customerId: '145233',
-            amount: '2599',
-            customerEmail: 'abc@mailinator.com',
-            customerPhone: '7777777777'
+            amount: req.body.amount,
+            customerId: req.body.customerId,
+            customerEmail: req.body.customerEmail,
+            customerPhone: req.body.customerPhone
+            // customerId: '145233',
+            // amount: '2599',
+            // customerEmail: 'abc@mailinator.com',
+            // customerPhone: '7777777777'
         }
         if(!paymentDetails.amount || !paymentDetails.customerId || !paymentDetails.customerEmail || !paymentDetails.customerPhone) {
             res.status(400).send('Payment failed')
         } else {
-            switch (req.url) {
-                case "/placeorder/paynow":
-                    var params = {};
-                    params['MID'] = paytmconfig.PaytmConfig.mid;
-                    params['WEBSITE'] = paytmconfig.PaytmConfig.website;
-                    params['CHANNEL_ID'] = 'WEB';
-                    params['INDUSTRY_TYPE_ID'] = 'Retail';
-                    params['ORDER_ID'] = orderId;
-                    params['ORDER_ID'] = orderId;
-                    params['CUST_ID'] = paymentDetails.customerId;
-                    params['TXN_AMOUNT'] = paymentDetails.amount;
-                    params['CALLBACK_URL'] = 'http://localhost:3000/callback';
-                    params['EMAIL'] = paymentDetails.customerEmail;
-                    params['MOBILE_NO'] = paymentDetails.customerPhone;
-    
-    
-                    paytmconfig.checksum_lib.genchecksum(params, paytmconfig.PaytmConfig.key, function (err, checksum) {
-                        var txn_url = "https://securegw-stage.paytm.in/theia/processTransaction"; // for staging
-                        // var txn_url = "https://securegw.paytm.in/theia/processTransaction"; // for production
-    
-                        var form_fields = "";
-                        for (var x in params) {
-                            form_fields += "<input type='hidden' name='" + x + "' value='" + params[x] + "' >";
+            var params = {};
+            params['MID'] = paytm.PaytmConfig.mid;
+            params['WEBSITE'] = paytm.PaytmConfig.website;
+            params['CHANNEL_ID'] = 'WEB';
+            params['INDUSTRY_TYPE_ID'] = 'Retail';
+            params['ORDER_ID'] = orderId;
+            params['ORDER_ID'] = orderId;
+            params['CUST_ID'] = paymentDetails.customerId;
+            params['TXN_AMOUNT'] = paymentDetails.amount;
+            params['CALLBACK_URL'] = 'http://localhost:3000/orders/placeorder/paynow/callback';
+            params['EMAIL'] = paymentDetails.customerEmail;
+            params['MOBILE_NO'] = paymentDetails.customerPhone;
+
+
+            checksum_lib.genchecksum(params, paytm.PaytmConfig.key, function (err, checksum) {
+                var txn_url = "https://securegw-stage.paytm.in/theia/processTransaction"; // for staging
+                // var txn_url = "https://securegw.paytm.in/theia/processTransaction"; // for production
+
+                var form_fields = "";
+                for (var x in params) {
+                    form_fields += "<input type='hidden' name='" + x + "' value='" + params[x] + "' >";
+                }
+                form_fields += "<input type='hidden' name='CHECKSUMHASH' value='" + checksum + "' >";
+
+                res.writeHead(200, { 'Content-Type': 'text/html' });
+                res.write('<html><head><title>Merchant Checkout Page</title></head><body><center><h1>Please do not refresh this page...</h1></center><form method="post" action="' + txn_url + '" name="f1">' + form_fields + '</form><script type="text/javascript">document.f1.submit();</script></body></html>');
+                res.end();
+            });
+        }
+    })    
+router
+    .route('/placeorder/paynow/callback')
+    .post((req, res) => {
+        var body = '';
+        
+        req.on('data', function (data) {
+            body += data;
+        });
+        
+        req.on('end', function () {
+            var html = "";
+            var post_data = qs.parse(body);
+            
+
+            // received params in callback
+            console.log('Callback Response: ', post_data, "\n");
+            html += "<b>Callback Response</b><br>";
+            for (var x in post_data) {
+                html += x + " => " + post_data[x] + "<br/>";
+            }
+            html += "<br/><br/>";
+
+
+            // verify the checksum
+            var checksumhash = post_data.CHECKSUMHASH;
+            // delete post_data.CHECKSUMHASH;
+            var result = checksum_lib.verifychecksum(post_data, paytm.PaytmConfig.key, checksumhash);
+            console.log("Checksum Result => ", result, "\n");
+            html += "<b>Checksum Result</b> => " + (result ? "True" : "False");
+            html += "<br/><br/>";
+
+
+
+            // Send Server-to-Server request to verify Order Status
+            var params = { "MID": paytm.PaytmConfig.mid, "ORDERID": post_data.ORDERID };
+
+            checksum_lib.genchecksum(params, paytm.PaytmConfig.key, function (err, checksum) {
+
+                params.CHECKSUMHASH = checksum;
+                post_data = 'JsonData=' + JSON.stringify(params);
+
+                var options = {
+                    hostname: 'securegw-stage.paytm.in', // for staging
+                    // hostname: 'securegw.paytm.in', // for production
+                    port: 443,
+                    path: '/merchant-status/getTxnStatus',
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Content-Length': post_data.length
+                    }
+                };
+
+
+                // Set up the request
+                var response = "";
+                var post_req = https.request(options, function (post_res) {
+                    post_res.on('data', function (chunk) {
+                        response += chunk;
+                    });
+
+                    post_res.on('end', function () {
+                        console.log('S2S Response: ', response, "\n");
+
+                        var _result = JSON.parse(response);
+                        html += "<b>Status Check Response</b><br>";
+                        for (var x in _result) {
+                            html += x + " => " + _result[x] + "<br/>";
                         }
-                        form_fields += "<input type='hidden' name='CHECKSUMHASH' value='" + checksum + "' >";
-    
+
                         res.writeHead(200, { 'Content-Type': 'text/html' });
-                        res.write('<html><head><title>Merchant Checkout Page</title></head><body><center><h1>Please do not refresh this page...</h1></center><form method="post" action="' + txn_url + '" name="f1">' + form_fields + '</form><script type="text/javascript">document.f1.submit();</script></body></html>');
+                        res.write(html);
                         res.end();
                     });
-                    break;
-    
-                case "/callback":
-    
-                    var body = '';
-    
-                    req.on('data', function (data) {
-                        body += data;
-                    });
-    
-                    req.on('end', function () {
-                        var html = "";
-                        var post_data = qs.parse(body);
-    
-    
-                        // received params in callback
-                        console.log('Callback Response: ', post_data, "\n");
-                        html += "<b>Callback Response</b><br>";
-                        for (var x in post_data) {
-                            html += x + " => " + post_data[x] + "<br/>";
-                        }
-                        html += "<br/><br/>";
-    
-    
-                        // verify the checksum
-                        var checksumhash = post_data.CHECKSUMHASH;
-                        // delete post_data.CHECKSUMHASH;
-                        var result = paytmconfig.checksum_lib.verifychecksum(post_data, PaytmConfig.key, checksumhash);
-                        console.log("Checksum Result => ", result, "\n");
-                        html += "<b>Checksum Result</b> => " + (result ? "True" : "False");
-                        html += "<br/><br/>";
-    
-    
-    
-                        // Send Server-to-Server request to verify Order Status
-                        var params = { "MID": PaytmConfig.mid, "ORDERID": post_data.ORDERID };
-    
-                        paytmconfig.paytmconfig.checksum_lib.genchecksum(params, PaytmConfig.key, function (err, checksum) {
-    
-                            params.CHECKSUMHASH = checksum;
-                            post_data = 'JsonData=' + JSON.stringify(params);
-    
-                            var options = {
-                                hostname: 'securegw-stage.paytm.in', // for staging
-                                // hostname: 'securegw.paytm.in', // for production
-                                port: 443,
-                                path: '/merchant-status/getTxnStatus',
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/x-www-form-urlencoded',
-                                    'Content-Length': post_data.length
-                                }
-                            };
-    
-    
-                            // Set up the request
-                            var response = "";
-                            var post_req = https.request(options, function (post_res) {
-                                post_res.on('data', function (chunk) {
-                                    response += chunk;
-                                });
-    
-                                post_res.on('end', function () {
-                                    console.log('S2S Response: ', response, "\n");
-    
-                                    var _result = JSON.parse(response);
-                                    html += "<b>Status Check Response</b><br>";
-                                    for (var x in _result) {
-                                        html += x + " => " + _result[x] + "<br/>";
-                                    }
-    
-                                    res.writeHead(200, { 'Content-Type': 'text/html' });
-                                    res.write(html);
-                                    res.end();
-                                });
-                            });
-    
-                            // post the data
-                            post_req.write(post_data);
-                            post_req.end();
-                        });
-                    });
-    
-                    break;
-            }
-        }
+                });
+
+                // post the data
+                post_req.write(post_data);
+                post_req.end();
+            });
+        });
     })
 
 module.exports = router;

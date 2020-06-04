@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+</head>
+<body>
+    <form action="/orders/placeorder/paynow" method="POST">
+        <label for="cusotmerid">Customer Id: </label>
+        <input type="text" name="customerId"><br>
+        <label for="cusotmerid">Amount: </label>
+        <input type="text" name="amount"><br>
+        <label for="cusotmerid">Customer Email: </label>
+        <input type="text" name="customerEmail"><br>
+        <label for="cusotmerid">Customer Phone: </label>
+        <input type="text" name="customerPhone"><br>
+        <button type="submit">Pay now</button>
+    </form>
+</body>
+</html>
