@@ -8,6 +8,14 @@ const categorySchema = mongoose.Schema({
     amount: {
         type: Number,
         required: true
+    },
+    quantity: {
+        type: Number,
+        required: true,
+        default: 0
+    },
+    imagePath: {
+        type: String
     }
 })
 
@@ -32,6 +40,8 @@ const subserviceSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    supportImages: [String],
+    supportVideos: [String],
     categories: [categorySchema]
 })
 

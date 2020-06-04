@@ -37,7 +37,8 @@ const subserviceRouter = require('./routes/subservice-router');
 const workerRouter = require("./routes/worker-router");
 const companyRouter = require("./routes/company-router");
 const orderRouter = require('./routes/order-router');
-const workerRequest = require('./routes/workrequest-route')
+const workerRequest = require('./routes/workrequest-route');
+const loginRouter = require('./routes/login-route');
 
 
 // set relative path
@@ -47,6 +48,7 @@ app.use('/worker', workerRouter)
 app.use('/company', companyRouter)
 app.use('/orders', orderRouter)
 app.use('/request', workerRequest)
+app.use('/auth', loginRouter)
 
 // version check for mobile app
 app.get('/checkserviceversion', async (req, res) => {

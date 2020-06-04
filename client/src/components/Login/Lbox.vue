@@ -85,6 +85,7 @@ export default {
             .then(responses => {
               if(responses.data.status == "Success") {
                 this.$cookies.set("username", username, '1d');
+                this.$cookies.set("pid", jwtToken, '1d');
                 this.$session.start();
                 this.$session.set('jwt', jwtToken);
                 window.location.href = "http://localhost:8080/dashboard";
@@ -124,7 +125,7 @@ export default {
     width: 33%;
     height: 65%;
     background-color: #fff;
-    top: 63%;
+    top: 58%;
     left: 50%;
     position: absolute;
     box-sizing: border-box;

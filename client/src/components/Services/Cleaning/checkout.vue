@@ -2,11 +2,51 @@
   <div class="Modal">
     <div class="Mbg">
       <div class="Mbox">
-        <div class="Img">
-          <router-link :to="{ path: '/services/cleaning/modal/cart' }">
-            <div class="cbtn"></div>
-          </router-link>
-        </div>  
+        <div class="mainheader">
+          <div>
+            <p class="header-p">CHECKOUT</p>
+          </div>
+          <div>
+            <router-link :to="{ path: '/services/cleaning/modal/cart' }">
+              <div class="cbtn"></div>
+            </router-link>
+          </div>
+
+        </div>
+        <div>
+
+        </div>
+        <div class="address">
+          <p class="addrheader">Address</p>
+          <form class="addr" action="" method="">
+            <div>
+              <input class="input-box" type="text" name="uname" placeholder="Full Name" v-model="username">
+            </div>
+            <div>
+              <input class="input-box" type="text" name="contactno" placeholder="Contact Number" v-model="password">
+            </div>
+            <div>
+              <input class="input-box" type="text" name="flatname" placeholder="Flat name/no." v-model="username">
+            </div>
+            <div>
+              <input class="input-box" type="text" name="saddr" placeholder="Street Address" v-model="password">
+            </div>
+            <div>
+              <input class="input-box" type="text" name="district" placeholder="District" v-model="username">
+            </div>
+            <div>
+              <input class="input-box" type="text" name="pincode" placeholder="Pincode" v-model="password">
+            </div>                        
+          </form>          
+        </div> 
+        <div class="td">
+          <div>
+            <p class="tdheader">Current date and time</p>
+          </div>
+          <div>
+            <input type="datetime-local" class="tdfield" value="2018-06-12T19:30" min="2018-06-07T00:00" max="2018-06-14T00:00">
+          </div>          
+        </div> 
         <div class="btns">
           <div>
             <router-link class="paynowbtn" :to="{name: ''}" @click.native="paynowfn">
@@ -59,20 +99,24 @@ export default {
   }
   .Mbox {
     position: absolute;
-    top: 6%;
+    top: 5%;
     left: 25%;
     width: 50%;
-    height: 600px;
+    height: 610px;
     background-color: #fff;
   }
-  .Img {
-    margin: 0px;
+  .mainheader {
     width: 100%;
-    height: 340px;
-    background-image: url(../../../assets/cout3.png);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;        
+    height: 50px;
+    background-color: #f2f2f2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;    
+  }
+  .header-p {
+    font-size: 20px;
+    padding-left: 5%;
+    padding-top: 3%;
+    font-weight: bold;
   }
   .cbtn {
     position: absolute;
@@ -92,9 +136,38 @@ export default {
     text-align: center;
     margin-bottom: 0px;
   }
+  .address {
+    margin-left: 100px;
+    margin-top: 25px;
+  }
+  .addrheader {
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
+  }
+  .input-box {
+    font-size: 18px;
+    width: 80%;
+    margin-top: 20px;
+    border-right: none;
+    border-top: none;
+    border-left: none; 
+    border-bottom: 1px solid #aaa;
+  }
+  .td {
+    margin-left: 100px;
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: 35% 65%;
+  }  
+  .tdheader {
+    font-size: 18px;
+  }
   .btns {
-    margin-top: 70px;
-    margin-left: 35%;
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-left: 23%;
   }  
   .paynowbtn input[type="submit"]{
     width: 40%;
@@ -105,7 +178,6 @@ export default {
     border-radius: 5px;
   }
   .paylaterbtn input[type="submit"]{
-    margin-top: 20px;
     width: 40%;
     height: 45px;
     border: none;

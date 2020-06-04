@@ -125,57 +125,6 @@ router.post('/signup', (req, res) => {
   })
 });
 
-router.post('/login', (req, res) => {
-  const LoginData = {
-    Username: req.body.username,
-    Password: req.body.password
-  }
-  const AuthenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(LoginData);
-
-  const UserData = {
-    Username: req.body.username,
-    Pool: userPool
-  }
-
-  const cognitoUser = new AmazonCognitoIdentity.CognitoUser(UserData);
-  cognitoUser.authenticateUser(AuthenticationDetails, {
-    onSuccess: data => {
-      const jwtToken = encrypt(data.idToken.jwtToken);
-      const username = encrypt(data.idToken.payload.sub);
-      Token.find({id: username},(err,results) => {
-        //If token doesn't exist, create new token
-        if(results.length == 0) {
-          const newToken = new Token({
-            token: jwtToken,
-            id: username
-          })
-          newToken
-          .save()
-          .then(token => {
-            res.send({ status: "Success", jwt: jwtToken, username: username, token: token });
-          })
-          .catch(err => {
-            console.log(err);
-          })
-        }
-        //Else, update the token on login
-        else {
-          let t = {};
-          t.token = jwtToken;
-          t = {$set: t};
-          Token.update({id: username}, t).then(() => {
-            res.send({status: "Success", jwt: jwtToken, username: username, t: t});
-          })
-        }
-      })
-      
-    },
-    onFailure: err => {
-      res.send(err.code);
-    }
-  })
-})
-
 router.post('/forgotPassword', (req, res) => {
   const cognitoUser = new AmazonCognitoIdentity.CognitoUser({
     Username: req.body.email,
@@ -223,23 +172,38 @@ router.post('/confirmEmail', (req, res) => {
 })
 
 router.post('/completeProfile/:id', (req, res) => {
-  let id = req.params.id;
-  let user = {};
+  const t = req.body.token;
+  Token.findOne({token: t}, (err,results) => {
+    if(results.length == 0) {
+      res.send({status: "Error!", code: "Invalid token!"});
+    }
+    else {
+      let id = req.params.id;
+      let user = {};
 
-  if (req.body.name) user.name = req.body.name;
-  if (req.body.addresses) user.addresses = req.body.addresses;
+      if (req.body.name) user.name = req.body.name;
+      if (req.body.addresses) user.addresses = req.body.addresses;
 
-  user = { $set: user }
+      user = { $set: user }
 
-  User.update({ userID: id }, user).then(() => {
-    res.send(user);
-  }).catch((err) => {
-    console.log(err);
+      User.update({ userID: id }, user).then(() => {
+        res.send(user);
+      }).catch((err) => {
+        console.log(err);
+      })
+
+    }
   })
 })
 
 router.post('/updateProfile/:id', (req, res) => {
-  let id = req.params.id;
+  const t = req.body.token;
+  Token.findOne({token: t}, (err,results) => {
+    if(results.length == 0) {
+      res.send({status: "Error!", code: "Invalid token!"});
+    }
+    else {
+      let id = req.params.id;
   let user = {};
 
   if (req.body.name) user.name = req.body.name;
@@ -327,8 +291,10 @@ router.post('/updateProfile/:id', (req, res) => {
         res.send(err.code);
       }
     })
+    }
   }
-
+  })
+  
 })
 
 router.post('/logout', (req, res) => {
@@ -345,23 +311,39 @@ router.post('/logout', (req, res) => {
 })
 
 router.post('/addAddress', (req, res) => {
-  const newAddress = req.body.address;
-  let user = {};
-  user.addresses = newAddress;
-  user = { $push: user };
-  User.update({ userID: req.body.userID }, user).then(() => {
-    res.send({ status: "Success", user: user });
+  const t = req.body.token;
+  Token.findOne({token: t}, (err,result) => {
+    if(result.length == 0) {
+      res.send({status: "Error!", code: "Invalid token!"});
+    }
+    else {
+      const newAddress = req.body.address;
+      let user = {};
+      user.addresses = newAddress;
+      user = { $push: user };
+      User.update({ userID: req.body.userID }, user).then(() => {
+        res.send({ status: "Success", user: user });
+      })
+        .catch(err => res.send({ err: err }))
+    }
   })
-    .catch(err => res.send({ err: err }))
 })
 
 router.post('/viewProfile', (req, res) => {
-  const userID = req.body.userID;
-  User.findOne({ userID: userID }, (err, results) => {
-    if (err) {
-      res.send({ status: "Error!", error: err });
+  const t = req.body.token;
+  Token.findOne({token: t}, (err,result) => {
+    if(result.length == 0) {
+      res.send({status: "Error!", code: "Invalid token!"});
     }
-    res.send({ status: "Success", data: results });
+    else {
+      const userID = req.body.userID;
+      User.findOne({ userID: userID }, (err, results) => {
+        if (err) {
+          res.send({ status: "Error!", error: err });
+        }
+        res.send({ status: "Success", data: results });
+      })
+    }
   })
 })
 

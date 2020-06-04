@@ -17,6 +17,11 @@
       <div>
         <input class="sbutton" type="submit" name="" value="Sign up" @click.prevent="signUp()">
       </div>
+      <div>
+        <router-link class="arrowIcon" :to="{ path: '/gethired' }">
+          <p class="prof">Are you a proffessional?</p>
+        </router-link>  
+      </div>
     </form>
           
   </div>
@@ -77,9 +82,9 @@ export default {
 <style scoped>    
   .box {
     width: 33%;
-    height: 65%;
+    height: 70%;
     background-color: #fff;
-    top: 63%;
+    top: 59%;
     left: 50%;
     position: absolute;
     box-sizing: border-box;
@@ -117,5 +122,10 @@ export default {
     padding-top: 15px;
     padding-right: 12px;
     padding-bottom: 15px;
+  }
+  .prof {
+    margin-top: 10px;
+    font-size: 15px;
+    color: #000;
   }
 </style>
