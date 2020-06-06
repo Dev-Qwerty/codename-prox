@@ -5,8 +5,10 @@
 
 <style scoped>
   .wrapper {
-    width: 100%;
-    height: 648px;
+    margin-left: 5%;
+    width: 90%;
+    height: 630px;
     background-color: #eeefef;
+    margin-bottom: 20px;
   }
 </style>

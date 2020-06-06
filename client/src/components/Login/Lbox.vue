@@ -125,7 +125,7 @@ export default {
     width: 33%;
     height: 65%;
     background-color: #fff;
-    top: 63%;
+    top: 58%;
     left: 50%;
     position: absolute;
     box-sizing: border-box;
