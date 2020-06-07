@@ -4,6 +4,7 @@ const qs = require('querystring')
 const router = express.Router();
 const uniqueId = require('../misc/unique-id')
 const assignWorker = require('../misc/assign-worker')
+const moment = require('moment')
 
 // Middleware for body parsing
 const parseUrl = express.urlencoded({ extended: false })
@@ -30,9 +31,7 @@ router
 
             // calculate total amount and category
             for (i = 0; i < req.body.service.categories.length; i++) {
-                console.log(req.body.service.categories[i].categoryName)
                 const serviceDetails = await subserviceModel.find({ categories: { $elemMatch: { _id: req.body.service.categories[i].categoryName } } }, 'categories.$')
-                console.log(serviceDetails)
                 itemAmount = serviceDetails[0].categories[0].amount * req.body.service.categories[i].quantity; // Find amount of each category
                 totalAmount = totalAmount + itemAmount;
                 req.body.service.categories[i].categoryName = serviceDetails[0].categories[0].category  // saving category name replacing categoryId in body of the request
@@ -57,8 +56,8 @@ router
             newOrder.address = req.body.address;
             newOrder.time = req.body.time;
 
-            newOrder.save()
-            res.json({ "message": "Order placed succesfully" })
+            newOrder.save();
+            res.json({ "message": "Order placed succesfully" });
 
 
             // function call to find worker for job assigning 
@@ -76,15 +75,46 @@ router
             newWorkRequest.date = req.body.date;
             newWorkRequest.time = req.body.time;
 
-            newWorkRequest.save()
+            // Find dueDate
+            let today = new Date() // Find today's date
+            let OrderDate = new Date(newOrder.date) // Order date
+            let hour = moment().hour() // Curent time
+            //  hour = ((hour + 11) % 12 + 1); // convert to 12hr
+            let dueDate = new Date() // Current time for setting dueDate
+            
+            
+            if(today.getDate() == OrderDate.getDate()){
+                if(hour>=0 && hour <=6){ 
+                    //set time = 7:30 AM
+                    dueDate = moment(dueDate).set({hour:7,minute:30,second:0,millisecond:0});
+                }else{
+                    // set time as current time + 15 min
+                    dueDate = moment(dueDate).add(15, 'minutes');
+                }
+            }else {
+                if(hour>=0 && hour <= 6){
+                    // set time = 7:30 AM of current day
+                    dueDate = moment(dueDate).set({hour:7,minute:30,second:0,millisecond:0});
+                }else if(hour>=22 && hour <24){
+                    // set time = 7:30 AM of next day
+                    dueDate = moment().add(1, 'days');
+                    dueDate = moment(dueDate).set({hour:7,minute:30,second:0,millisecond:0});
+                }else {
+                    // set time as current time + 30 min
+                    dueDate = moment(dueDate).add(30, 'minutes');
+                }
+            }
+
+            newWorkRequest.dueDate = dueDate;
+            newWorkRequest.save();
 
             // TODO: send notification to worker about work assigned
 
 
         } catch (error) {
             // TODO : If error is duplicate orderid create new orderid and save that order to database
-            console.log(" error occured")
-            res.json({ "message": "Failed to place Order" })
+            console.log(error)
+            // res.json({ "message": "Failed to place Order" })
         }
 
     })
