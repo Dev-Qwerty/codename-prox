@@ -51,6 +51,10 @@ const workerRequestSchema = mongoose.Schema({
     time: {
         type: String,
         require: true
+    },
+    dueDate: {
+        type: Date,
+        required: true
     }
 })
 
