@@ -15,7 +15,7 @@ const subserviceModel = require('../models/subservice-model');
 const workRequestModel = require('../models/workrequest-model');
 const mainserviceModel = require('../models/mainservice-model')
 
-const paytm = require('../config/paymentgateway/paytmconfig')
+const paytm = require('../config/keys')
 const checksum_lib = require('../config/paymentgateway/checksum')
 
 
