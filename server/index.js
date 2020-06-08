@@ -14,8 +14,8 @@ app.use(cors());
 });*/
 
 // Middleware for body parsing
-app.use(express.urlencoded({ extended: false }))
-app.use(express.json({ extended: false }))
+const parseUrl = express.urlencoded({ extended: false })
+const parseJson = express.json({ extended: false })
 
 app.use(session(
     {
@@ -42,13 +42,13 @@ const loginRouter = require('./routes/login-route');
 
 
 // set relative path
-app.use('/customer', customerRouter)
-app.use('/services', subserviceRouter)
-app.use('/worker', workerRouter)
-app.use('/company', companyRouter)
+app.use('/customer', [parseUrl,parseJson], customerRouter)
+app.use('/services', [parseUrl,parseJson], subserviceRouter)
+app.use('/worker', [parseUrl,parseJson], workerRouter)
+app.use('/company', [parseUrl,parseJson], companyRouter)
 app.use('/orders', orderRouter)
-app.use('/request', workerRequest)
-app.use('/auth', loginRouter)
+app.use('/request', [parseUrl,parseJson], workerRequest)
+app.use('/auth', [parseUrl,parseJson], loginRouter)
 
 // version check for mobile app
 app.get('/checkserviceversion', async (req, res) => {

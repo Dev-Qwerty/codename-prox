@@ -1,5 +1,4 @@
 const express = require('express');
-const http = require('http')
 const https = require('https')
 const qs = require('querystring')
 const router = express.Router();
@@ -7,9 +6,9 @@ const uniqueId = require('../misc/unique-id')
 const assignWorker = require('../misc/assign-worker')
 const moment = require('moment')
 
-// express body parser
-const expressUrl = express.urlencoded({ extended: false })
-const expressJson =  express.json({ extended: false })
+// Middleware for body parsing
+const parseUrl = express.urlencoded({ extended: false })
+const parseJson = express.json({ extended: false })
 
 // import order model
 const orderModel = require('../models/order-model');
@@ -17,13 +16,13 @@ const subserviceModel = require('../models/subservice-model');
 const workRequestModel = require('../models/workrequest-model');
 const mainserviceModel = require('../models/mainservice-model')
 
-const paytm = require('../config/paymentgateway/paytmconfig')
+const paytm = require('../config/keys')
 const checksum_lib = require('../config/paymentgateway/checksum')
 
 
 router
     .route('/placeorder/pay-later')
-    .post(async (req, res) => {
+    .post([parseUrl,parseJson], async (req, res) => {
         try {
             global.totalAmount = 0;  // total amount variable
             global.newOrder = new orderModel;  // create new order instance
@@ -126,7 +125,7 @@ router
     .get((req, res) => {
         res.render('payment')
     })
-    .post((req, res) => {
+    .post([parseUrl,parseJson], (req, res) => {
         var orderId = uniqueId.uniqueOrderId()
         var paymentDetails = {
             amount: req.body.amount,
@@ -170,88 +169,79 @@ router
                 res.end();
             });
         }
-    })    
+    })
+
 router
     .route('/placeorder/paynow/callback')
     .post((req, res) => {
+
         var body = '';
-        
-        req.on('data', function (data) {
-            body += data;
-        });
-        
-        req.on('end', function () {
-            var html = "";
-            var post_data = qs.parse(body);
-            
 
-            // received params in callback
-            console.log('Callback Response: ', post_data, "\n");
-            html += "<b>Callback Response</b><br>";
-            for (var x in post_data) {
-                html += x + " => " + post_data[x] + "<br/>";
-            }
-            html += "<br/><br/>";
+	        req.on('data', function (data) {
+	            body += data;
+	        });
+
+	        req.on('end', function () {
+				var html = "";
+				var post_data = qs.parse(body);
+
+				// received params in callback
+                console.log('Callback Response: ', post_data, "\n");
 
 
-            // verify the checksum
-            var checksumhash = post_data.CHECKSUMHASH;
-            // delete post_data.CHECKSUMHASH;
-            var result = checksum_lib.verifychecksum(post_data, paytm.PaytmConfig.key, checksumhash);
-            console.log("Checksum Result => ", result, "\n");
-            html += "<b>Checksum Result</b> => " + (result ? "True" : "False");
-            html += "<br/><br/>";
+				// verify the checksum
+				var checksumhash = post_data.CHECKSUMHASH;
+				// delete post_data.CHECKSUMHASH;
+				var result = checksum_lib.verifychecksum(post_data, paytm.PaytmConfig.key, checksumhash);
+				console.log("Checksum Result => ", result, "\n");
 
 
+				// Send Server-to-Server request to verify Order Status
+				var params = {"MID": paytm.PaytmConfig.mid, "ORDERID": post_data.ORDERID};
 
-            // Send Server-to-Server request to verify Order Status
-            var params = { "MID": paytm.PaytmConfig.mid, "ORDERID": post_data.ORDERID };
+				checksum_lib.genchecksum(params, paytm.PaytmConfig.key, function (err, checksum) {
 
-            checksum_lib.genchecksum(params, paytm.PaytmConfig.key, function (err, checksum) {
+					params.CHECKSUMHASH = checksum;
+					post_data = 'JsonData='+JSON.stringify(params);
 
-                params.CHECKSUMHASH = checksum;
-                post_data = 'JsonData=' + JSON.stringify(params);
-
-                var options = {
-                    hostname: 'securegw-stage.paytm.in', // for staging
-                    // hostname: 'securegw.paytm.in', // for production
-                    port: 443,
-                    path: '/merchant-status/getTxnStatus',
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                        'Content-Length': post_data.length
-                    }
-                };
+					var options = {
+						hostname: 'securegw-stage.paytm.in', // for staging
+						// hostname: 'securegw.paytm.in', // for production
+						port: 443,
+						path: '/merchant-status/getTxnStatus',
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/x-www-form-urlencoded',
+							'Content-Length': post_data.length
+						}
+					};
 
 
-                // Set up the request
-                var response = "";
-                var post_req = https.request(options, function (post_res) {
-                    post_res.on('data', function (chunk) {
-                        response += chunk;
-                    });
+					// Set up the request
+					var response = "";
+					var post_req = https.request(options, function(post_res) {
+						post_res.on('data', function (chunk) {
+							response += chunk;
+						});
 
-                    post_res.on('end', function () {
-                        console.log('S2S Response: ', response, "\n");
+						post_res.on('end', function(){
+							console.log('S2S Response: ', response, "\n");
 
-                        var _result = JSON.parse(response);
-                        html += "<b>Status Check Response</b><br>";
-                        for (var x in _result) {
-                            html += x + " => " + _result[x] + "<br/>";
-                        }
+							var _result = JSON.parse(response);
+                            if(_result.STATUS == 'TXN_SUCCESS') {
+                                res.send('payment sucess')
+                            }else {
+                                res.send('payment failed')
+                            }
+						});
+					});
 
-                        res.writeHead(200, { 'Content-Type': 'text/html' });
-                        res.write(html);
-                        res.end();
-                    });
-                });
-
-                // post the data
-                post_req.write(post_data);
-                post_req.end();
-            });
-        });
+					// post the data
+					post_req.write(post_data);
+					post_req.end();
+				});
+	        });
     })
+    
 
 module.exports = router;
