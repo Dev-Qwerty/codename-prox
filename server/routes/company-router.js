@@ -5,8 +5,8 @@ const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
 const Company = require('../models/company-model');
 
 const poolData = {
-    UserPoolId: keys.cognito.userPoolId,
-    ClientId: keys.cognito.clientId
+    UserPoolId: keys.cognito.userPoolId || process.env['COGNITOUSERPOOLID'],
+    ClientId: keys.cognito.clientId || process.env['COGNITOCLIENTID']
 }
 
 const companyPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);

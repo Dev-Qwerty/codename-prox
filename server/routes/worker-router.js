@@ -9,8 +9,8 @@ const workOrderModel = require('../models/order-model');
 const Token = require('../models/token');
 
 const poolData = {
-	UserPoolId: keys.cognito.userPoolId,
-	ClientId: keys.cognito.clientId
+	UserPoolId: keys.cognito.userPoolId || process.env['COGNITOUSERPOOLID'],
+	ClientId: keys.cognito.clientId || process.env['COGNITOCLIENTID']
 }
 
 const workerPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
