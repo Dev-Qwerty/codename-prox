@@ -10,7 +10,7 @@
 export default {
   data () {
     return {
-      sitekey: '6LfsCfYUAAAAAEKiFDDFZW9yqlCZpd3G3EFoDy2w',
+      sitekey: process.env['RECAPTCHASITEKEY'] || '6LfsCfYUAAAAAEKiFDDFZW9yqlCZpd3G3EFoDy2w',
       widgetId: 0
     }
   },
