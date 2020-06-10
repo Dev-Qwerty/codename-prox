@@ -29,16 +29,15 @@ export default {
 
 <style scoped>
   .Mbg {
-    background-color: blue;
-    width: 100%;
-    height: 368%;
+    background-color: #eeefef;
+    width:100%;
+    height: 722px;
+    padding-top: 3%;
+    padding-left: 15%;
   }
   .Mbox {
-    position: absolute;
-    top: 20%;
-    left: 25%;
-    width: 50%;
+    width: 80%;
     height: 610px;
-    background-color: #fff;
+    background-color: #aaa;
   }    
 </style>
