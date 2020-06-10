@@ -1,5 +1,5 @@
 <template>
-  <div class="Container">
+  <div class="Container"> 
     <div class="box">
       <h1>GET A STEP FURTHER</h1>
       <h1>JOIN US.</h1>
@@ -15,7 +15,9 @@
         <p>Urban Company provides you an interface to meet with</p>
         <p>your customer to chat and make a deal to get their</p>
         <p>work done. So why waiting..</p>
-        <input type="submit" value="GET HIRED">
+        <router-link :to="{ name: 'wcSignup' }" @click="wcsignupfn">
+          <input type="submit" value="GET HIRED">
+        </router-link> 
       </div>
       <div class="img">
       </div>
@@ -60,9 +62,31 @@
         </div>
       </div>
       <div class="Grid1-box2"></div>
-    </div>  
+    </div>
+    <router-view>
+      <wcSignup />
+    </router-view>      
   </div>  
 </template>
+
+<script>
+import wcSignup from '@/components/GetHired/wcSignup.vue'
+
+export default {
+  name: 'GetHired',
+  components: {
+    wcSignup
+  },
+  data() {
+    return {
+    }
+  },
+  methods: {
+    wcsignupfn() {
+    }
+  }
+}
+</script>
 
 <style scoped>
   .box {
