@@ -15,7 +15,9 @@
         <p>Urban Company provides you an interface to meet with</p>
         <p>your customer to chat and make a deal to get their</p>
         <p>work done. So why waiting..</p>
-        <input type="submit" value="GET HIRED">
+        <router-link :to="{ path: '/gethired/signup' }">
+          <input type="submit" value="GET HIRED">
+        </router-link> 
       </div>
       <div class="img">
       </div>
