@@ -28,7 +28,7 @@ export default {
 <style scoped>
   .Mbg {
     position: absolute;
-    top: -10px;
+    top: 0;
     left: 0%;
     background: rgb(128, 128, 128, 0.8);
     width: 100%;

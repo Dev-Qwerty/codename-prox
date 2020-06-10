@@ -1,5 +1,5 @@
 <template>
-  <div class="Container">
+  <div class="Container"> 
     <div class="box">
       <h1>GET A STEP FURTHER</h1>
       <h1>JOIN US.</h1>
@@ -70,7 +70,6 @@
 </template>
 
 <script>
-import Nav from '@/components/Home/Navbar'
 import wcSignup from '@/components/GetHired/wcSignup.vue'
 
 export default {
