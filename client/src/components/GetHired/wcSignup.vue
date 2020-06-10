@@ -2,13 +2,15 @@
   <div class="Modal">
     <div class="Mbg">
       <div class="Mbox">
-                   
+        <h1>hello</h1>        
       </div>
     </div>
   </div>  
 </template>
 
 <script>
+
+
 export default {
   name: 'wcSignup',
   components: { 
@@ -27,10 +29,7 @@ export default {
 
 <style scoped>
   .Mbg {
-    position: absolute;
-    top: 0;
-    left: 0%;
-    background: rgb(128, 128, 128, 0.8);
+    background-color: blue;
     width: 100%;
     height: 368%;
   }

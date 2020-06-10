@@ -30,16 +30,12 @@ export default new VueRouter({
     },
     { 
       path: '/gethired', 
-      component: GetHired, 
-      children: [
-        {
-          path: 'signup',
-          name: 'wcSignup',
-          component: wcSignup,
-          props: true,      
-        },  
-      ]    
+      component: GetHired,    
     },
+    { 
+      path: '/wcsignup', 
+      component: wcSignup 
+    },    
     { 
       path: '/signup', 
       component: Signup,
