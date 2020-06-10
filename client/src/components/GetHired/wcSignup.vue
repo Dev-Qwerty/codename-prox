@@ -7,10 +7,8 @@
           
           </div>
           <div class="right">
+            <p class="wchdn">Urban Associates</p>
             <form class="inp" action="" method="">
-              <div>
-                <input class="input-box" type="Text" name="uname" placeholder="Full Name" v-model="username">
-              </div>
               <div>
                 <input class="input-box" type="email" name="uname" placeholder="Email" v-model="username">
               </div>              
@@ -73,21 +71,24 @@ export default {
     background-color: #eeefef;
     width:100%;
     height: 722px;
-    padding-top: 3%;
+    padding-top: 55px;
     padding-left: 14%;
   }
   .Mbox {
     width: 85%;
-    height: 630px;
+    height: 615px;
     display: grid;
     grid-template-columns: 55% 45%;
   }  
   .sh-bottom {
-    box-shadow: 0 5px 5px -6px #707070;
+    box-shadow: 0 5px 15px -6px #707070;
   }
   .sh-left {
     box-shadow: -5px 0 5px -6px #707070;
   }    
+  .ys-sh-all {
+    box-shadow: 0 0 5px #DBDBDB;
+  }  
   .leftPic {
     margin: 0px;
     width: 100%;
@@ -99,9 +100,15 @@ export default {
   .right {
     background-color: #fff;
   }
+  .wchdn {
+    font-size: 25px;
+    color: #000;
+    text-align: center;
+    margin-top: 50px;
+  }  
   .inp {
-    margin-left: 80px;
-    margin-top: 80px;
+    margin-left: 90px;
+    margin-top: 20px;
   }
   .inp .input-box {
     font-size: 15px;
@@ -114,7 +121,7 @@ export default {
     height: 30px;  
   } 
   .inp select {
-    margin-top: 20px;
+    margin-top: 30px;
     width: 40%;
     height: 30px;  
   }
@@ -123,7 +130,7 @@ export default {
   }
   .terms {
     font-size: 15px;
-    margin-top: 20px;
+    margin-top: 30px;
   }  
   .terms-label {
     margin-left: 10px;
@@ -140,7 +147,7 @@ export default {
     border-radius: 5px;
   }  
   .wcsignin {
-    margin-left: 153px;
+    margin-left: 160px;
     margin-top: 50px;
     color: #000;
     font-size: 14px;
