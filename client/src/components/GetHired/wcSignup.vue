@@ -7,7 +7,21 @@
           
           </div>
           <div class="right">
-            
+            <form class="inp" action="" method="">
+              <div>
+                <input class="input-box" type="email" name="uname" placeholder="Email" v-model="username">
+              </div>
+              <div>
+                <input class="input-box" type="text" name="contactno" placeholder="Phone Number" v-model="password">
+              </div>
+              <div>
+                <input class="input-box" type="password" name="flatname" placeholder="Password" v-model="username">
+              </div>  
+              <select name="jtitle" id="jtitle">
+                <option value="worker">Worker</option>
+                <option value="company">Company</option>
+              </select>                      
+            </form>              
           </div>      
         </div>
       </div>
@@ -64,5 +78,27 @@ export default {
   }
   .right {
     background-color: #fff;
+  }
+  .inp {
+    margin-left: 60px;
+    margin-top: 50px;
+  }
+  .inp .input-box {
+    font-size: 15px;
+    width: 80%;
+    margin-top: 20px;
+    border-right: none;
+    border-top: none;
+    border-left: none; 
+    border-bottom: 1px solid #aaa;
+    height: 30px;  
+  } 
+  .inp select {
+    margin-top: 20px;
+    width: 40%;
+    height: 30px;  
+  }
+  #jtitle {
+    font-size: 14px;
   }
 </style>
