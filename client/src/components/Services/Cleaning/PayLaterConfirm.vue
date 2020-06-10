@@ -18,9 +18,6 @@
           </div>-->
         </div>                
       </div>
-      <router-view>
-        <PayLaterConfirm />
-      </router-view>
     </div>
   </div>  
 </template>

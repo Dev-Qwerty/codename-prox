@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../components/Home/Main.vue'
 import GetHired from '../components/GetHired/GHMain.vue'
-import signup from '@/components/GetHired/Signup.vue'
+import wcSignup from '@/components/GetHired/wcSignup.vue'
 import Signup from '../components/Signup/SMain.vue'
 import Login from '../components/Login/LMain.vue'
 import About from '../components/About/Aboutmain.vue'
@@ -34,8 +34,8 @@ export default new VueRouter({
       children: [
         {
           path: 'signup',
-          name: 'signup',
-          component: signup,
+          name: 'wcSignup',
+          component: wcSignup,
           props: true,      
         },  
       ]    
