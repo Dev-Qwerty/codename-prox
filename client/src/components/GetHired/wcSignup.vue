@@ -9,19 +9,39 @@
           <div class="right">
             <form class="inp" action="" method="">
               <div>
-                <input class="input-box" type="email" name="uname" placeholder="Email" v-model="username">
+                <input class="input-box" type="Text" name="uname" placeholder="Full Name" v-model="username">
               </div>
+              <div>
+                <input class="input-box" type="email" name="uname" placeholder="Email" v-model="username">
+              </div>              
               <div>
                 <input class="input-box" type="text" name="contactno" placeholder="Phone Number" v-model="password">
               </div>
               <div>
                 <input class="input-box" type="password" name="flatname" placeholder="Password" v-model="username">
               </div>  
+              <div>
+                <input class="input-box" type="password" name="flatname" placeholder="Confirm Password" v-model="username">
+              </div>              
               <select name="jtitle" id="jtitle">
                 <option value="worker">Worker</option>
                 <option value="company">Company</option>
-              </select>                      
-            </form>              
+              </select>   
+              <div>
+              <div class="terms">
+                <input type="checkbox" name="check1" value="">
+                <label class="terms-label">I agree with terms and conditions</label>
+              </div>                
+                <router-link class="signupbtn" :to="{name: ''}" @click.native="paynowfn">
+                  <input type="submit" value="Sign Up">
+                </router-link> 
+              </div>                                 
+            </form> 
+            <div>
+              <router-link class="" :to="{ path: '/login' }">
+                <p class="wcsignin">Already have an account? Sign in.</p>
+              </router-link>  
+            </div>                         
           </div>      
         </div>
       </div>
@@ -58,9 +78,9 @@ export default {
   }
   .Mbox {
     width: 85%;
-    height: 610px;
+    height: 630px;
     display: grid;
-    grid-template-columns: 60% 40%;
+    grid-template-columns: 55% 45%;
   }  
   .sh-bottom {
     box-shadow: 0 5px 5px -6px #707070;
@@ -80,12 +100,12 @@ export default {
     background-color: #fff;
   }
   .inp {
-    margin-left: 60px;
-    margin-top: 50px;
+    margin-left: 80px;
+    margin-top: 80px;
   }
   .inp .input-box {
     font-size: 15px;
-    width: 80%;
+    width: 78%;
     margin-top: 20px;
     border-right: none;
     border-top: none;
@@ -101,4 +121,30 @@ export default {
   #jtitle {
     font-size: 14px;
   }
+  .terms {
+    font-size: 15px;
+    margin-top: 20px;
+  }  
+  .terms-label {
+    margin-left: 10px;
+  }
+  .signupbtn input[type="submit"]{
+    margin-left: 110px;
+    margin-top: 40px;
+    font-size: 15px;
+    width: 30%;
+    height: 40px;
+    border: none;
+    color: #fff;
+    background-color: black;
+    border-radius: 5px;
+  }  
+  .wcsignin {
+    margin-left: 153px;
+    margin-top: 50px;
+    color: #000;
+    font-size: 14px;
+    text-decoration: underline;
+  }
+
 </style>
