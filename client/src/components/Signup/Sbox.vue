@@ -18,7 +18,7 @@
         <input class="sbutton" type="submit" name="" value="Sign up" @click.prevent="signUp()">
       </div>
       <div>
-        <router-link class="arrowIcon" :to="{ path: '/gethired' }">
+        <router-link class="" :to="{ path: '/gethired' }">
           <p class="prof">Are you a proffessional?</p>
         </router-link>  
       </div>

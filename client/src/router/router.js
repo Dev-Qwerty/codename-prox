@@ -30,63 +30,19 @@ export default new VueRouter({
     },
     { 
       path: '/gethired', 
-      component: GetHired, 
-      children: [
-        {
-          path: 'signup',
-          name: 'wcSignup',
-          component: wcSignup,
-          props: true,      
-        },  
-      ]    
+      component: GetHired,    
     },
     { 
+      path: '/wcsignup', 
+      component: wcSignup 
+    },    
+    { 
       path: '/signup', 
-      component: Signup,
-      children: [
-        {
-          path: 'user',
-          name: 'user',
-          component: Cmodal,
-          props: true,      
-        },
-        {
-          path: 'worker',
-          name: 'worker',
-          component: Cmodal,
-          props: true,      
-        },
-        {
-          path: 'company',
-          name: 'company',
-          component: Cmodal,
-          props: true,      
-        }                
-      ]      
+      component: Signup,    
     },
     { 
       path: '/login', 
-      component: Login,
-      children: [
-        {
-          path: 'user',
-          name: 'user',
-          component: Cmodal,
-          props: true,      
-        },
-        {
-          path: 'worker',
-          name: 'worker',
-          component: Cmodal,
-          props: true,      
-        },
-        {
-          path: 'company',
-          name: 'company',
-          component: Cmodal,
-          props: true,      
-        }                
-      ]      
+      component: Login,     
     },  
     { 
       path: '/about', 

@@ -1,14 +1,55 @@
 <template>
-  <div class="Modal">
+  <div class="wcsignup">
     <div class="Mbg">
-      <div class="Mbox">
-                   
+      <div class="sh-left">
+        <div class="Mbox sh-bottom">
+          <div class="leftPic">
+          
+          </div>
+          <div class="right">
+            <p class="wchdn">Urban Associates</p>
+            <form class="inp" action="" method="">
+              <div>
+                <input class="input-box" type="email" name="uname" placeholder="Email" v-model="username">
+              </div>              
+              <div>
+                <input class="input-box" type="text" name="contactno" placeholder="Phone Number" v-model="password">
+              </div>
+              <div>
+                <input class="input-box" type="password" name="flatname" placeholder="Password" v-model="username">
+              </div>  
+              <div>
+                <input class="input-box" type="password" name="flatname" placeholder="Confirm Password" v-model="username">
+              </div>              
+              <select name="jtitle" id="jtitle">
+                <option value="worker">Worker</option>
+                <option value="company">Company</option>
+              </select>   
+              <div>
+              <div class="terms">
+                <input type="checkbox" name="check1" value="">
+                <label class="terms-label">I agree with terms and conditions</label>
+              </div>                
+                <router-link class="signupbtn" :to="{name: ''}" @click.native="paynowfn">
+                  <input type="submit" value="Sign Up">
+                </router-link> 
+              </div>                                 
+            </form> 
+            <div>
+              <router-link class="" :to="{ path: '/login' }">
+                <p class="wcsignin">Already have an account? Sign in.</p>
+              </router-link>  
+            </div>                         
+          </div>      
+        </div>
       </div>
     </div>
   </div>  
 </template>
 
 <script>
+
+
 export default {
   name: 'wcSignup',
   components: { 
@@ -27,19 +68,90 @@ export default {
 
 <style scoped>
   .Mbg {
-    position: absolute;
-    top: 0;
-    left: 0%;
-    background: rgb(128, 128, 128, 0.8);
-    width: 100%;
-    height: 368%;
+    background-color: #eeefef;
+    width:100%;
+    height: 722px;
+    padding-top: 55px;
+    padding-left: 14%;
   }
   .Mbox {
-    position: absolute;
-    top: 20%;
-    left: 25%;
-    width: 50%;
-    height: 610px;
-    background-color: #fff;
+    width: 85%;
+    height: 615px;
+    display: grid;
+    grid-template-columns: 55% 45%;
+  }  
+  .sh-bottom {
+    box-shadow: 0 5px 15px -6px #707070;
+  }
+  .sh-left {
+    box-shadow: -5px 0 5px -6px #707070;
   }    
+  .ys-sh-all {
+    box-shadow: 0 0 5px #DBDBDB;
+  }  
+  .leftPic {
+    margin: 0px;
+    width: 100%;
+    background-image: url(../../assets/wcsignup.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;  
+  }
+  .right {
+    background-color: #fff;
+  }
+  .wchdn {
+    font-size: 25px;
+    color: #000;
+    text-align: center;
+    margin-top: 50px;
+  }  
+  .inp {
+    margin-left: 90px;
+    margin-top: 20px;
+  }
+  .inp .input-box {
+    font-size: 15px;
+    width: 78%;
+    margin-top: 20px;
+    border-right: none;
+    border-top: none;
+    border-left: none; 
+    border-bottom: 1px solid #aaa;
+    height: 30px;  
+  } 
+  .inp select {
+    margin-top: 30px;
+    width: 40%;
+    height: 30px;  
+  }
+  #jtitle {
+    font-size: 14px;
+  }
+  .terms {
+    font-size: 15px;
+    margin-top: 30px;
+  }  
+  .terms-label {
+    margin-left: 10px;
+  }
+  .signupbtn input[type="submit"]{
+    margin-left: 110px;
+    margin-top: 40px;
+    font-size: 15px;
+    width: 30%;
+    height: 40px;
+    border: none;
+    color: #fff;
+    background-color: black;
+    border-radius: 5px;
+  }  
+  .wcsignin {
+    margin-left: 160px;
+    margin-top: 50px;
+    color: #000;
+    font-size: 14px;
+    text-decoration: underline;
+  }
+
 </style>

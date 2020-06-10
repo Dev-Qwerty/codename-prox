@@ -15,7 +15,7 @@
         <p>Urban Company provides you an interface to meet with</p>
         <p>your customer to chat and make a deal to get their</p>
         <p>work done. So why waiting..</p>
-        <router-link :to="{ name: 'wcSignup' }" @click="wcsignupfn">
+        <router-link :to="{ path:'wcsignup' }" @click="wcsignupfn">
           <input type="submit" value="GET HIRED">
         </router-link> 
       </div>
@@ -62,20 +62,15 @@
         </div>
       </div>
       <div class="Grid1-box2"></div>
-    </div>
-    <router-view>
-      <wcSignup />
-    </router-view>      
+    </div>    
   </div>  
 </template>
 
 <script>
-import wcSignup from '@/components/GetHired/wcSignup.vue'
 
 export default {
   name: 'GetHired',
   components: {
-    wcSignup
   },
   data() {
     return {
