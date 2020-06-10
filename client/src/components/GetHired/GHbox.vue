@@ -60,9 +60,32 @@
         </div>
       </div>
       <div class="Grid1-box2"></div>
-    </div>  
+    </div>
+    <router-view>
+      <Signup />
+    </router-view>      
   </div>  
 </template>
+
+<script>
+import Signup from '@/components/GetHired/Signup.vue'
+
+export default {
+  name: 'GetHired',
+  components: {
+    Signup
+  },
+  data() {
+    return {
+    }
+  },
+  methods: {
+    signupfn() {
+      /*alert(JSON.stringify(this.cartArr))*/
+    }
+  }
+}
+</script>
 
 <style scoped>
   .box {
