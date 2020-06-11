@@ -49,6 +49,10 @@ const UserSchema = new mongoose.Schema({
     name: {
         type: String,
         default: ""
+    },
+    completedProfile: {
+        type: Boolean,
+        default: false
     }
 });
 
