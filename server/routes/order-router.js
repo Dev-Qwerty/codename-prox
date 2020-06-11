@@ -225,13 +225,38 @@ router
 						});
 
 						post_res.on('end', function(){
-							console.log('S2S Response: ', response, "\n");
-
-							var _result = JSON.parse(response);
-                            if(_result.STATUS == 'TXN_SUCCESS') {
-                                res.send('payment sucess')
-                            }else {
-                                res.send('payment failed')
+                            console.log('S2S Response: ', response, "\n");
+                            
+                            var _result = JSON.parse(response);
+                            
+                            // Send response based on the Transaction status (RESPONSE CODE)
+                            switch(_result.RESPCODE) {
+                                case '01':
+                                    res.send(_result.RESPMSG)
+                                    break
+                                case '227':
+                                    res.send(_result.RESPMSG)
+                                    break
+                                case '235':
+                                    res.send(_result.RESPMSG)
+                                    break
+                                case '295':
+                                    res.send(_result.RESPMSG)
+                                    break
+                                case '334':
+                                    res.send('payment failed')
+                                    break
+                                case '400':
+                                    res.send(_result.RESPMSG)
+                                    break
+                                case '401':
+                                    res.send(_result.RESPMSG)
+                                    break
+                                case '402':
+                                    res.send(_result.RESPMSG)
+                                    break
+                                case '810':
+                                    res.send(_result.RESPMSG)
                             }
 						});
 					});
