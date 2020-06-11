@@ -69,7 +69,7 @@ router.post('/completeProfile/:id', (req, res) => {
 			worker.specialization = req.body.specialization;
 			worker.address = req.body.address;
 			worker.service = req.body.service;
-
+			worker.completedProfile = true;
 			worker = { $set: worker };
 
 			Worker.update({ workerID: id }, worker).then(() => {

@@ -183,7 +183,7 @@ router.post('/completeProfile/:id', (req, res) => {
 
       if (req.body.name) user.name = req.body.name;
       if (req.body.addresses) user.addresses = req.body.addresses;
-
+      user.completedProfile = true;
       user = { $set: user }
 
       User.update({ userID: id }, user).then(() => {

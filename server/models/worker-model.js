@@ -63,6 +63,10 @@ const WorkerSchema = new mongoose.Schema({
     rating: {
         type: Number,
         default: 3
+    },
+    completedProfile: {
+        type: Boolean,
+        default: false
     }
 })
 
