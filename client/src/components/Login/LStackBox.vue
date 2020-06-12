@@ -1,11 +1,11 @@
 <template>
   <div class = "box">
     <h4>Login</h4>
-    <p id="one">Hello let's get started</p>
+    <!--<p id="one">Hello let's get started</p>
     <div class="wrapper">
       <div class="col googleIcon"></div>
     </div>
-    <p id="two">Login with your social network</p>
+    <p id="two">Login with your social network</p>-->
   </div>
 </template>
 
@@ -26,9 +26,10 @@
     padding: 20px;
     border: 1px solid #000;
     box-shadow: 7px 7px #eeefef;
+    padding-top: 65px;
   }
   .box h4 {
-    font-size: 28px;
+    font-size: 30px;
     color: #fff;
     margin-bottom: 2px;
   }

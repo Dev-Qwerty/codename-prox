@@ -72,7 +72,7 @@ export default {
     width:100%;
     height: 722px;
     padding-top: 55px;
-    padding-left: 14%;
+    padding-left: 13%;
   }
   .Mbox {
     width: 85%;
