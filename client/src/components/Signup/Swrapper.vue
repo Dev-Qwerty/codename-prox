@@ -22,7 +22,7 @@
     position: absolute;
     left: 75%;
     top: 15%;
-    width: 15%;
+    width: 16%;
     height: 15%;
     display: grid;
     grid-template-columns: 60% 40%;
@@ -31,14 +31,14 @@
     border-radius: 6px;
   }
   .wch {
-    margin-left: 5px;
-    font-size: 16px;
+    margin-left: 8px;
+    font-size: 18px;
     padding-left: 15px;
     padding-top: 30px;
     color: #000;
   }
   .img {
-    margin-left: -10px;
+    margin-left: -5px;
     margin-bottom: 10px;
     width: 100%;
     background-image: url(../../assets/Cworker.png);

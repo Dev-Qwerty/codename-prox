@@ -19,10 +19,10 @@
         <router-link class="nav-link" :to="{ path: '/services' }">Services</router-link>
       </li>
       <li class="nav-item">
-        <router-link class="nav-link" :to="{ path: 'gethired' }">Get Hired</router-link>
+        <router-link class="nav-link" :to="{ path: '/gethired' }">Get Hired</router-link>
       </li>
       <li class="nav-item">
-        <router-link class="nav-link" :to="{ path: '' }">Blog</router-link>
+        <router-link class="nav-link" :to="{ path: '/blog' }">Blog</router-link>
       </li>
       <li class="nav-item">
         <router-link class="btn btn-light" :to="{ path: 'login' }" tag="button">Login</router-link>
