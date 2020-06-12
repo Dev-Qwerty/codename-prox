@@ -20,13 +20,11 @@
 .box h1 {
     margin: 0px;
     padding: 0px;
-    font-family: 'Times New Roman';
     font-size: 60px;
 }
 .box h2{
     margin: 0px;
     padding: 0px;
-    font-family: 'Times New Roman';
     font-size: 40px;
 }
 .qw {
