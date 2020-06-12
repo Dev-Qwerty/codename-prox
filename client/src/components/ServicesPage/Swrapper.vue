@@ -15,34 +15,55 @@
       </div>
       <div class="grid2">
         <div class="b1">
-          <div class="iBox i1"></div>
+          <div class="iBox i1">
+            <div class="i1img"></div>
+            <p class="i1h">PLUMBING</p>
+          </div>
         </div>
         <div class="b1">
           <div class="iBox i2"></div>
         </div>
         <div class="b2">
-          <div class="iBox i3"></div></div>      
+          <div class="iBox i3">
+            <div class="i3img"></div>
+            <p class="i3h">HOME APPLIANCES</p>   
+          </div></div>      
       </div>
       <div class="grid3">
         <div class="b1">
-          <div class="iBox i4"></div>
+          <div class="iBox i4">
+            <div class="i4img"></div>
+            <p class="i4h">FABRICATION</p>            
+          </div>
         </div>
         <div class="b1">
-          <div class="iBox i5"></div>
+          <div class="iBox i5">
+            <div class="i5img"></div>
+            <p class="i5h">CARPENTRY</p>               
+          </div>
         </div>
         <div class="b2">
-          <div class="iBox i6"></div></div>      
+          <div class="iBox i6"></div>
+        </div>      
       </div>   
       <div class="grid4">
         <div class="b3">
-          <div class="iBox i7"></div>
+           <router-link class="" :to="{ path: '/services/cleaning' }"> 
+            <div class="iBox i7"></div>
+          </router-link>
         </div>
-        <div class="b3" @click="cfn">
-          <div class="iBox i8"></div>
-          <!--<router-link class="iBox i8" :to="{ path: 'gethired' }" v-on="cfn()"></router-link>-->
+        <div class="b3">
+          <router-link class="" :to="{ path: '/services/cleaning' }"> 
+            <div class="iBox i8"></div>
+          </router-link>
         </div>
         <div class="">
-          <div class="iBox i9"></div>
+          <router-link class="" :to="{ path: '/services/cleaning' }">
+            <div class="iBox i9">
+              <div class="i9img"></div>
+              <p class="i9h">PEST CONTROL</p>              
+            </div>          
+          </router-link>          
         </div>      
       </div>
       <!--<div class="grid5">
@@ -83,8 +104,7 @@ export default {
     }
   },
   methods: {
-    cfn() {
-      this.$router.push({path: 'services/cleaning'})
+    fn() {
     }
   }
 }
@@ -155,41 +175,140 @@ export default {
   }    
   .iBox {
     border-radius: 10px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
     margin-left: 80px;
     margin-top: 60px;
     height: 60%;
     width: 60%;
   }
   .i1 {
-    background-image: url(../../assets/Painting.png);
+    background-color: #F1F1F1;
+    padding-top: 10px;
+  }
+  .i1img {
+    margin-left: 75px;
+    width: 100px;
+    height: 110px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url(../../assets/plumbing.png);
+  }
+  .i1h {
+    text-align: center;
+    margin-top: 15px;
+    color: #000;
+    opacity: 68%;
+    font-size: 18px;
+    font-weight: bold;
   }
   .i2 {
     background-image: url(../../assets/Elec.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
   .i3 {
-    background-image: url(../../assets/Painting.png);
+    background-color: #F1F1F1;
+    padding-top: 10px;
   }
+  .i3img {
+    margin-left: 55px;
+    width: 125px;
+    height: 110px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url(../../assets/tv.png);
+  }
+  .i3h {
+    text-align: center;
+    margin-top: 15px;
+    color: #000;
+    opacity: 68%;
+    font-size: 17px;
+    font-weight: bold;
+  }  
   .i4 {
-    background-image: url(../../assets/Painting.png);
+    background-color: #F1F1F1;
+    padding-top: 30px;
   }
+  .i4img {
+    margin-left:80px;
+    width: 85px;
+    height: 85px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url(../../assets/fab.png);
+  }
+  .i4h {
+    text-align: center;
+    margin-top: 15px;
+    color: #000;
+    opacity: 68%;
+    font-size: 17px;
+    font-weight: bold;
+  } 
   .i5 {
-    background-image: url(../../assets/Painting.png);
+    background-color: #F1F1F1;
+    padding-top: 30px;
   }
+  .i5img {
+    margin-left:70px;
+    width: 85px;
+    height: 85px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url(../../assets/carpentry.png);
+  }
+  .i5h {
+    text-align: center;
+    margin-top: 15px;
+    color: #000;
+    opacity: 68%;
+    font-size: 17px;
+    font-weight: bold;
+  } 
   .i6 {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;    
     background-image: url(../../assets/Photo.png);
   }
   .i7 {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;       
     background-image: url(../../assets/Painting.png);
   }
   .i8 {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;     
     background-image: url(../../assets/Cleaning.png);
   }
   .i9 {
-    background-image: url(../../assets/Painting.png);
-  }          
+    background-color: #F1F1F1;
+    padding-top: 30px;
+  }
+  .i9img {
+    margin-left:80px;
+    width: 85px;
+    height: 85px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url(../../assets/pest.png);
+  }
+  .i9h {
+    text-align: center;
+    margin-top: 15px;
+    color: #000;
+    opacity: 68%;
+    font-size: 17px;
+    font-weight: bold;
+  }         
         
   .iBox1 {
     border-radius: 10px;
