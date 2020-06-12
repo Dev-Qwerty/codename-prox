@@ -125,18 +125,25 @@ router
     .get((req, res) => {
         res.render('payment')
     })
-    .post([parseUrl,parseJson], (req, res) => {
+    .post([parseUrl,parseJson], async (req, res) => {
         var orderId = uniqueId.uniqueOrderId()
+        
+        global.totalAmount = 0 //total amount variable
+
+        // calculate total amount and category
+        for (let i = 0; i < req.body.service.categories.length; i++) {
+            const serviceDetails = await subserviceModel.find({ categories: { $elemMatch: { _id: req.body.service.categories[i].categoryName } } }, 'categories.$')
+            itemAmount = serviceDetails[0].categories[0].amount * req.body.service.categories[i].quantity // Find amount of each category
+            totalAmount = totalAmount + itemAmount
+        }
+
         var paymentDetails = {
-            amount: req.body.amount,
+            amount: totalAmount,
             customerId: req.body.customerId,
             customerEmail: req.body.customerEmail,
             customerPhone: req.body.customerPhone
-            // customerId: '145233',
-            // amount: '2599',
-            // customerEmail: 'abc@mailinator.com',
-            // customerPhone: '7777777777'
         }
+
         if(!paymentDetails.amount || !paymentDetails.customerId || !paymentDetails.customerEmail || !paymentDetails.customerPhone) {
             res.status(400).send('Payment failed')
         } else {
@@ -173,9 +180,11 @@ router
 
 router
     .route('/placeorder/paynow/callback')
-    .post((req, res) => {
+    .post(async (req, res) => {
 
-        var body = '';
+        try {
+
+            var body = '';
 
 	        req.on('data', function (data) {
 	            body += data;
@@ -193,8 +202,8 @@ router
 				var checksumhash = post_data.CHECKSUMHASH;
 				// delete post_data.CHECKSUMHASH;
 				var result = checksum_lib.verifychecksum(post_data, paytm.PaytmConfig.key, checksumhash);
-				console.log("Checksum Result => ", result, "\n");
-
+                console.log("Checksum Result => ", result, "\n");
+            
 
 				// Send Server-to-Server request to verify Order Status
 				var params = {"MID": paytm.PaytmConfig.mid, "ORDERID": post_data.ORDERID};
@@ -225,13 +234,38 @@ router
 						});
 
 						post_res.on('end', function(){
-							console.log('S2S Response: ', response, "\n");
+                            console.log('S2S Response: ', response, "\n");
 
-							var _result = JSON.parse(response);
-                            if(_result.STATUS == 'TXN_SUCCESS') {
-                                res.send('payment sucess')
-                            }else {
-                                res.send('payment failed')
+                            var _result = JSON.parse(response);
+                            
+                            // Send response based on the Transaction status (RESPONSE CODE)
+                            switch(_result.RESPCODE) {
+                                case '01':
+                                    res.send(_result.RESPMSG)
+                                    break
+                                case '227':
+                                    res.send(_result.RESPMSG)
+                                    break
+                                case '235':
+                                    res.send(_result.RESPMSG)
+                                    break
+                                case '295':
+                                    res.send(_result.RESPMSG)
+                                    break
+                                case '334':
+                                    res.send('payment failed')
+                                    break
+                                case '400':
+                                    res.send(_result.RESPMSG)
+                                    break
+                                case '401':
+                                    res.send(_result.RESPMSG)
+                                    break
+                                case '402':
+                                    res.send(_result.RESPMSG)
+                                    break
+                                case '810':
+                                    res.send(_result.RESPMSG)
                             }
 						});
 					});
@@ -241,6 +275,11 @@ router
 					post_req.end();
 				});
 	        });
+        } catch (error) {
+            console.log(error)
+        }
+
+        
     })
     
 
