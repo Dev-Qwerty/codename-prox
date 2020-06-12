@@ -92,7 +92,7 @@ export default {
   .leftPic {
     margin: 0px;
     width: 100%;
-    background-image: url(../../assets/Cworker.png);
+    background-image: url(../../assets/wcsignup.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;  

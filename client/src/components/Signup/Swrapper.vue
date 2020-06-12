@@ -1,9 +1,11 @@
 <template>
   <div class="wrapper">
-    <div class="wcbox">
-      <p class="wch">Sign up for Proffessional.</p>
-      <div class="img"></div>
-    </div>
+    <router-link class="" :to="{ path: '/wcsignup' }">
+      <div class="wcbox">
+        <p class="wch">Sign up for Proffessionals.</p>
+        <div class="img"></div>
+      </div>
+    </router-link>      
   </div>  
 </template>
 
@@ -29,10 +31,11 @@
     border-radius: 6px;
   }
   .wch {
-    margin-left: 10px;
+    margin-left: 9px;
     font-size: 16px;
     padding-left: 15px;
     padding-top: 30px;
+    color: #000;
   }
   .img {
     margin-left: -10px;
