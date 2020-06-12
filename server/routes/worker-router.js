@@ -9,8 +9,8 @@ const workOrderModel = require('../models/order-model');
 const Token = require('../models/token');
 
 const poolData = {
-	UserPoolId: keys.cognito.userPoolId,
-	ClientId: keys.cognito.clientId
+	UserPoolId: keys.cognito.userPoolId || process.env['COGNITOUSERPOOLID'],
+	ClientId: keys.cognito.clientId || process.env['COGNITOCLIENTID']
 }
 
 const workerPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
@@ -69,7 +69,7 @@ router.post('/completeProfile/:id', (req, res) => {
 			worker.specialization = req.body.specialization;
 			worker.address = req.body.address;
 			worker.service = req.body.service;
-
+			worker.completedProfile = true;
 			worker = { $set: worker };
 
 			Worker.update({ workerID: id }, worker).then(() => {
