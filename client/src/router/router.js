@@ -6,6 +6,7 @@ import wcSignup from '@/components/GetHired/wcSignup.vue'
 import Signup from '../components/Signup/SMain.vue'
 import Login from '../components/Login/LMain.vue'
 import About from '../components/About/Aboutmain.vue'
+import Blog from '../components/About/Bmain.vue'
 import Services from '../components/ServicesPage/SMain.vue'
 import Cleaning from '@/components/Services/Cleaning/Cmain.vue'
 import Cmodal from '@/components/Services/Cleaning/Cmodal.vue'
@@ -48,6 +49,10 @@ export default new VueRouter({
       path: '/about', 
       component: About 
     },
+    { 
+      path: '/blog', 
+      component: Blog
+    },    
     { 
       path: '/services', 
       component: Services 
