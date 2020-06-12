@@ -9,16 +9,16 @@
     
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="../../assets/ManFactory.jpg" >
+        <img src="../../assets/Pbrush.jpg" >
       </div>
       <div class="carousel-item">
-        <img src="../../assets/Pbrush.jpg" width="1100" height="500">
+        <img src="../../assets/ManFactory.jpg" width="1100" height="500">
       </div>
       <div class="carousel-item">
         <img src="../../assets/RectBulb.jpg" width="1100" height="500">
       </div>
     </div>
-    
+
   </div>
 </template>
 
