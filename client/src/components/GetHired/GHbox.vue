@@ -43,7 +43,7 @@
         <h4>Get verified customer request</h4>
       </div>            
     </div>
-    <div class="hrline">
+    <!--<div class="hrline">
       <hr>
     </div>
     <div class="Grid1">
@@ -62,7 +62,7 @@
         </div>
       </div>
       <div class="Grid1-box2"></div>
-    </div>    
+    </div>-->   
   </div>  
 </template>
 
