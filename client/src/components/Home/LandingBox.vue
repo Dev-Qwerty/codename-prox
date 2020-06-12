@@ -18,16 +18,16 @@
 
 <style scoped>    
   .box {
-    width: 600px;
-    height: 300px;
+    width: 670px;
+    height: 370px;
     background-color: #fff;
     opacity: 0.9;
-    top: 60%;
-    left: 30%;
+    top: 55%;
+    left: 25%;
     position: absolute;
     box-sizing: border-box;
     transform: translate(-50%, -50%);
-    padding-top: 30px;
+    padding-top: 90px;
     padding-bottom: 5px;
     padding-left: 30px;
     padding-right: 30px;
@@ -36,9 +36,10 @@
 
   .box h3 {
     color: #000;
-    padding-bottom: 0px;
+    padding-bottom: 10px;
     text-align: center;
     font-weight: bold;
+    font-size: 33px;
   }
   .box h5 {
     margin: 0;
