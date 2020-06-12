@@ -23,8 +23,8 @@
     margin-left: 20px;
   }
   .img {
-    height: 75px;
-    widows: 75px;  
+    height: 77px;
+    widows: 77px;  
     margin-left: 0px;
     margin-top: 32px;
     background-image: url(../../assets/c.png);
