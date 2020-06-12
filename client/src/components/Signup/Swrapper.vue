@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <div class="wcbox">
-      <p class="wch">Are you a proffessional?</p>
+      <p class="wch">Sign up for Proffessional.</p>
       <div class="img"></div>
     </div>
   </div>  
@@ -25,14 +25,18 @@
     display: grid;
     grid-template-columns: 60% 40%;
     background-color: #fff;
+    box-shadow: 3px 3px #ceced1;
+    border-radius: 6px;
   }
   .wch {
-    font-size: 17px;
-    padding-left: 10px;
-    padding-top: 10px;
+    margin-left: 10px;
+    font-size: 16px;
+    padding-left: 15px;
+    padding-top: 30px;
   }
   .img {
-    margin: 0px;
+    margin-left: -10px;
+    margin-bottom: 10px;
     width: 100%;
     background-image: url(../../assets/Cworker.png);
     background-position: center;
