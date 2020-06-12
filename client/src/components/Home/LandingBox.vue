@@ -22,8 +22,8 @@
     height: 300px;
     background-color: #fff;
     opacity: 0.9;
-    top: 60%;
-    left: 30%;
+    top: 55%;
+    left: 22%;
     position: absolute;
     box-sizing: border-box;
     transform: translate(-50%, -50%);
