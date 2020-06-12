@@ -15,35 +15,48 @@
       </div>
       <div class="grid2">
         <div class="b1">
-          <div class="iBox i1">
-            <div class="i1img"></div>
-            <p class="i1h">PLUMBING</p>
-          </div>
+          <router-link class="" :to="{ path: '/services/cleaning' }"> 
+            <div class="iBox i1">
+              <div class="i1img"></div>
+              <p class="i1h">PLUMBING</p>
+            </div>
+          </router-link>  
         </div>
         <div class="b1">
-          <div class="iBox i2"></div>
+          <router-link class="" :to="{ path: '/services/cleaning' }"> 
+            <div class="iBox i2"></div>
+          </router-link>  
         </div>
         <div class="b2">
-          <div class="iBox i3">
-            <div class="i3img"></div>
-            <p class="i3h">HOME APPLIANCES</p>   
-          </div></div>      
+          <router-link class="" :to="{ path: '/services/cleaning' }"> 
+            <div class="iBox i3">
+              <div class="i3img"></div>
+              <p class="i3h">HOME APPLIANCES</p>   
+            </div>
+          </router-link> 
+        </div>    
       </div>
       <div class="grid3">
         <div class="b1">
-          <div class="iBox i4">
-            <div class="i4img"></div>
-            <p class="i4h">FABRICATION</p>            
-          </div>
+          <router-link class="" :to="{ path: '/services/cleaning' }"> 
+            <div class="iBox i4">
+              <div class="i4img"></div>
+              <p class="i4h">FABRICATION</p>            
+            </div>
+          </router-link>  
         </div>
         <div class="b1">
-          <div class="iBox i5">
-            <div class="i5img"></div>
-            <p class="i5h">CARPENTRY</p>               
-          </div>
+          <router-link class="" :to="{ path: '/services/cleaning' }"> 
+            <div class="iBox i5">
+              <div class="i5img"></div>
+              <p class="i5h">CARPENTRY</p>                 
+            </div>
+          </router-link>
         </div>
         <div class="b2">
-          <div class="iBox i6"></div>
+           <router-link class="" :to="{ path: '/services/cleaning' }"> 
+            <div class="iBox i6"></div>
+          </router-link>
         </div>      
       </div>   
       <div class="grid4">
