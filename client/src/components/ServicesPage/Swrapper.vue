@@ -45,7 +45,7 @@
           <div class="iBox i9"></div>
         </div>      
       </div>
-      <div class="grid5">
+      <!--<div class="grid5">
         <div class="hrr1"></div>
         <div class="heading1">
           <h3>OFFERS</h3>
@@ -69,7 +69,7 @@
             </div>            
           </div>
         </div>      
-      </div>           
+      </div>-->           
     </div>
         
   </div>    
