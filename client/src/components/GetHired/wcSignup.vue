@@ -1,6 +1,12 @@
 <template>
   <div class="wcsignup">
     <div class="Mbg">
+      <router-link :to="{ path: '/gethired' }">
+        <div class="top-box">
+          <div class="arrowIcon"></div>
+          <h3></h3>
+        </div>      
+      </router-link>      
       <div class="sh-left">
         <div class="Mbox sh-bottom">
           <div class="leftPic">
@@ -79,6 +85,34 @@ export default {
     height: 615px;
     display: grid;
     grid-template-columns: 55% 45%;
+  }  
+  .top-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 50px;
+    background-color: #000;
+    width: 66px; 
+    box-sizing: border-box;
+    padding-left: 20px;
+    padding-top: 10px;
+    display: flex;
+  }
+  .arrowIcon {
+    margin-top: 3px;
+    width: 20px;
+    height: 20px;
+    background-image: url(../../assets/arrow.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;    
+  }  
+  .top-box h3 {
+    margin-top: 2px;
+    margin-left: 15px;
+    color: #aaa;
+    font-style: italic;
+    font-size: 21px;
   }  
   .sh-bottom {
     box-shadow: 0 5px 15px -6px #707070;

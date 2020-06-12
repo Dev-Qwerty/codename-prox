@@ -1,8 +1,8 @@
 <template>
   <div class="wrapper">
-    <router-link class="" :to="{ path: '/wcsignup' }">
+    <router-link class="" :to="{ path: '/gethired' }">
       <div class="wcbox">
-        <p class="wch">Sign up for Proffessionals.</p>
+        <p class="wch">Join with us as Associates!</p>
         <div class="img"></div>
       </div>
     </router-link>      
@@ -31,7 +31,7 @@
     border-radius: 6px;
   }
   .wch {
-    margin-left: 9px;
+    margin-left: 5px;
     font-size: 16px;
     padding-left: 15px;
     padding-top: 30px;
