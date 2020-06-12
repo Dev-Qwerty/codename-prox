@@ -2,7 +2,7 @@
   <div class="wrapper">
     <router-link class="" :to="{ path: '/gethired' }">
       <div class="wcbox">
-        <p class="wch">Join with us as Associates.</p>
+        <p class="wch">Join with us as Associates!</p>
         <div class="img"></div>
       </div>
     </router-link>      
