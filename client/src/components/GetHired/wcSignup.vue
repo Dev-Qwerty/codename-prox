@@ -72,7 +72,7 @@ export default {
     width:100%;
     height: 722px;
     padding-top: 55px;
-    padding-left: 14%;
+    padding-left: 13%;
   }
   .Mbox {
     width: 85%;
@@ -92,7 +92,7 @@ export default {
   .leftPic {
     margin: 0px;
     width: 100%;
-    background-image: url(../../assets/wcsignup.png);
+    background-image: url(../../assets/Cworker.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;  
