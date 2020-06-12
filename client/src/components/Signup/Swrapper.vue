@@ -32,13 +32,13 @@
   }
   .wch {
     margin-left: 8px;
-    font-size: 17px;
+    font-size: 18px;
     padding-left: 15px;
     padding-top: 30px;
     color: #000;
   }
   .img {
-    margin-left: -12px;
+    margin-left: -5px;
     margin-bottom: 10px;
     width: 100%;
     background-image: url(../../assets/Cworker.png);
