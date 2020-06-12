@@ -27,7 +27,7 @@
     position: absolute;
     box-sizing: border-box;
     transform: translate(-50%, -50%);
-    padding-top: 30px;
+    padding-top: 60px;
     padding-bottom: 5px;
     padding-left: 30px;
     padding-right: 30px;
