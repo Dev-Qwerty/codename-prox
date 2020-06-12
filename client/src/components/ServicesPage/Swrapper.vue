@@ -108,6 +108,7 @@ export default {
     margin-top: 50px;
     margin-left: 10%;
     margin-right: 70px;
+    margin-bottom: 7%;
     width: 80%;
   }
   .grid1 {
