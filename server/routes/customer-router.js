@@ -368,7 +368,7 @@ router.post('/uploadProfilePic/:id', upload.array('file', 1), (req, res) => {
 router.get('/getBasicProfile/:id', (req,res) => {
   const id = req.params.id;
   User.findOne({userID: id}, (err,result) => {
-    res.send({name: result.name, type: result.specialization, rating: result.rating, location: result.address.district, profile: result.name.charAt(0)})
+    res.send({name: result.name, profile: result.name.charAt(0)}) //To Do: after customer dashboard is ready
   })
 })
 
