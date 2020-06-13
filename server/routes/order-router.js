@@ -6,6 +6,7 @@ const router = express.Router();
 const uniqueId = require('../misc/unique-id')
 const assignWorker = require('../misc/assign-worker')
 const moment = require('moment')
+const sendMessage = require('../misc/textmessage')
 
 // express body parser
 const expressUrl = express.urlencoded({ extended: false })
@@ -15,7 +16,8 @@ const expressJson =  express.json({ extended: false })
 const orderModel = require('../models/order-model');
 const subserviceModel = require('../models/subservice-model');
 const workRequestModel = require('../models/workrequest-model');
-const mainserviceModel = require('../models/mainservice-model')
+const mainserviceModel = require('../models/mainservice-model');
+const workerModel = require('../models/worker-model');
 
 const paytm = require('../config/paymentgateway/paytmconfig')
 const checksum_lib = require('../config/paymentgateway/checksum')
@@ -42,9 +44,8 @@ router
             // Find subservice details
             const id = req.body.service.serviceId
             const service = await subserviceModel.findById(id)
-            mainserviceID = service.mainserviceID
-            const mainservice = await mainserviceModel.findById(mainserviceID, 'serviceName -_id');// Find mainservice details
-            serviceKeyWords.push(service.name);  // add subservice as service key word name to find worker
+            const mainservice = await mainserviceModel.findById(service.mainserviceID, 'serviceName -_id');// Find mainservice name for sending message
+            serviceKeyWords.push(service.name); // add subservice as service key word name to find worker
 
             // create new orderrs
             newOrder.orderID = uniqueId.uniqueOrderId();
@@ -110,6 +111,15 @@ router
             newWorkRequest.save();
 
             // TODO: send notification to worker about work assigned
+            //Find worker name and number
+            const workerDetails = await workerModel.findOne({workerID: assignedWorker},'name phoneNo -_id');
+            workDetails = {
+                mainserviceName: mainservice.serviceName,
+                place: "Vyttila",
+                date: req.body.date,
+                time: req.body.time,
+            }
+            sendMessage.sendTextMessage("worker",workerDetails,workDetails);
 
 
         } catch (error) {
