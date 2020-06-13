@@ -50,8 +50,8 @@ router.post('/signup', (req, res) => {
 			.then((worker) => {
 				res.send({ user: worker, data: data.user });
 			})
-
 	})
+
 })
 
 router.post('/completeProfile/:id', (req, res) => {
@@ -196,6 +196,13 @@ router
 				}
 				res.json({ "completedWorks": completedWorks, "upcommingWorks": upcommingWorks, "todaysWork": todaysWork, "totalEarning": totalEarning, "totalWorks": completedWorks.length })
 			}
+	})
+
+	router.get('/getBasicProfile/:id', (req,res) => {
+		const id = req.params.id;
+		Worker.findOne({workerID: id}, (err,result) => {
+			res.send({name: result.name, type: result.specialization, rating: result.rating, location: result.address.district, profile: result.name.charAt(0)})
+		})
 	})
 
 module.exports = router;
