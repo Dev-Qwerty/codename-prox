@@ -138,5 +138,13 @@ router.post('/forgotPassword', (req,res) => {
     })
   })
 
+  router.get('/getBasicProfile/:id', (req,res) => {
+    const id = req.params.id;
+    Company.findOne({companyID: id}, (err,result) => {
+      res.send({name: result.name, profile: result.name.charAt(0)}) //To Do: after company dashboard is ready
+    })
+  })
+  
+
 
 module.exports = router;
