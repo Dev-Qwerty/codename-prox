@@ -365,4 +365,11 @@ router.post('/uploadProfilePic/:id', upload.array('file', 1), (req, res) => {
   res.json({ file: req.file });
 });
 
+router.get('/getBasicProfile/:id', (req,res) => {
+  const id = req.params.id;
+  User.findOne({userID: id}, (err,result) => {
+    res.send({name: result.name, profile: result.name.charAt(0)}) //To Do: after customer dashboard is ready
+  })
+})
+
 module.exports = router;
