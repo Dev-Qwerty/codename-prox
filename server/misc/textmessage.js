@@ -40,7 +40,7 @@ exports.sendTextMessage = (recipient,recipientDetails,workDetails) => {
   }else {
     // Create publish parameters
     var params2 = {
-      Message: `Hey Mathai,\nThank you for using (Product name).\nOur professional ${workDetails.workerName} has been assigned for your requested work ${workDetails.work} with orderID ${workDetails.orderID}.\nOur professional will be there on ${workDetails.date} at ${workDetails.time}`, /* required */
+      Message: `Hey ${recipientDetails.name},\nThank you for using (Product name).\nOur professional ${workDetails.workerName} has been assigned for your requested work ${workDetails.work} with orderID ${workDetails.orderID}.\nOur professional will be there on ${workDetails.date} at ${workDetails.time}`, /* required */
       PhoneNumber: '+91XXXXXXXXXX', //TODO : concat phone no. with country code
     };
   }

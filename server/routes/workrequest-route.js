@@ -42,7 +42,7 @@ router
                     let work = await orders.findOne({orderID: orderId},'service.subserviceName  date time'); // Fetch work details
                     let workerDetails = await workerModel.findOne({workerID: workerId},'name phoneNo -_id'); // Fetch worker details
                     workDetails = {
-                        workerName: "Ramji Rao",
+                        workerName: workerDetails.name,
                         work: work.service.subserviceName,
                         date: moment(work.date).format('DD MMMM YYYY'),
                         time: work.time,
