@@ -8,6 +8,7 @@ const workerRequest = require('../models/workrequest-model')
 const orders = require('../models/order-model')
 const selectedWorkers = require('../models/selectedWorkers-model')
 const workerModel = require('../models/worker-model')
+const customerModel = require('../models/user-model')
 
 router
     .route('/workrequest/:id')
@@ -36,6 +37,19 @@ router
                     await orders.findOneAndUpdate({orderID: orderId}, {workerID: workerId})
                     res.send('worker assigned')
                     // TODO: Send SMS to customer
+                    let customer = await orders.findOne({orderID: orderId},'userID -_id') // Fetch customer ID
+                    let customerDetails = await customerModel.findOne({userID: customer.userID},'name phone -_id') // Fetch customer details
+                    let work = await orders.findOne({orderID: orderId},'service.subserviceName  date time'); // Fetch work details
+                    let workerDetails = await workerModel.findOne({workerID: workerId},'name phoneNo -_id'); // Fetch worker details
+                    workDetails = {
+                        workerName: "Ramji Rao",
+                        work: work.service.subserviceName,
+                        date: moment(work.date).format('DD MMMM YYYY'),
+                        time: work.time,
+                        orderID: orderId
+                    }
+                    console.log(workDetails)
+                    sendMessage.sendTextMessage("customer",customerDetails,workDetails);
                 } else {
                     let selectedWorkersDetails = await selectedWorkers.findOne({orderID: orderId}, '-_id')
                     let declinedWorker = selectedWorkersDetails.selectedWorkers.shift() //Return first worker
