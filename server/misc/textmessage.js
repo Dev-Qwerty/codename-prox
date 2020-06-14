@@ -35,7 +35,7 @@ exports.sendTextMessage = (recipient,recipientDetails,workDetails) => {
     // Create publish parameters
     var params2 = {
       Message: `Hey ${recipientDetails.name},\nA new work has been alloted to you.\nWork: ${workDetails.mainserviceName},\nPlace: ${workDetails.place},\nDate: ${workDetails.date},\nTime: ${workDetails.time}\n\nGo to your profile to accept/decline the request`, /* required */
-      PhoneNumber: 'XXXXXXXXXXX', //TODO : concat phone no. with country code
+      PhoneNumber: '+91XXXXXXXXXX', //TODO : concat phone no. with country code
     };
   }else {
     console.log("message is for customer")

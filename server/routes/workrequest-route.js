@@ -1,10 +1,13 @@
 const express = require('express')
 const moment = require('moment')
 const router = express.Router()
+const sendMessage = require('../misc/textmessage')
+
 // Import Models
 const workerRequest = require('../models/workrequest-model')
 const orders = require('../models/order-model')
 const selectedWorkers = require('../models/selectedWorkers-model')
+const workerModel = require('../models/worker-model')
 
 router
     .route('/workrequest/:id')
@@ -34,10 +37,10 @@ router
                     res.send('worker assigned')
                     // TODO: Send SMS to customer
                 } else {
-                    let workerDetails = await selectedWorkers.findOne({orderID: orderId}, '-_id')
-                    let declinedWorker = workerDetails.selectedWorkers.shift() //Return first worker
-                    workerDetails.declinedWorkers.push(declinedWorker) //Add declined worker to declined worker array
-                    let newWorker = workerDetails.selectedWorkers[0]
+                    let selectedWorkersDetails = await selectedWorkers.findOne({orderID: orderId}, '-_id')
+                    let declinedWorker = selectedWorkersDetails.selectedWorkers.shift() //Return first worker
+                    selectedWorkersDetails.declinedWorkers.push(declinedWorker) //Add declined worker to declined worker array
+                    let newWorker = selectedWorkersDetails.selectedWorkers[0]
 
                     
                     // set new due date
@@ -46,7 +49,7 @@ router
                     let OrderDate = dateDetails.date  // order date
                     OrderDate = new Date(OrderDate)  // change orderdate to date datatype
                     let dueDate = dateDetails.dueDate // current due date
-                    let hour = moment().hour() // Curent time
+                    let hour = moment().hour() // Curent time(hour)
                     //  hour = ((hour + 11) % 12 + 1); // convert to 12hr
                     
                     if(today.getDate() == OrderDate.getDate()){
@@ -71,11 +74,21 @@ router
                         }
                     }
 
-
+                    //TODO !important : Repeat the cycle once more when all workers decline
                     
                     await workerRequest.findOneAndUpdate({requestID: requestId}, {workerID: newWorker.workerID,dueDate:dueDate})
-                    await selectedWorkers.findOneAndUpdate({orderID: orderId}, {selectedWorkers: workerDetails.selectedWorkers, declinedWorkers: workerDetails.declinedWorkers})
-                    res.status(200).send({workerDetails})
+                    await selectedWorkers.findOneAndUpdate({orderID: orderId}, {selectedWorkers: selectedWorkersDetails.selectedWorkers, declinedWorkers: selectedWorkersDetails.declinedWorkers})
+                    // Send SMS to worker
+                    let workerDetails = await workerModel.findOne({workerID: newWorker.workerID},'name phoneNo -_id');
+                    // Find work details
+                    let work = await orders.findOne({orderID: orderId},'service.subserviceName address.line2 date time');
+                    workDetails = {
+                        mainserviceName: work.service.subserviceName,
+                        place: work.address.line2,
+                        date: work.date,
+                        time: work.time,
+                    }
+                    sendMessage.sendTextMessage("worker",workerDetails,workDetails);
                 }          
             }
         } catch (error) {

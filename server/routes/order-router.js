@@ -115,7 +115,7 @@ router
             const workerDetails = await workerModel.findOne({workerID: assignedWorker},'name phoneNo -_id');
             workDetails = {
                 mainserviceName: mainservice.serviceName,
-                place: "Vyttila",
+                place: req.body.address.line2,
                 date: req.body.date,
                 time: req.body.time,
             }
