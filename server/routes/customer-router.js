@@ -17,8 +17,8 @@ global.fetch = require("node-fetch");
 let id = "";
 
 const s3 = new aws.S3({
-  accessKeyId: keys.s3.accessKey,
-  secretAccessKey: keys.s3.secret
+  accessKeyId: keys.s3.accessKey || process.env['S3ACCESS'],
+  secretAccessKey: keys.s3.secret || process.env['S3SECRET']
 });
 
 const fileFilter = (req, file, cb) => {
@@ -61,8 +61,8 @@ function decrypt(text) {
 
 
 const poolData = {
-  UserPoolId: keys.cognito.userPoolId,
-  ClientId: keys.cognito.clientId
+  UserPoolId: keys.cognito.userPoolId || process.env['COGNITOUSERPOOLID'],
+  ClientId: keys.cognito.clientId || process.env['COGNITOCLIENTID']
 }
 
 const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
@@ -183,7 +183,7 @@ router.post('/completeProfile/:id', (req, res) => {
 
       if (req.body.name) user.name = req.body.name;
       if (req.body.addresses) user.addresses = req.body.addresses;
-
+      user.completedProfile = true;
       user = { $set: user }
 
       User.update({ userID: id }, user).then(() => {
@@ -364,5 +364,12 @@ router.post('/uploadProfilePic/:id', upload.array('file', 1), (req, res) => {
   id = req.params.id;
   res.json({ file: req.file });
 });
+
+router.get('/getBasicProfile/:id', (req,res) => {
+  const id = req.params.id;
+  User.findOne({userID: id}, (err,result) => {
+    res.send({name: result.name, profile: result.name.charAt(0)}) //To Do: after customer dashboard is ready
+  })
+})
 
 module.exports = router;

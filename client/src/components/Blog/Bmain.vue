@@ -1,19 +1,19 @@
 <template>
   <div>
     <Nav />
-    <Aboutsub />
+    <blog />
   </div>
 </template>
 
 <script>
 
 import Nav from '@/components/Home/Navbar.vue'
-import Aboutsub from '@/components/About/construct'
+import blog from '@/components/About/construct'
 
 export default {
   components: {
     Nav,
-    Aboutsub
+    blog
   }
 }
 </script>

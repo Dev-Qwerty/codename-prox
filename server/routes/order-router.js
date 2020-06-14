@@ -1,5 +1,4 @@
 const express = require('express');
-const http = require('http')
 const https = require('https')
 const qs = require('querystring')
 const router = express.Router();
@@ -8,9 +7,9 @@ const assignWorker = require('../misc/assign-worker')
 const moment = require('moment')
 const sendMessage = require('../misc/textmessage')
 
-// express body parser
-const expressUrl = express.urlencoded({ extended: false })
-const expressJson =  express.json({ extended: false })
+// Middleware for body parsing
+const parseUrl = express.urlencoded({ extended: false })
+const parseJson = express.json({ extended: false })
 
 // import order model
 const orderModel = require('../models/order-model');
@@ -19,13 +18,13 @@ const workRequestModel = require('../models/workrequest-model');
 const mainserviceModel = require('../models/mainservice-model');
 const workerModel = require('../models/worker-model');
 
-const paytm = require('../config/paymentgateway/paytmconfig')
+const paytm = require('../config/keys')
 const checksum_lib = require('../config/paymentgateway/checksum')
 
 
 router
     .route('/placeorder/pay-later')
-    .post(async (req, res) => {
+    .post([parseUrl,parseJson], async (req, res) => {
         try {
             global.totalAmount = 0;  // total amount variable
             global.newOrder = new orderModel;  // create new order instance
@@ -136,18 +135,25 @@ router
     .get((req, res) => {
         res.render('payment')
     })
-    .post((req, res) => {
+    .post([parseUrl,parseJson], async (req, res) => {
         var orderId = uniqueId.uniqueOrderId()
+        
+        global.totalAmount = 0 //total amount variable
+
+        // calculate total amount and category
+        for (let i = 0; i < req.body.service.categories.length; i++) {
+            const serviceDetails = await subserviceModel.find({ categories: { $elemMatch: { _id: req.body.service.categories[i].categoryName } } }, 'categories.$')
+            itemAmount = serviceDetails[0].categories[0].amount * req.body.service.categories[i].quantity // Find amount of each category
+            totalAmount = totalAmount + itemAmount
+        }
+
         var paymentDetails = {
-            amount: req.body.amount,
+            amount: totalAmount,
             customerId: req.body.customerId,
             customerEmail: req.body.customerEmail,
             customerPhone: req.body.customerPhone
-            // customerId: '145233',
-            // amount: '2599',
-            // customerEmail: 'abc@mailinator.com',
-            // customerPhone: '7777777777'
         }
+
         if(!paymentDetails.amount || !paymentDetails.customerId || !paymentDetails.customerEmail || !paymentDetails.customerPhone) {
             res.status(400).send('Payment failed')
         } else {
@@ -180,88 +186,111 @@ router
                 res.end();
             });
         }
-    })    
+    })
+
 router
     .route('/placeorder/paynow/callback')
-    .post((req, res) => {
-        var body = '';
-        
-        req.on('data', function (data) {
-            body += data;
-        });
-        
-        req.on('end', function () {
-            var html = "";
-            var post_data = qs.parse(body);
+    .post(async (req, res) => {
+
+        try {
+
+            var body = '';
+
+	        req.on('data', function (data) {
+	            body += data;
+	        });
+
+	        req.on('end', function () {
+				var html = "";
+				var post_data = qs.parse(body);
+
+				// received params in callback
+                console.log('Callback Response: ', post_data, "\n");
+
+
+				// verify the checksum
+				var checksumhash = post_data.CHECKSUMHASH;
+				// delete post_data.CHECKSUMHASH;
+				var result = checksum_lib.verifychecksum(post_data, paytm.PaytmConfig.key, checksumhash);
+                console.log("Checksum Result => ", result, "\n");
             
 
-            // received params in callback
-            console.log('Callback Response: ', post_data, "\n");
-            html += "<b>Callback Response</b><br>";
-            for (var x in post_data) {
-                html += x + " => " + post_data[x] + "<br/>";
-            }
-            html += "<br/><br/>";
+				// Send Server-to-Server request to verify Order Status
+				var params = {"MID": paytm.PaytmConfig.mid, "ORDERID": post_data.ORDERID};
+
+				checksum_lib.genchecksum(params, paytm.PaytmConfig.key, function (err, checksum) {
+
+					params.CHECKSUMHASH = checksum;
+					post_data = 'JsonData='+JSON.stringify(params);
+
+					var options = {
+						hostname: 'securegw-stage.paytm.in', // for staging
+						// hostname: 'securegw.paytm.in', // for production
+						port: 443,
+						path: '/merchant-status/getTxnStatus',
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/x-www-form-urlencoded',
+							'Content-Length': post_data.length
+						}
+					};
 
 
-            // verify the checksum
-            var checksumhash = post_data.CHECKSUMHASH;
-            // delete post_data.CHECKSUMHASH;
-            var result = checksum_lib.verifychecksum(post_data, paytm.PaytmConfig.key, checksumhash);
-            console.log("Checksum Result => ", result, "\n");
-            html += "<b>Checksum Result</b> => " + (result ? "True" : "False");
-            html += "<br/><br/>";
+					// Set up the request
+					var response = "";
+					var post_req = https.request(options, function(post_res) {
+						post_res.on('data', function (chunk) {
+							response += chunk;
+						});
 
+						post_res.on('end', function(){
+                            console.log('S2S Response: ', response, "\n");
 
+                            var _result = JSON.parse(response);
+                            
+                            // Send response based on the Transaction status (RESPONSE CODE)
+                            switch(_result.RESPCODE) {
+                                case '01':
+                                    res.send(_result.RESPMSG)
+                                    break
+                                case '227':
+                                    res.send(_result.RESPMSG)
+                                    break
+                                case '235':
+                                    res.send(_result.RESPMSG)
+                                    break
+                                case '295':
+                                    res.send(_result.RESPMSG)
+                                    break
+                                case '334':
+                                    res.send('payment failed')
+                                    break
+                                case '400':
+                                    res.send(_result.RESPMSG)
+                                    break
+                                case '401':
+                                    res.send(_result.RESPMSG)
+                                    break
+                                case '402':
+                                    res.send(_result.RESPMSG)
+                                    break
+                                case '810':
+                                    res.send(_result.RESPMSG)
+                            }
+						});
+					});
 
-            // Send Server-to-Server request to verify Order Status
-            var params = { "MID": paytm.PaytmConfig.mid, "ORDERID": post_data.ORDERID };
+					// post the data
+					post_req.write(post_data);
+					post_req.end();
+				});
+	        });
+        } catch (error) {
+            console.log(error)
+        }
 
-            checksum_lib.genchecksum(params, paytm.PaytmConfig.key, function (err, checksum) {
-
-                params.CHECKSUMHASH = checksum;
-                post_data = 'JsonData=' + JSON.stringify(params);
-
-                var options = {
-                    hostname: 'securegw-stage.paytm.in', // for staging
-                    // hostname: 'securegw.paytm.in', // for production
-                    port: 443,
-                    path: '/merchant-status/getTxnStatus',
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                        'Content-Length': post_data.length
-                    }
-                };
-
-
-                // Set up the request
-                var response = "";
-                var post_req = https.request(options, function (post_res) {
-                    post_res.on('data', function (chunk) {
-                        response += chunk;
-                    });
-
-                    post_res.on('end', function () {
-                        console.log('S2S Response: ', response, "\n");
-
-                        var _result = JSON.parse(response);
-                        html += "<b>Status Check Response</b><br>";
-                        for (var x in _result) {
-                            html += x + " => " + _result[x] + "<br/>";
-                        }
-
-                        res.writeHead(200, { 'Content-Type': 'text/html' });
-                        res.write(html);
-                        res.end();
-                    });
-                });
-
-                // post the data
-                post_req.write(post_data);
-                post_req.end();
-            });
-        });
+        
     })
+    
 
 module.exports = router;

@@ -3,10 +3,11 @@ const router = express.Router();
 const keys = require('../config/keys');
 const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
 const Company = require('../models/company-model');
+const Token = require('../models/token');
 
 const poolData = {
-    UserPoolId: keys.cognito.userPoolId,
-    ClientId: keys.cognito.clientId
+    UserPoolId: keys.cognito.userPoolId || process.env['COGNITOUSERPOOLID'],
+    ClientId: keys.cognito.clientId || process.env['COGNITOCLIENTID']
 }
 
 const companyPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
@@ -52,6 +53,31 @@ router.post('/signup', (req,res) => {
           res.send({user: company, data: data.user});
         })
     })
+})
+
+router.post('/completeProfile/:id', (req, res) => {
+  const t = req.body.token;
+  Token.findOne({token: t}, (err,results) => {
+    if(results.length == 0) {
+      res.send({status: "Error!", code: "Invalid token!"});
+    }
+    else {
+      let id = req.params.id;
+      let company = {};
+
+      if (req.body.name) company.name = req.body.name;
+      if (req.body.addresses) company.addresses = req.body.addresses;
+      company.completedProfile = true;
+      company = { $set: company }
+
+      Company.update({ companyID: id }, company).then(() => {
+        res.send(company);
+      }).catch((err) => {
+        console.log(err);
+      })
+
+    }
+  })
 })
 
 router.post('/forgotPassword', (req,res) => {
@@ -111,6 +137,14 @@ router.post('/forgotPassword', (req,res) => {
       }
     })
   })
+
+  router.get('/getBasicProfile/:id', (req,res) => {
+    const id = req.params.id;
+    Company.findOne({companyID: id}, (err,result) => {
+      res.send({name: result.name, profile: result.name.charAt(0)}) //To Do: after company dashboard is ready
+    })
+  })
+  
 
 
 module.exports = router;

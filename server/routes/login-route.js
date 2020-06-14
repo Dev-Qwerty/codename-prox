@@ -4,6 +4,9 @@ const Token = require('../models/token');
 const keys = require('../config/keys');
 const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
 const crypto = require('crypto');
+const User = require('../models/user-model');
+const Company = require('../models/company-model');
+const Worker = require('../models/worker-model');
 
 const poolData = {
     UserPoolId: keys.cognito.userPoolId,
@@ -38,7 +41,6 @@ router.post('/login', (req,res) => {
         Username: req.body.username,
         Pool: userPool
       }
-      console.log("Reached here!");
       const cognitoUser = new AmazonCognitoIdentity.CognitoUser(UserData);
       cognitoUser.authenticateUser(AuthenticationDetails, {
         onSuccess: data => {
@@ -55,7 +57,27 @@ router.post('/login', (req,res) => {
               newToken
               .save()
               .then(token => {
-                res.send({ status: "Success", jwt: pidToken, username: username, token: token, category: category });
+                if(category == 'Customer') {
+                  User.findOne({userID: decrypt(username)}, (err,r) => {
+                    if(r.length != 0) {
+                    res.send({ status: "Success", jwt: pidToken, username: username, token: token, category: category, completedProfile: r.completedProfile });
+                    }
+                  })
+                }
+                else if(category == 'Worker') {
+                  Worker.findOne({workerID: decrypt(username)}, (err,r) => {
+                    if(r.length != 0) {
+                      res.send({ status: "Success", jwt: pidToken, username: username, token: token, category: category, completedProfile: r.completedProfile });
+                    }
+                  })
+                }
+                else {
+                  Company.findOne({companyID: decrypt(username)}, (err,r) => {
+                    if(r.length != 0) {
+                      res.send({ status: "Success", jwt: pidToken, username: username, token: token, category: category, completedProfile: r.completedProfile });
+                    }
+                  })
+                }
               })
               .catch(err => {
                 console.log(err);
@@ -67,7 +89,22 @@ router.post('/login', (req,res) => {
               t.token = pidToken;
               t = {$set: t};
               Token.update({id: username}, t).then(() => {
-                res.send({status: "Success", jwt: pidToken, username: username, t: t, category: category });
+                if(category == 'Customer') {
+                  User.findOne({userID: decrypt(username)}, (err,r) => {
+                    if(err) console.log(err);
+                    res.send({ status: "Success", jwt: pidToken, username: username, category: category, completedProfile: r.completedProfile });
+                  })
+                }
+                else if(category == 'Worker') {
+                  Worker.findOne({workerID: decrypt(username)}, (err,r) => {
+                      res.send({ status: "Success", jwt: pidToken, username: username, category: category, completedProfile: r.completedProfile })
+                  })
+                }
+                else {
+                  Company.findOne({companyID: decrypt(username)}, (err,r) => {
+                    res.send({ status: "Success", jwt: pidToken, username: username, category: category, completedProfile: r.completedProfile });
+                  })
+                }
               })
             }
           })

@@ -9,8 +9,8 @@ const workOrderModel = require('../models/order-model');
 const Token = require('../models/token');
 
 const poolData = {
-	UserPoolId: keys.cognito.userPoolId,
-	ClientId: keys.cognito.clientId
+	UserPoolId: keys.cognito.userPoolId || process.env['COGNITOUSERPOOLID'],
+	ClientId: keys.cognito.clientId || process.env['COGNITOCLIENTID']
 }
 
 const workerPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
@@ -50,8 +50,8 @@ router.post('/signup', (req, res) => {
 			.then((worker) => {
 				res.send({ user: worker, data: data.user });
 			})
-
 	})
+
 })
 
 router.post('/completeProfile/:id', (req, res) => {
@@ -69,7 +69,7 @@ router.post('/completeProfile/:id', (req, res) => {
 			worker.specialization = req.body.specialization;
 			worker.address = req.body.address;
 			worker.service = req.body.service;
-
+			worker.completedProfile = true;
 			worker = { $set: worker };
 
 			Worker.update({ workerID: id }, worker).then(() => {
@@ -196,6 +196,13 @@ router
 				}
 				res.json({ "completedWorks": completedWorks, "upcommingWorks": upcommingWorks, "todaysWork": todaysWork, "totalEarning": totalEarning, "totalWorks": completedWorks.length })
 			}
+	})
+
+	router.get('/getBasicProfile/:id', (req,res) => {
+		const id = req.params.id;
+		Worker.findOne({workerID: id}, (err,result) => {
+			res.send({name: result.name, type: result.specialization, rating: result.rating, location: result.address.district, profile: result.name.charAt(0)})
+		})
 	})
 
 module.exports = router;

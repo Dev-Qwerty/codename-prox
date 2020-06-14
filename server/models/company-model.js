@@ -48,6 +48,10 @@ const CompanySchema = new mongoose.Schema({
     workers: {
         type: Array,
         default: null
+    },
+    completedProfile: {
+        type: Boolean,
+        default: false
     }
 });
 

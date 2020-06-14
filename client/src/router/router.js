@@ -2,9 +2,11 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../components/Home/Main.vue'
 import GetHired from '../components/GetHired/GHMain.vue'
+import wcSignup from '@/components/GetHired/wcSignup.vue'
 import Signup from '../components/Signup/SMain.vue'
 import Login from '../components/Login/LMain.vue'
 import About from '../components/About/Aboutmain.vue'
+import Blog from '../components/Blog/Bmain.vue'
 import Services from '../components/ServicesPage/SMain.vue'
 import Cleaning from '@/components/Services/Cleaning/Cmain.vue'
 import Cmodal from '@/components/Services/Cleaning/Cmodal.vue'
@@ -29,60 +31,28 @@ export default new VueRouter({
     },
     { 
       path: '/gethired', 
-      component: GetHired 
+      component: GetHired,    
     },
     { 
+      path: '/wcsignup', 
+      component: wcSignup 
+    },    
+    { 
       path: '/signup', 
-      component: Signup,
-      children: [
-        {
-          path: 'user',
-          name: 'user',
-          component: Cmodal,
-          props: true,      
-        },
-        {
-          path: 'worker',
-          name: 'worker',
-          component: Cmodal,
-          props: true,      
-        },
-        {
-          path: 'company',
-          name: 'company',
-          component: Cmodal,
-          props: true,      
-        }                
-      ]      
+      component: Signup,    
     },
     { 
       path: '/login', 
-      component: Login,
-      children: [
-        {
-          path: 'user',
-          name: 'user',
-          component: Cmodal,
-          props: true,      
-        },
-        {
-          path: 'worker',
-          name: 'worker',
-          component: Cmodal,
-          props: true,      
-        },
-        {
-          path: 'company',
-          name: 'company',
-          component: Cmodal,
-          props: true,      
-        }                
-      ]      
+      component: Login,     
     },  
     { 
       path: '/about', 
       component: About 
     },
+    { 
+      path: '/blog', 
+      component: Blog
+    },    
     { 
       path: '/services', 
       component: Services 
