@@ -8,22 +8,24 @@
         <div class="sidenav-top">
           <div class="sidenav-top-top">
             <div class="Circle">
-              <p class="circle-inside">G</p>
+              <p class="circle-inside">{{ this.winfo.profile }}</p>
             </div>
-            <p class="profile-name">George Samuel</p>
+            <p class="profile-name">{{ this.winfo.name }}</p>
             <div class="profile-underline"></div>
           </div>
           <div class="sidenav-top-mid">
             <div class="sidenav-top-mid-one">
               <div class="sidenav-top-mid-one-img"></div>
-              <p class="job-title">Cleaner</p>
+              <p class="job-title">{{ this.winfo.type[0] }}</p>
             </div>
             <div class="sidenav-top-mid-two">
               <div class="sidenav-top-mid-two-img"></div>
-              <p class="Place">Kottayam</p>
+              <p class="Place">{{ this.winfo.location }}</p>
             </div>
           </div>
-          <div class="sidenav-top-bottom"></div>
+          <div class="sidenav-top-bottom">
+            <p>Rating: {{ this.winfo.rating }}</p>
+          </div>
         </div>
         <div class="sidenav-mid">
           <router-link :to="{name: 'workrequests'}" @click.native="workreqfn">
@@ -62,7 +64,6 @@
         </div>
       </div>
       <div class="dashboard-body">
-        {{ this.winfo.name }}
         <router-view>
           <workreq />
           <pworks />
@@ -231,13 +232,13 @@ export default {
   }     
   .sidenav-top-bottom {
     margin-top: -15px;
-    margin-left: 20px;
-    height: 20px;
+    margin-left: 50px;
+    /*height: 20px;
     width: 80%;
     background-image: url('../../assets/stars.png');
     background-repeat: no-repeat;
     background-position: center;
-    background-size: contain;      
+    background-size: contain;*/      
   }    
   .sidenav-mid {  
     margin-top: -20px;
