@@ -62,6 +62,7 @@
         </div>
       </div>
       <div class="dashboard-body">
+        {{ this.winfo.name }}
         <router-view>
           <workreq />
           <pworks />
@@ -84,23 +85,42 @@ export default {
     myworks
   },
   data() {
-
+    return {
+      wid: this.$cookies.get("id"),
+      winfo: []
+    }
   },
   methods: {
+    /*beforeCreate: function () {
+      if (!this.$session.exists()) {
+        window.location.href = "http://localhost:8080/"
+      }
+    }*/  
+    workreqfn() {
+      
+    },
     logout() {
       this.$cookies.remove("username");
       this.$cookies.remove("id");
       this.$cookies.remove("pid");
       this.$session.destroy()
       window.location.href = "http://localhost:8080/"
+    },
+    apiCall() {
+      let url = 'http://localhost:3000/worker/getBasicProfile/' + this.wid
+      this.$http.get(url)
+      .then((response) => {
+        this.winfo = response.data
+      })
+      .catch((error) => {
+        alert(error);
+      })     
     }
   },
-  /*beforeCreate: function () {
-    if (!this.$session.exists()) {
-      window.location.href = "http://localhost:8080/"
-    }
-  }*/
-}
+  created() {
+   this.apiCall() 
+  }
+}        
 </script>
 
 <style scoped>
