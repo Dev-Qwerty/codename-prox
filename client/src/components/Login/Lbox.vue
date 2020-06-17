@@ -19,11 +19,6 @@
       <div v-if="errorstatus" class="errormsg">
        <span>{{ errormsg }}</span>
        </div>
-       <div v-if="invalidCategory">
-         <p>Select your category:</p>
-         <button class= "category-btn">Worker</button>
-         <button class = "category-btn">Company</button>
-       </div>
   </div>
 </template>
 
@@ -37,8 +32,7 @@ export default {
       password: "",
       errormsg: "",
       errorstatus: false,
-      captchastatus: false,
-      invalidCategory: false
+      captchastatus: false
     }
   },
   methods: {
@@ -53,7 +47,7 @@ export default {
       }
       else {
         if (this.password.length > 6) {
-        let url = "http://localhost:3000/customer/login";
+        let url = "http://localhost:3000/auth/login";
         this.$http
           .post(url, {
             username: this.username,
@@ -75,31 +69,14 @@ export default {
               });
             }
             if(response.data.status == "Success") {
-            let verifyURL = "http://localhost:3000/customer/verifyCategory";
             const username = response.data.username;
             const jwtToken = response.data.jwt;
-            this.$http
-            .post(verifyURL, {
-              userID: username
-            })
-            .then(responses => {
-              if(responses.data.status == "Success") {
-                this.$cookies.set("username", username, '1d');
+            this.$cookies.set("username", username, '1d');
                 this.$cookies.set("pid", jwtToken, '1d');
                 this.$session.start();
                 this.$session.set('jwt', jwtToken);
+                this.$cookies.set("id", response.data.id);
                 window.location.href = "http://localhost:8080/dashboard";
-              }
-              else {
-                this.invalidCategory = true;
-                Vue.$toast.open({
-                  message: 'Invalid category!',
-                  type: 'error',
-                  position: 'bottom-left'
-              });
-              }
-            })
-          
             }
           })
           .catch(function(error) {

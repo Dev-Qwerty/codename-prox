@@ -89,6 +89,8 @@ export default {
   methods: {
     logout() {
       this.$cookies.remove("username");
+      this.$cookies.remove("id");
+      this.$cookies.remove("pid");
       this.$session.destroy()
       window.location.href = "http://localhost:8080/"
     }
