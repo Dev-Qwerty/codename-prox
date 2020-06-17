@@ -36,9 +36,9 @@
                 <input type="checkbox" name="check1" id="checkbox" value="">
                 <label class="terms-label">I agree with terms and conditions</label>
               </div>                
-                <router-link class="signupbtn" :to="{name: ''}" @click.prevent="signupfn">
-                  <input type="submit" value="Sign Up">
-                </router-link> 
+              <div class="signupbtn">
+                  <input type="submit" value="Sign Up" @click.prevent="signupfn()">
+              </div> 
               </div>                                 
             </form> 
             <div>
@@ -54,7 +54,7 @@
 </template>
 
 <script>
-
+import Vue from 'vue';
 
 export default {
   name: 'wcSignup',
@@ -77,7 +77,7 @@ export default {
           this.$http.post(url, {
             email: this.email,
             password: this.password,
-            phone: this.phone
+            phoneNo: this.phone
           })
           .then(response=> {
             if(response.data.status == "Success") {

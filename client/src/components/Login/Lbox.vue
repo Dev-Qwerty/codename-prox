@@ -53,7 +53,7 @@ export default {
       }
       else {
         if (this.password.length > 6) {
-        let url = "http://localhost:3000/customer/login";
+        let url = "http://localhost:3000/auth/login";
         this.$http
           .post(url, {
             username: this.username,

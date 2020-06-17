@@ -111,7 +111,7 @@ router.post('/login', (req,res) => {
           
         },
         onFailure: err => {
-          res.send({error: err});
+          res.send(err.code);
         }
       })
 })
