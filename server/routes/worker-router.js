@@ -7,11 +7,26 @@ const mainserviceModel = require('../models/mainservice-model');
 const subserviceModel = require('../models/subservice-model');
 const workOrderModel = require('../models/order-model');
 const Token = require('../models/token');
+const crypto = require('crypto');
 
 const poolData = {
 	UserPoolId: keys.cognito.userPoolId || process.env['COGNITOUSERPOOLID'],
 	ClientId: keys.cognito.clientId || process.env['COGNITOCLIENTID']
 }
+function encrypt(text) {
+	var mykey = crypto.createCipher('aes-128-cbc', 'afvbbmhghhh');
+	var mystr = mykey.update(text, 'utf8', 'hex')
+	mystr += mykey.final('hex');
+	return mystr;
+  }
+  
+  function decrypt(text) {
+	var mykey = crypto.createDecipher('aes-128-cbc', 'afvbbmhghhh');
+	var mystr = mykey.update(text, 'hex', 'utf8')
+	mystr += mykey.final('utf8');
+	return mystr;
+  }
+  
 
 const workerPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
 
@@ -62,7 +77,7 @@ router.post('/completeProfile/:id', (req, res) => {
 			res.send({status: "Error!", code: "Invalid token!"});
 		}
 		else {
-			const id = req.params.id;
+			const id = decrypt(req.params.id);
 			let worker = {};
 			worker.name = req.body.name;
 			worker.workerType = req.body.type;
@@ -200,7 +215,7 @@ router
 	})
 
 	router.get('/getBasicProfile/:id', (req,res) => {
-		const id = req.params.id;
+		const id = decrypt(req.params.id);
 		Worker.findOne({workerID: id}, (err,result) => {
 			res.send({name: result.name, type: result.specialization, rating: result.rating, location: result.address.district, profile: result.name.charAt(0)})
 		})

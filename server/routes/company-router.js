@@ -4,10 +4,25 @@ const keys = require('../config/keys');
 const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
 const Company = require('../models/company-model');
 const Token = require('../models/token');
+const crypto = require('crypto');
 
 const poolData = {
     UserPoolId: keys.cognito.userPoolId || process.env['COGNITOUSERPOOLID'],
     ClientId: keys.cognito.clientId || process.env['COGNITOCLIENTID']
+}
+
+function encrypt(text) {
+  var mykey = crypto.createCipher('aes-128-cbc', 'afvbbmhghhh');
+  var mystr = mykey.update(text, 'utf8', 'hex')
+  mystr += mykey.final('hex');
+  return mystr;
+}
+
+function decrypt(text) {
+  var mykey = crypto.createDecipher('aes-128-cbc', 'afvbbmhghhh');
+  var mystr = mykey.update(text, 'hex', 'utf8')
+  mystr += mykey.final('utf8');
+  return mystr;
 }
 
 const companyPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
@@ -62,7 +77,7 @@ router.post('/completeProfile/:id', (req, res) => {
       res.send({status: "Error!", code: "Invalid token!"});
     }
     else {
-      let id = req.params.id;
+      let id = decrypt(req.params.id);
       let company = {};
 
       if (req.body.name) company.name = req.body.name;
@@ -139,7 +154,7 @@ router.post('/forgotPassword', (req,res) => {
   })
 
   router.get('/getBasicProfile/:id', (req,res) => {
-    const id = req.params.id;
+    const id = decrypt(req.params.id);
     Company.findOne({companyID: id}, (err,result) => {
       res.send({name: result.name, profile: result.name.charAt(0)}) //To Do: after company dashboard is ready
     })
