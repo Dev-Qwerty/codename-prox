@@ -164,7 +164,7 @@ export default {
     padding-top: 10px;
     padding-left: 20px;
     margin-top: 20px;
-    margin-left: 85px;
+    margin-left: 100px;
     width: 70px;
     height: 70px;
     background-color: #DBDBDB;
@@ -175,7 +175,7 @@ export default {
   } 
   .profile-name {
     font-size: 18px;
-    margin-left: 60px;
+    margin-left: 80px;
   }  
   .profile-underline {
     width: 58%;
@@ -187,7 +187,7 @@ export default {
   .sidenav-top-mid {
     display: grid;
     grid-template-rows: 30px 30px; 
-    padding-left: 60px;  
+    padding-left: 80px;  
     margin-top: -5px;   
   }
  .sidenav-top-mid-one {
@@ -232,7 +232,8 @@ export default {
   }     
   .sidenav-top-bottom {
     margin-top: -15px;
-    margin-left: 50px;
+    margin-left: 95px;
+    font-size: 18px;
     /*height: 20px;
     width: 80%;
     background-image: url('../../assets/stars.png');
