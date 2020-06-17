@@ -48,7 +48,7 @@ router.post('/signup', (req, res) => {
 		newWorker
 			.save()
 			.then((worker) => {
-				res.send({ status:"Success",user: worker, data: data.user });
+				res.send({ status:"Success",user: worker, data: data.user});
 			})
 			.catch(error => console.log(error))
 	})

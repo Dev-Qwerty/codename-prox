@@ -75,6 +75,7 @@ export default {
                 this.$cookies.set("pid", jwtToken, '1d');
                 this.$session.start();
                 this.$session.set('jwt', jwtToken);
+                this.$cookies.set("id", response.data.id);
                 window.location.href = "http://localhost:8080/dashboard";
             }
           })
