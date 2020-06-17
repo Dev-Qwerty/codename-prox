@@ -63,10 +63,10 @@ export default {
   data() {
     return {
       email: "",
-      phone: 0,
+      phone: "",
       password: "",
       password2: "",
-      category: ""
+      category: "Worker"
     }
   },
   methods: {
