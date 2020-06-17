@@ -50,7 +50,7 @@ router.post('/signup', (req,res) => {
         newCompany
         .save()
         .then((company) => {
-          res.send({user: company, data: data.user});
+          res.send({status: "Success",user: company, data: data.user});
         })
     })
 })
