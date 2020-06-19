@@ -53,7 +53,7 @@ export default {
             }
             else {
               Vue.$toast.open({
-                  message: 'Network Error!',
+                  message: response.data,
                   type: 'error',
                   position: 'bottom-left'
               });
