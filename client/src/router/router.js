@@ -33,10 +33,6 @@ export default new VueRouter({
     { 
       path: '/gethired', 
       component: GetHired,    
-    },
-    { 
-      path: '/construct', 
-      component: construct,    
     },    
     { 
       path: '/wcsignup', 
@@ -114,6 +110,11 @@ export default new VueRouter({
           component: pworks,
           props: true
         },*/
+        { 
+          name: 'construct', 
+          path: '/construct', 
+          component: construct,    
+        },        
         {
           path: 'myworks',
           name: 'myworks',

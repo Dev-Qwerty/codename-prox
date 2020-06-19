@@ -34,7 +34,7 @@
               <p>Work Requests</p>
             </div>
           </router-link>
-          <router-link :to="{name: ''}" @click.native="mfn">
+          <router-link :to="{name: 'construct'}" @click.native="mfn">
             <div class="sidenav-mid-two">
               <div class="sidenav-mid-img2"></div>
               <p>Pending Works</p>
