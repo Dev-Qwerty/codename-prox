@@ -34,7 +34,7 @@
               <p>Work Requests</p>
             </div>
           </router-link>
-          <router-link :to="{name: 'pendingworks'}" @click.native="pworksfn">
+          <router-link :to="{name: ''}" @click.native="mfn">
             <div class="sidenav-mid-two">
               <div class="sidenav-mid-img2"></div>
               <p>Pending Works</p>
@@ -66,7 +66,7 @@
       <div class="dashboard-body">
         <router-view>
           <workreq />
-          <pworks />
+          <!--<pworks />-->
           <myworks />
         </router-view>       
       </div>
@@ -76,13 +76,13 @@
 
 <script>
 import workreq from '@/components/Dashboard/workreq.vue'
-import pworks from '@/components/Dashboard/pworks.vue'
+//import pworks from '@/components/Dashboard/pworks.vue'
 import myworks from '@/components/Dashboard/myworks.vue'
 
 export default {
   components: {
     workreq,
-    pworks,
+    //pworks,
     myworks
   },
   data() {
