@@ -2,13 +2,22 @@
   <div class = "box">
     <form method="POST">
       <div>
-        <input class="input-box" type="email" name="email" placeholder="EMAIL" v-model="email">
+        <input class="input-box" type="email" name="email" placeholder="EMAIL" v-model="email" v-validate="'required|email'">
       </div>
       <div>
-        <input class="input-box" type="number" name="phoneno" placeholder="PHONENO" v-model="phone">
+        <span class="error-msg">{{ errors.first('email') }}</span>
+      </div>
+      <div>
+        <input class="input-box" type="text" name="phone" placeholder="PHONENO" v-model="phone" v-validate="'min:10|required'">
+      </div>
+      <div>
+        <span class="error-msg">{{ errors.first('phone') }}</span>
       </div>      
       <div>
-        <input class="input-box" type="Password" name="password" placeholder="PASSWORD" v-model ="password">
+        <input class="input-box" type="Password" name="password" placeholder="PASSWORD" v-model ="password" v-validate="'min:6|verify_password'">
+      </div>
+      <div>
+        <span class="error-msg">{{ errors.first('password') }}</span>
       </div>
       <div>
         <label>Keep me signed in</label>
@@ -19,7 +28,7 @@
       </div>
       <div>
         <router-link class="" :to="{ path: '/gethired' }">
-          <p class="prof">Are you a proffessional?</p>
+          <p class="prof">Are you a professional?</p>
         </router-link>  
       </div>
     </form>
@@ -33,7 +42,7 @@ export default {
   data() {
     return {
       email: "",
-      phone: 0,
+      phone: null,
       password: ""
     }
   },
@@ -44,7 +53,7 @@ export default {
         this.$http
           .post(url, {
             email: this.email,
-            phone: this.phone,
+            phoneNo: "+91"+ this.phone,
             password: this.password
           })
           .then(response => {
@@ -53,7 +62,7 @@ export default {
             }
             else {
               Vue.$toast.open({
-                  message: 'Network Error!',
+                  message: response.data,
                   type: 'error',
                   position: 'bottom-left'
               });
@@ -127,5 +136,10 @@ export default {
     margin-top: 10px;
     font-size: 15px;
     color: #000;
+  }
+  .error-msg {
+    font-size: 12px;
+    color: red;
+    font-weight: bold;
   }
 </style>

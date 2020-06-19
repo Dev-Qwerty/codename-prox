@@ -11,6 +11,7 @@
     "axios": "^0.19.2",
     "core-js": "^3.6.5",
     "mdbvue": "^6.7.1",
+    "vee-validate": "^2.2.15",
     "vue": "^2.6.10",
     "vue-cookies": "^1.7.0",
     "vue-cryptojs": "^2.1.4",

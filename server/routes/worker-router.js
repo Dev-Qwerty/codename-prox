@@ -189,29 +189,21 @@ router.post('/verifyCategory', (req, res) => {
 
 // fetch myworks
 router
-	.route('/myworks')
+	.route('/myworks/:id')
 	.get(async (req, res) => {
-		const t = req.body.token;
-		results = await Token.findOne({token: t});
-			if(results == null) {
-				res.send({status: "Error!", code: "Invalid token!"});				
+		let id = decrypt(req.params.id);
+		let totalEarning = 0
+		let todaysWork = []
+		let today = new Date().getFullYear().toString()+ "-" + (new Date().getMonth() + 1).toString() + "-" + new Date().getDate().toString()
+		let completedWorks = await workOrderModel.find({ workerID: id, completed: true }, 'service address date totalAmount -_id')
+		let upcommingWorks = await workOrderModel.find({ workerID: id, completed: false }, 'service address date totalAmount -_id')
+		for (i = 0; i < upcommingWorks.length; i++) {
+			if (upcommingWorks[i].date.localeCompare(today) == 0) {
+				todaysWork.push(upcommingWorks[i])
 			}
-			else {
-				global.totalEarning = 0
-				global.todaysWork = []
-				global.today = new Date().getDate().toString() + "-" + (new Date().getMonth() + 1).toString() + "-" + new Date().getFullYear().toString()
-				// console.log(today)
-				let id = "no worker assigned" //TODO : find workerID from cookies
-				let completedWorks = await workOrderModel.find({ workerID: id, completed: true }, 'service address date totalAmount -_id')
-				let upcommingWorks = await workOrderModel.find({ workerID: id, completed: false }, 'service address date totalAmount -_id')
-				for (i = 0; i < upcommingWorks.length; i++) {
-					if (upcommingWorks[i].date.localeCompare(today) == 0) {
-						todaysWork.push(upcommingWorks[i])
-					}
-					totalEarning = totalEarning + parseInt(upcommingWorks[i].totalAmount)
-				}
-				res.json({ "completedWorks": completedWorks, "upcommingWorks": upcommingWorks, "todaysWork": todaysWork, "totalEarning": totalEarning, "totalWorks": completedWorks.length })
-			}
+			totalEarning = totalEarning + parseInt(upcommingWorks[i].totalAmount)
+		}
+		res.json({ "completedWorks": completedWorks, "upcommingWorks": upcommingWorks, "todaysWork": todaysWork, "totalEarning": totalEarning, "totalWorks": completedWorks.length })
 	})
 
 	router.get('/getBasicProfile/:id', (req,res) => {
