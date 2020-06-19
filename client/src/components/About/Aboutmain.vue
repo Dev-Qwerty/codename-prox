@@ -8,7 +8,7 @@
 <script>
 
 import Nav from '@/components/Home/Navbar.vue'
-import Aboutsub from '@/components/About/construct'
+import Aboutsub from '@/components/construct/construct'
 
 export default {
   components: {
