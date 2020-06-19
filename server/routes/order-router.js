@@ -5,7 +5,7 @@ const router = express.Router();
 const uniqueId = require('../misc/unique-id')
 const assignWorker = require('../misc/assign-worker')
 const moment = require('moment')
-const sendMessage = require('../misc/textmessage')
+//const sendMessage = require('../misc/textmessage')
 
 // Middleware for body parsing
 const parseUrl = express.urlencoded({ extended: false })
@@ -118,7 +118,7 @@ router
                 date: req.body.date,
                 time: req.body.time,
             }
-            sendMessage.sendTextMessage("worker",workerDetails,workDetails);
+            //sendMessage.sendTextMessage("worker",workerDetails,workDetails);
 
 
         } catch (error) {

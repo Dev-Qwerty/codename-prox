@@ -8,22 +8,24 @@
         <div class="sidenav-top">
           <div class="sidenav-top-top">
             <div class="Circle">
-              <p class="circle-inside">G</p>
+              <p class="circle-inside">{{ this.winfo.profile }}</p>
             </div>
-            <p class="profile-name">George Samuel</p>
+            <p class="profile-name">{{ this.winfo.name }}</p>
             <div class="profile-underline"></div>
           </div>
           <div class="sidenav-top-mid">
             <div class="sidenav-top-mid-one">
               <div class="sidenav-top-mid-one-img"></div>
-              <p class="job-title">Cleaner</p>
+              <p class="job-title">{{ this.winfo.type[0] }}</p>
             </div>
             <div class="sidenav-top-mid-two">
               <div class="sidenav-top-mid-two-img"></div>
-              <p class="Place">Kottayam</p>
+              <p class="Place">{{ this.winfo.location }}</p>
             </div>
           </div>
-          <div class="sidenav-top-bottom"></div>
+          <div class="sidenav-top-bottom">
+            <p>Rating: {{ this.winfo.rating }}</p>
+          </div>
         </div>
         <div class="sidenav-mid">
           <router-link :to="{name: 'workrequests'}" @click.native="workreqfn">
@@ -84,21 +86,42 @@ export default {
     myworks
   },
   data() {
-
+    return {
+      wid: this.$cookies.get("id"),
+      winfo: []
+    }
   },
   methods: {
+    /*beforeCreate: function () {
+      if (!this.$session.exists()) {
+        window.location.href = "http://localhost:8080/"
+      }
+    }*/  
+    workreqfn() {
+      
+    },
     logout() {
       this.$cookies.remove("username");
+      this.$cookies.remove("id");
+      this.$cookies.remove("pid");
       this.$session.destroy()
       window.location.href = "http://localhost:8080/"
+    },
+    apiCall() {
+      let url = 'http://localhost:3000/worker/getBasicProfile/' + this.wid
+      this.$http.get(url)
+      .then((response) => {
+        this.winfo = response.data
+      })
+      .catch((error) => {
+        alert(error);
+      })     
     }
   },
-  /*beforeCreate: function () {
-    if (!this.$session.exists()) {
-      window.location.href = "http://localhost:8080/"
-    }
-  }*/
-}
+  created() {
+   this.apiCall() 
+  }
+}        
 </script>
 
 <style scoped>
@@ -141,7 +164,7 @@ export default {
     padding-top: 10px;
     padding-left: 20px;
     margin-top: 20px;
-    margin-left: 85px;
+    margin-left: 100px;
     width: 70px;
     height: 70px;
     background-color: #DBDBDB;
@@ -152,7 +175,7 @@ export default {
   } 
   .profile-name {
     font-size: 18px;
-    margin-left: 60px;
+    margin-left: 80px;
   }  
   .profile-underline {
     width: 58%;
@@ -164,7 +187,7 @@ export default {
   .sidenav-top-mid {
     display: grid;
     grid-template-rows: 30px 30px; 
-    padding-left: 60px;  
+    padding-left: 80px;  
     margin-top: -5px;   
   }
  .sidenav-top-mid-one {
@@ -209,13 +232,14 @@ export default {
   }     
   .sidenav-top-bottom {
     margin-top: -15px;
-    margin-left: 20px;
-    height: 20px;
+    margin-left: 95px;
+    font-size: 18px;
+    /*height: 20px;
     width: 80%;
     background-image: url('../../assets/stars.png');
     background-repeat: no-repeat;
     background-position: center;
-    background-size: contain;      
+    background-size: contain;*/      
   }    
   .sidenav-mid {  
     margin-top: -20px;

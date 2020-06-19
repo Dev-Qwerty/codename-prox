@@ -16,29 +16,29 @@
             <p class="wchdn">Urban Associates</p>
             <form class="inp" action="" method="">
               <div>
-                <input class="input-box" type="email" name="uname" placeholder="Email" v-model="username">
+                <input class="input-box" type="email" name="uname" placeholder="Email" v-model="email">
               </div>              
               <div>
-                <input class="input-box" type="text" name="contactno" placeholder="Phone Number" v-model="password">
+                <input class="input-box" type="text" name="contactno" placeholder="Phone Number" v-model="phone">
               </div>
               <div>
-                <input class="input-box" type="password" name="flatname" placeholder="Password" v-model="username">
+                <input class="input-box" type="password" name="flatname" placeholder="Password" v-model="password">
               </div>  
               <div>
-                <input class="input-box" type="password" name="flatname" placeholder="Confirm Password" v-model="username">
+                <input class="input-box" type="password" name="flatname" placeholder="Confirm Password" v-model="password2">
               </div>              
-              <select name="jtitle" id="jtitle">
+              <select name="jtitle" id="jtitle" v-model="category">
                 <option value="worker">Worker</option>
                 <option value="company">Company</option>
               </select>   
               <div>
               <div class="terms">
-                <input type="checkbox" name="check1" value="">
+                <input type="checkbox" name="check1" id="checkbox" value="">
                 <label class="terms-label">I agree with terms and conditions</label>
               </div>                
-                <router-link class="signupbtn" :to="{name: ''}" @click.native="paynowfn">
-                  <input type="submit" value="Sign Up">
-                </router-link> 
+              <div class="signupbtn">
+                  <input type="submit" value="Sign Up" @click.prevent="signupfn()">
+              </div> 
               </div>                                 
             </form> 
             <div>
@@ -54,7 +54,7 @@
 </template>
 
 <script>
-
+import Vue from 'vue';
 
 export default {
   name: 'wcSignup',
@@ -62,11 +62,44 @@ export default {
   },
   data() {
     return {
+      email: "",
+      phone: "",
+      password: "",
+      password2: "",
+      category: "Worker"
     }
   },
   methods: {
     signupfn() {
-      
+      if((this.password == this.password2) && (this.password.length>6)) {
+        if(document.getElementById('checkbox').checked == true) {
+          let url = "http://localhost:3000/"+this.category+'/signup';
+          this.$http.post(url, {
+            email: this.email,
+            password: this.password,
+            phoneNo: this.phone
+          })
+          .then(response=> {
+            if(response.data.status == "Success") {
+              window.location.href = "http://localhost:8080/login";
+            }
+            else {
+              Vue.$toast.open({
+                  message: 'Network Error!',
+                  type: 'error',
+                  position: 'bottom-left'
+              });
+            }
+          })
+          .catch(error=>{
+            Vue.$toast.open({
+                  message: error,
+                  type: 'error',
+                  position: 'bottom-left'
+              });
+          })
+        }
+      }
     }
   }
 }

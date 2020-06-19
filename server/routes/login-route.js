@@ -92,17 +92,17 @@ router.post('/login', (req,res) => {
                 if(category == 'Customer') {
                   User.findOne({userID: decrypt(username)}, (err,r) => {
                     if(err) console.log(err);
-                    res.send({ status: "Success", jwt: pidToken, username: username, category: category, completedProfile: r.completedProfile });
+                    res.send({ status: "Success", jwt: pidToken, username: username, category: category, completedProfile: r.completedProfile, id: username });
                   })
                 }
                 else if(category == 'Worker') {
                   Worker.findOne({workerID: decrypt(username)}, (err,r) => {
-                      res.send({ status: "Success", jwt: pidToken, username: username, category: category, completedProfile: r.completedProfile })
+                      res.send({ status: "Success", jwt: pidToken, username: username, category: category, completedProfile: r.completedProfile, id: username })
                   })
                 }
                 else {
                   Company.findOne({companyID: decrypt(username)}, (err,r) => {
-                    res.send({ status: "Success", jwt: pidToken, username: username, category: category, completedProfile: r.completedProfile });
+                    res.send({ status: "Success", jwt: pidToken, username: username, category: category, completedProfile: r.completedProfile, id: username });
                   })
                 }
               })
@@ -111,7 +111,7 @@ router.post('/login', (req,res) => {
           
         },
         onFailure: err => {
-          res.send({error: err});
+          res.send(err.code);
         }
       })
 })
