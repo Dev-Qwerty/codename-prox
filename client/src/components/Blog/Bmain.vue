@@ -8,7 +8,7 @@
 <script>
 
 import Nav from '@/components/Home/Navbar.vue'
-import blog from '@/components/About/construct'
+import blog from '@/components/construct/construct'
 
 export default {
   components: {

@@ -6,6 +6,7 @@ import wcSignup from '@/components/GetHired/wcSignup.vue'
 import Signup from '../components/Signup/SMain.vue'
 import Login from '../components/Login/LMain.vue'
 import About from '../components/About/Aboutmain.vue'
+import construct from '../components/construct/construct.vue'
 import Blog from '../components/Blog/Bmain.vue'
 import Services from '../components/ServicesPage/SMain.vue'
 import Cleaning from '@/components/Services/Cleaning/Cmain.vue'
@@ -15,7 +16,7 @@ import checkout from '@/components/Services/Cleaning/checkout.vue'
 import PayLaterConfirm from '@/components/Services/Cleaning/PayLaterConfirm.vue'
 import Dashboard from '@/components/Dashboard/DMain.vue'
 import workreq from '@/components/Dashboard/workreq.vue'
-import pworks from '@/components/Dashboard/pworks.vue'
+//import pworks from '@/components/Dashboard/pworks.vue'
 import myworks from '@/components/Dashboard/myworks.vue'
 import ForgotPassword from '@/components/ForgotPassword/FPMain.vue'
 import UpdateProfile from '@/components/UpdateProfile/UPMain.vue'
@@ -32,7 +33,7 @@ export default new VueRouter({
     { 
       path: '/gethired', 
       component: GetHired,    
-    },
+    },    
     { 
       path: '/wcsignup', 
       component: wcSignup 
@@ -103,12 +104,17 @@ export default new VueRouter({
           component: workreq,
           props: true
         },
-        {
+        /*{
           path: 'pendingworks',
           name: 'pendingworks',
           component: pworks,
           props: true
-        },
+        },*/
+        { 
+          name: 'construct', 
+          path: '/construct', 
+          component: construct,    
+        },        
         {
           path: 'myworks',
           name: 'myworks',

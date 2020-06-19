@@ -102,7 +102,7 @@ router.post('/signup', (req, res) => {
 
   userPool.signUp(email, password, [emailAttribute, phoneAttribute, nameAttribute, categoryAttribute], null, (err, data) => {
     if (err) {
-      return console.log(err);
+      res.send(err.message);
     }
     const userID = data.userSub;
     const phone = phoneNo;
