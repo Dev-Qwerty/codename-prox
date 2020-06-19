@@ -8,7 +8,10 @@
         <span class="error-msg">{{ errors.first('email') }}</span>
       </div>
       <div>
-        <input class="input-box" type="number" name="phoneno" placeholder="PHONENO" v-model="phone">
+        <input class="input-box" type="text" name="phone" placeholder="PHONENO" v-model="phone" v-validate="'min:10|required'">
+      </div>
+      <div>
+        <span class="error-msg">{{ errors.first('phone') }}</span>
       </div>      
       <div>
         <input class="input-box" type="Password" name="password" placeholder="PASSWORD" v-model ="password" v-validate="'min:6|verify_password'">
@@ -50,7 +53,7 @@ export default {
         this.$http
           .post(url, {
             email: this.email,
-            phoneNo: this.phone,
+            phoneNo: "+91"+ this.phone,
             password: this.password
           })
           .then(response => {
