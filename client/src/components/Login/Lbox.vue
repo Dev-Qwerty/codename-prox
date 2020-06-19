@@ -2,7 +2,10 @@
   <div class = "box">
     <form action="" method="POST">
       <div>
-        <input class="input-box" type="text" name="uname" placeholder="USERNAME" v-model="username">
+        <input class="input-box" type="text" name="username" placeholder="USERNAME" v-model="username" v-validate="'email|required'">
+      </div>
+      <div>
+        <span class="error-msg">{{ errors.first('username') }}</span>
       </div>
       <div>
         <input class="input-box" type="Password" name="password" placeholder="PASSWORD" v-model="password">
@@ -154,5 +157,10 @@ export default {
     color: #fff;
     width: 100px;
     border-radius: 3px;
+  }
+  .error-msg {
+    font-size: 12px;
+    color: red;
+    font-weight: bold;
   }
 </style>
