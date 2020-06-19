@@ -5,10 +5,16 @@
         <input class="input-box" type="email" name="email" placeholder="EMAIL" v-model="email" v-validate="'required|email'">
       </div>
       <div>
+        <span class="error-msg">{{ errors.first('email') }}</span>
+      </div>
+      <div>
         <input class="input-box" type="number" name="phoneno" placeholder="PHONENO" v-model="phone">
       </div>      
       <div>
-        <input class="input-box" type="Password" name="password" placeholder="PASSWORD" v-model ="password">
+        <input class="input-box" type="Password" name="password" placeholder="PASSWORD" v-model ="password" v-validate="'min:6|verify_password'">
+      </div>
+      <div>
+        <span class="error-msg">{{ errors.first('password') }}</span>
       </div>
       <div>
         <label>Keep me signed in</label>
@@ -127,5 +133,10 @@ export default {
     margin-top: 10px;
     font-size: 15px;
     color: #000;
+  }
+  .error-msg {
+    font-size: 12px;
+    color: red;
+    font-weight: bold;
   }
 </style>
