@@ -15,7 +15,7 @@ import checkout from '@/components/Services/Cleaning/checkout.vue'
 import PayLaterConfirm from '@/components/Services/Cleaning/PayLaterConfirm.vue'
 import Dashboard from '@/components/Dashboard/DMain.vue'
 import workreq from '@/components/Dashboard/workreq.vue'
-import pworks from '@/components/Dashboard/pworks.vue'
+//import pworks from '@/components/Dashboard/pworks.vue'
 import myworks from '@/components/Dashboard/myworks.vue'
 import ForgotPassword from '@/components/ForgotPassword/FPMain.vue'
 import UpdateProfile from '@/components/UpdateProfile/UPMain.vue'
@@ -103,12 +103,12 @@ export default new VueRouter({
           component: workreq,
           props: true
         },
-        {
+        /*{
           path: 'pendingworks',
           name: 'pendingworks',
           component: pworks,
           props: true
-        },
+        },*/
         {
           path: 'myworks',
           name: 'myworks',
