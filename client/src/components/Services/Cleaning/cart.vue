@@ -33,7 +33,7 @@
                     <p>{{ sr.category }}</p>
                   </div>
                   <div class="c1-box-col2">
-                    <!--<p>{{ sr.category }}</p>-->
+                    <p>{{ sr.quantity }}</p>
                   </div>
                   <div class="c1-box-col3">
                     <p>{{ sr.amount }}</p>
