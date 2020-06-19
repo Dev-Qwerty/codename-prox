@@ -2,7 +2,7 @@
   <div class = "box">
     <form method="POST">
       <div>
-        <input class="input-box" type="email" name="email" placeholder="EMAIL" v-model="email">
+        <input class="input-box" type="email" name="email" placeholder="EMAIL" v-model="email" v-validate="'required|email'">
       </div>
       <div>
         <input class="input-box" type="number" name="phoneno" placeholder="PHONENO" v-model="phone">
@@ -19,7 +19,7 @@
       </div>
       <div>
         <router-link class="" :to="{ path: '/gethired' }">
-          <p class="prof">Are you a proffessional?</p>
+          <p class="prof">Are you a professional?</p>
         </router-link>  
       </div>
     </form>
@@ -33,7 +33,7 @@ export default {
   data() {
     return {
       email: "",
-      phone: 0,
+      phone: null,
       password: ""
     }
   },
@@ -44,7 +44,7 @@ export default {
         this.$http
           .post(url, {
             email: this.email,
-            phone: this.phone,
+            phoneNo: this.phone,
             password: this.password
           })
           .then(response => {
