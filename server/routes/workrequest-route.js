@@ -24,12 +24,12 @@ router
     })
 
 router
-    .route('/workrequest')
+    .route('/workrequest/:id')
     .post( async (req, res) => {
         try {
-            const { orderId, requestId, workerId, requestStatus } = req.body
-
-            if(!orderId  || !requestId  || !workerId  || !requestStatus) {
+            const { orderId, requestId, requestStatus } = req.body
+            let workerId = req.params.id  //TODO: decrypt workerid
+            if(!orderId  || !requestId|| !requestStatus) {
                 res.status(400).send('Error updating records!')
             } else{
                 if (requestStatus === 'accepted') {
