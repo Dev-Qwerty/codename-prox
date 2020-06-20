@@ -1,7 +1,7 @@
 const express = require('express')
 const moment = require('moment')
 const router = express.Router()
-//const sendMessage = require('../misc/textmessage')
+const sendMessage = require('../misc/textmessage')
 
 // Import Models
 const workerRequest = require('../models/workrequest-model')
@@ -13,7 +13,6 @@ const customerModel = require('../models/user-model')
 router
     .route('/workrequest/:id')
     .get((req, res) => {
-        // const worker = req.params.id
         workerRequest.find({ workerId: req.params.id })
             .then(response => {
                 res.send(response)
@@ -24,19 +23,18 @@ router
     })
 
 router
-    .route('/workrequest')
+    .route('/workrequest/:id')
     .post( async (req, res) => {
         try {
-            const { orderId, requestId, workerId, requestStatus } = req.body
-
-            if(!orderId  || !requestId  || !workerId  || !requestStatus) {
+            const { orderId, requestId, requestStatus } = req.body
+            let workerId = req.params.id  //TODO: decrypt workerid
+            if(!orderId  || !requestId|| !requestStatus) {
                 res.status(400).send('Error updating records!')
             } else{
                 if (requestStatus === 'accepted') {
                     await workerRequest.findOneAndUpdate({requestID: requestId}, {workerID: workerId, requestStatus: requestStatus})
                     await orders.findOneAndUpdate({orderID: orderId}, {workerID: workerId})
                     res.send('worker assigned')
-                    // TODO: Send SMS to customer
                     let customer = await orders.findOne({orderID: orderId},'userID -_id') // Fetch customer ID
                     let customerDetails = await customerModel.findOne({userID: customer.userID},'name phone -_id') // Fetch customer details
                     let work = await orders.findOne({orderID: orderId},'service.subserviceName  date time'); // Fetch work details
@@ -49,7 +47,7 @@ router
                         orderID: orderId
                     }
                     console.log(workDetails)
-                    //sendMessage.sendTextMessage("customer",customerDetails,workDetails);
+                    sendMessage.sendTextMessage("customer",customerDetails,workDetails);
                 } else {
                     let selectedWorkersDetails = await selectedWorkers.findOne({orderID: orderId}, '-_id')
                     let declinedWorker = selectedWorkersDetails.selectedWorkers.shift() //Return first worker
@@ -102,7 +100,7 @@ router
                         date: work.date,
                         time: work.time,
                     }
-                    //sendMessage.sendTextMessage("worker",workerDetails,workDetails);
+                    sendMessage.sendTextMessage("worker",workerDetails,workDetails);
                 }          
             }
         } catch (error) {
