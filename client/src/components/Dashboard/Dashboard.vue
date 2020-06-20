@@ -63,7 +63,7 @@
           </a>          
         </div>
       </div>
-      <div class="dashboard-body">           
+      <div class="dashboard-body">         
         <router-view>
           <workreq />
           <!--<pworks />-->
@@ -98,11 +98,11 @@ export default {
       }
     }*/  
     workreqfn() {
-
+      this.init = "false"
     },
     myworksfn() {
-    
-    },    
+      this.init = "false"
+    },       
     logout() {
       this.$cookies.remove("username");
       this.$cookies.remove("id");
@@ -123,6 +123,7 @@ export default {
   },
   created() {
    this.apiCall() 
+   this.$router.push('dashboard/workrequests')
   }
 }        
 </script>
