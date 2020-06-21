@@ -25,7 +25,7 @@
         <router-link class="nav-link" :to="{ path: '/blog' }">Blog</router-link>
       </li>
       <li class="nav-item">
-        <router-link class="btn btn-light" :to="{ path: 'login' }" tag="button">Login</router-link>
+        <a class="btn btn-light" @click="loginClicked()" tag="button">Login</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#"> / </a>
@@ -39,6 +39,13 @@
 </template>
 
 <script>
+export default {
+  methods: {
+    loginClicked() {
+      window.location.href="http://localhost:8080/login";
+    }
+  }
+}
 </script>
 
 <style>
@@ -47,7 +54,7 @@
     font-size: 18px;
   }
   .btn {
-    color: #aaa;
+    color: #000;
     font-size: 18px;
   }
   .navbar {
