@@ -14,9 +14,19 @@
               <p id="one">{{ sr.category }}<p>
               <div class="Rs"></div>
               <p id="two">{{ sr.amount }}</p>
-              <div class="btn">
+              <!-- <div class="btn">
                 <input type="submit" value="ADD" @click="fn(sr)">
-              </div>
+              </div> -->
+              <button
+                v-show="!inCart.includes(sr.category)"
+                @click="fn(sr)"
+                class="btn"
+              >ADD</button>
+              <button
+                v-show="inCart.includes(sr.category)"
+                @click="rm(sr)"
+                class="btn"
+              >REMOVE</button>
             </div>
             <p id="Vdetails">view details  <span id="Vspan">></span></p>
           </div>
@@ -43,15 +53,24 @@ export default {
   },
   data() {
     return {
+      inCart: [],
       cartArr: [],
       sarray: this.$route.params.sarray
     }   
   },
   methods: {
     fn(obj) {
+      obj.quantity = obj.quantity + 1
+      this.inCart.push(obj.category)
       this.cartArr.push(obj)
       this.$cookies.set("cart", JSON.stringify(this.cartArr), '1d')
       /*EventBus.$emit('sub-sub-service', obj)*/
+    },
+    rm(obj){
+      obj.quantity = 0
+      this.inCart = this.inCart.filter(element => element != obj.category)
+      this.cartArr = this.cartArr.filter(element => element.category != obj.category)
+      this.$cookies.set("cart", JSON.stringify(this.cartArr), "id")
     },
     closefn() {
       this.$cookies.remove("cart") 
@@ -150,7 +169,8 @@ export default {
     font-weight: bold;
     font-size: 20px;    
   }
-  .btn input[type="submit"] {
+  /* .btn input[type="submit"] { */
+  .btn {
     border: none;
     background-color: #000;
     color: #fff;
