@@ -123,7 +123,7 @@ export default {
   },
   created() {
    this.apiCall() 
-   this.$router.push('dashboard/workrequests')
+   //this.$router.push('dashboard/workrequests')
   }
 }        
 </script>

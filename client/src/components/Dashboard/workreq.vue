@@ -36,8 +36,28 @@
 
 <script>
 export default {
-    
-}
+  data() {
+    return {
+      wid: this.$cookies.get("id"),
+      reqarr: []
+    }
+  },
+  methods: {
+    apiCall() {
+      let url = 'http://localhost:3000/request/workrequest/f35ce2de4348f6943f9621bed9af307f'
+      this.$http.get(url)
+      .then((response) => {
+        this.reqarr = response.data
+      })
+      .catch((error) => {
+        alert(error);
+      })     
+    }
+  },
+  created() {
+   this.apiCall()
+  }
+} 
 </script>
 
   <style scoped>
