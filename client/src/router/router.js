@@ -112,7 +112,7 @@ export default new VueRouter({
         },*/
         { 
           name: 'construct', 
-          path: '/construct', 
+          path: 'construct', 
           component: construct,    
         },        
         {
