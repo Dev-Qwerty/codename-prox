@@ -35,10 +35,26 @@ export default {
       password: "",
       errormsg: "",
       errorstatus: false,
-      captchastatus: false
+      captchastatus: false,
+      sitekey: process.env['RECAPTCHASITEKEY'] || '6LfsCfYUAAAAAEKiFDDFZW9yqlCZpd3G3EFoDy2w'
     }
   },
   methods: {
+    render () {
+      if (window.grecaptcha) {
+        this.widgetId = window.grecaptcha.render('g-recaptcha', {
+          sitekey: this.sitekey,
+          size: 'invisible',
+          // the callback executed when the user solve the recaptcha
+          callback: (response) => {
+            // emit an event called verify with the response as payload
+            this.$emit('verify', response)
+            // reset the recaptcha widget so you can execute it again
+            this.reset() 
+          }
+        })
+      }
+    },
     captchaVerified() {
       this.captchastatus = true;
       if(this.captchastatus == false) {
@@ -96,7 +112,10 @@ export default {
       this.$refs.recaptcha.execute();
     },
   },
-  components: { recaptcha }
+  components: { recaptcha },
+  beforeCreate() {
+    this.render();
+  },
 }
 </script>
 
