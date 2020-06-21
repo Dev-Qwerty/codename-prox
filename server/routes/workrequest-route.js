@@ -2,6 +2,7 @@ const express = require('express')
 const moment = require('moment')
 const router = express.Router()
 const sendMessage = require('../misc/textmessage')
+const crypt = require('../misc/crypt')
 
 // Import Models
 const workerRequest = require('../models/workrequest-model')
@@ -13,7 +14,8 @@ const customerModel = require('../models/user-model')
 router
     .route('/workrequest/:id')
     .get((req, res) => {
-        workerRequest.find({ workerId: req.params.id })
+        let id = crypt.decrypt(req.params.id)
+        workerRequest.find({ workerID: id })
             .then(response => {
                 res.send(response)
             })
@@ -27,7 +29,7 @@ router
     .post( async (req, res) => {
         try {
             const { orderId, requestId, requestStatus } = req.body
-            let workerId = req.params.id  //TODO: decrypt workerid
+            let workerId = crypt.decrypt(req.params.id)
             if(!orderId  || !requestId|| !requestStatus) {
                 res.status(400).send('Error updating records!')
             } else{
