@@ -13,7 +13,7 @@ const customerModel = require('../models/user-model')
 router
     .route('/workrequest/:id')
     .get((req, res) => {
-        workerRequest.find({ workerId: req.params.id })
+        workerRequest.find({ workerID: req.params.id })
             .then(response => {
                 res.send(response)
             })
