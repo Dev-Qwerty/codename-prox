@@ -20,7 +20,7 @@ const workerRequestSchema = mongoose.Schema({
         default: 'declined'
     },
     service: {
-        serviceName: {
+        subserviceName: {
             type: String,
             requied: true
         },
@@ -36,7 +36,7 @@ const workerRequestSchema = mongoose.Schema({
             }
         }]
     },
-    Place: {
+    place: {
         type: String,
         requied: true
     },
