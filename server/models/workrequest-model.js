@@ -36,7 +36,7 @@ const workerRequestSchema = mongoose.Schema({
             }
         }]
     },
-    Place: {
+    place: {
         type: String,
         requied: true
     },
