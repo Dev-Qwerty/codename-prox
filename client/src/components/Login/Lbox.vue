@@ -15,7 +15,9 @@
         <input type="checkbox" name="check1" value="">
       </div>
       <div>
-        <input class="sbutton" type="submit" name="" value="Sign in" @click.prevent="login()">
+        <vue-recaptcha sitekey="6LfsCfYUAAAAAEKiFDDFZW9yqlCZpd3G3EFoDy2w" @verify="onCaptchaVerified">
+        <input class="sbutton" type="submit" name="" value="Sign in" @click.prevent="onCaptchaVerified">
+        </vue-recaptcha>
       </div>
     </form>
       <div v-if="errorstatus" class="errormsg">
@@ -26,6 +28,7 @@
 
 <script>
 import Vue from 'vue'
+import VueRecaptcha from 'vue-recaptcha'
 export default {
   data() {
     return {
@@ -37,8 +40,33 @@ export default {
     }
   },
   methods: {
+    onCaptchaVerified(rtoken) {
+      let url = "http://localhost:3000/auth/verifyToken";
+      this.$http.post(url, {
+        response: rtoken
+      })
+      .then(response => {
+        if(response.data.success == true) {
+          this.captchastatus = true;
+          this.login();
+        }
+        else {
+        Vue.$toast.open({
+          message: 'Captcha Verified!',
+          type: 'success',
+          position: 'bottom-left'
+        });  
+        }
+      })
+      .catch(error => {
+        Vue.$toast.open({
+          message: error,
+          type: 'warning',
+          position: 'bottom-left'
+        });
+      })
+    },
     login() {
-      this.captchastatus = true;
       if(this.captchastatus == false) {
         Vue.$toast.open({
           message: 'Please select captcha',
@@ -90,7 +118,8 @@ export default {
         }
       }
     },
-  }
+  },
+  components: { VueRecaptcha }
 }
 </script>
 
