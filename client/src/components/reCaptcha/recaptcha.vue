@@ -1,9 +1,11 @@
 <template>
-  <div 
-  id="g-recaptcha"
-  class="g-recaptcha"
-  :data-sitekey="sitekey">
-  </div>
+  <div class="g-recaptcha"
+      :data-sitekey="sitekey"
+      :data-callback="execute"
+      data-size="invisible"
+  >
+</div>
+
 </template>
 
 <script>
