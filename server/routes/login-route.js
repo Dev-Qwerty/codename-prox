@@ -7,6 +7,7 @@ const crypto = require('crypto');
 const User = require('../models/user-model');
 const Company = require('../models/company-model');
 const Worker = require('../models/worker-model');
+const request = require('request');
 
 const poolData = {
     UserPoolId: keys.cognito.userPoolId,
@@ -115,5 +116,13 @@ router.post('/login', (req,res) => {
         }
       })
 })
+router.post('/verifyToken', (req,res) => {
+  const response = req.body.response;
+  request.post({ headers: {'content-type' : 'application/json'}
+               , url: 'https://www.google.com/recaptcha/api/siteverify?secret=6LfsCfYUAAAAAK1Vz4hDsCLIntI0X2jER8nn2iOd&response='+response}
+               , function(error, r, body){
+   res.send(body); 
+}); 
 
+})
 module.exports = router;

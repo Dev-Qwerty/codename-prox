@@ -1,6 +1,6 @@
 <template>
   <div class = "box">
-    <form action="" method="POST">
+    <form action="" method="POST" id="login-form">
       <div>
         <input class="input-box" type="text" name="username" placeholder="USERNAME" v-model="username" v-validate="'email|required'">
       </div>
@@ -15,8 +15,9 @@
         <input type="checkbox" name="check1" value="">
       </div>
       <div>
-        <input class="sbutton" type="submit" name="" value="Sign in" @click.prevent="login()">
-        <recaptcha ref="recaptcha" @verify="captchaVerified()"></recaptcha>
+        <vue-recaptcha sitekey="6LfsCfYUAAAAAEKiFDDFZW9yqlCZpd3G3EFoDy2w" @verify="onCaptchaVerified">
+        <input class="sbutton" type="submit" name="" value="Sign in" @click.prevent="onCaptchaVerified">
+        </vue-recaptcha>
       </div>
     </form>
       <div v-if="errorstatus" class="errormsg">
@@ -27,7 +28,7 @@
 
 <script>
 import Vue from 'vue'
-import recaptcha from '@/components/reCaptcha/recaptcha.vue'
+import VueRecaptcha from 'vue-recaptcha'
 export default {
   data() {
     return {
@@ -35,28 +36,37 @@ export default {
       password: "",
       errormsg: "",
       errorstatus: false,
-      captchastatus: false,
-      sitekey: process.env['RECAPTCHASITEKEY'] || '6LfsCfYUAAAAAEKiFDDFZW9yqlCZpd3G3EFoDy2w'
+      captchastatus: false
     }
   },
   methods: {
-    render () {
-      if (window.grecaptcha) {
-        this.widgetId = window.grecaptcha.render('g-recaptcha', {
-          sitekey: this.sitekey,
-          size: 'invisible',
-          // the callback executed when the user solve the recaptcha
-          callback: (response) => {
-            // emit an event called verify with the response as payload
-            this.$emit('verify', response)
-            // reset the recaptcha widget so you can execute it again
-            this.reset() 
-          }
-        })
-      }
+    onCaptchaVerified(rtoken) {
+      let url = "http://localhost:3000/auth/verifyToken";
+      this.$http.post(url, {
+        response: rtoken
+      })
+      .then(response => {
+        if(response.data.success == true) {
+          this.captchastatus = true;
+          this.login();
+        }
+        else {
+        Vue.$toast.open({
+          message: 'Captcha Verified!',
+          type: 'success',
+          position: 'bottom-left'
+        });  
+        }
+      })
+      .catch(error => {
+        Vue.$toast.open({
+          message: error,
+          type: 'warning',
+          position: 'bottom-left'
+        });
+      })
     },
-    captchaVerified() {
-      this.captchastatus = true;
+    login() {
       if(this.captchastatus == false) {
         Vue.$toast.open({
           message: 'Please select captcha',
@@ -108,14 +118,8 @@ export default {
         }
       }
     },
-    login() {
-      this.$refs.recaptcha.execute();
-    },
   },
-  components: { recaptcha },
-  beforeCreate() {
-    this.render();
-  },
+  components: { VueRecaptcha }
 }
 </script>
 
