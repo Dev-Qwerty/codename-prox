@@ -21,8 +21,12 @@
               <div class="ir-box-four-img"></div>
             </div>                       
           </div> 
-          <div :id="'cid-'+sr._id" class="collapse c-body">
-            {{ sr.service.subserviceName }}
+          <div :id="'cid-'+sr._id" class="collapse c-body  c-body-ys-sh-all">
+            <P>{{ sr.service.subserviceName }}</p>
+            <p>Hello</p>
+            <p>Hello</p>
+            <p>Hello</p>
+            <p>Hello</p>
           </div>   
 
         </div>                 
@@ -153,6 +157,15 @@ export default {
     background-position: center;
     background-size: contain;       
   }
+  .c-body {    
+    margin-left: 10px;
+    border: 2px solid #DBDBDB;
+    background-color: #fff;
+    width: 95%;
+  }
+  .c-body-sh-all {
+    box-shadow: 0 0 5px #DBDBDB;
+  }   
   .your-schedule {
     padding-left: 40px;
     padding-top: 10px;  
