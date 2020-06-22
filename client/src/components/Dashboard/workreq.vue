@@ -14,10 +14,10 @@
             <div class="ir-box-two">
               <p class="ir-box-two-one">00:00</p>
             </div>
-            <div class="ir-box-three">
-              <div class="ir-box-three-img" @click="acceptfn"></div>
+            <div class="ir-box-three" @click="acceptfn(sr)">
+              <div class="ir-box-three-img"></div>
             </div>
-            <div class="ir-box-four">
+            <div class="ir-box-four" @click="declinefn(sr)">
               <div class="ir-box-four-img"></div>
             </div>                       
           </div> 
@@ -83,9 +83,40 @@ export default {
         alert(error);
       })     
     },
-    acceptfn() {
-      alert("accept")
-    }
+    acceptfn(obj) {
+      let arr = obj
+      let url = 'http://localhost:3000/request/workrequest/f35ce2de4348f6943f9621bed9af307f'
+      this.$http.post(url, {
+        "orderId": JSON.stringify(arr.orderID),
+        "requestId": JSON.stringify(arr.requestID),
+        "requestStatus": "accepted"         
+        })
+        .then(function (response) {
+          //console.log(response);
+          alert(JSON.stringify(response))
+        })
+        .catch(function (error) {
+          //console.log(error);
+          alert(error)
+        })      
+    },
+    declinefn(obj) {
+      let arr = obj
+      let url = 'http://localhost:3000/request/workrequest/f35ce2de4348f6943f9621bed9af307f'
+      this.$http.post(url, {
+        "orderId": JSON.stringify(arr.orderID),
+        "requestId": JSON.stringify(arr.requestID),
+        "requestStatus": "declined"         
+        })
+        .then(function (response) {
+          //console.log(response);
+          alert(JSON.stringify(response))
+        })
+        .catch(function (error) {
+          //console.log(error);
+          alert(error)
+        }) 
+    }    
   },
   created() {
    this.apiCall()
