@@ -9,10 +9,10 @@
           <div class="ir-box sh-bottom" data-toggle="collapse" :href="'#cid-'+sr._id">
             <div class="ir-box-one sh-left">
               <p class="ir-box-one-one">{{ sr.service.subserviceName }}</p>
-              <p class="ir-box-one-two">9:30 AM, May 10, Kanjirappally</p>
+              <!--<p class="ir-box-one-two">9:30 AM, May 10, Kanjirappally</p>-->
             </div>
             <div class="ir-box-two">
-              <p class="ir-box-two-one">00:36</p>
+              <p class="ir-box-two-one">00:00</p>
             </div>
             <div class="ir-box-three">
               <div class="ir-box-three-img"></div>
@@ -22,11 +22,22 @@
             </div>                       
           </div> 
           <div :id="'cid-'+sr._id" class="collapse c-body  c-body-ys-sh-all">
-            <P>{{ sr.service.subserviceName }}</p>
-            <p>Hello</p>
-            <p>Hello</p>
-            <p>Hello</p>
-            <p>Hello</p>
+            <div class="c-r1">
+              <p class="c-r1-1">Date:</p>
+              <P class="c-r1-2">{{ sr.date }}</p>
+            </div>
+            <div class="c-r1">
+              <p class="c-r1-1">Time:</p>
+              <P class="c-r1-2">{{ sr.time }}</p>
+            </div> 
+            <div class="c-r1">
+              <p class="c-r1-1">Due:</p>
+              <P class="c-r1-2">{{ sr.dueDate }}</p>
+            </div>             
+            <div class="c-r1">
+              <p class="c-r1-1">Amount:</p>
+              <P class="c-r1-2">{{ sr.amount }}</p>
+            </div>                       
           </div>   
 
         </div>                 
@@ -88,7 +99,7 @@ export default {
     color: #000;
   }
   .ir-box {
-    margin-top: 10px;
+    margin-top: 15px;
     width: 98%;
     height: 70px;
     display: grid;
@@ -104,10 +115,10 @@ export default {
   }  
   .ir-box-one {
     padding-left: 20px;
-    padding-top: 12px;
+    padding-top: 22px;
   }
   .ir-box-one-one {
-    font-size: 15px;
+    font-size: 18px;
     font-weight: bold;
     margin: 0;
   }
@@ -119,17 +130,12 @@ export default {
   .ir-box-two {
     text-align: end;
     padding-right: 30px;
-    padding-top: 14px;    
+    padding-top: 20px;    
   }
   .ir-box-two-one {
-    font-size: 18px;
+    font-size: 17px;
     color: #707070;
     margin: 0;
-  }
-  .ir-box-two-two {
-    font-size: 13px;
-    margin-top: -5px;
-    color: #0084E9;
   }
   .ir-box-three {
     border-left: 1px solid #DBDBDB;
@@ -162,10 +168,21 @@ export default {
     border: 2px solid #DBDBDB;
     background-color: #fff;
     width: 95%;
+    padding: 10px;
   }
   .c-body-sh-all {
     box-shadow: 0 0 5px #DBDBDB;
   }   
+  .c-r1 {
+    display: flex;
+  }
+  .c-r1-1 {
+    font-size: 14px;
+  }
+  .c-r1-2 {
+    font-size: 14px;
+    margin-left: 5px;
+  }
   .your-schedule {
     padding-left: 40px;
     padding-top: 10px;  
