@@ -43,7 +43,7 @@
                     <p>{{ sr.amount }}</p>
                   </div>
                   <div class="c1-box-col4">
-                    <p>$299</p>
+                    <p>{{ sr.amount * sr.quantity }}</p>
                   </div>
                 </div> 
               </div>
