@@ -18,12 +18,12 @@
                 <input type="submit" value="ADD" @click="fn(sr)">
               </div> -->
               <button
-                v-show="!inCart.includes(sr.category)"
+                v-show="!inCart.includes(sr._id)"
                 @click="fn(sr)"
                 class="btn"
               >ADD</button>
               <button
-                v-show="inCart.includes(sr.category)"
+                v-show="inCart.includes(sr._id)"
                 @click="rm(sr)"
                 class="btn"
               >REMOVE</button>
@@ -60,16 +60,25 @@ export default {
   },
   methods: {
     fn(obj) {
-      obj.quantity = obj.quantity + 1
-      this.inCart.push(obj.category)
+      if(obj.quantity == 0) {
+        obj.quantity = obj.quantity + 1
+      }
+      // this.cartArr = []
+      // if(this.$cookies.get("cart") != null){
+      //   // for (let i = 0; i < this.$cookies.get("cart").length; i++) {
+      //     this.cartArr.push(JSON.parse(this.$cookies.get("cart"))[0])
+      //   // }     
+      // }
+      this.inCart.push(obj._id)
       this.cartArr.push(obj)
       this.$cookies.set("cart", JSON.stringify(this.cartArr), '1d')
       /*EventBus.$emit('sub-sub-service', obj)*/
     },
     rm(obj){
+      console.log(obj)
       obj.quantity = 0
-      this.inCart = this.inCart.filter(element => element != obj.category)
-      this.cartArr = this.cartArr.filter(element => element.category != obj.category)
+      this.inCart = this.inCart.filter(element => element != obj._id)
+      this.cartArr = this.cartArr.filter(element => element._id != obj._id)
       this.$cookies.set("cart", JSON.stringify(this.cartArr), "id")
     },
     closefn() {
