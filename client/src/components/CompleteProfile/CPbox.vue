@@ -26,26 +26,52 @@
       <input type="text" name="specialization" id="specialization" v-model="specialization" placeholder="Specialization" class="input-box">
       </div>
       <div>
-        <input class="sbutton" type="submit" name="" value="Next">
+        <input class="sbutton" type="submit" name="" value="Next" @click.prevent="completeProfile()">
       </div>
     </form>
   </div>
 </template>
 
 <script>
+import Vue from 'vue';
 export default {
   data() {
     return {
-      categoryIsWorker: false,
+      categoryIsWorker: (this.category == 'Worker')? true: false,
       name: "",
       phoneno: localStorage.getItem("phoneNo"),
       email: localStorage.getItem("email"),
       tags: [],
       workerType: "",
-      specialization: ""
+      specialization: "",
+      category: localStorage.getItem("category")
     }
   },
   methods: {
+    completeProfile() {
+      let url = "http://localhost:3000/"+this.category+"/completeProfile/"+this.$cookies.get('id');
+      if(this.category == 'Customer') {
+        this.$http.post(url, {
+          name: this.name,
+          token: this.$cookies.get("pid")
+        })
+        .then(response => {
+          if(response.data.status == "Success") {
+            localStorage.removeItem("phoneNo");
+            localStorage.removeItem("email");
+            localStorage.removeItem("category");
+            window.location.href = "http://localhost:8080/addAddress";
+          }
+          else {
+            Vue.$toast.open({
+                  message: 'Error!',
+                  type: 'error',
+                  position: 'bottom-left'
+              });
+          }
+        })
+      }
+    }
   }
 }
 </script>

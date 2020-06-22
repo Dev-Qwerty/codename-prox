@@ -50,7 +50,7 @@ router.post('/login', (req,res) => {
           const category = data.idToken.payload['custom:category']; 
           Token.find({id: username},(err,results) => {
             //If token doesn't exist, create new token
-            if(results.length == 0) {
+            if(results == []) {
               const newToken = new Token({
                 token: pidToken,
                 id: username
