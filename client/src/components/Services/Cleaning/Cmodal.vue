@@ -55,7 +55,7 @@ export default {
     return {
       inCart: [],
       cartArr: [],
-      sarray: this.$route.params.sarray
+      sarray: this.$cookies.get("sarray")
     }   
   },
   methods: {

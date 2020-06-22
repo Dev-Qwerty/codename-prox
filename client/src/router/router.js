@@ -60,7 +60,7 @@ export default new VueRouter({
     },
     { 
       path: '/services/cleaning', 
-      component: Cleaning,
+      component: Cleaning,    
       children: [
         {
           path: 'modal',
@@ -92,7 +92,7 @@ export default new VueRouter({
             }
           ]
         },       
-      ] 
+      ]
     },
     { 
       path: '/dashboard', 
