@@ -22,21 +22,30 @@
             </div>                       
           </div> 
           <div :id="'cid-'+sr._id" class="collapse c-body  c-body-ys-sh-all">
-            <div class="c-r1">
-              <p class="c-r1-1">Date:</p>
-              <P class="c-r1-2">{{ sr.date }}</p>
+            <div class="c-r">
+              <p class="c-r-1">Date:</p>
+              <P class="c-r-2">{{ sr.date }}</p>
+            </div>
+            <div class="c-r">
+              <p class="c-r-1">Time:</p>
+              <P class="c-r-2">{{ sr.time }}</p>
+            </div> 
+            <div class="c-r">
+              <p class="c-r-1">Due:</p>
+              <P class="c-r-2">{{ sr.dueDate }}</p>
+            </div>             
+            <div class="c-r">
+              <p class="c-r-1">Amount:</p>
+              <P class="c-r-2">{{ sr.amount }}</p>
             </div>
             <div class="c-r1">
-              <p class="c-r1-1">Time:</p>
-              <P class="c-r1-2">{{ sr.time }}</p>
-            </div> 
-            <div class="c-r1">
-              <p class="c-r1-1">Due:</p>
-              <P class="c-r1-2">{{ sr.dueDate }}</p>
-            </div>             
-            <div class="c-r1">
-              <p class="c-r1-1">Amount:</p>
-              <P class="c-r1-2">{{ sr.amount }}</p>
+              <p class="c-r1-1">Categories:</p>
+              <div v-for="n in 2" v-bind:key="n">
+                <div class="c-r1-2">
+                  <p class="c-r1-2-1">{{ sr.service.categories[0].categoryName }}</p>
+                  <p class="c-r1-2-2">{{ sr.service.categories[0].quantity }}</p>
+                </div>
+              </div>
             </div>                       
           </div>   
 
@@ -168,20 +177,36 @@ export default {
     border: 2px solid #DBDBDB;
     background-color: #fff;
     width: 95%;
-    padding: 10px;
+    padding: 20px;
   }
   .c-body-sh-all {
     box-shadow: 0 0 5px #DBDBDB;
   }   
-  .c-r1 {
+  .c-r {
     display: flex;
+  }
+  .c-r-1 {
+    font-size: 14px;
+    font-weight: bold;
+  }
+  .c-r-2 {
+    font-size: 14px;
+    margin-left: 8px;
   }
   .c-r1-1 {
     font-size: 14px;
+    font-weight: bold;
   }
   .c-r1-2 {
     font-size: 14px;
-    margin-left: 5px;
+    margin-left: 20px;
+    display: flex;
+  }
+  .c-r1-2-1 {
+
+  }
+  .c-r1-2-2 {
+    margin-left: 10px;
   }
   .your-schedule {
     padding-left: 40px;
