@@ -20,6 +20,7 @@ import workreq from '@/components/Dashboard/workreq.vue'
 import myworks from '@/components/Dashboard/myworks.vue'
 import ForgotPassword from '@/components/ForgotPassword/FPMain.vue'
 import UpdateProfile from '@/components/UpdateProfile/UPMain.vue'
+import CompleteProfile from '@/components/CompleteProfile/CPMain.vue'
 
 Vue.use(VueRouter)
 
@@ -130,6 +131,10 @@ export default new VueRouter({
     {
       path: '/updateProfile',
       component: UpdateProfile
+    },
+    {
+      path: '/completeProfile',
+      component: CompleteProfile
     }           
   ]
 })
