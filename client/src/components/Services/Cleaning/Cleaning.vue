@@ -28,7 +28,7 @@
             <div class="Bbottom">
               <div id="Desc"><p>{{ service.description }}</p></div>
               <p id="Vdetails">view details  <span id="Vspan">></span></p>  
-              <router-link :to="{name: 'modal', params: { sarray: service }}" @click.native="fn">
+              <router-link :to="{name: 'modal'}" @click.native="fn(service)">
                 <input type="submit" value="Add to cart">
               </router-link>
             </div>
@@ -37,8 +37,9 @@
       </div>
       <router-view>
         <modal />
-      </router-view>
+      </router-view> 
     </div>
+       
   </div>    
 </template>
 
@@ -59,8 +60,9 @@ export default {
     cartfn() {
       window.scrollTo(0,0)
     },
-    fn() {
-      window.scrollTo(0,0)
+    fn(obj) {
+      this.$cookies.set("sarray", JSON.stringify(obj), "id")
+      //window.scrollTo(0,0)
     },
     apiCall() {
       let url = 'http://localhost:3000/services/5ea50d377c154d280cf37efb'
