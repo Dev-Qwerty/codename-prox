@@ -19,6 +19,9 @@
                 <option value="company">Company Professional</option>
           </select> 
       </div>
+      <div v-if="workerType == 'company'">
+        <input type="text" name="companyID" id="companyID" v-model="companyID" class="input-box" placeholder="Company ID">
+      </div>
       <div v-if="categoryIsWorker">
       <input type="text" name="specialization" id="specialization" v-model="specialization" placeholder="Specialization" class="input-box">
       </div>
@@ -33,7 +36,13 @@
 export default {
   data() {
     return {
-      categoryIsWorker: false
+      categoryIsWorker: false,
+      name: "",
+      phoneno: "",
+      email: "",
+      tags: [],
+      workerType: "",
+      specialization: ""
     }
   },
   methods: {
