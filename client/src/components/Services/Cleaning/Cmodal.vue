@@ -63,20 +63,24 @@ export default {
       if(obj.quantity == 0) {
         obj.quantity = obj.quantity + 1
       }
-      // this.cartArr = []
-      // if(this.$cookies.get("cart") != null){
-      //   // for (let i = 0; i < this.$cookies.get("cart").length; i++) {
-      //     this.cartArr.push(JSON.parse(this.$cookies.get("cart"))[0])
-      //   // }     
-      // }
+      this.cartArr = []
+      if(this.$cookies.get("cart") != null){
+        for (let i = 0; i < JSON.parse(this.$cookies.get("cart")).length; i++) {
+          this.cartArr.push(JSON.parse(this.$cookies.get("cart"))[i])
+        }     
+      }
       this.inCart.push(obj._id)
       this.cartArr.push(obj)
       this.$cookies.set("cart", JSON.stringify(this.cartArr), '1d')
       /*EventBus.$emit('sub-sub-service', obj)*/
     },
     rm(obj){
-      console.log(obj)
-      obj.quantity = 0
+      this.cartArr = []
+      if(this.$cookies.get("cart") != null){
+        for (let i = 0; i < JSON.parse(this.$cookies.get("cart")).length; i++) {
+          this.cartArr.push(JSON.parse(this.$cookies.get("cart"))[i])
+        }     
+      }
       this.inCart = this.inCart.filter(element => element != obj._id)
       this.cartArr = this.cartArr.filter(element => element._id != obj._id)
       this.$cookies.set("cart", JSON.stringify(this.cartArr), "id")
