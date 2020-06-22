@@ -88,6 +88,13 @@ export default {
     closefn() {
       this.$cookies.remove("cart") 
     }
+  },
+  created() {
+    if(this.$cookies.get("cart") != null){
+        for (let i = 0; i < JSON.parse(this.$cookies.get("cart")).length; i++) {
+          this.inCart.push(JSON.parse(this.$cookies.get("cart"))[i]._id)
+        }     
+      }
   }
 }
 </script>
