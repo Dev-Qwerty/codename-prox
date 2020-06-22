@@ -3,24 +3,30 @@
     <div class="wr-grid">
       <div class="incomming-req">
         <p class="ir-header">Incomming Requests</p>
-        <div v-for="n in 5" v-bind:key="n">
-          <div class="ir-box sh-bottom">
+
+        <div v-for="sr in reqarr" v-bind:key="sr._id">
+
+          <div class="ir-box sh-bottom" data-toggle="collapse" :href="'#cid-'+sr._id">
             <div class="ir-box-one sh-left">
-              <p class="ir-box-one-one">1 BHK Home Cleaning</p>
+              <p class="ir-box-one-one">{{ sr.service.subserviceName }}</p>
               <p class="ir-box-one-two">9:30 AM, May 10, Kanjirappally</p>
             </div>
             <div class="ir-box-two">
               <p class="ir-box-two-one">00:36</p>
-              <p class="ir-box-two-two">view details</p>
             </div>
             <div class="ir-box-three">
               <div class="ir-box-three-img"></div>
             </div>
             <div class="ir-box-four">
               <div class="ir-box-four-img"></div>
-            </div>
-          </div>        
-        </div>         
+            </div>                       
+          </div> 
+          <div :id="'cid-'+sr._id" class="collapse c-body">
+            {{ sr.service.subserviceName }}
+          </div>   
+
+        </div>                 
+      
       </div>
       <div class="your-schedule">
         <p class="ys-header">Your Schedule</p>
