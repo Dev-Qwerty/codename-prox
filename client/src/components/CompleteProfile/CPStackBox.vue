@@ -8,12 +8,12 @@
 <style scoped>    
   .box {
     width: 35%;
-    height: 165px;
+    height: 110px;
     background-color: #000;
     color: #fff;
     opacity: 0.9;
-    top: 33%;
-    left: 50%;
+    top: 17%;
+    left: 17%;
     position: absolute;
     box-sizing: border-box;
     transform: translate(-50%, -50%);

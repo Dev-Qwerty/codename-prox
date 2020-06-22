@@ -5,10 +5,10 @@
         <input type="text" name="name" id="name" placeholder="Name" v-model="name" class="input-box">
       </div>
       <div>
-        <input type="text" name="phoneno" id="phoneno" v-model="phoneno" class="input-box">
+        <input type="text" name="phoneno" id="phoneno" v-model="phoneno" class="input-box" disabled>
       </div>
       <div>
-        <input type="email" name="email" id="email" v-model="email" class="input-box">
+        <input type="email" name="email" id="email" v-model="email" class="input-box" disabled>
       </div>
       <div v-if="categoryIsWorker">
       <input-tag v-model="tags" placeholder="Add tags"></input-tag>
@@ -38,8 +38,8 @@ export default {
     return {
       categoryIsWorker: false,
       name: "",
-      phoneno: "",
-      email: "",
+      phoneno: localStorage.getItem("phoneNo"),
+      email: localStorage.getItem("email"),
       tags: [],
       workerType: "",
       specialization: ""
@@ -52,11 +52,11 @@ export default {
 
 <style scoped>    
   .box {
-    width: 50%;
-    height: 55%;
+    width: 35%;
+    height: 104px;
     background-color: #fff;
-    top: 63%;
-    left: 50%;
+    top: 15%;
+    left: 17%;
     position: absolute;
     box-sizing: border-box;
     transform: translate(-50%, -50%);
@@ -70,10 +70,10 @@ export default {
   }
   .box-1 {
     width: 50%;
-    height: 60%;
+    height: 95%;
     background-color: #fff;
-    top: 63%;
-    left: 50%;
+    top: 42%;
+    left: 59%;
     position: absolute;
     box-sizing: border-box;
     transform: translate(-50%, -50%);
