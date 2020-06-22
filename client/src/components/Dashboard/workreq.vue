@@ -6,8 +6,8 @@
 
         <div v-for="sr in reqarr" v-bind:key="sr._id">
 
-          <div class="ir-box sh-bottom" data-toggle="collapse" :href="'#cid-'+sr._id">
-            <div class="ir-box-one sh-left">
+          <div class="ir-box sh-bottom">
+            <div class="ir-box-one sh-left" data-toggle="collapse" :href="'#cid-'+sr._id">
               <p class="ir-box-one-one">{{ sr.service.subserviceName }}</p>
               <!--<p class="ir-box-one-two">9:30 AM, May 10, Kanjirappally</p>-->
             </div>
@@ -15,7 +15,7 @@
               <p class="ir-box-two-one">00:00</p>
             </div>
             <div class="ir-box-three">
-              <div class="ir-box-three-img"></div>
+              <div class="ir-box-three-img" @click="acceptfn"></div>
             </div>
             <div class="ir-box-four">
               <div class="ir-box-four-img"></div>
@@ -82,6 +82,9 @@ export default {
       .catch((error) => {
         alert(error);
       })     
+    },
+    acceptfn() {
+      alert("accept")
     }
   },
   created() {
