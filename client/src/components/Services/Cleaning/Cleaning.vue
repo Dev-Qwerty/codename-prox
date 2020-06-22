@@ -28,8 +28,8 @@
             <div class="Bbottom">
               <div id="Desc"><p>{{ service.description }}</p></div>
               <p id="Vdetails">view details  <span id="Vspan">></span></p>  
-              <router-link :to="{name: 'modal'}" @click.native="fn(service)">
-                <input type="submit" value="Add to cart">
+              <router-link :to="{name: 'modal'}">
+                <input type="submit" value="Add to cart" @click="fn(service)">
               </router-link>
             </div>
           </div> 
