@@ -19,11 +19,11 @@ const poolData = {
 const workerPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
 
 router.post('/signup', (req, res) => {
-	const { email, password, phoneNo } = req.body;
+	const { email, password, phone } = req.body;
 
 	const phoneData = {
 		Name: 'phone_number',
-		Value: phoneNo
+		Value: phone
 	}
 	const emailData = {
 		Name: 'email',
@@ -45,7 +45,7 @@ router.post('/signup', (req, res) => {
 		const workerID = data.userSub;
 		const newWorker = new Worker({
 			email,
-			phoneNo,
+			phone,
 			workerID
 		})
 		newWorker

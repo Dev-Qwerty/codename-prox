@@ -47,7 +47,7 @@ const WorkerSchema = new mongoose.Schema({
         type: Array,
         default: null
     },
-    phoneNo: {
+    phone: {
         type: Number,
         required: true
     },

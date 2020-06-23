@@ -23,7 +23,7 @@
         <p>* - Required fields</p>
       </div>
       <div>
-        <input class="sbutton" type="submit" name="" value="Continue">
+        <input class="sbutton" type="submit" name="" value="Continue" @click.prevent="addAddress()">
       </div>
     </form>
   </div>
@@ -34,10 +34,46 @@ import Vue from 'vue';
 export default {
   data() {
     return {
-      
+      line1: "",
+      line2: "",
+      city: "",
+      district: "",
+      state: "",
+      pincode: "",
+      category: localStorage.getItem('category'),
+      address: {}
     }
   },
   methods: {
+    addAddress() {
+      this.address = {
+        line1: this.line1,
+        line2: this.line2,
+        city: this.city,
+        district: this.district,
+        state: this.state,
+        pincode: this.pincode
+      }
+      let url = 'http://localhost:3000/'+this.category+'/addAddress';
+      this.$http.post(url,{
+        token: this.$cookies.get("pid"),
+        userID: this.$cookies.get('id'),
+        address: this.address,
+        completedProfile: true
+      })
+      .then(response => {
+        if(response.data.status == "Success") {
+          window.location.href = "http://localhost:8080/dashboard/workrequests";
+        }
+        else {
+          Vue.$toast.open({
+                  message: 'Error!',
+                  type: 'error',
+                  position: 'bottom-left'
+              });
+        }
+      })
+    }
   }
 }
 </script>

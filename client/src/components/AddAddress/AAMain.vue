@@ -1,9 +1,9 @@
 <template>
   <div>
     <Nav />
-    <CPwrapper />
-    <CPbox />
-    <CPStackBox />
+    <AAwrapper />
+    <AAbox />
+    <AAStackBox />
   </div>
 </template>
 

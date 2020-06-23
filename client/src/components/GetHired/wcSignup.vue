@@ -77,7 +77,7 @@ export default {
           this.$http.post(url, {
             email: this.email,
             password: this.password,
-            phoneNo: this.phone
+            phoneNo: "+91" + this.phone
           })
           .then(response=> {
             if(response.data.status == "Success") {

@@ -318,6 +318,7 @@ router.post('/addAddress', (req, res) => {
       const newAddress = req.body.address;
       let user = {};
       user.addresses = newAddress;
+      user.completedProfile = req.body.completedProfile;
       user = { $push: user };
       User.update({ userID: req.body.userID }, user).then(() => {
         res.send({ status: "Success", user: user });

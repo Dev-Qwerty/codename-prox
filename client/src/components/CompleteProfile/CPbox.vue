@@ -59,7 +59,6 @@ export default {
           if(response.data.status == "Success") {
             localStorage.removeItem("phoneNo");
             localStorage.removeItem("email");
-            localStorage.removeItem("category");
             window.location.href = "http://localhost:8080/addAddress";
           }
           else {
