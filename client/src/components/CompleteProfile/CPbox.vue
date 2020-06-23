@@ -26,7 +26,7 @@
       <input type="text" name="specialization" id="specialization" v-model="specialization" placeholder="Specialization" class="input-box">
       </div>
       <div>
-        <input class="sbutton" type="submit" name="" value="Next" @click.prevent="completeProfile()">
+        <input class="sbutton" type="submit" name="" value="Continue" @click.prevent="completeProfile()">
       </div>
     </form>
   </div>

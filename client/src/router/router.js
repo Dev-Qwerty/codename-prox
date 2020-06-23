@@ -21,6 +21,7 @@ import myworks from '@/components/Dashboard/myworks.vue'
 import ForgotPassword from '@/components/ForgotPassword/FPMain.vue'
 import UpdateProfile from '@/components/UpdateProfile/UPMain.vue'
 import CompleteProfile from '@/components/CompleteProfile/CPMain.vue'
+import AddAddress from '@/components/AddAddress/AAMain.vue'
 
 Vue.use(VueRouter)
 
@@ -135,6 +136,10 @@ export default new VueRouter({
     {
       path: '/completeProfile',
       component: CompleteProfile
+    },
+    {
+      path: '/addAddress', 
+      component: AddAddress
     }           
   ]
 })
