@@ -13,15 +13,10 @@ const customerModel = require('../models/user-model')
 
 router
     .route('/workrequest/:id')
-    .get((req, res) => {
+    .get(async (req, res) => {
         let id = crypt.decrypt(req.params.id)
-        workerRequest.find({ workerID: id })
-            .then(response => {
-                res.send(response)
-            })
-            .catch(error => {
-                console.error(error)
-            })
+        let requestDetails = await workerRequest.find({ workerID: id ,requestStatus:"declined"},'-workerID -_id')
+        res.send(requestDetails);
     })
 
 router
