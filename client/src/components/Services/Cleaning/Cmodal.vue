@@ -18,12 +18,12 @@
                 <input type="submit" value="ADD" @click="fn(sr)">
               </div> -->
               <button
-                v-show="!inCart.includes(sr.category)"
+                v-show="!inCart.includes(sr._id)"
                 @click="fn(sr)"
                 class="btn"
               >ADD</button>
               <button
-                v-show="inCart.includes(sr.category)"
+                v-show="inCart.includes(sr._id)"
                 @click="rm(sr)"
                 class="btn"
               >REMOVE</button>
@@ -55,26 +55,46 @@ export default {
     return {
       inCart: [],
       cartArr: [],
-      sarray: this.$route.params.sarray
+      sarray: this.$cookies.get("sarray")
     }   
   },
   methods: {
     fn(obj) {
-      obj.quantity = obj.quantity + 1
-      this.inCart.push(obj.category)
+      if(obj.quantity == 0) {
+        obj.quantity = obj.quantity + 1
+      }
+      this.cartArr = []
+      if(this.$cookies.get("cart") != null){
+        for (let i = 0; i < JSON.parse(this.$cookies.get("cart")).length; i++) {
+          this.cartArr.push(JSON.parse(this.$cookies.get("cart"))[i])
+        }     
+      }
+      this.inCart.push(obj._id)
       this.cartArr.push(obj)
       this.$cookies.set("cart", JSON.stringify(this.cartArr), '1d')
       /*EventBus.$emit('sub-sub-service', obj)*/
     },
     rm(obj){
-      obj.quantity = 0
-      this.inCart = this.inCart.filter(element => element != obj.category)
-      this.cartArr = this.cartArr.filter(element => element.category != obj.category)
+      this.cartArr = []
+      if(this.$cookies.get("cart") != null){
+        for (let i = 0; i < JSON.parse(this.$cookies.get("cart")).length; i++) {
+          this.cartArr.push(JSON.parse(this.$cookies.get("cart"))[i])
+        }     
+      }
+      this.inCart = this.inCart.filter(element => element != obj._id)
+      this.cartArr = this.cartArr.filter(element => element._id != obj._id)
       this.$cookies.set("cart", JSON.stringify(this.cartArr), "id")
     },
     closefn() {
       this.$cookies.remove("cart") 
     }
+  },
+  created() {
+    if(this.$cookies.get("cart") != null){
+        for (let i = 0; i < JSON.parse(this.$cookies.get("cart")).length; i++) {
+          this.inCart.push(JSON.parse(this.$cookies.get("cart"))[i]._id)
+        }     
+      }
   }
 }
 </script>

@@ -3,24 +3,54 @@
     <div class="wr-grid">
       <div class="incomming-req">
         <p class="ir-header">Incomming Requests</p>
-        <div v-for="n in 5" v-bind:key="n">
+
+        <div v-for="sr in reqarr" v-bind:key="sr._id">
+
           <div class="ir-box sh-bottom">
-            <div class="ir-box-one sh-left">
-              <p class="ir-box-one-one">1 BHK Home Cleaning</p>
-              <p class="ir-box-one-two">9:30 AM, May 10, Kanjirappally</p>
+            <div class="ir-box-one sh-left" data-toggle="collapse" :href="'#cid-'+sr._id">
+              <p class="ir-box-one-one">{{ sr.service.subserviceName }}</p>
+              <!--<p class="ir-box-one-two">9:30 AM, May 10, Kanjirappally</p>-->
             </div>
             <div class="ir-box-two">
-              <p class="ir-box-two-one">00:36</p>
-              <p class="ir-box-two-two">view details</p>
+              <p class="ir-box-two-one">00:00</p>
             </div>
-            <div class="ir-box-three">
+            <div class="ir-box-three" @click="acceptfn(sr)">
               <div class="ir-box-three-img"></div>
             </div>
-            <div class="ir-box-four">
+            <div class="ir-box-four" @click="declinefn(sr)">
               <div class="ir-box-four-img"></div>
+            </div>                       
+          </div> 
+          <div :id="'cid-'+sr._id" class="collapse c-body  c-body-ys-sh-all">
+            <div class="c-r">
+              <p class="c-r-1">Date:</p>
+              <P class="c-r-2">{{ sr.date }}</p>
             </div>
-          </div>        
-        </div>         
+            <div class="c-r">
+              <p class="c-r-1">Time:</p>
+              <P class="c-r-2">{{ sr.time }}</p>
+            </div> 
+            <div class="c-r">
+              <p class="c-r-1">Due:</p>
+              <P class="c-r-2">{{ sr.dueDate }}</p>
+            </div>             
+            <div class="c-r">
+              <p class="c-r-1">Amount:</p>
+              <P class="c-r-2">{{ sr.amount }}</p>
+            </div>
+            <div class="c-r1">
+              <p class="c-r1-1">Categories:</p>
+              <div v-for="n in 2" v-bind:key="n">
+                <div class="c-r1-2">
+                  <p class="c-r1-2-1">{{ sr.service.categories[0].categoryName }}</p>
+                  <p class="c-r1-2-2">{{ sr.service.categories[0].quantity }}</p>
+                </div>
+              </div>
+            </div>                       
+          </div>   
+
+        </div>                 
+      
       </div>
       <div class="your-schedule">
         <p class="ys-header">Your Schedule</p>
@@ -36,8 +66,62 @@
 
 <script>
 export default {
-    
-}
+  data() {
+    return {
+      wid: this.$cookies.get("id"),
+      reqarr: []
+    }
+  },
+  methods: {
+    apiCall() {
+      let url = 'http://localhost:3000/request/workrequest/f35ce2de4348f6943f9621bed9af307f'
+      this.$http.get(url)
+      .then((response) => {
+        this.reqarr = response.data
+      })
+      .catch((error) => {
+        alert(error);
+      })     
+    },
+    acceptfn(obj) {
+      let arr = obj
+      let url = 'http://localhost:3000/request/workrequest/f35ce2de4348f6943f9621bed9af307f'
+      this.$http.post(url, {
+        "orderId": JSON.stringify(arr.orderID),
+        "requestId": JSON.stringify(arr.requestID),
+        "requestStatus": "accepted"         
+        })
+        .then(function (response) {
+          //console.log(response);
+          alert(JSON.stringify(response))
+        })
+        .catch(function (error) {
+          //console.log(error);
+          alert(error)
+        })      
+    },
+    declinefn(obj) {
+      let arr = obj
+      let url = 'http://localhost:3000/request/workrequest/f35ce2de4348f6943f9621bed9af307f'
+      this.$http.post(url, {
+        "orderId": JSON.stringify(arr.orderID),
+        "requestId": JSON.stringify(arr.requestID),
+        "requestStatus": "declined"         
+        })
+        .then(function (response) {
+          //console.log(response);
+          alert(JSON.stringify(response))
+        })
+        .catch(function (error) {
+          //console.log(error);
+          alert(error)
+        }) 
+    }    
+  },
+  created() {
+   this.apiCall()
+  }
+} 
 </script>
 
   <style scoped>
@@ -58,7 +142,7 @@ export default {
     color: #000;
   }
   .ir-box {
-    margin-top: 10px;
+    margin-top: 15px;
     width: 98%;
     height: 70px;
     display: grid;
@@ -74,10 +158,10 @@ export default {
   }  
   .ir-box-one {
     padding-left: 20px;
-    padding-top: 12px;
+    padding-top: 22px;
   }
   .ir-box-one-one {
-    font-size: 15px;
+    font-size: 18px;
     font-weight: bold;
     margin: 0;
   }
@@ -89,17 +173,12 @@ export default {
   .ir-box-two {
     text-align: end;
     padding-right: 30px;
-    padding-top: 14px;    
+    padding-top: 20px;    
   }
   .ir-box-two-one {
-    font-size: 18px;
+    font-size: 17px;
     color: #707070;
     margin: 0;
-  }
-  .ir-box-two-two {
-    font-size: 13px;
-    margin-top: -5px;
-    color: #0084E9;
   }
   .ir-box-three {
     border-left: 1px solid #DBDBDB;
@@ -126,6 +205,42 @@ export default {
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;       
+  }
+  .c-body {    
+    margin-left: 10px;
+    border: 2px solid #DBDBDB;
+    background-color: #fff;
+    width: 95%;
+    padding: 20px;
+  }
+  .c-body-sh-all {
+    box-shadow: 0 0 5px #DBDBDB;
+  }   
+  .c-r {
+    display: flex;
+  }
+  .c-r-1 {
+    font-size: 14px;
+    font-weight: bold;
+  }
+  .c-r-2 {
+    font-size: 14px;
+    margin-left: 8px;
+  }
+  .c-r1-1 {
+    font-size: 14px;
+    font-weight: bold;
+  }
+  .c-r1-2 {
+    font-size: 14px;
+    margin-left: 20px;
+    display: flex;
+  }
+  .c-r1-2-1 {
+
+  }
+  .c-r1-2-2 {
+    margin-left: 10px;
   }
   .your-schedule {
     padding-left: 40px;
