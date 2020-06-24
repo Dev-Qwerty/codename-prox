@@ -11,10 +11,8 @@
         <input type="email" name="email" id="email" v-model="email" class="input-box" disabled>
       </div>
       <div v-if="categoryIsWorker">
-      <input-tag v-model="tags" placeholder="Add tags"></input-tag>
-      </div>
-      <div v-if="categoryIsWorker">
           <select name="jtitle" id="jtitle" v-model="workerType" class="input-box">
+                <option value="" disabled selected>Select Worker Type</option>
                 <option value="worker">Individual Professional</option>
                 <option value="company">Company Professional</option>
           </select> 
@@ -23,7 +21,21 @@
         <input type="text" name="companyID" id="companyID" v-model="companyID" class="input-box" placeholder="Company ID">
       </div>
       <div v-if="categoryIsWorker">
-      <input type="text" name="specialization" id="specialization" v-model="specialization" placeholder="Specialization" class="input-box">
+          <select name="service" id="service" v-model="service" class="input-box">
+                <option value="" disabled selected>Select your main Service</option> 
+                <option value="Cleaning">Cleaning</option>
+                <option value="Plumbing">Plumbing</option>
+                <option value="Electrical">Electrical</option>
+                <option value="Home Appliances">Home Appliances</option>
+                <option value="Fabrication">Fabrication</option>
+                <option value="Carpentry">Carpentry</option>
+                <option value="Photography">Photography</option>
+                <option value="Painting">Painting</option>
+                <option value="Pest Control">Pest Control</option>
+          </select> 
+      </div>
+      <div v-if="categoryIsWorker" class="input-box">
+      <input-tag v-model="tags" placeholder="Add tags"></input-tag>
       </div>
       <div>
         <input class="sbutton" type="submit" name="" value="Continue" @click.prevent="completeProfile()">
@@ -37,17 +49,24 @@ import Vue from 'vue';
 export default {
   data() {
     return {
-      categoryIsWorker: (this.category == 'Worker')? true: false,
+      categoryIsWorker: false,
       name: "",
       phoneno: localStorage.getItem("phoneNo"),
       email: localStorage.getItem("email"),
       tags: [],
       workerType: "",
       specialization: "",
-      category: localStorage.getItem("category")
+      category: localStorage.getItem("category"),
+      service: "",
+      companyID: ""
     }
   },
   methods: {
+    checkCategory() {
+      if(this.category == 'Worker') {
+        this.categoryIsWorker = true       
+      }
+    },
     completeProfile() {
       let url = "http://localhost:3000/"+this.category+"/completeProfile/"+this.$cookies.get('id');
       if(this.category == 'Customer') {
@@ -70,8 +89,36 @@ export default {
           }
         })
       }
+      else if(this.category == 'Worker') {
+        this.$http.post(url, {
+          name: this.name,
+          token: this.$cookies.get("pid"),
+          workerType: this.workerType,
+          specialization: this.tags,
+          service: this.service,
+          companyID: this.companyID
+        })
+        .then(response => {
+          if(response.data.status == "Success") {
+            localStorage.removeItem("phoneNo");
+            localStorage.removeItem("email");
+            window.location.href = "http://localhost:8080/addAddress";
+          }
+          else {
+            Vue.$toast.open({
+                  message: 'Error!',
+                  type: 'error',
+                  position: 'bottom-left'
+              });
+          }
+        })
+      }
+      
     }
-  }
+  },
+  mounted() {
+    this.checkCategory();
+  },
 }
 </script>
 
@@ -95,9 +142,9 @@ export default {
   }
   .box-1 {
     width: 50%;
-    height: 95%;
+    height: 100%;
     background-color: #fff;
-    top: 42%;
+    top: 44%;
     left: 59%;
     position: absolute;
     box-sizing: border-box;

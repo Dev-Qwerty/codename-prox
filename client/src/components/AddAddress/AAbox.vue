@@ -46,24 +46,22 @@ export default {
   },
   methods: {
     addAddress() {
-      this.address = {
-        line1: this.line1,
-        line2: this.line2,
-        city: this.city,
-        district: this.district,
-        state: this.state,
-        pincode: this.pincode
-      }
+      this.address.line1 = this.line1;
+      this.address.line2 = this.line2;
+      this.address.city = this.city;
+      this.address.district = this.district;
+      this.address.state = this.state;
+      this.address.pincode = this.pincode;
       let url = 'http://localhost:3000/'+this.category+'/addAddress';
       this.$http.post(url,{
         token: this.$cookies.get("pid"),
-        userID: this.$cookies.get('id'),
+        id: this.$cookies.get('id'),
         address: this.address,
         completedProfile: true
       })
       .then(response => {
         if(response.data.status == "Success") {
-          window.location.href = "http://localhost:8080/dashboard/workrequests";
+          window.location.href = "http://localhost:8080/dashboard";
         }
         else {
           Vue.$toast.open({
