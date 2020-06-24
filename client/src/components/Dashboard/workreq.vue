@@ -55,9 +55,10 @@
       <div class="your-schedule">
         <p class="ys-header">Your Schedule</p>
         <div class="ys-box ys-sh-all">
-          <p class="ys-box-one">10th May 2019</p>
-          <p class="ys-box-two">10:30 AM - Kitchen Clean</p>
-          <p class="ys-box-two">10:45 AM - Sofa Clean</p>
+          <div v-for="sr in reqarr" v-bind:key="sr._id">
+            <p class="ys-box-one">{{ sr.date }}  {{ sr.time }}</p>
+            <p class="ys-box-two">{{ sr.service.subserviceName }}</p>
+          </div>
         </div>
       </div>
     </div>
@@ -117,7 +118,12 @@ export default {
         })
         .then(function (response) {
           //console.log(response);
-          alert(JSON.stringify(response))
+          //alert(JSON.stringify(response))
+          Vue.$toast.open({
+            message: response.data,
+            type: 'success',
+            position: 'bottom-left'
+          });           
         })
         .catch(function (error) {
           //console.log(error);
@@ -227,19 +233,19 @@ export default {
     display: flex;
   }
   .c-r-1 {
-    font-size: 14px;
+    font-size: 15px;
     font-weight: bold;
   }
   .c-r-2 {
-    font-size: 14px;
+    font-size: 15px;
     margin-left: 8px;
   }
   .c-r1-1 {
-    font-size: 14px;
+    font-size: 15px;
     font-weight: bold;
   }
   .c-r1-2 {
-    font-size: 14px;
+    font-size: 15px;
     margin-left: 20px;
     display: flex;
   }
@@ -270,7 +276,8 @@ export default {
   } 
   .ys-box-one {
     font-size: 15px;
-    margin-bottom: 10px
+    margin-bottom: 5px;
+    text-decoration: underline;
   }
   .ys-box-two {
     margin-top: 0px;
