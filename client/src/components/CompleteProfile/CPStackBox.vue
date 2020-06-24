@@ -1,24 +1,25 @@
 <template>
   <div class = "box">
-    <h4>Complete Profile</h4>
-    <p id="one">Welcome! Let's complete your profile...</p>
+    <h4>Welcome!</h4>
+    <p id="one">Let's complete your profile...</p>
   </div>
 </template>
 
 <style scoped>    
   .box {
-    width: 35%;
+    width: 20%;
     height: 110px;
     background-color: #000;
     color: #fff;
     opacity: 0.9;
-    top: 17%;
-    left: 17%;
+    top: 12%;
+    left: 3%;
     position: absolute;
     box-sizing: border-box;
     padding: 0px;
     border-radius: 10px;
-    padding: 20px;
+    padding-top: 20px;
+    padding-left: 50px;
     border: 1px solid #000;
     box-shadow: 7px 7px #eeefef;
   }

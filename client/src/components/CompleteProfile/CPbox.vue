@@ -148,7 +148,7 @@ export default {
     width: 45%;
     height: 90%;
     background-color: #fff;
-    top: 10%;
+    top: 15%;
     left: 28%;
     position: absolute;
     box-sizing: border-box;
