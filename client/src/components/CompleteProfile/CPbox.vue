@@ -162,14 +162,14 @@ export default {
     box-shadow: 3px 3px #ceced1
   }
   .box-1 {
-    width: 50%;
+    width: 40%;
     height: 100%;
     background-color: #fff;
-    top: 44%;
-    left: 59%;
+    top: 10%;
+    left: 10%;
     position: absolute;
     box-sizing: border-box;
-    transform: translate(-50%, -50%);
+    /*transform: translate(-50%, -50%);*/
     padding-top: 110px;
     padding-bottom: 5px;
     padding-left: 50px;
