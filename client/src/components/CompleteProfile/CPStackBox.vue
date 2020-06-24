@@ -1,7 +1,7 @@
 <template>
   <div class = "box">
     <h4>Complete Profile</h4>
-    <p id="one">Welcome to codename-prox! Let's complete your profile...</p>
+    <p id="one">Welcome! Let's complete your profile...</p>
   </div>
 </template>
 
@@ -16,7 +16,6 @@
     left: 17%;
     position: absolute;
     box-sizing: border-box;
-    transform: translate(-50%, -50%);
     padding: 0px;
     border-radius: 10px;
     padding: 20px;
