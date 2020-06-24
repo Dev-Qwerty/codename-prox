@@ -320,10 +320,14 @@ router.post('/addAddress', (req, res) => {
       user.addresses = newAddress;
       user.completedProfile = req.body.completedProfile;
       user = { $push: user };
-      User.update({ userID: req.body.id }, user).then(() => {
-        res.send({ status: "Success", user: user });
+      User.findOneAndUpdate({ userID: req.body.id }, user, (err,doc,result) => {
+        if(err) {
+          res.send({err: err});
+        }
+        else {
+          res.send({status: "Success", user: user});
+        }
       })
-        .catch(err => res.send({ err: err }))
     }
   })
 })
