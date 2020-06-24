@@ -144,29 +144,12 @@ export default {
 </script>
 
 <style scoped>    
-  .box {
-    width: 35%;
-    height: 104px;
-    background-color: #fff;
-    top: 15%;
-    left: 17%;
-    position: absolute;
-    box-sizing: border-box;
-    transform: translate(-50%, -50%);
-    padding-top: 110px;
-    padding-bottom: 5px;
-    padding-left: 50px;
-    padding-right: 50px;
-    border-radius: 10px;
-    border: none;
-    box-shadow: 3px 3px #ceced1
-  }
   .box-1 {
-    width: 40%;
+    width: 50%;
     height: 100%;
     background-color: #fff;
     top: 10%;
-    left: 10%;
+    left: 25%;
     position: absolute;
     box-sizing: border-box;
     /*transform: translate(-50%, -50%);*/
