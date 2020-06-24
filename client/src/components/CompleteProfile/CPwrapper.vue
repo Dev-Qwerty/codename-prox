@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <div class="top-header">
-      <p>Associates Dashboard</p>
+      <p>Complete Profile Page</p>
     </div>       
   </div>  
 </template>

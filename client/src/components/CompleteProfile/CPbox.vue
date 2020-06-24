@@ -145,15 +145,15 @@ export default {
 
 <style scoped>    
   .box-1 {
-    width: 50%;
-    height: 100%;
+    width: 45%;
+    height: 85%;
     background-color: #fff;
     top: 10%;
-    left: 25%;
+    left: 28%;
     position: absolute;
     box-sizing: border-box;
     /*transform: translate(-50%, -50%);*/
-    padding-top: 110px;
+    padding-top: 30px;
     padding-bottom: 5px;
     padding-left: 50px;
     padding-right: 50px;
@@ -178,8 +178,8 @@ export default {
     border-radius: 3px;
     box-shadow: 5px 5px #eeefef;
     font-size: 19px;
-    margin-top: 5vw;
-    margin-left: 15vw;
+    margin-top: 2vw;
+    margin-left: 13vw;
   }
   .input-box {
     font-size: 14px;
