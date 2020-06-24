@@ -65,6 +65,8 @@
 </template>
 
 <script>
+import Vue from 'vue';
+
 export default {
   data() {
     return {
@@ -93,7 +95,12 @@ export default {
         })
         .then(function (response) {
           //console.log(response);
-          alert(JSON.stringify(response))
+          //alert(JSON.stringify(response.data))
+          Vue.$toast.open({
+            message: response.data,
+            type: 'success',
+            position: 'bottom-left'
+          });          
         })
         .catch(function (error) {
           //console.log(error);
