@@ -6,7 +6,7 @@
 <style scoped>
   .wrapper {
     width: 100%;
-    height: 648px;
+    height: 870px;
     background-color: #eeefef;
   } 
 </style>
