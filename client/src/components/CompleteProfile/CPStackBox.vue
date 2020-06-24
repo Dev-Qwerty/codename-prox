@@ -16,9 +16,8 @@
     left: 3%;
     position: absolute;
     box-sizing: border-box;
-    padding: 0px;
     border-radius: 10px;
-    padding-top: 20px;
+    padding-top: 28px;
     padding-left: 50px;
     border: 1px solid #000;
     box-shadow: 7px 7px #eeefef;
@@ -27,35 +26,5 @@
     font-size: 23px;
     color: #fff;
     margin-bottom: 2px;
-  }
-  #one {
-    color: #aaa;
-    font-size: 14px;
-  }
-  .wrapper {
-    width: 25%;
-    margin: 0px;
-    padding-left: 0px;
-    padding-right: 5px;
-    padding-bottom: 0px;
-    padding-top: 0px;    
-    display: flex;
-  }
-  .col {
-    margin-right: 15px;
-    height: 25px;
-    background-blend-mode: overlay;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    border-radius: 2px; 
-  }  
-  .col.googleIcon {
-    background-image: url('../../assets/Gicon.jpg');
-  }
-  #two {
-    margin-top: 5px;
-    color: #aaa;
-    font-size: 10px;
   }
 </style>

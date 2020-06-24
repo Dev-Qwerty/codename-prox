@@ -153,7 +153,7 @@ export default {
     position: absolute;
     box-sizing: border-box;
     /*transform: translate(-50%, -50%);*/
-    padding-top: 20px;
+    padding-top: 28px;
     padding-bottom: 5px;
     padding-left: 50px;
     padding-right: 50px;
