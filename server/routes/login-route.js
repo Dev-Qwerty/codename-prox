@@ -48,9 +48,9 @@ router.post('/login', (req,res) => {
           const username = encrypt(data.idToken.payload.sub);
           const pidToken = encrypt(Math.random().toString(36).slice(2));
           const category = data.idToken.payload['custom:category']; 
-          Token.find({id: username},(err,results) => {
+          Token.findOne({id: username},(err,results) => {
             //If token doesn't exist, create new token
-            if(results.length == 0) {
+            if(results == null) {
               const newToken = new Token({
                 token: pidToken,
                 id: username
@@ -61,21 +61,21 @@ router.post('/login', (req,res) => {
                 if(category == 'Customer') {
                   User.findOne({userID: decrypt(username)}, (err,r) => {
                     if(r.length != 0) {
-                    res.send({ status: "Success", jwt: pidToken, username: username, token: token, category: category, completedProfile: r.completedProfile });
+                    res.send({ status: "Success", jwt: pidToken, id: username, token: token, category: category, completedProfile: r.completedProfile, phoneNo: r.phone, email: r.email });
                     }
                   })
                 }
                 else if(category == 'Worker') {
                   Worker.findOne({workerID: decrypt(username)}, (err,r) => {
                     if(r.length != 0) {
-                      res.send({ status: "Success", jwt: pidToken, username: username, token: token, category: category, completedProfile: r.completedProfile });
+                      res.send({ status: "Success", jwt: pidToken, id: username, token: token, category: category, completedProfile: r.completedProfile, phoneNo: r.phone, email: r.email });
                     }
                   })
                 }
                 else {
                   Company.findOne({companyID: decrypt(username)}, (err,r) => {
                     if(r.length != 0) {
-                      res.send({ status: "Success", jwt: pidToken, username: username, token: token, category: category, completedProfile: r.completedProfile });
+                      res.send({ status: "Success", jwt: pidToken, id: username, token: token, category: category, completedProfile: r.completedProfile, phoneNo: r.phone, email: r.email });
                     }
                   })
                 }
@@ -89,21 +89,21 @@ router.post('/login', (req,res) => {
               let t = {};
               t.token = pidToken;
               t = {$set: t};
-              Token.update({id: username}, t).then(() => {
+              Token.updateOne({id: username}, t).then(() => {
                 if(category == 'Customer') {
                   User.findOne({userID: decrypt(username)}, (err,r) => {
                     if(err) console.log(err);
-                    res.send({ status: "Success", jwt: pidToken, username: username, category: category, completedProfile: r.completedProfile, id: username });
+                    res.send({ status: "Success", jwt: pidToken, username: username, category: category, completedProfile: r.completedProfile, id: username, phoneNo: r.phone, email: r.email });
                   })
                 }
                 else if(category == 'Worker') {
                   Worker.findOne({workerID: decrypt(username)}, (err,r) => {
-                      res.send({ status: "Success", jwt: pidToken, username: username, category: category, completedProfile: r.completedProfile, id: username })
+                      res.send({ status: "Success", jwt: pidToken, username: username, category: category, completedProfile: r.completedProfile, id: username, phoneNo: r.phone, email: r.email })
                   })
                 }
                 else {
                   Company.findOne({companyID: decrypt(username)}, (err,r) => {
-                    res.send({ status: "Success", jwt: pidToken, username: username, category: category, completedProfile: r.completedProfile, id: username });
+                    res.send({ status: "Success", jwt: pidToken, username: username, category: category, completedProfile: r.completedProfile, id: username, phoneNo: r.phone, email: r.email });
                   })
                 }
               })

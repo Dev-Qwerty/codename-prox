@@ -182,12 +182,10 @@ router.post('/completeProfile/:id', (req, res) => {
       let user = {};
 
       if (req.body.name) user.name = req.body.name;
-      if (req.body.addresses) user.addresses = req.body.addresses;
-      user.completedProfile = true;
       user = { $set: user }
 
       User.update({ userID: id }, user).then(() => {
-        res.send(user);
+        res.send({status: "Success", user: user});
       }).catch((err) => {
         console.log(err);
       })
@@ -320,11 +318,16 @@ router.post('/addAddress', (req, res) => {
       const newAddress = req.body.address;
       let user = {};
       user.addresses = newAddress;
+      user.completedProfile = req.body.completedProfile;
       user = { $push: user };
-      User.update({ userID: req.body.userID }, user).then(() => {
-        res.send({ status: "Success", user: user });
+      User.findOneAndUpdate({ userID: req.body.id }, user, (err,doc,result) => {
+        if(err) {
+          res.send({err: err});
+        }
+        else {
+          res.send({status: "Success", user: user});
+        }
       })
-        .catch(err => res.send({ err: err }))
     }
   })
 })

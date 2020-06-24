@@ -30,7 +30,7 @@ const CompanySchema = new mongoose.Schema({
         lowercase: true,
         required: true
     },
-    phoneNo: {
+    phone: {
         type: Number,
         required: true,
         unique: true

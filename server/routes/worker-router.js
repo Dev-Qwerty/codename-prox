@@ -19,11 +19,11 @@ const poolData = {
 const workerPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
 
 router.post('/signup', (req, res) => {
-	const { email, password, phoneNo } = req.body;
+	const { email, password, phone } = req.body;
 
 	const phoneData = {
 		Name: 'phone_number',
-		Value: phoneNo
+		Value: phone
 	}
 	const emailData = {
 		Name: 'email',
@@ -45,7 +45,7 @@ router.post('/signup', (req, res) => {
 		const workerID = data.userSub;
 		const newWorker = new Worker({
 			email,
-			phoneNo,
+			phone,
 			workerID
 		})
 		newWorker
@@ -61,23 +61,21 @@ router.post('/signup', (req, res) => {
 router.post('/completeProfile/:id', (req, res) => {
 	const t = req.body.token;
 	Token.findOne({token: t}, (err,result) => {
-		if(result.length == 0) {
+		if(result == []) {
 			res.send({status: "Error!", code: "Invalid token!"});
 		}
 		else {
-			const id = decrypt(req.params.id);
+			const id = crypt.decrypt(req.params.id);
 			let worker = {};
 			worker.name = req.body.name;
 			worker.workerType = req.body.type;
 			worker.companyID = req.body.companyID;
 			worker.specialization = req.body.specialization;
-			worker.address = req.body.address;
 			worker.service = req.body.service;
-			worker.completedProfile = true;
 			worker = { $set: worker };
 
 			Worker.update({ workerID: id }, worker).then(() => {
-				res.send({ status: "Success!", worker: worker });
+				res.send({ status: "Success", worker: worker });
 			})
 
 
@@ -86,9 +84,35 @@ router.post('/completeProfile/:id', (req, res) => {
 	
 })
 
+router.post('/addAddress', (req, res) => {
+	const t = req.body.token;
+	Token.findOne({token: t}, (err,result) => {
+	  if(result == []) {
+		res.send({status: "Error!", code: "Invalid token!"});
+	  }
+	  else {
+		const newAddress = req.body.address;
+		let worker = {};
+		worker.address = newAddress;
+		worker.completedProfile = req.body.completedProfile;
+		worker = { $set: worker };
+		Worker.findOneAndUpdate({workerID: crypt.decrypt(req.body.id)}, worker, (err,doc,result) => {
+			if(err) {
+				console.log("Error");
+			}
+			else {
+				res.send({status: "Success", user: worker});
+			}
+		})
+		  .catch(err => res.send({ err: err }))
+	  }
+	})
+  })
+  
+
 // fetch tags while worker signup
 router.get('/fetchtags', async (req, res) => {
-	const t = req.body.token;
+	const t = req.query.token;
 	let result = await Token.findOne({token: t});
 	console.log(result);
 		if(result == null) {
@@ -197,7 +221,7 @@ router
 	router.get('/getBasicProfile/:id', (req,res) => {
 		const id = crypt.decrypt(req.params.id)
 		Worker.findOne({workerID: id}, (err,result) => {
-			res.send({name: result.name, type: result.specialization, rating: result.rating, location: result.address.district, profile: result.name.charAt(0)})
+			res.send({name: result.name, type: result.service, rating: result.rating, location: result.address.district, profile: result.name.charAt(0)})
 		})
 	})
 

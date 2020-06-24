@@ -16,7 +16,7 @@
           <div class="sidenav-top-mid">
             <div class="sidenav-top-mid-one">
               <div class="sidenav-top-mid-one-img"></div>
-              <p class="job-title">{{ this.winfo.type[0] }}</p>
+              <p class="job-title">{{ this.winfo.type }}</p>
             </div>
             <div class="sidenav-top-mid-two">
               <div class="sidenav-top-mid-two-img"></div>

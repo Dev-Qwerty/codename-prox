@@ -9,6 +9,7 @@ import VueCryptojs from 'vue-cryptojs'
 import VueToast from 'vue-toast-notification'
 import 'vue-toast-notification/dist/theme-sugar.css';
 import VeeValidate from 'vee-validate';
+import InputTag from 'vue-input-tag';
 
 Vue.use(VeeValidate);
 VeeValidate.Validator.extend('verify_password', {
@@ -18,6 +19,8 @@ VeeValidate.Validator.extend('verify_password', {
       return strongRegex.test(value);
   }
 });
+
+Vue.component('input-tag', InputTag);
 
 //For Cookie Handling
 Vue.use(VueCookies)

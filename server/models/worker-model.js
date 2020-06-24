@@ -1,28 +1,35 @@
 const mongoose = require('mongoose');
 
-const addressSchema = new mongoose.Schema({
+/*const addressSchema = new mongoose.Schema({
     line1: {
         type: String,
+        default: ""
     },
     line2: {
-        type: String
+        type: String,
+        default: ""
     },
     city: {
-        type: String
+        type: String,
+        "default": ""
     },
     district: {
-        type: String
+        type: String,
+        default: ""
     },
     state: {
-        type: String
+        type: String,
+        default: ""
     },
     pinCode: {
-        type: Number
+        type: Number,
+        default: ""
     },
     zone: {
-        type: String
+        type: String,
+        default: ""
     }
-})
+})*/
 
 const WorkerSchema = new mongoose.Schema({
     name: {
@@ -47,7 +54,7 @@ const WorkerSchema = new mongoose.Schema({
         type: Array,
         default: null
     },
-    phoneNo: {
+    phone: {
         type: Number,
         required: true
     },
@@ -55,7 +62,18 @@ const WorkerSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    address: addressSchema,
+    address: {
+        type: Object,
+        default: {
+           line1: "",
+           line2: "",
+           city: "",
+           district: "",
+           state: "",
+           pincode: "",
+           zone: ""
+        }
+    },
     totalWorks: {
         type: Number,
         default: 0

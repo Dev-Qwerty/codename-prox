@@ -28,14 +28,14 @@ function decrypt(text) {
 const companyPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
 
 router.post('/signup', (req,res) => {
-    const { name, email, password, phoneNo } = req.body;
+    const { name, email, password, phone } = req.body;
        const nameData = {
         Name: 'given_name',
         Value: name
     }
     const phoneData = {
         Name: 'phone_number',
-        Value: phoneNo
+        Value: phone
     }
     const emailData = {
         Name: 'email',
@@ -58,7 +58,7 @@ router.post('/signup', (req,res) => {
         const companyID = data.userSub;
         const newCompany = new Company({
           email,
-          phoneNo,
+          phone,
           name,
           companyID
         })

@@ -98,14 +98,29 @@ export default {
               });
             }
             if(response.data.status == "Success") {
-            const username = response.data.username;
-            const jwtToken = response.data.jwt;
-            this.$cookies.set("username", username, '1d');
-                this.$cookies.set("pid", jwtToken, '1d');
-                this.$session.start();
-                this.$session.set('jwt', jwtToken);
-                this.$cookies.set("id", response.data.id);
-                window.location.href = "http://localhost:8080/dashboard";
+              if(response.data.completedProfile == false) {
+                localStorage.setItem("email", response.data.email);
+                localStorage.setItem("phoneNo", response.data.phoneNo);
+                localStorage.setItem("category", response.data.category);
+                const username = response.data.username;
+                const jwtToken = response.data.jwt;
+                this.$cookies.set("username", username, '1d');
+                    this.$cookies.set("pid", jwtToken, '1d');
+                    this.$session.start();
+                    this.$session.set('jwt', jwtToken);
+                    this.$cookies.set("id", response.data.id);
+                    window.location.href = "http://localhost:8080/completeProfile";
+               }
+               else {
+                const username = response.data.username;
+                const jwtToken = response.data.jwt;
+                this.$cookies.set("username", username, '1d');
+                    this.$cookies.set("pid", jwtToken, '1d');
+                    this.$session.start();
+                    this.$session.set('jwt', jwtToken);
+                    this.$cookies.set("id", response.data.id);
+                    window.location.href = "http://localhost:8080/dashboard";
+               }            
             }
           })
           .catch(function(error) {
