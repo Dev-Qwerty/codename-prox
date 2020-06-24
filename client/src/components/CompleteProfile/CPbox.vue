@@ -144,33 +144,16 @@ export default {
 </script>
 
 <style scoped>    
-  .box {
-    width: 35%;
-    height: 104px;
-    background-color: #fff;
-    top: 15%;
-    left: 17%;
-    position: absolute;
-    box-sizing: border-box;
-    transform: translate(-50%, -50%);
-    padding-top: 110px;
-    padding-bottom: 5px;
-    padding-left: 50px;
-    padding-right: 50px;
-    border-radius: 10px;
-    border: none;
-    box-shadow: 3px 3px #ceced1
-  }
   .box-1 {
-    width: 50%;
-    height: 100%;
+    width: 45%;
+    height: 85%;
     background-color: #fff;
-    top: 44%;
-    left: 59%;
+    top: 11%;
+    left: 28%;
     position: absolute;
     box-sizing: border-box;
-    transform: translate(-50%, -50%);
-    padding-top: 110px;
+    /*transform: translate(-50%, -50%);*/
+    padding-top: 28px;
     padding-bottom: 5px;
     padding-left: 50px;
     padding-right: 50px;
@@ -195,8 +178,8 @@ export default {
     border-radius: 3px;
     box-shadow: 5px 5px #eeefef;
     font-size: 19px;
-    margin-top: 5vw;
-    margin-left: 15vw;
+    margin-top: 2vw;
+    margin-left: 13vw;
   }
   .input-box {
     font-size: 14px;

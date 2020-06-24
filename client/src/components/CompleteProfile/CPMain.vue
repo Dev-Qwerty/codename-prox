@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Nav />
+    <!--<Nav />-->
     <CPwrapper />
     <CPbox />
     <CPStackBox />
@@ -8,14 +8,14 @@
 </template>
 
 <script>
-import Nav from '@/components/Home/Navbar'
+//import Nav from '@/components/Home/Navbar'
 import CPwrapper from '@/components/CompleteProfile/CPwrapper'
 import CPbox from '@/components/CompleteProfile/CPbox'
 import CPStackBox from '@/components/CompleteProfile/CPStackBox'
 
 export default {
   components: {
-    Nav,
+    //Nav,
     CPwrapper,
     CPbox,
     CPStackBox
