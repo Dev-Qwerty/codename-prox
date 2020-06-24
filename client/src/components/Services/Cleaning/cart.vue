@@ -33,13 +33,17 @@
                     <p>{{ sr.category }}</p>
                   </div>
                   <div class="c1-box-col2">
-                    <p>{{ sr.quantity }}</p>
+                    <p>
+                      <button @click="subQuantity(sr._id)" :disabled="sr.quantity == 1" >-</button>
+                      {{ sr.quantity }}
+                      <button @click="addQuantity(sr._id)" :disabled="sr.quantity == 5" >+</button>
+                    </p>
                   </div>
                   <div class="c1-box-col3">
                     <p>{{ sr.amount }}</p>
                   </div>
                   <div class="c1-box-col4">
-                    <p>$299</p>
+                    <p>{{ sr.amount * sr.quantity }}</p>
                   </div>
                 </div> 
               </div>
@@ -106,7 +110,22 @@ export default {
     }   
   },
   methods: {
-  
+    subQuantity(id) {
+      for (let i = 0; i < this.cartArr.length; i++) {
+        if(this.cartArr[i]._id == id) {
+          this.cartArr[i].quantity -= 1
+        }
+      }
+      this.$cookies.set("cart", JSON.stringify(this.cartArr), '1d')
+    },
+    addQuantity(id) {
+      for( let i = 0; i < this.cartArr.length; i++) {
+        if(this.cartArr[i]._id == id) {
+          this.cartArr[i].quantity += 1
+        }
+      }
+      this.$cookies.set("cart", JSON.stringify(this.cartArr), '1d')
+    }
   },
   created() {
   }   
