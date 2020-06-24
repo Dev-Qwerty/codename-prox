@@ -24,7 +24,10 @@
   }
   .box h4 {
     font-size: 23px;
-    color: #fff;
+    color: #eeefef;
     margin-bottom: 2px;
+  }
+  .box p {
+    color: #eeefef;
   }
 </style>

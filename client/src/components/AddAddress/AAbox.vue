@@ -86,7 +86,7 @@ export default {
     position: absolute;
     box-sizing: border-box;
     /*transform: translate(-50%, -50%);*/
-    padding-top: 28px;
+    padding-top: 15px;
     padding-bottom: 5px;
     padding-left: 50px;
     padding-right: 50px;
@@ -111,8 +111,8 @@ export default {
     border-radius: 3px;
     box-shadow: 5px 5px #eeefef;
     font-size: 19px;
-    margin-top: 1vw;
-    margin-left: 15vw;
+    margin-top: 10px;
+    margin-left: 13vw;
   }
   .input-box {
     font-size: 14px;
