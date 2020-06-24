@@ -146,14 +146,14 @@ export default {
 <style scoped>    
   .box-1 {
     width: 45%;
-    height: 90%;
+    height: 85%;
     background-color: #fff;
-    top: 15%;
+    top: 11%;
     left: 28%;
     position: absolute;
     box-sizing: border-box;
     /*transform: translate(-50%, -50%);*/
-    padding-top: 80px;
+    padding-top: 20px;
     padding-bottom: 5px;
     padding-left: 50px;
     padding-right: 50px;
