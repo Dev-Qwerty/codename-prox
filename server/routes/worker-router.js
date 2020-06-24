@@ -112,7 +112,7 @@ router.post('/addAddress', (req, res) => {
 
 // fetch tags while worker signup
 router.get('/fetchtags', async (req, res) => {
-	const t = req.body.token;
+	const t = req.query.token;
 	let result = await Token.findOne({token: t});
 	console.log(result);
 		if(result == null) {
@@ -221,7 +221,7 @@ router
 	router.get('/getBasicProfile/:id', (req,res) => {
 		const id = crypt.decrypt(req.params.id)
 		Worker.findOne({workerID: id}, (err,result) => {
-			res.send({name: result.name, type: result.specialization, rating: result.rating, location: result.address.district, profile: result.name.charAt(0)})
+			res.send({name: result.name, type: result.service, rating: result.rating, location: result.address.district, profile: result.name.charAt(0)})
 		})
 	})
 

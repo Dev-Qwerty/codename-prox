@@ -48,9 +48,10 @@ router.post('/login', (req,res) => {
           const username = encrypt(data.idToken.payload.sub);
           const pidToken = encrypt(Math.random().toString(36).slice(2));
           const category = data.idToken.payload['custom:category']; 
-          Token.find({id: username},(err,results) => {
+          Token.findOne({id: username},(err,results) => {
+            console.log(results);
             //If token doesn't exist, create new token
-            if(results == []) {
+            if(results == null) {
               const newToken = new Token({
                 token: pidToken,
                 id: username
@@ -89,7 +90,7 @@ router.post('/login', (req,res) => {
               let t = {};
               t.token = pidToken;
               t = {$set: t};
-              Token.update({id: username}, t).then(() => {
+              Token.updateOne({id: username}, t).then(() => {
                 if(category == 'Customer') {
                   User.findOne({userID: decrypt(username)}, (err,r) => {
                     if(err) console.log(err);

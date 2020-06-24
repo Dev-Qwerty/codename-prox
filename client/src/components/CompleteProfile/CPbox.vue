@@ -21,7 +21,7 @@
         <input type="text" name="companyID" id="companyID" v-model="companyID" class="input-box" placeholder="Company ID">
       </div>
       <div v-if="categoryIsWorker">
-          <select name="service" id="service" v-model="service" class="input-box">
+          <select name="service" id="service" v-model="service" class="input-box" @change="fetchTags()">
                 <option value="" disabled selected>Select your main Service</option> 
                 <option value="Cleaning">Cleaning</option>
                 <option value="Plumbing">Plumbing</option>
@@ -35,7 +35,7 @@
           </select> 
       </div>
       <div v-if="categoryIsWorker" class="input-box">
-      <input-tag v-model="tags" placeholder="Add tags"></input-tag>
+      <input-tag v-model="tags" placeholder="Select or deselect tags accordingly!"></input-tag>
       </div>
       <div>
         <input class="sbutton" type="submit" name="" value="Continue" @click.prevent="completeProfile()">
@@ -65,6 +65,27 @@ export default {
     checkCategory() {
       if(this.category == 'Worker') {
         this.categoryIsWorker = true       
+      }
+    },
+    fetchTags() {
+      if(this.service != "") {
+        let url = "http://localhost:3000/worker/fetchtags?service="+this.service+"&token="+this.$cookies.get("pid");
+        this.$http.get(url)
+        .then(response => {
+          this.tags = response.data.tags;
+          Vue.$toast.open({
+                  message: 'Please select tags accordingly! Press x to de-select tags.',
+                  type: 'info',
+                  position: 'bottom-left'
+              });
+        })
+        .catch(err => {
+          Vue.$toast.open({
+                  message: err,
+                  type: 'error',
+                  position: 'bottom-left'
+              });
+        })
       }
     },
     completeProfile() {
@@ -174,7 +195,7 @@ export default {
     border-radius: 3px;
     box-shadow: 5px 5px #eeefef;
     font-size: 19px;
-    margin-top: 1vw;
+    margin-top: 5vw;
     margin-left: 15vw;
   }
   .input-box {
