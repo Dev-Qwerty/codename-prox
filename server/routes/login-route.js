@@ -8,6 +8,7 @@ const User = require('../models/user-model');
 const Company = require('../models/company-model');
 const Worker = require('../models/worker-model');
 const request = require('request');
+const crypt = require('../misc/crypt');
 
 const poolData = {
     UserPoolId: keys.cognito.userPoolId,
@@ -15,22 +16,7 @@ const poolData = {
   }
   
 const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
-  
-
-function encrypt(text) {
-    var mykey = crypto.createCipher('aes-128-cbc', 'afvbbmhghhh');
-    var mystr = mykey.update(text, 'utf8', 'hex')
-    mystr += mykey.final('hex');
-    return mystr;
-  }
-  
-  function decrypt(text) {
-    var mykey = crypto.createDecipher('aes-128-cbc', 'afvbbmhghhh');
-    var mystr = mykey.update(text, 'hex', 'utf8')
-    mystr += mykey.final('utf8');
-    return mystr;
-  }
-  
+    
 router.post('/login', (req,res) => {
     const LoginData = {
         Username: req.body.username,
@@ -45,8 +31,8 @@ router.post('/login', (req,res) => {
       const cognitoUser = new AmazonCognitoIdentity.CognitoUser(UserData);
       cognitoUser.authenticateUser(AuthenticationDetails, {
         onSuccess: data => {
-          const username = encrypt(data.idToken.payload.sub);
-          const pidToken = encrypt(Math.random().toString(36).slice(2));
+          const username = crypt.encrypt(data.idToken.payload.sub);
+          const pidToken = crypt.encrypt(Math.random().toString(36).slice(2));
           const category = data.idToken.payload['custom:category']; 
           Token.findOne({id: username},(err,results) => {
             //If token doesn't exist, create new token
@@ -59,21 +45,21 @@ router.post('/login', (req,res) => {
               .save()
               .then(token => {
                 if(category == 'Customer') {
-                  User.findOne({userID: decrypt(username)}, (err,r) => {
+                  User.findOne({userID: crypt.decrypt(username)}, (err,r) => {
                     if(r.length != 0) {
                     res.send({ status: "Success", jwt: pidToken, id: username, token: token, category: category, completedProfile: r.completedProfile, phoneNo: r.phone, email: r.email });
                     }
                   })
                 }
                 else if(category == 'Worker') {
-                  Worker.findOne({workerID: decrypt(username)}, (err,r) => {
+                  Worker.findOne({workerID: crypt.decrypt(username)}, (err,r) => {
                     if(r.length != 0) {
                       res.send({ status: "Success", jwt: pidToken, id: username, token: token, category: category, completedProfile: r.completedProfile, phoneNo: r.phone, email: r.email });
                     }
                   })
                 }
                 else {
-                  Company.findOne({companyID: decrypt(username)}, (err,r) => {
+                  Company.findOne({companyID: crypt.decrypt(username)}, (err,r) => {
                     if(r.length != 0) {
                       res.send({ status: "Success", jwt: pidToken, id: username, token: token, category: category, completedProfile: r.completedProfile, phoneNo: r.phone, email: r.email });
                     }
@@ -91,18 +77,18 @@ router.post('/login', (req,res) => {
               t = {$set: t};
               Token.updateOne({id: username}, t).then(() => {
                 if(category == 'Customer') {
-                  User.findOne({userID: decrypt(username)}, (err,r) => {
+                  User.findOne({userID: crypt.decrypt(username)}, (err,r) => {
                     if(err) console.log(err);
                     res.send({ status: "Success", jwt: pidToken, username: username, category: category, completedProfile: r.completedProfile, id: username, phoneNo: r.phone, email: r.email });
                   })
                 }
                 else if(category == 'Worker') {
-                  Worker.findOne({workerID: decrypt(username)}, (err,r) => {
+                  Worker.findOne({workerID: crypt.decrypt(username)}, (err,r) => {
                       res.send({ status: "Success", jwt: pidToken, username: username, category: category, completedProfile: r.completedProfile, id: username, phoneNo: r.phone, email: r.email })
                   })
                 }
                 else {
-                  Company.findOne({companyID: decrypt(username)}, (err,r) => {
+                  Company.findOne({companyID: crypt.decrypt(username)}, (err,r) => {
                     res.send({ status: "Success", jwt: pidToken, username: username, category: category, completedProfile: r.completedProfile, id: username, phoneNo: r.phone, email: r.email });
                   })
                 }

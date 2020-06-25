@@ -12,6 +12,7 @@ const aws = require("aws-sdk");
 const fs = require("fs");
 const multerS3 = require("multer-s3")
 const Token = require('../models/token');
+const crypt = require('../misc/crypt');
 global.fetch = require("node-fetch");
 
 let id = "";
@@ -44,21 +45,6 @@ let upload = multer({
     }
   })
 });
-
-function encrypt(text) {
-  var mykey = crypto.createCipher('aes-128-cbc', 'afvbbmhghhh');
-  var mystr = mykey.update(text, 'utf8', 'hex')
-  mystr += mykey.final('hex');
-  return mystr;
-}
-
-function decrypt(text) {
-  var mykey = crypto.createDecipher('aes-128-cbc', 'afvbbmhghhh');
-  var mystr = mykey.update(text, 'hex', 'utf8')
-  mystr += mykey.final('utf8');
-  return mystr;
-}
-
 
 const poolData = {
   UserPoolId: keys.cognito.userPoolId || process.env['COGNITOUSERPOOLID'],
@@ -178,7 +164,7 @@ router.post('/completeProfile/:id', (req, res) => {
       res.send({status: "Error!", code: "Invalid token!"});
     }
     else {
-      let id = decrypt(req.params.id);
+      let id = crypt.decrypt(req.params.id);
       let user = {};
 
       if (req.body.name) user.name = req.body.name;
@@ -201,7 +187,7 @@ router.post('/updateProfile/:id', (req, res) => {
       res.send({status: "Error!", code: "Invalid token!"});
     }
     else {
-      let id = decrypt(req.params.id);
+      let id = crypt.decrypt(req.params.id);
   let user = {};
 
   if (req.body.name) user.name = req.body.name;
@@ -352,7 +338,7 @@ router.post('/viewProfile', (req, res) => {
 
 router.post('/verifyCategory', (req, res) => {
   const userIDhash = req.body.userID;
-  const userID = decrypt(userIDhash);
+  const userID = crypt.decrypt(userIDhash);
   User.findOne({ userID: userID }, (err, results) => {
     if (results) {
       res.send({ status: "Success" });
@@ -364,12 +350,12 @@ router.post('/verifyCategory', (req, res) => {
 })
 
 router.post('/uploadProfilePic/:id', upload.array('file', 1), (req, res) => {
-  id = decrypt(req.params.id);
+  id = crypt.decrypt(req.params.id);
   res.json({ file: req.file });
 });
 
 router.get('/getBasicProfile/:id', (req,res) => {
-  const id = decrypt(req.params.id);
+  const id = crypt.decrypt(req.params.id);
   User.findOne({userID: id}, (err,result) => {
     res.send({name: result.name, profile: result.name.charAt(0)}) //To Do: after customer dashboard is ready
   })
