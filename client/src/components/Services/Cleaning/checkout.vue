@@ -40,12 +40,18 @@
           </form>          
         </div> 
         <div class="td">
-          <div>
-            <p class="tdheader">Current date and time</p>
-          </div>
-          <div>
-            <input type="datetime-local" class="tdfield" value="2018-06-12T19:30" min="2018-06-07T00:00" max="2018-06-14T00:00">
-          </div>          
+            <vc-date-picker
+              class="tdfeild"
+              v-model='date'
+              :popover="{visibility: 'click'}"
+              :input-props='{
+                placeholder: "Date",
+                readonly: true
+              }'
+              :min-date='new Date()'
+              color='grey'
+            />
+            <VueCtkDateTimePicker class="tdfeild" id="TimePicker" v-model="time" only-time="true" format="hh mm a" formatted="hh mm a" noHeader="true" noButton="true" noLabel="true" label="Time" color="black"/>
         </div> 
         <div class="btns">
           <div>
@@ -69,20 +75,27 @@
 
 <script>
 import PayLaterConfirm from '@/components/Services/Cleaning/PayLaterConfirm.vue'
+import moment from 'moment'
+import VueCtkDateTimePicker from 'vue-ctk-date-time-picker';
+import 'vue-ctk-date-time-picker/dist/vue-ctk-date-time-picker.css';
 
 export default {
   name: 'checkout',
   components: {
-    PayLaterConfirm 
+    PayLaterConfirm,
+    VueCtkDateTimePicker
   },
   data() {
     return {
-      cartArr: JSON.parse(this.$cookies.get("cart"))
+      cartArr: JSON.parse(this.$cookies.get("cart")),
+      date: '',
+      time: ''
     }
   },
   methods: {
     paylaterfn() {
       /*alert(JSON.stringify(this.cartArr))*/
+       this.date = moment(this.date).format('YYYY-M-D')
     }
   }
 }
@@ -159,9 +172,9 @@ export default {
     margin-top: 50px;
     display: grid;
     grid-template-columns: 35% 65%;
-  }  
-  .tdheader {
-    font-size: 18px;
+  }
+  .tdfeild {
+    width: 200px;
   }
   .btns {
     margin-top: 40px;

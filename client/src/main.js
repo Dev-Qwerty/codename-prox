@@ -10,6 +10,13 @@ import VueToast from 'vue-toast-notification'
 import 'vue-toast-notification/dist/theme-sugar.css';
 import VeeValidate from 'vee-validate';
 import InputTag from 'vue-input-tag';
+import VCalendar from 'v-calendar';
+
+
+// Use v-calendar & v-date-picker components
+Vue.use(VCalendar, {
+  componentPrefix: 'vc',  // Use <vc-calendar /> instead of <v-calendar />
+});
 
 Vue.use(VeeValidate);
 VeeValidate.Validator.extend('verify_password', {
