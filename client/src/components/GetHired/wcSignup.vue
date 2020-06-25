@@ -99,6 +99,20 @@ export default {
               });
           })
         }
+        else {
+           Vue.$toast.open({
+                  message: 'Please accept the terms and conditions!',
+                  type: 'error',
+                  position: 'bottom-left'
+              });
+        }
+      }
+      else {
+         Vue.$toast.open({
+                  message: 'Please check your password!',
+                  type: 'error',
+                  position: 'bottom-left'
+              });
       }
     }
   }
