@@ -1,7 +1,7 @@
 const express = require('express')
 const moment = require('moment')
 const router = express.Router()
-const sendMessage = require('../misc/textmessage')
+// const sendMessage = require('../misc/textmessage')
 const crypt = require('../misc/crypt')
 
 // Import Models
@@ -44,7 +44,7 @@ router
                         orderID: orderId
                     }
                     console.log(workDetails)
-                    sendMessage.sendTextMessage("customer",customerDetails,workDetails);
+                    // sendMessage.sendTextMessage("customer",customerDetails,workDetails);
                 } else {
                     let selectedWorkersDetails = await selectedWorkers.findOne({orderID: orderId}, '-_id')
                     let declinedWorker = selectedWorkersDetails.selectedWorkers.shift() //Return first worker
@@ -97,7 +97,7 @@ router
                         date: work.date,
                         time: work.time,
                     }
-                    sendMessage.sendTextMessage("worker",workerDetails,workDetails);
+                    // sendMessage.sendTextMessage("worker",workerDetails,workDetails);
                 }          
             }
         } catch (error) {
