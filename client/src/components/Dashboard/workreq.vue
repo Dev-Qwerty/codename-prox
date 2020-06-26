@@ -23,6 +23,10 @@
           </div> 
           <div :id="'cid-'+sr.orderID" class="collapse c-body  c-body-ys-sh-all">
             <div class="c-r">
+              <p class="c-r-1">Place:</p>
+              <P class="c-r-2">{{ sr.place }}</p>
+            </div>            
+            <div class="c-r">
               <p class="c-r-1">Date:</p>
               <P class="c-r-2">{{ sr.date }}</p>
             </div>
@@ -88,11 +92,11 @@ export default {
     },
     acceptfn(obj) {
       let arr = obj
-      alert(JSON.stringify(arr))
+      alert(JSON.stringify(arr.orderID))
       let url = 'http://localhost:3000/request/workrequest/f35ce2de4348f6943f9621bed9af307f'
       this.$http.post(url, {
-        "orderId": JSON.stringify(arr.orderID),
-        "requestId": JSON.stringify(arr.requestID),
+        "orderId": arr.orderID,
+        "requestId": arr.requestID,
         "requestStatus": "accepted"         
         })
         .then(function (response) {
@@ -113,8 +117,8 @@ export default {
       let arr = obj
       let url = 'http://localhost:3000/request/workrequest/f35ce2de4348f6943f9621bed9af307f'
       this.$http.post(url, {
-        "orderId": JSON.stringify(arr.orderID),
-        "requestId": JSON.stringify(arr.requestID),
+        "orderId": arr.orderID,
+        "requestId": arr.requestID,
         "requestStatus": "declined"         
         })
         .then(function (response) {
