@@ -5,7 +5,7 @@
         <input type="text" name="code" id="code" placeholder="Enter confirmation code" v-model="code" class="input-box">
       </div>
       <div>
-        <input class="sbutton" type="submit" name="" value="Confirm Code" @click.prevent="">
+        <input class="sbutton" type="submit" name="" value="Confirm Code" @click.prevent="checkCode()">
       </div>
     </form>
   </div>
@@ -23,12 +23,28 @@ export default {
   },
   methods: {
     checkCode() {
-      
+      this.category = this.category[0].toUpperCase() + this.category.slice(1);
+      let url = "http://localhost:3000/"+this.category+"/confirmEmail";
+      this.$http.post(url, {
+        code: this.code,
+        email: this.email
+      })
+      .then(response => {
+        if(response.data.status == "Success") {
+          localStorage.removeItem("email");
+          localStorage.removeItem("category");
+          window.location.href = "http://localhost:8080/login";
+        }
+        else {
+          Vue.$toast.open({
+                  message: response.data.error.message,
+                  type: 'error',
+                  position: 'bottom-left'
+              });
+        }
+      })
     }
-  },
-  mounted() {
-    this.checkCategory();
-  },
+  }
 }
 </script>
 
