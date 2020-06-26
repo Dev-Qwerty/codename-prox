@@ -3,7 +3,7 @@
     <div class="mw-body">
       <p class="ty-header">Today's Work</p>
       <div class="box-wrapper">
-        <div v-for="sr in myworksarr.todaysWork" v-bind:key="sr.date">
+        <div v-for="(sr, index) in myworksarr.todaysWork" :key="index">
           <div class="box sh-all">
             <div class="box-row1">
               <p class="row1-one">$99</p>
@@ -25,7 +25,7 @@
 
       <p class="yd-header">Upcomming Works</p>
       <div class="box-wrapper">
-        <div v-for="sr in myworksarr.upcommingWorks" v-bind:key="sr.date">
+        <div v-for="(sr, index) in myworksarr.upcommingWorks" :key="index">
           <div class="box sh-all">
             <div class="box-row1">
               <p class="row1-one">$99</p>
@@ -47,7 +47,7 @@
 
       <p class="yd-header">Completed Works</p>
       <div class="box-wrapper">
-        <div v-for="sr in myworksarr.todaysWorks" v-bind:key="sr.date">
+        <div v-for="(sr, index) in myworksarr.completedWorks" :key="index">
           <div class="box sh-all">
             <div class="box-row1">
               <p class="row1-one">$99</p>
