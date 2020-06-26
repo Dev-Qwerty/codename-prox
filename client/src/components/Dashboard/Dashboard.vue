@@ -162,15 +162,17 @@ export default {
     grid-template-rows: 45% 35% 20%;    
   }
   .sidenav-top-top {
-    margin-bottom: 20px;
+    margin-top: 25px;
+    margin-bottom: 0px;
     display: grid;
     grid-template-rows: 3fr 1fr 1px;
   }
   .Circle {
     padding-top: 10px;
     padding-left: 20px;
-    margin-top: 20px;
-    margin-left: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5px;
     width: 70px;
     height: 70px;
     background-color: #DBDBDB;
@@ -178,33 +180,35 @@ export default {
   }
   .circle-inside {
     font-size: 35px;
+    margin: 0 auto;    
   } 
   .profile-name {
     font-size: 18px;
-    margin-left: 80px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0px;
   }  
   .profile-underline {
     width: 58%;
     height: 1px;
-    margin-top: -17px;
-    margin-left: 50px;
+    margin-left: auto;
+    margin-right: auto;
     background-color: #aaa;
   }     
   .sidenav-top-mid {
     display: grid;
     grid-template-rows: 30px 30px; 
-    padding-left: 80px;  
-    margin-top: -5px;   
+    margin-top: 5px;   
   }
  .sidenav-top-mid-one {
     display: grid;
     grid-template-columns: 15% 95%;
     padding-top: 15px;
-    padding-left: 10px;
+    margin-left: auto;
+    margin-right: auto;    
   }     
   .sidenav-top-mid-one-img {
     margin-top: 3px;
-    margin-left: 8px;
     height: 16px;
     width: 16px;
     background-image: url('../../assets/jobTitle.png');
@@ -213,6 +217,7 @@ export default {
     background-size: contain;    
   }   
   .job-title {
+    margin-left: 10px;
     font-size: 17px;
     color: #707070;
   } 
@@ -220,11 +225,11 @@ export default {
     display: grid;
     grid-template-columns: 15% 95%;
     padding-top: 15px;
-    padding-left: 10px;
+    margin-left: auto;
+    margin-right: auto;       
   }     
   .sidenav-top-mid-two-img {
     margin-top: 3px;
-    margin-left: 8px;
     height: 16px;
     width: 16px;
     background-image: url('../../assets/Place.png');
@@ -233,12 +238,14 @@ export default {
     background-size: contain;    
   }   
   .Place {
+    margin-left: 0px;
     font-size: 17px;
     color: #707070;
   }     
   .sidenav-top-bottom {
     margin-top: -15px;
-    margin-left: 95px;
+    margin-left: auto;
+    margin-right: auto;   
     font-size: 18px;
     /*height: 20px;
     width: 80%;
