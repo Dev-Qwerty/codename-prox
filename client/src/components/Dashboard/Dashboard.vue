@@ -198,12 +198,12 @@ export default {
   .sidenav-top-mid {
     display: grid;
     grid-template-rows: 30px 30px; 
-    margin-top: 5px;   
+    margin-top: 20px;   
   }
  .sidenav-top-mid-one {
     display: grid;
     grid-template-columns: 15% 95%;
-    padding-top: 15px;
+    padding-top: 0px;
     margin-left: auto;
     margin-right: auto;    
   }     
@@ -224,7 +224,7 @@ export default {
  .sidenav-top-mid-two {
     display: grid;
     grid-template-columns: 15% 95%;
-    padding-top: 15px;
+    margin-top: -4px;
     margin-left: auto;
     margin-right: auto;       
   }     
