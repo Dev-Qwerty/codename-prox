@@ -1,7 +1,7 @@
 <template>
   <div class="mw-wrapper">
     <div class="mw-body">
-      <p class="ty-header">Today</p>
+      <p class="ty-header">Today's Work</p>
       <div class="box-wrapper">
         <div v-for="n in 3" v-bind:key="n">
           <div class="box sh-all">
@@ -23,7 +23,7 @@
         </div>
       </div>
 
-      <p class="yd-header">Yesterday</p>
+      <p class="yd-header">Upcomming Works</p>
       <div class="box-wrapper">
         <div v-for="n in 2" v-bind:key="n">
           <div class="box sh-all">
@@ -44,6 +44,28 @@
           </div>
         </div>
       </div>  
+
+      <p class="yd-header">Completed Works</p>
+      <div class="box-wrapper">
+        <div v-for="n in 2" v-bind:key="n">
+          <div class="box sh-all">
+            <div class="box-row1">
+              <p class="row1-one">$99</p>
+              <div class="Line"></div>
+            </div>
+            <div class="box-row2">
+              <p class="row2-one">Kitchen Cleaning</p>
+              <p class="row2-two">Kanjirappally, Kottayam</p>
+            </div>
+            <div class="box-row3">
+              <p class="row3-one">8:30 AM</p>
+            </div>
+            <div class="box-row4">
+              <p class="row4-one">Work Details</p>
+            </div>
+          </div>
+        </div>
+      </div>      
 
     </div>
   </div>
