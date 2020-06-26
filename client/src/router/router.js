@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../components/Home/Main.vue'
@@ -23,6 +24,7 @@ import UpdateProfile from '@/components/UpdateProfile/UPMain.vue'
 import CompleteProfile from '@/components/CompleteProfile/CPMain.vue'
 import AddAddress from '@/components/AddAddress/AAMain.vue'
 import ConfirmEmail from '@/components/ConfirmEmail/CEMain.vue'
+import { isNullOrUndefined } from 'util';
 
 Vue.use(VueRouter)
 
@@ -39,15 +41,39 @@ export default new VueRouter({
     },    
     { 
       path: '/wcsignup', 
-      component: wcSignup 
+      component: wcSignup,
+      beforeEnter(to,from,next) {
+        if(Vue.$cookies.get("pid")!=undefined) {
+          window.location.href = "http://localhost:8080/dashboard";
+        }
+        else {
+          next();
+        }
+      }   
     },    
     { 
       path: '/signup', 
-      component: Signup,    
+      component: Signup,
+      beforeEnter(to,from,next) {
+        if(Vue.$cookies.get("pid")!=undefined) {
+          window.location.href = "http://localhost:8080/dashboard";
+        }
+        else {
+          next();
+        }
+      }      
     },
     { 
       path: '/login', 
-      component: Login,     
+      component: Login,
+      beforeEnter(to,from,next) {
+        if(Vue.$cookies.get("pid")!=undefined) {
+          window.location.href = "http://localhost:8080/dashboard";
+        }
+        else {
+          next();
+        }
+      }     
     },  
     { 
       path: '/about', 
@@ -124,7 +150,16 @@ export default new VueRouter({
           component: myworks,
           props: true
         }              
-      ]
+      ],
+      beforeEnter (to, from, next) {
+        if(Vue.$cookies.get("pid")==undefined) {
+          alert("Access Denied! Please login!");
+          window.location.href = "http://localhost:8080/login";
+        }
+        else {
+          next();
+        }
+      }
     },
     {
       path: '/forgotPassword',
