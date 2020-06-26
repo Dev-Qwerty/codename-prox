@@ -42,7 +42,7 @@
               <p class="c-r1-1">Categories:</p>
               <div v-for="n in 2" v-bind:key="n">
                 <div class="c-r1-2">
-                  <p class="c-r1-2-1">{{ sr.service.categories[0].categoryName }}</p>
+                  <p class="c-r1-2-1">{{ sr.service.categories[0].category }}</p>
                   <p class="c-r1-2-2">{{ sr.service.categories[0].quantity }}</p>
                 </div>
               </div>
