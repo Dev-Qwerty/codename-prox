@@ -89,7 +89,7 @@ export default {
     return {
       // cartArr: JSON.parse(this.$cookies.get("cart")),
       service: {
-        serviceId: 'subservice id',
+        serviceId: this.$cookies.get("sarray")._id,
         categories: JSON.parse(this.$cookies.get("cart"))
       },
       name: '',

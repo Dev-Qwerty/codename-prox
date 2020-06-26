@@ -211,9 +211,7 @@ export default {
     font-weight: bold;
     font-size: 15px;
   }
-  #Vspan {
-
-  }
+  
   .Bbottom input[type="submit"] {
     border: none;
     background-color: #000;
