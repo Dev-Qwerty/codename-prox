@@ -29,7 +29,7 @@
         </div>
         <div class="sidenav-mid">
           <router-link :to="{name: 'workrequests'}" @click.native="workreqfn">
-            <div class="sidenav-mid-one">
+            <div class="sidenav-mid-one active">
               <div class="sidenav-mid-img1"></div>
               <p>Work Requests</p>
             </div>
@@ -260,15 +260,20 @@ export default {
     grid-template-rows: 1fr 1fr 1fr 1fr;
   }
   .sidenav-mid-one {
+    color: #fff;
     background-color: #000;
     display: grid;
-    grid-template-columns: 15% 95%;
+    grid-template-columns: 10% 90%;
     padding-top: 15px;
-    padding-left: 10px;
-  }   
+    padding-left: 15%;
+  }
+  /*.sidenav-mid-one:hover {
+    cursor: pointer;
+    background-color: #000;
+    color: #fff;
+  }*/     
   .sidenav-mid-img1{
     margin-top: 3px;
-    margin-left: 18px;
     height: 15px;
     width: 15px;
     background-image: url('../../assets/Wreq.png');
@@ -278,13 +283,12 @@ export default {
   } 
   .sidenav-mid-one p {
     font-size: 15px;
-    color: #fff;
   }     
   .sidenav-mid-two {
     display: grid;
     grid-template-columns: 15% 95%;
     padding-top: 15px;
-    padding-left: 10px;
+    padding-left: 10%;
   } 
   .sidenav-mid-img2 {
     margin-top: 3px;
@@ -304,7 +308,7 @@ export default {
     display: grid;
     grid-template-columns: 15% 95%;
     padding-top: 15px;
-    padding-left: 10px;    
+    padding-left: 10%;    
   } 
   .sidenav-mid-img3 {
     margin-top: 3px;
@@ -324,7 +328,7 @@ export default {
     display: grid;
     grid-template-columns: 15% 95%;
     padding-top: 15px;
-    padding-left: 10px;        
+    padding-left: 10%;        
   } 
   .sidenav-mid-img4 {
     margin-top: 3px;
@@ -351,7 +355,7 @@ export default {
     display: grid;
     grid-template-columns: 15% 95%;
     padding-top: 15px;
-    padding-left: 10px;
+    padding-left: 10%;
   }     
   .sidenav-bottom-img1 {
     margin-top: 3px;
@@ -371,7 +375,7 @@ export default {
     display: grid;
     grid-template-columns: 15% 95%;
     padding-top: 15px;
-    padding-left: 10px;
+    padding-left: 10%;
   }     
   .sidenav-bottom-img2 {
     margin-top: 3px;
