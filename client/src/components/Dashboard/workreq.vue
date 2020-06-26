@@ -7,7 +7,7 @@
         <div v-for="sr in reqarr" v-bind:key="sr._id">
 
           <div class="ir-box sh-bottom">
-            <div class="ir-box-one sh-left" data-toggle="collapse" :href="'#cid-'+sr._id">
+            <div class="ir-box-one sh-left" data-toggle="collapse" :href="'#cid-'+sr.orderID">
               <p class="ir-box-one-one">{{ sr.service.subserviceName }}</p>
               <!--<p class="ir-box-one-two">9:30 AM, May 10, Kanjirappally</p>-->
             </div>
@@ -21,7 +21,7 @@
               <div class="ir-box-four-img"></div>
             </div>                       
           </div> 
-          <div :id="'cid-'+sr._id" class="collapse c-body  c-body-ys-sh-all">
+          <div :id="'cid-'+sr.orderID" class="collapse c-body  c-body-ys-sh-all">
             <div class="c-r">
               <p class="c-r-1">Date:</p>
               <P class="c-r-2">{{ sr.date }}</p>
@@ -88,6 +88,7 @@ export default {
     },
     acceptfn(obj) {
       let arr = obj
+      alert(JSON.stringify(arr))
       let url = 'http://localhost:3000/request/workrequest/f35ce2de4348f6943f9621bed9af307f'
       this.$http.post(url, {
         "orderId": JSON.stringify(arr.orderID),
