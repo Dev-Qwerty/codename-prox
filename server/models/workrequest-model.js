@@ -26,7 +26,7 @@ const workerRequestSchema = mongoose.Schema({
         },
         categories: [{
             _id: false,
-            categoryName: {
+            category: {
                 type: String,
                 requied: true
             },
