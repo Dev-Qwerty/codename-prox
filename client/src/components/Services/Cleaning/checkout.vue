@@ -35,7 +35,7 @@
               <input class="input-box" type="text" name="district" placeholder="District" v-model="address.district">
             </div>
             <div>
-              <input class="input-box" type="text" name="pincode" placeholder="Pincode" v-model="address.pincode">
+              <input class="input-box" type="text" name="pincode" placeholder="Pincode" v-model="address.pin">
             </div>                        
           </form>          
         </div> 
@@ -89,7 +89,7 @@ export default {
     return {
       // cartArr: JSON.parse(this.$cookies.get("cart")),
       service: {
-        serviceId: 'service id',
+        serviceId: 'subservice id',
         categories: JSON.parse(this.$cookies.get("cart"))
       },
       name: '',
@@ -98,7 +98,7 @@ export default {
         line1: '',
         line2: '',
         district: '',
-        pincode: ''
+        pin: ''
       },
       date: '',
       time: ''
@@ -116,7 +116,7 @@ export default {
           date: this.date,
           time: this.time
         }).then(response => {
-          alert(response.date)
+          alert(response.data.message)
         }).catch(error => {
           alert(error)
         })
