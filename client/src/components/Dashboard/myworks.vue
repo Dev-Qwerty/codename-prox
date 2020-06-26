@@ -28,20 +28,16 @@
         <div v-for="(sr, index) in myworksarr.upcommingWorks" :key="index">
           <div class="box sh-all">
             <div class="box-row1">
-              <p class="row1-one">{{ sr.totalAmount }}</p>
+              <p class="row1-one"><span>$</span>{{ sr.totalAmount }}</p>
               <div class="Line"></div>
             </div>
             <div class="box-row2">
-              <p class="row2-one">Kitchen Cleaning</p>
-              <p class="row2-two">Kanjirappally, Kottayam</p>
+              <p class="row2-one">{{ sr.service.subserviceName }}</p>
             </div>
             <div class="box-row3">
-              <p class="row3-one">8:30 AM</p>
-            </div>
-            <div class="box-row4">
-              <p class="row4-one">Work Details</p>
-            </div>
-          </div>
+              <p class="row3-one">{{ sr.date }}</p>
+            </div>            
+          </div>          
         </div>
       </div>
 
@@ -117,7 +113,7 @@ export default {
     grid-template-columns: 1fr 1fr 1fr;
   } 
   .box {
-    width: 250px;
+    width: 300px;
     height: 200px;
     display: grid;
     grid-template-rows: 30% 25% 30% 15%;
@@ -129,39 +125,38 @@ export default {
   }    
   .box-row1 {
     text-align: center;
+    margin-top: 10px;
   }
   .row1-one {
     text-align: center;
-    font-size: 40px;
+    font-size: 38px;
     font-weight: bold;
     margin: 0px;
   }
   .Line {
-    margin-top: -5px;
-    margin-left: 70px;
-    height: 1px;
-    width: 120px;
+    margin-top: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 2px;
+    width: 150px;
     background-color: #aaa;
   }
   .box-row2 {
     text-align: center;
+    margin-top: 20px;
   }
   .row2-one {
     font-size: 22px;
     font-weight: bold;
     margin: 0px;
   }
-  .row2-two {
-    margin-top: -6px;
-    font-size: 14px;
-    color: #aaa;
-  }
   .box-row3 {
     text-align: center;
-    padding-top: 5px;
+    margin-top: 0px;
   }
   .row3-one {
     font-size: 40px;
+    color: #aaa;
   }
   .box-row4 {
     text-align: center
