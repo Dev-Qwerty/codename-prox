@@ -48,6 +48,20 @@ app.use('/orders', orderRouter)
 app.use('/request', [parseUrl,parseJson], workerRequest)
 app.use('/auth', [parseUrl,parseJson], loginRouter)
 
+app.post('/autosuggest',[parseUrl,parseJson], async (req, res) => {
+    try {
+        let query = req.body.query;
+        let mainservice = await mainservicemodel.findOne({"$text": {"$search": query}})
+        let suggestions =  mainservice.subServices
+        suggestions.unshift(mainservice.serviceName)
+        res.send(suggestions)
+    } catch (error) {
+        let suggestions = ["Cleaning","Electronics and Appliances","Painting","Saloon","Birthday Party"]
+        res.send(suggestions)
+    }
+    
+})
+
 // version check for mobile app
 app.get('/checkserviceversion', async (req, res) => {
     let serviceVersion = req.query.serviceVersion;

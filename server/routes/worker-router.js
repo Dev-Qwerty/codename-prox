@@ -207,8 +207,8 @@ router
 		let totalEarning = 0
 		let todaysWork = []
 		let today = new Date().getFullYear().toString()+ "-" + (new Date().getMonth() + 1).toString() + "-" + new Date().getDate().toString()
-		let completedWorks = await workOrderModel.find({ workerID: id, completed: true }, 'service address date totalAmount -_id')
-		let upcommingWorks = await workOrderModel.find({ workerID: id, completed: false }, 'service address date totalAmount -_id')
+		let completedWorks = await workOrderModel.find({ workerID: id, completed: true }, 'service address date totalAmount')
+		let upcommingWorks = await workOrderModel.find({ workerID: id, completed: false }, 'service address date totalAmount')
 		for (i = 0; i < upcommingWorks.length; i++) {
 			if (upcommingWorks[i].date.localeCompare(today) == 0) {
 				todaysWork.push(upcommingWorks[i])
