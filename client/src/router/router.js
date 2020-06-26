@@ -22,6 +22,7 @@ import ForgotPassword from '@/components/ForgotPassword/FPMain.vue'
 import UpdateProfile from '@/components/UpdateProfile/UPMain.vue'
 import CompleteProfile from '@/components/CompleteProfile/CPMain.vue'
 import AddAddress from '@/components/AddAddress/AAMain.vue'
+import ConfirmEmail from '@/components/ConfirmEmail/CEMain.vue'
 
 Vue.use(VueRouter)
 
@@ -140,6 +141,10 @@ export default new VueRouter({
     {
       path: '/addAddress', 
       component: AddAddress
+    },
+    {
+      path: '/confirmEmail',
+      component: ConfirmEmail
     }           
   ]
 })
