@@ -29,15 +29,9 @@
         </div>
         <div class="sidenav-mid">
           <router-link :to="{name: 'workrequests'}" @click.native="workreqfn">
-            <div class="sidenav-mid-one">
+            <div class="sidenav-mid-one active">
               <div class="sidenav-mid-img1"></div>
               <p>Work Requests</p>
-            </div>
-          </router-link>
-          <router-link :to="{name: 'construct'}" @click.native="mfn">
-            <div class="sidenav-mid-two">
-              <div class="sidenav-mid-img2"></div>
-              <p>Pending Works</p>
             </div>
           </router-link>
           <router-link :to="{name: 'myworks'}" @click.native="myworksfn">
@@ -45,11 +39,19 @@
               <div class="sidenav-mid-img3"></div>
               <p>My Works</p>
             </div>
+          </router-link> 
+          <router-link :to="{name: ''}" @click.native="myincomefn">        
+            <div class="sidenav-mid-four">
+              <div class="sidenav-mid-img4"></div>
+              <p>My Income</p>
+            </div>
           </router-link>
-          <div class="sidenav-mid-four">
-            <div class="sidenav-mid-img4"></div>
-            <p>My Income</p>
-          </div>
+          <router-link :to="{name: 'construct'}" @click.native="calenderfn">
+            <div class="sidenav-mid-two">
+              <div class="sidenav-mid-img2"></div>
+              <p>Calender</p>
+            </div>
+          </router-link>           
         </div>
         <div class="sidenav-line"></div>
         <div class="sidenav-bottom">
@@ -98,10 +100,10 @@ export default {
       }
     }*/  
     workreqfn() {
-      this.init = "false"
+      
     },
     myworksfn() {
-      this.init = "false"
+      
     },       
     logout() {
       this.$cookies.remove("username");
@@ -160,15 +162,17 @@ export default {
     grid-template-rows: 45% 35% 20%;    
   }
   .sidenav-top-top {
-    margin-bottom: 20px;
+    margin-top: 25px;
+    margin-bottom: 0px;
     display: grid;
     grid-template-rows: 3fr 1fr 1px;
   }
   .Circle {
     padding-top: 10px;
     padding-left: 20px;
-    margin-top: 20px;
-    margin-left: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5px;
     width: 70px;
     height: 70px;
     background-color: #DBDBDB;
@@ -176,33 +180,35 @@ export default {
   }
   .circle-inside {
     font-size: 35px;
+    margin: 0 auto;    
   } 
   .profile-name {
     font-size: 18px;
-    margin-left: 80px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0px;
   }  
   .profile-underline {
     width: 58%;
     height: 1px;
-    margin-top: -17px;
-    margin-left: 50px;
+    margin-left: auto;
+    margin-right: auto;
     background-color: #aaa;
   }     
   .sidenav-top-mid {
     display: grid;
     grid-template-rows: 30px 30px; 
-    padding-left: 80px;  
-    margin-top: -5px;   
+    margin-top: 20px;   
   }
  .sidenav-top-mid-one {
     display: grid;
     grid-template-columns: 15% 95%;
-    padding-top: 15px;
-    padding-left: 10px;
+    padding-top: 0px;
+    margin-left: auto;
+    margin-right: auto;    
   }     
   .sidenav-top-mid-one-img {
     margin-top: 3px;
-    margin-left: 8px;
     height: 16px;
     width: 16px;
     background-image: url('../../assets/jobTitle.png');
@@ -211,18 +217,19 @@ export default {
     background-size: contain;    
   }   
   .job-title {
+    margin-left: 10px;
     font-size: 17px;
     color: #707070;
   } 
  .sidenav-top-mid-two {
     display: grid;
     grid-template-columns: 15% 95%;
-    padding-top: 15px;
-    padding-left: 10px;
+    margin-top: -4px;
+    margin-left: auto;
+    margin-right: auto;       
   }     
   .sidenav-top-mid-two-img {
     margin-top: 3px;
-    margin-left: 8px;
     height: 16px;
     width: 16px;
     background-image: url('../../assets/Place.png');
@@ -231,12 +238,14 @@ export default {
     background-size: contain;    
   }   
   .Place {
+    margin-left: 0px;
     font-size: 17px;
     color: #707070;
   }     
   .sidenav-top-bottom {
     margin-top: -15px;
-    margin-left: 95px;
+    margin-left: auto;
+    margin-right: auto;   
     font-size: 18px;
     /*height: 20px;
     width: 80%;
@@ -251,15 +260,20 @@ export default {
     grid-template-rows: 1fr 1fr 1fr 1fr;
   }
   .sidenav-mid-one {
+    color: #fff;
     background-color: #000;
     display: grid;
-    grid-template-columns: 15% 95%;
+    grid-template-columns: 10% 90%;
     padding-top: 15px;
-    padding-left: 10px;
-  }   
+    padding-left: 15%;
+  }
+  /*.sidenav-mid-one:hover {
+    cursor: pointer;
+    background-color: #000;
+    color: #fff;
+  }*/     
   .sidenav-mid-img1{
     margin-top: 3px;
-    margin-left: 18px;
     height: 15px;
     width: 15px;
     background-image: url('../../assets/Wreq.png');
@@ -269,13 +283,12 @@ export default {
   } 
   .sidenav-mid-one p {
     font-size: 15px;
-    color: #fff;
   }     
   .sidenav-mid-two {
     display: grid;
     grid-template-columns: 15% 95%;
     padding-top: 15px;
-    padding-left: 10px;
+    padding-left: 10%;
   } 
   .sidenav-mid-img2 {
     margin-top: 3px;
@@ -295,7 +308,7 @@ export default {
     display: grid;
     grid-template-columns: 15% 95%;
     padding-top: 15px;
-    padding-left: 10px;    
+    padding-left: 10%;    
   } 
   .sidenav-mid-img3 {
     margin-top: 3px;
@@ -315,7 +328,7 @@ export default {
     display: grid;
     grid-template-columns: 15% 95%;
     padding-top: 15px;
-    padding-left: 10px;        
+    padding-left: 10%;        
   } 
   .sidenav-mid-img4 {
     margin-top: 3px;
@@ -342,7 +355,7 @@ export default {
     display: grid;
     grid-template-columns: 15% 95%;
     padding-top: 15px;
-    padding-left: 10px;
+    padding-left: 10%;
   }     
   .sidenav-bottom-img1 {
     margin-top: 3px;
@@ -362,7 +375,7 @@ export default {
     display: grid;
     grid-template-columns: 15% 95%;
     padding-top: 15px;
-    padding-left: 10px;
+    padding-left: 10%;
   }     
   .sidenav-bottom-img2 {
     margin-top: 3px;
