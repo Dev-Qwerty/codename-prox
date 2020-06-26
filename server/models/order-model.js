@@ -30,7 +30,7 @@ const orderSchema = mongoose.Schema({
         },
         categories: [{
             _id: false,
-            categoryName: {
+            category: {
                 type: String,
                 required: true
             },

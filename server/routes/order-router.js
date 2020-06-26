@@ -5,7 +5,7 @@ const router = express.Router();
 const uniqueId = require('../misc/unique-id')
 const assignWorker = require('../misc/assign-worker')
 const moment = require('moment')
-const sendMessage = require('../misc/textmessage')
+// const sendMessage = require('../misc/textmessage')
 
 // Middleware for body parsing
 const parseUrl = express.urlencoded({ extended: false })
@@ -33,10 +33,9 @@ router
 
             // calculate total amount and category
             for (i = 0; i < req.body.service.categories.length; i++) {
-                const serviceDetails = await subserviceModel.find({ categories: { $elemMatch: { _id: req.body.service.categories[i].categoryName } } }, 'categories.$')
+                const serviceDetails = await subserviceModel.find({ categories: { $elemMatch: { _id: req.body.service.categories[i]._id } } }, 'categories.$')
                 itemAmount = serviceDetails[0].categories[0].amount * req.body.service.categories[i].quantity; // Find amount of each category
                 totalAmount = totalAmount + itemAmount;
-                req.body.service.categories[i].categoryName = serviceDetails[0].categories[0].category  // saving category name replacing categoryId in body of the request
                 serviceKeyWords.push(serviceDetails[0].categories[0].category) // add subservice category name as service key word to find worker
             }
 
@@ -45,6 +44,12 @@ router
             const service = await subserviceModel.findById(id)
             // const mainservice = await mainserviceModel.findById(service.mainserviceID, 'serviceName -_id');// Find mainservice name for sending message
             serviceKeyWords.push(service.name); // add subservice as service key word name to find worker
+
+            // Remove _id and amount from req.body.service
+            for(i=0; i<req.body.service.categories.length; i++){
+                delete req.body.service.categories[i]._id
+                delete req.body.service.categories[i].amount
+            }
 
             // create new orderrs
             newOrder.orderID = uniqueId.uniqueOrderId();
@@ -117,7 +122,7 @@ router
                 date: req.body.date,
                 time: req.body.time,
             }
-            sendMessage.sendTextMessage("worker",workerDetails,workDetails);
+            // sendMessage.sendTextMessage("worker",workerDetails,workDetails);
 
 
         } catch (error) {
