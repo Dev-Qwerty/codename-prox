@@ -16,16 +16,28 @@
             <p class="wchdn">Urban Associates</p>
             <form class="inp" action="" method="">
               <div>
-                <input class="input-box" type="email" name="uname" placeholder="Email" v-model="email">
+                <input class="input-box" type="email" name="username" placeholder="Email" v-model="email" v-validate="'email|required'">
               </div>              
               <div>
-                <input class="input-box" type="text" name="contactno" placeholder="Phone Number" v-model="phone">
+                 <span class="error-msg">{{ errors.first('username') }}</span>
               </div>
               <div>
-                <input class="input-box" type="password" name="flatname" placeholder="Password" v-model="password">
+                <input class="input-box" type="text" name="phone" placeholder="Phone Number" v-model="phone" v-validate="'min:10|required'">
+              </div>
+              <div>
+                 <span class="error-msg">{{ errors.first('phone') }}</span>
+              </div>
+              <div>
+                <input class="input-box" type="password" name="password" placeholder="Password" v-model="password" v-validate="'min:6|verify_password'">
+              </div>
+              <div>
+                 <span class="error-msg">{{ errors.first('password') }}</span>
               </div>  
               <div>
-                <input class="input-box" type="password" name="flatname" placeholder="Confirm Password" v-model="password2">
+                <input class="input-box" type="password" name="confirm_password" placeholder="Confirm Password" v-model="password2" ref="password" v-validate="'required|confirmed:password'" data-vv-as="password">
+              </div>
+              <div>
+                 <span class="error-msg" v-if="password!=password2">Passwords do not match!</span>
               </div>              
               <select name="jtitle" id="jtitle" v-model="category">
                 <option value="worker">Worker</option>
@@ -99,6 +111,20 @@ export default {
               });
           })
         }
+        else {
+           Vue.$toast.open({
+                  message: 'Please accept the terms and conditions!',
+                  type: 'error',
+                  position: 'bottom-left'
+              });
+        }
+      }
+      else {
+         Vue.$toast.open({
+                  message: 'Please check your password!',
+                  type: 'error',
+                  position: 'bottom-left'
+              });
       }
     }
   }
@@ -219,6 +245,11 @@ export default {
     color: #000;
     font-size: 14px;
     text-decoration: underline;
+  }
+  .error-msg {
+    font-size: 12px;
+    color: red;
+    font-weight: bold;
   }
 
 </style>

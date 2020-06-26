@@ -20,32 +20,38 @@
           <p class="addrheader">Address</p>
           <form class="addr" action="" method="">
             <div>
-              <input class="input-box" type="text" name="uname" placeholder="Full Name" v-model="username">
+              <input class="input-box" type="text" name="uname" placeholder="Full Name" v-model="address.name">
             </div>
             <div>
-              <input class="input-box" type="text" name="contactno" placeholder="Contact Number" v-model="password">
+              <input class="input-box" type="text" name="contactno" placeholder="Contact Number" v-model="address.number">
             </div>
             <div>
-              <input class="input-box" type="text" name="flatname" placeholder="Flat name/no." v-model="username">
+              <input class="input-box" type="text" name="flatname" placeholder="Flat name/no." v-model="address.line1">
             </div>
             <div>
-              <input class="input-box" type="text" name="saddr" placeholder="Street Address" v-model="password">
+              <input class="input-box" type="text" name="saddr" placeholder="Street Address" v-model="address.line2">
             </div>
             <div>
-              <input class="input-box" type="text" name="district" placeholder="District" v-model="username">
+              <input class="input-box" type="text" name="district" placeholder="District" v-model="address.district">
             </div>
             <div>
-              <input class="input-box" type="text" name="pincode" placeholder="Pincode" v-model="password">
+              <input class="input-box" type="text" name="pincode" placeholder="Pincode" v-model="address.pincode">
             </div>                        
           </form>          
         </div> 
         <div class="td">
-          <div>
-            <p class="tdheader">Current date and time</p>
-          </div>
-          <div>
-            <input type="datetime-local" class="tdfield" value="2018-06-12T19:30" min="2018-06-07T00:00" max="2018-06-14T00:00">
-          </div>          
+            <vc-date-picker
+              class="tdfeild"
+              v-model='date'
+              :popover="{visibility: 'click'}"
+              :input-props='{
+                placeholder: "Date",
+                readonly: true
+              }'
+              :min-date='new Date()'
+              color='grey'
+            />
+            <VueCtkDateTimePicker class="tdfeild" id="TimePicker" v-model="time" only-time=true format="hh mm a" formatted="hh mm a" noHeader=true noButton=true noLabel=true label="Time" color="black"/>
         </div> 
         <div class="btns">
           <div>
@@ -55,7 +61,7 @@
           </div>
           <div>
             <router-link class="paylaterbtn" :to="{name: 'confirm'}" @click.native="paylaterfn">
-              <input type="submit" value="Pay Later">
+              <input type="submit" value="Pay Later" @click="paylater">
             </router-link>
           </div> 
         </div>                 
@@ -69,20 +75,51 @@
 
 <script>
 import PayLaterConfirm from '@/components/Services/Cleaning/PayLaterConfirm.vue'
+import moment from 'moment'
+import VueCtkDateTimePicker from 'vue-ctk-date-time-picker';
+import 'vue-ctk-date-time-picker/dist/vue-ctk-date-time-picker.css';
 
 export default {
   name: 'checkout',
   components: {
-    PayLaterConfirm 
+    PayLaterConfirm,
+    VueCtkDateTimePicker
   },
   data() {
     return {
-      cartArr: JSON.parse(this.$cookies.get("cart"))
+      // cartArr: JSON.parse(this.$cookies.get("cart")),
+      service: {
+        serviceId: 'service id',
+        categories: JSON.parse(this.$cookies.get("cart"))
+      },
+      name: '',
+      number: '',
+      address: {
+        line1: '',
+        line2: '',
+        district: '',
+        pincode: ''
+      },
+      date: '',
+      time: ''
     }
   },
   methods: {
-    paylaterfn() {
-      /*alert(JSON.stringify(this.cartArr))*/
+    paylaterfn(){},
+    paylater() {
+       this.date = moment(this.date).format('YYYY-M-D')
+       let url = "http://localhost:3000/orders/placeorder/pay-later"
+       this.$http
+        .post(url, {
+          service: this.service,
+          address: this.address,
+          date: this.date,
+          time: this.time
+        }).then(response => {
+          alert(response.date)
+        }).catch(error => {
+          alert(error)
+        })
     }
   }
 }
@@ -159,9 +196,9 @@ export default {
     margin-top: 50px;
     display: grid;
     grid-template-columns: 35% 65%;
-  }  
-  .tdheader {
-    font-size: 18px;
+  }
+  .tdfeild {
+    width: 200px;
   }
   .btns {
     margin-top: 40px;

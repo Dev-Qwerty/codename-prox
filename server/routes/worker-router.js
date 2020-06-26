@@ -7,7 +7,7 @@ const mainserviceModel = require('../models/mainservice-model');
 const subserviceModel = require('../models/subservice-model');
 const workOrderModel = require('../models/order-model');
 const Token = require('../models/token');
-const crypt = require('../misc/crypt')
+const crypt = require('../misc/crypt');
 
 const poolData = {
 	UserPoolId: keys.cognito.userPoolId || process.env['COGNITOUSERPOOLID'],
