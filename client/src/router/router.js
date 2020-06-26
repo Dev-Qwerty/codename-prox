@@ -41,11 +41,27 @@ export default new VueRouter({
     },    
     { 
       path: '/wcsignup', 
-      component: wcSignup 
+      component: wcSignup,
+      beforeEnter(to,from,next) {
+        if(Vue.$cookies.get("pid")!=undefined) {
+          window.location.href = "http://localhost:8080/dashboard";
+        }
+        else {
+          next();
+        }
+      }   
     },    
     { 
       path: '/signup', 
-      component: Signup,    
+      component: Signup,
+      beforeEnter(to,from,next) {
+        if(Vue.$cookies.get("pid")!=undefined) {
+          window.location.href = "http://localhost:8080/dashboard";
+        }
+        else {
+          next();
+        }
+      }      
     },
     { 
       path: '/login', 
