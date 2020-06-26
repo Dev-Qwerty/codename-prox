@@ -34,22 +34,24 @@
               <p>Work Requests</p>
             </div>
           </router-link>
-          <router-link :to="{name: 'construct'}" @click.native="mfn">
-            <div class="sidenav-mid-two">
-              <div class="sidenav-mid-img2"></div>
-              <p>Pending Works</p>
-            </div>
-          </router-link>
           <router-link :to="{name: 'myworks'}" @click.native="myworksfn">
             <div class="sidenav-mid-three">
               <div class="sidenav-mid-img3"></div>
               <p>My Works</p>
             </div>
+          </router-link> 
+          <router-link :to="{name: ''}" @click.native="myincomefn">        
+            <div class="sidenav-mid-four">
+              <div class="sidenav-mid-img4"></div>
+              <p>My Income</p>
+            </div>
           </router-link>
-          <div class="sidenav-mid-four">
-            <div class="sidenav-mid-img4"></div>
-            <p>My Income</p>
-          </div>
+          <router-link :to="{name: 'construct'}" @click.native="calenderfn">
+            <div class="sidenav-mid-two">
+              <div class="sidenav-mid-img2"></div>
+              <p>Calender</p>
+            </div>
+          </router-link>           
         </div>
         <div class="sidenav-line"></div>
         <div class="sidenav-bottom">
@@ -98,10 +100,10 @@ export default {
       }
     }*/  
     workreqfn() {
-      this.init = "false"
+      
     },
     myworksfn() {
-      this.init = "false"
+      
     },       
     logout() {
       this.$cookies.remove("username");
