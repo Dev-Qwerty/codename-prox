@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <div class="top-header">
-      <p>Complete Profile Page</p>
+      <p>Confirm Email Page</p>
     </div>       
   </div>  
 </template>

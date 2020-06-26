@@ -2,7 +2,10 @@
   <div class = "box-1">
     <form action="" method="POST">
       <div>
-        <input type="text" name="code" id="code" placeholder="Enter confirmation code" v-model="code" class="input-box">
+        <input type="text" name="code" id="code" placeholder="Enter confirmation code" v-model="code" class="input-box" v-validate="'required'">
+      </div>
+      <div>
+        <span class="error-msg">{{ errors.first('code') }}</span>
       </div>
       <div>
         <input class="sbutton" type="submit" name="" value="Confirm Code" @click.prevent="checkCode()">
@@ -51,7 +54,7 @@ export default {
 <style scoped>    
   .box-1 {
     width: 45%;
-    height: 85%;
+    height: 30%;
     background-color: #fff;
     top: 11%;
     left: 28%;
@@ -109,4 +112,10 @@ export default {
     width: 16vw;
     border-radius: 10px;
   }
+  .error-msg {
+    font-size: 12px;
+    color: red;
+    font-weight: bold;
+  }
+
 </style>

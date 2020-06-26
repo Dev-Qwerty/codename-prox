@@ -8,7 +8,7 @@
 <style scoped>    
   .box {
     width: 20%;
-    height: 110px;
+    height: 130px;
     background-color: #000;
     color: #fff;
     opacity: 0.9;
