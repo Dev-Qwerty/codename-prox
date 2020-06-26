@@ -50,9 +50,32 @@
 </template>
 
 <script>
+//import Vue from 'vue';
+
 export default {
-    
-}
+  data() {
+    return {
+      wid: this.$cookies.get("id"),
+      myworksarr: []
+    }
+  },
+  methods: {
+    apiCall() {
+      let url = 'http://localhost:3000/worker/myworks/f35ce2de4348f6943f9621bed9af307f'
+      this.$http.get(url)
+      .then((response) => {
+        this.myworksarr = response.data
+        alert(JSON.stringify(this.myworksarr))
+      })
+      .catch((error) => {
+        alert(error);
+      })     
+    },   
+  },
+  created() {
+   this.apiCall()
+  }
+} 
 </script>
 
 <style scoped>
