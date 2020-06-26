@@ -23,6 +23,10 @@
           </div> 
           <div :id="'cid-'+sr.orderID" class="collapse c-body  c-body-ys-sh-all">
             <div class="c-r">
+              <p class="c-r-1">Place:</p>
+              <P class="c-r-2">{{ sr.place }}</p>
+            </div>            
+            <div class="c-r">
               <p class="c-r-1">Date:</p>
               <P class="c-r-2">{{ sr.date }}</p>
             </div>

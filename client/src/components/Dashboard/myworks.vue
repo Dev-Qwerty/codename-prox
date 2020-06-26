@@ -3,7 +3,7 @@
     <div class="mw-body">
       <p class="ty-header">Today's Work</p>
       <div class="box-wrapper">
-        <div v-for="n in 3" v-bind:key="n">
+        <div v-for="sr in myworksarr.todaysWork" v-bind:key="sr.date">
           <div class="box sh-all">
             <div class="box-row1">
               <p class="row1-one">$99</p>
@@ -25,7 +25,7 @@
 
       <p class="yd-header">Upcomming Works</p>
       <div class="box-wrapper">
-        <div v-for="n in 2" v-bind:key="n">
+        <div v-for="sr in myworksarr.upcommingWorks" v-bind:key="sr.date">
           <div class="box sh-all">
             <div class="box-row1">
               <p class="row1-one">$99</p>
@@ -47,7 +47,7 @@
 
       <p class="yd-header">Completed Works</p>
       <div class="box-wrapper">
-        <div v-for="n in 2" v-bind:key="n">
+        <div v-for="sr in myworksarr.todaysWorks" v-bind:key="sr.date">
           <div class="box sh-all">
             <div class="box-row1">
               <p class="row1-one">$99</p>
@@ -87,7 +87,6 @@ export default {
       this.$http.get(url)
       .then((response) => {
         this.myworksarr = response.data
-        alert(JSON.stringify(this.myworksarr))
       })
       .catch((error) => {
         alert(error);
