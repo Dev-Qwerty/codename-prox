@@ -10,15 +10,15 @@
       </div>
     </div> -->
     
-    <div class="Grid4">
+    <div  class="Grid4">
       <div class="Grid4-inner">
-        <input type="text" @blur="showtable=false" @click="selectService" @keyup="autosuggest" v-model="keyword" class="Grid4-box1" placeholder="Search services">
+        <input type="text" @click="showSuggest = true" @keyup="autosuggest" v-model="keyword" class="Grid4-box1" placeholder="Search services">
         <!-- <input type="submit" value="search" class="Grid4-box2"> -->
       </div>
-      <div class="Grid4-inner2" v-show="showtable">
-        <p v-if="!this.keyword && showtable">Most searched services</p>
+      <div @mouseleave="showSuggest=false" class="Grid4-inner2" v-show="showSuggest">
+        <p v-if="!this.keyword && showSuggest">Most searched services</p>
         <div v-for="suggestion in suggestions" :key="suggestion">
-          <p>{{ suggestion }}</p>
+          <p @click="showService(suggestion)">{{ suggestion }}</p>
         </div>  
       </div>
     </div>
@@ -32,7 +32,7 @@ export default {
     return {
       keyword: '',
       suggestions: [],
-      showtable: false
+      showSuggest: false
     }
   },
   methods: {
@@ -48,8 +48,15 @@ export default {
           })
       },300)
     },
-    selectService(){
-      this.showtable = true
+    showService(service){
+      let serviceroute = "";
+      if(this.keyword == ""){
+       serviceroute = service.split(" ").join("-").toLowerCase();
+      }else {
+       serviceroute = this.suggestions[0].split(" ").join("-").toLowerCase();
+      }
+      this.showSuggest = false;
+      window.location.href = "http://localhost:8080/services/"+serviceroute;
     }
   },
   created: function(){
