@@ -207,8 +207,8 @@ router
 		let totalEarning = 0
 		let todaysWork = []
 		let today = new Date().getFullYear().toString()+ "-" + (new Date().getMonth() + 1).toString() + "-" + new Date().getDate().toString()
-		let completedWorks = await workOrderModel.find({ workerID: id, completed: true }, 'service address date totalAmount -_id')
-		let upcommingWorks = await workOrderModel.find({ workerID: id, completed: false }, 'service address date totalAmount -_id')
+		let completedWorks = await workOrderModel.find({ workerID: id, completed: true }, 'service address date totalAmount')
+		let upcommingWorks = await workOrderModel.find({ workerID: id, completed: false }, 'service address date totalAmount')
 		for (i = 0; i < upcommingWorks.length; i++) {
 			if (upcommingWorks[i].date.localeCompare(today) == 0) {
 				todaysWork.push(upcommingWorks[i])
@@ -224,5 +224,20 @@ router
 			res.send({name: result.name, type: result.service, rating: result.rating, location: result.address.district, profile: result.name.charAt(0)})
 		})
 	})
+
+	router.post('/confirmEmail', (req, res) => {
+		const cognitoUser = new AmazonCognitoIdentity.CognitoUser({
+		  Username: req.body.email,
+		  Pool: workerPool
+		})
+		const confirmationCode = req.body.code;
+		cognitoUser.confirmRegistration(confirmationCode, true, function (err, result) {
+		  if (err) {
+			res.send({ status: "Error", error: err });
+		  }
+		  res.send({ status: "Success", res: result });
+		})
+	  })
+	  
 
 module.exports = router;

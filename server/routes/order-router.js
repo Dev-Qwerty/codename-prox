@@ -26,105 +26,118 @@ router
     .route('/placeorder/pay-later')
     .post([parseUrl,parseJson], async (req, res) => {
         try {
-            global.totalAmount = 0;  // total amount variable
-            global.newOrder = new orderModel;  // create new order instance
-            let serviceKeyWords = []   // subservice and category name to find corresponding worker
-
-
-            // calculate total amount and category
-            for (i = 0; i < req.body.service.categories.length; i++) {
-                const serviceDetails = await subserviceModel.find({ categories: { $elemMatch: { _id: req.body.service.categories[i]._id } } }, 'categories.$')
-                itemAmount = serviceDetails[0].categories[0].amount * req.body.service.categories[i].quantity; // Find amount of each category
-                totalAmount = totalAmount + itemAmount;
-                serviceKeyWords.push(serviceDetails[0].categories[0].category) // add subservice category name as service key word to find worker
-            }
-
-            // Find subservice details
-            const id = req.body.service.serviceId
-            const service = await subserviceModel.findById(id)
-            // const mainservice = await mainserviceModel.findById(service.mainserviceID, 'serviceName -_id');// Find mainservice name for sending message
-            serviceKeyWords.push(service.name); // add subservice as service key word name to find worker
-
-            // Remove _id and amount from req.body.service
-            for(i=0; i<req.body.service.categories.length; i++){
-                delete req.body.service.categories[i]._id
-                delete req.body.service.categories[i].amount
-            }
-
-            // create new orderrs
-            newOrder.orderID = uniqueId.uniqueOrderId();
-            newOrder.userID = "adjfne3";   // TODO : save original userid
-            newOrder.date = req.body.date;
-            newOrder.service.subserviceName = service.name;
-            newOrder.service.categories = req.body.service.categories;
-            newOrder.totalAmount = totalAmount;
-            newOrder.paid = false;
-            newOrder.address = req.body.address;
-            newOrder.time = req.body.time;
-
-            newOrder.save();
-            res.json({ "message": "Order placed succesfully" });
-
-
-            // function call to find worker for job assigning 
-            let assignedWorker = await assignWorker.assignWorker(serviceKeyWords, req.body.address.pin, newOrder.orderID);
-
-
-            // Create work request
-            let newWorkRequest = new workRequestModel;
-            newWorkRequest.requestID = uniqueId.uniqueRequestId();
-            newWorkRequest.orderID = newOrder.orderID;
-            newWorkRequest.workerID = assignedWorker;
-            newWorkRequest.service = newOrder.service;
-            newWorkRequest.place = req.body.address.line2;
-            newWorkRequest.amount = newOrder.totalAmount;
-            newWorkRequest.date = req.body.date;
-            newWorkRequest.time = req.body.time;
-
-            // Find dueDate
-            let today = new Date() // Find today's date
-            let OrderDate = new Date(newOrder.date) // Order date
-            let hour = moment().hour() // Curent time
-            //  hour = ((hour + 11) % 12 + 1); // convert to 12hr
-            let dueDate = new Date() // Current time for setting dueDate
-            
-            
-            if(today.getDate() == OrderDate.getDate()){
-                if(hour>=0 && hour <=6){ 
-                    //set time = 7:30 AM
-                    dueDate = moment(dueDate).set({hour:7,minute:30,second:0,millisecond:0});
-                }else{
-                    // set time as current time + 15 min
-                    dueDate = moment(dueDate).add(15, 'minutes');
+            let completed = true
+            if(!req.body.service.serviceId || !req.body.address.line1 || !req.body.address.line2 || !req.body.address.district || !req.body.address.pin || !req.body.date || !req.body.time || req.body.service.categories == 0 ){
+                completed = false
+            }else{
+                for( i = req.body.service.categories.length; i > 0 ; i--){
+                   
+                    if(!req.body.service.categories[i-1].quantity || !req.body.service.categories[i-1]._id || !req.body.service.categories[i-1].category || !req.body.service.categories[i-1].amount ){
+                        completed = false
+                    }
                 }
-            }else {
-                if(hour>=0 && hour <= 6){
-                    // set time = 7:30 AM of current day
-                    dueDate = moment(dueDate).set({hour:7,minute:30,second:0,millisecond:0});
-                }else if(hour>=22 && hour <24){
-                    // set time = 7:30 AM of next day
-                    dueDate = moment().add(1, 'days');
-                    dueDate = moment(dueDate).set({hour:7,minute:30,second:0,millisecond:0});
+            }
+            if(completed){
+                global.totalAmount = 0;  // total amount variable
+                global.newOrder = new orderModel;  // create new order instance
+                let serviceKeyWords = []   // subservice and category name to find corresponding worker
+
+
+                // calculate total amount and category
+                for (i = 0; i < req.body.service.categories.length; i++) {
+                    const serviceDetails = await subserviceModel.find({ categories: { $elemMatch: { _id: req.body.service.categories[i]._id } } }, 'categories.$')
+                    itemAmount = serviceDetails[0].categories[0].amount * req.body.service.categories[i].quantity; // Find amount of each category
+                    totalAmount = totalAmount + itemAmount;
+                    serviceKeyWords.push(serviceDetails[0].categories[0].category) // add subservice category name as service key word to find worker
+                }
+
+                // Find subservice details
+                const id = req.body.service.serviceId
+                const service = await subserviceModel.findById(id)
+                // const mainservice = await mainserviceModel.findById(service.mainserviceID, 'serviceName -_id');// Find mainservice name for sending message
+                serviceKeyWords.push(service.name); // add subservice as service key word name to find worker
+
+                // Remove _id and amount from req.body.service
+                for(i=0; i<req.body.service.categories.length; i++){
+                    delete req.body.service.categories[i]._id
+                    delete req.body.service.categories[i].amount
+                }
+
+                // create new orderrs
+                newOrder.orderID = uniqueId.uniqueOrderId();
+                newOrder.userID = "adjfne3";   // TODO : save original userid
+                newOrder.date = req.body.date;
+                newOrder.service.subserviceName = service.name;
+                newOrder.service.categories = req.body.service.categories;
+                newOrder.totalAmount = totalAmount;
+                newOrder.paid = false;
+                newOrder.address = req.body.address;
+                newOrder.time = req.body.time;
+
+                newOrder.save();
+                res.json({ "message": "Order placed succesfully" });
+
+
+                // function call to find worker for job assigning 
+                let assignedWorker = await assignWorker.assignWorker(serviceKeyWords, req.body.address.pin, newOrder.orderID);
+
+
+                // Create work request
+                let newWorkRequest = new workRequestModel;
+                newWorkRequest.requestID = uniqueId.uniqueRequestId();
+                newWorkRequest.orderID = newOrder.orderID;
+                newWorkRequest.workerID = assignedWorker;
+                newWorkRequest.service = newOrder.service;
+                newWorkRequest.place = req.body.address.line2;
+                newWorkRequest.amount = newOrder.totalAmount;
+                newWorkRequest.date = req.body.date;
+                newWorkRequest.time = req.body.time;
+
+                // Find dueDate
+                let today = new Date() // Find today's date
+                let OrderDate = new Date(newOrder.date) // Order date
+                let hour = moment().hour() // Curent time
+                //  hour = ((hour + 11) % 12 + 1); // convert to 12hr
+                let dueDate = new Date() // Current time for setting dueDate
+                
+                
+                if(today.getDate() == OrderDate.getDate()){
+                    if(hour>=0 && hour <=6){ 
+                        //set time = 7:30 AM
+                        dueDate = moment(dueDate).set({hour:7,minute:30,second:0,millisecond:0});
+                    }else{
+                        // set time as current time + 15 min
+                        dueDate = moment(dueDate).add(15, 'minutes');
+                    }
                 }else {
-                    // set time as current time + 30 min
-                    dueDate = moment(dueDate).add(30, 'minutes');
+                    if(hour>=0 && hour <= 6){
+                        // set time = 7:30 AM of current day
+                        dueDate = moment(dueDate).set({hour:7,minute:30,second:0,millisecond:0});
+                    }else if(hour>=22 && hour <24){
+                        // set time = 7:30 AM of next day
+                        dueDate = moment().add(1, 'days');
+                        dueDate = moment(dueDate).set({hour:7,minute:30,second:0,millisecond:0});
+                    }else {
+                        // set time as current time + 30 min
+                        dueDate = moment(dueDate).add(30, 'minutes');
+                    }
                 }
+
+                newWorkRequest.dueDate = dueDate;
+                newWorkRequest.save();
+
+                //Find worker name and number
+                const workerDetails = await workerModel.findOne({workerID: assignedWorker},'name phoneNo -_id');
+                workDetails = {
+                    mainserviceName: service.name,
+                    place: req.body.address.line2,
+                    date: req.body.date,
+                    time: req.body.time,
+                }
+                // sendMessage.sendTextMessage("worker",workerDetails,workDetails);
+            }else {
+                res.json({ "message": "failed to place order" });
             }
-
-            newWorkRequest.dueDate = dueDate;
-            newWorkRequest.save();
-
-            //Find worker name and number
-            const workerDetails = await workerModel.findOne({workerID: assignedWorker},'name phoneNo -_id');
-            workDetails = {
-                mainserviceName: service.name,
-                place: req.body.address.line2,
-                date: req.body.date,
-                time: req.body.time,
-            }
-            // sendMessage.sendTextMessage("worker",workerDetails,workDetails);
-
-
         } catch (error) {
             // TODO : If error is duplicate orderid create new orderid and save that order to database
             console.log(error)

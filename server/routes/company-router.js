@@ -146,6 +146,20 @@ router.post('/forgotPassword', (req,res) => {
       res.send({name: result.name, profile: result.name.charAt(0)}) //To Do: after company dashboard is ready
     })
   })
+
+  router.post('/confirmEmail', (req, res) => {
+		const cognitoUser = new AmazonCognitoIdentity.CognitoUser({
+		  Username: req.body.email,
+		  Pool: companyPool
+		})
+		const confirmationCode = req.body.code;
+		cognitoUser.confirmRegistration(confirmationCode, true, function (err, result) {
+		  if (err) {
+			res.send({ status: "Error", error: err });
+		  }
+		  res.send({ status: "Success", res: result });
+		})
+	  })
   
 
 

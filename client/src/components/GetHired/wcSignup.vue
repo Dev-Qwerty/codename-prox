@@ -93,7 +93,9 @@ export default {
           })
           .then(response=> {
             if(response.data.status == "Success") {
-              window.location.href = "http://localhost:8080/login";
+              localStorage.setItem("email", this.email);
+              localStorage.setItem("category", this.category);
+              window.location.href = "http://localhost:8080/confirmEmail";
             }
             else {
               Vue.$toast.open({

@@ -14,5 +14,7 @@ const mainserviceSchema = mongoose.Schema({
     }
 })
 
+mainserviceSchema.index({"$**":"text"})
+
 const mainservice = mongoose.model('mainservices', mainserviceSchema);
 module.exports = mainservice;
