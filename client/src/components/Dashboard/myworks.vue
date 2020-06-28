@@ -17,7 +17,24 @@
               <p class="row3-one">8:30 AM</p>
             </div>
             <div class="box-row4">
-              <p class="row4-one">Work Details</p>
+              <div class="row4-one">
+                <popper
+                  trigger="clickToToggle"
+                  :options="{
+                    placement: 'right',
+                    modifiers: { offset: { offset: '0,10px' } }
+                  }">
+                  <div class="popper">
+                    <p>popper content</p>
+                    <p>popper content</p>
+                    <p>popper content</p>
+                  </div>
+              
+                  <button slot="reference">
+                    Work Details
+                  </button>
+                </popper>                 
+              </div>  
             </div>
           </div>
         </div>
@@ -38,39 +55,40 @@
               <p class="row3-one">{{ sr.date }}</p>
             </div>            
           </div>-->          
-          <div class="box sh-all">
-            <div class="box-row1">
-              <p class="row1-one">$99</p>
-              <div class="Line"></div>
-            </div>
-            <div class="box-row2">
-              <p class="row2-one">Kitchen Cleaning</p>
-              <p class="row2-two">Kanjirappally, Kottayam</p>
-            </div>
-            <div class="box-row3">
-              <p class="row3-one">8:30 AM</p>
-            </div>
-            <div class="box-row4">
-              <!--<button class="row4-one">Work Details</button>-->
-              <div class="row4-one">
-                <popper
-                  trigger="clickToOpen"
-                  :options="{
-                    placement: 'right',
-                    modifiers: { offset: { offset: '0,10px' } }
-                  }">
-                  <div class="popper">
-                    <p>popper content</p>
-                    <p>popper content</p>
-                    <p>popper content</p>
-                  </div>
-              
-                  <button slot="reference">
-                    Work Details
-                  </button>
-                </popper>                 
-              </div>                        
-
+          <div class="box">
+            <div class=""> 
+              <div class="box-row1">
+                <p class="row1-one"><span>$</span>{{ sr.totalAmount }}</p>
+                <div class="Line"></div>
+              </div>
+              <div class="box-row2">
+                <p class="row2-one">{{ sr.service.subserviceName }}</p>
+                <p class="row2-two">Kanjirappally, Kottayam</p>
+              </div>
+              <div class="box-row3">
+                <p class="row3-one">{{ sr.date }}</p>
+              </div>
+              <div class="box-row4">
+                <div class="row4-one">
+                  <popper
+                    trigger="clickToToggle"
+                    :options="{
+                      placement: 'right',
+                      modifiers: { offset: { offset: '0,10px' } }
+                    }">
+                    <div class="popper">
+                      <p class="row2-one">{{ sr.service.subserviceName }}</p>
+                      <p class="row1-one"><span>$</span>{{ sr.totalAmount }}</p>
+                      <p>popper content</p>
+                      <p>popper content</p>
+                    </div>
+                
+                    <button slot="reference">
+                      Details
+                    </button>
+                  </popper>                 
+                </div>                        
+              </div>
             </div>
           </div>          
         </div>
@@ -142,7 +160,7 @@ export default {
   .mw-body {
     padding-top: 10px;
     padding-left: 50px;
-    height: 1500px;
+    height: 2000px;
   }
   .ty-header {
     font-weight: bold;
@@ -164,17 +182,15 @@ export default {
     background-color: #fff;
     border: 1px solid #F5F5F5; 
     margin-bottom: 30px;
-  } 
-  .sh-all {
-    box-shadow: 0 0 5px #DBDBDB;
-  }    
+    box-shadow: -5px 5px 5px #DBDBDB;
+  }     
   .box-row1 {
     text-align: center;
     margin-top: 10px;
   }
   .row1-one {
     text-align: center;
-    font-size: 38px;
+    font-size: 25px;
     font-weight: bold;
     margin: 0px;
   }
@@ -182,31 +198,32 @@ export default {
     margin-top: 0px;
     margin-left: auto;
     margin-right: auto;
-    height: 2px;
+    height: 1px;
     width: 150px;
     background-color: #aaa;
   }
   .box-row2 {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 10px;
   }
   .row2-one {
-    font-size: 22px;
+    font-size: 21px;
     font-weight: bold;
     margin: 0px;
   }
   .box-row3 {
     text-align: center;
-    margin-top: 15px;
+    margin-top: -10px;
   }
   .row3-one {
-    font-size: 40px;
+    font-size: 30px;
     color: #aaa;
   }
   .box-row4 {
     text-align: center
   }
   .row4-one {
+    margin-top: -5px;
     font-size: 14px;
   }
   .yd-header {
@@ -218,8 +235,8 @@ export default {
   .popper {
     background-color: #000;
     color: #fff;
-    width: 200px;
-    height: 200px;
+    width: 350px;
+    height: 300px;
     padding: 10px;
     border: none;
   }
