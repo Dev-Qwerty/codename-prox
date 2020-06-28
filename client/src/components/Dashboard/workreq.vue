@@ -109,7 +109,8 @@ export default {
               message: response.data,
               type: 'success',
               position: 'top-right'
-            });          
+            });  
+            window.location.reload();        
           } else {
             Vue.$toast.open({
               message: "Something went wrong",
@@ -139,7 +140,8 @@ export default {
               message: response.data,
               type: 'success',
               position: 'top-right'
-            });          
+            });  
+            window.location.reload();        
           } else {
             Vue.$toast.open({
               message: "Something went wrong",
