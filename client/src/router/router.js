@@ -25,6 +25,8 @@ import CompleteProfile from '@/components/CompleteProfile/CPMain.vue'
 import AddAddress from '@/components/AddAddress/AAMain.vue'
 import ConfirmEmail from '@/components/ConfirmEmail/CEMain.vue'
 import { isNullOrUndefined } from 'util';
+import Electronics from '@/components/Services/Electronics/Electronics'
+import Ecmodal from '@/components/Services/Electronics/Ecmodal'
 
 Vue.use(VueRouter)
 
@@ -92,9 +94,21 @@ export default new VueRouter({
       component: Cleaning,    
       children: [
         {
-          path: 'modal',
-          name: 'modal',
+          path: 'cmodal',
+          name: 'cmodal',
           component: Cmodal,
+          props: true
+        },       
+      ]
+    },
+    { 
+      path: '/services/electronics-and-appliances', 
+      component: Electronics,    
+      children: [
+        {
+          path: 'ecmodal',
+          name: 'ecmodal',
+          component: Ecmodal,
           props: true
         },       
       ]
