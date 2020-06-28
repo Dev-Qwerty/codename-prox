@@ -147,25 +147,75 @@
 
       <p class="yd-header">Completed Works</p>
       <div class="box-wrapper">
-        <div v-for="(sr, index) in myworksarr.completedWorks" :key="index">
-          <div class="box sh-all">
-            <div class="box-row1">
-              <p class="row1-one">$99</p>
-              <div class="Line"></div>
+        <div v-for="(sr, index) in myworksarr.completedWorks" :key="index">       
+          <div class="box">
+            <div class=""> 
+              <div class="box-row1">
+                <p class="row1-one"><span>$</span>{{ sr.totalAmount }}</p>
+                <div class="Line"></div>
+              </div>
+              <div class="box-row2">
+                <p class="row2-one">{{ sr.service.subserviceName }}</p>
+                <p class="row2-two">{{ sr.address.line2 }}, {{ sr.address.district }}</p>
+              </div>
+              <div class="box-row3">
+                <p class="row3-one">{{ sr.date }}</p>
+              </div>
+              <div class="box-row4">
+                <div class="row4-one">
+                  <popper
+                    trigger="clickToToggle"
+                    :options="{
+                      placement: 'right',
+                      modifiers: { offset: { offset: '0,10px' } }
+                    }">
+                    <div class="popper">
+                      <div class="c-r">
+                        <p class="c-r-1">Service:</p>
+                        <P class="c-r-2">{{ sr.service.subserviceName }}</p>
+                      </div>            
+                      <div class="c-r">
+                        <p class="c-r-1">Date:</p>
+                        <P class="c-r-2">{{ sr.date }}</p>
+                      </div>
+                      <div class="c-r">
+                        <p class="c-r-1">Time:</p>
+                        <P class="c-r-2">04: 00 AM</p>
+                      </div>
+                      <div class="c-r">
+                        <p class="c-r-1">Total Amount:</p>
+                        <P class="c-r-2">{{ sr.totalAmount }}</p>
+                      </div> 
+                      <div  class="c-r1">
+                        <p class="c-r1-hding">Adderss:</p>
+                        <div class="c-r1-1">
+                          <p class="">{{ sr.address.lin1 }}</p>
+                          <p class="">{{ sr.address.lin2 }}</p>
+                          <p class="">{{ sr.address.district }}</p>
+                          <p class="">{{ sr.address.pin }}</p>
+                        </div>                         
+                      </div>
+                      <div class="c-r2">
+                        <p class="c-r2-hding">Categories:</p>
+                        <div v-for="(srq, index) in sr.service.categories" :key="index">
+                            <div class="c-r2-1">
+                              <p class="c-r2-1-1">{{ srq.category }}</p>
+                              <p class="c-r2-1-2">{{ srq.quantity }}</p>
+                            </div>                                 
+                        </div>
+                      </div>                                           
+                    </div>
+                
+                    <button slot="reference" class="popper-btn">
+                      DETAILS
+                    </button>
+                  </popper>                 
+                </div>                        
+              </div>
             </div>
-            <div class="box-row2">
-              <p class="row2-one">Kitchen Cleaning</p>
-              <p class="row2-two">Kanjirappally, Kottayam</p>
-            </div>
-            <div class="box-row3">
-              <p class="row3-one">8:30 AM</p>
-            </div>
-            <div class="box-row4">
-              <p class="row4-one">Work Details</p>
-            </div>
-          </div>
+          </div>          
         </div>
-      </div>      
+      </div>     
 
     </div>
   </div>
