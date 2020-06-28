@@ -160,7 +160,22 @@ router.post('/forgotPassword', (req,res) => {
 		  res.send({ status: "Success", res: result });
 		})
 	  })
-  
+    
+    router.post('/getCompleteProfile/:id', (req,res) => {
+      const id = crypt.decrypt(req.params.id);
+      const token = req.body.token;
+      Token.findOne({token: token},(err,result) => {
+        if(result.length == 0) {
+          res.send({status: "Error!", code: "Invalid token!"});
+        }
+        else {
+          Company.findOne({companyID: id}, (err,results) => {
+            res.send(results);
+          })
+        }
+      })
+    })
+    
 
 
 module.exports = router;
