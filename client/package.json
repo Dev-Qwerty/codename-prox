@@ -15,7 +15,6 @@
     "v-calendar": "^1.0.8",
     "vee-validate": "^2.2.15",
     "vue": "^2.6.10",
-    "vue-autosuggest": "^2.2.0",
     "vue-cookies": "^1.7.0",
     "vue-cryptojs": "^2.1.4",
     "vue-ctk-date-time-picker": "^2.5.0",
