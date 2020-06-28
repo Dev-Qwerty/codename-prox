@@ -4,10 +4,10 @@
       <div class="incomming-req">
         <p class="ir-header">Incomming Requests</p>
 
-        <div v-for="sr in reqarr" v-bind:key="sr._id">
+        <div v-for="sr in reqarr" v-bind:key="sr.orderID">
 
           <div class="ir-box sh-bottom">
-            <div class="ir-box-one sh-left" data-toggle="collapse" :href="'#cid-'+sr.orderID">
+            <div class="ir-box-one sh-left" data-toggle="collapse" :href="'#cid-'+sr.requestID">
               <p class="ir-box-one-one">{{ sr.service.subserviceName }}</p>
               <!--<p class="ir-box-one-two">9:30 AM, May 10, Kanjirappally</p>-->
             </div>
@@ -21,7 +21,7 @@
               <div class="ir-box-four-img"></div>
             </div>                       
           </div> 
-          <div :id="'cid-'+sr.orderID" class="collapse c-body  c-body-ys-sh-all">
+          <div :id="'cid-'+sr.requestID" class="collapse c-body  c-body-ys-sh-all">
             <div class="c-r">
               <p class="c-r-1">Place:</p>
               <P class="c-r-2">{{ sr.place }}</p>
@@ -43,12 +43,12 @@
               <P class="c-r-2">{{ sr.amount }}</p>
             </div>
             <div class="c-r1">
-              <p class="c-r1-1">Categories:</p>
-              <div v-for="n in 2" v-bind:key="n">
-                <div class="c-r1-2">
-                  <p class="c-r1-2-1">{{ sr.service.categories[0].category }}</p>
-                  <p class="c-r1-2-2">{{ sr.service.categories[0].quantity }}</p>
-                </div>
+              <p class="c-r1-hding">Categories:</p>
+              <div v-for="(srq, index) in sr.service.categories" :key="index">
+                  <div class="c-r1-1">
+                    <p class="c-r1-1-1">{{ srq.category }}</p>
+                    <p class="c-r1-1-2">{{ srq.quantity }}</p>
+                  </div>                                 
               </div>
             </div>                       
           </div>   
@@ -59,9 +59,11 @@
       <div class="your-schedule">
         <p class="ys-header">Your Schedule</p>
         <div class="ys-box ys-sh-all">
-          <div v-for="sr in reqarr" v-bind:key="sr._id">
-            <p class="ys-box-one">{{ sr.date }}  {{ sr.time }}</p>
-            <p class="ys-box-two">{{ sr.service.subserviceName }}</p>
+          <div v-for="sr in reqarr" v-bind:key="sr.orderID">
+            <div class="ys-box-inwrapper">
+              <p class="ys-box-one">{{ sr.date }}  {{ sr.time }}</p>
+              <p class="ys-box-two">{{ sr.service.subserviceName }}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -145,7 +147,7 @@ export default {
   <style scoped>
   .wr-grid {
     width: 100%;
-    height: 676px;
+    height: 1500px;
     display: grid;
     grid-template-columns: 2fr 1fr;
   }
@@ -245,19 +247,19 @@ export default {
     font-size: 15px;
     margin-left: 8px;
   }
-  .c-r1-1 {
+  .c-r1-hding {
     font-size: 15px;
     font-weight: bold;
   }
-  .c-r1-2 {
+  .c-r1-1 {
     font-size: 15px;
     margin-left: 20px;
     display: flex;
   }
-  .c-r1-2-1 {
+  .c-r1-1-1 {
 
   }
-  .c-r1-2-2 {
+  .c-r1-1-2 {
     margin-left: 10px;
   }
   .your-schedule {
@@ -272,16 +274,18 @@ export default {
   }  
   .ys-box {
     width: 80%;
-    height: 300px;
     background-color: #fff;
-    padding: 10px;
+    padding: 20px;
   }
   .ys-sh-all {
     box-shadow: 0 0 5px #DBDBDB;
+  }
+  .ys-box-inwrapper {
+    margin-bottom: 15px;
   } 
   .ys-box-one {
     font-size: 15px;
-    margin-bottom: 5px;
+    margin-bottom: 2px;
     text-decoration: underline;
   }
   .ys-box-two {
