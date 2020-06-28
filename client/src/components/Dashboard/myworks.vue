@@ -3,58 +3,7 @@
     <div class="mw-body">
       <p class="ty-header">Today's Work</p>    
       <div class="box-wrapper">
-        <div v-for="(sr, index) in myworksarr.todaysWork" :key="index">
-          <div class="box sh-all">
-            <div class="box-row1">
-              <p class="row1-one">$99</p>
-              <div class="Line"></div>
-            </div>
-            <div class="box-row2">
-              <p class="row2-one">Kitchen Cleaning</p>
-              <p class="row2-two">Kanjirappally, Kottayam</p>
-            </div>
-            <div class="box-row3">
-              <p class="row3-one">8:30 AM</p>
-            </div>
-            <div class="box-row4">
-              <div class="row4-one">
-                <popper
-                  trigger="clickToToggle"
-                  :options="{
-                    placement: 'right',
-                    modifiers: { offset: { offset: '0,10px' } }
-                  }">
-                  <div class="popper">
-                    <p>popper content</p>
-                    <p>popper content</p>
-                    <p>popper content</p>
-                  </div>
-              
-                  <button slot="reference">
-                    Work Details
-                  </button>
-                </popper>                 
-              </div>  
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <p class="yd-header">Upcomming Works</p>
-      <div class="box-wrapper">
-        <div v-for="(sr, index) in myworksarr.upcommingWorks" :key="index">
-          <!--<div class="box sh-all">
-            <div class="box-row1">
-              <p class="row1-one"><span>$</span>{{ sr.totalAmount }}</p>
-              <div class="Line"></div>
-            </div>
-            <div class="box-row2">
-              <p class="row2-one">{{ sr.service.subserviceName }}</p>
-            </div>
-            <div class="box-row3">
-              <p class="row3-one">{{ sr.date }}</p>
-            </div>            
-          </div>-->          
+        <div v-for="(sr, index) in myworksarr.todaysWork" :key="index">       
           <div class="box">
             <div class=""> 
               <div class="box-row1">
@@ -63,7 +12,7 @@
               </div>
               <div class="box-row2">
                 <p class="row2-one">{{ sr.service.subserviceName }}</p>
-                <p class="row2-two">Kanjirappally, Kottayam</p>
+                <p class="row2-two">{{ sr.address.line2 }}, {{ sr.address.district }}</p>
               </div>
               <div class="box-row3">
                 <p class="row3-one">{{ sr.date }}</p>
@@ -77,10 +26,112 @@
                       modifiers: { offset: { offset: '0,10px' } }
                     }">
                     <div class="popper">
-                      <p class="row2-one">{{ sr.service.subserviceName }}</p>
-                      <p class="row1-one"><span>$</span>{{ sr.totalAmount }}</p>
-                      <p>popper content</p>
-                      <p>popper content</p>
+                      <div class="c-r">
+                        <p class="c-r-1">Service:</p>
+                        <P class="c-r-2">{{ sr.service.subserviceName }}</p>
+                      </div>            
+                      <div class="c-r">
+                        <p class="c-r-1">Date:</p>
+                        <P class="c-r-2">{{ sr.date }}</p>
+                      </div>
+                      <div class="c-r">
+                        <p class="c-r-1">Time:</p>
+                        <P class="c-r-2">04: 00 AM</p>
+                      </div>
+                      <div class="c-r">
+                        <p class="c-r-1">Total Amount:</p>
+                        <P class="c-r-2">{{ sr.totalAmount }}</p>
+                      </div> 
+                      <div  class="c-r1">
+                        <p class="c-r1-hding">Adderss:</p>
+                        <div class="c-r1-1">
+                          <p class="">{{ sr.address.lin1 }}</p>
+                          <p class="">{{ sr.address.lin2 }}</p>
+                          <p class="">{{ sr.address.district }}</p>
+                          <p class="">{{ sr.address.pin }}</p>
+                        </div>                         
+                      </div>
+                      <div class="c-r2">
+                        <p class="c-r2-hding">Categories:</p>
+                        <div v-for="(srq, index) in sr.service.categories" :key="index">
+                            <div class="c-r2-1">
+                              <p class="c-r2-1-1">{{ srq.category }}</p>
+                              <p class="c-r2-1-2">{{ srq.quantity }}</p>
+                            </div>                                 
+                        </div>
+                      </div>                                           
+                    </div>
+                
+                    <button slot="reference" class="popper-btn">
+                      DETAILS
+                    </button>
+                  </popper>                 
+                </div>                        
+              </div>
+            </div>
+          </div>          
+        </div>
+      </div>
+
+      <p class="yd-header">Upcomming Works</p>
+      <div class="box-wrapper">
+        <div v-for="(sr, index) in myworksarr.upcommingWorks" :key="index">       
+          <div class="box">
+            <div class=""> 
+              <div class="box-row1">
+                <p class="row1-one"><span>$</span>{{ sr.totalAmount }}</p>
+                <div class="Line"></div>
+              </div>
+              <div class="box-row2">
+                <p class="row2-one">{{ sr.service.subserviceName }}</p>
+                <p class="row2-two">{{ sr.address.line2 }}, {{ sr.address.district }}</p>
+              </div>
+              <div class="box-row3">
+                <p class="row3-one">{{ sr.date }}</p>
+              </div>
+              <div class="box-row4">
+                <div class="row4-one">
+                  <popper
+                    trigger="clickToToggle"
+                    :options="{
+                      placement: 'right',
+                      modifiers: { offset: { offset: '0,10px' } }
+                    }">
+                    <div class="popper">
+                      <div class="c-r">
+                        <p class="c-r-1">Service:</p>
+                        <P class="c-r-2">{{ sr.service.subserviceName }}</p>
+                      </div>            
+                      <div class="c-r">
+                        <p class="c-r-1">Date:</p>
+                        <P class="c-r-2">{{ sr.date }}</p>
+                      </div>
+                      <div class="c-r">
+                        <p class="c-r-1">Time:</p>
+                        <P class="c-r-2">04: 00 AM</p>
+                      </div>
+                      <div class="c-r">
+                        <p class="c-r-1">Total Amount:</p>
+                        <P class="c-r-2">{{ sr.totalAmount }}</p>
+                      </div> 
+                      <div  class="c-r1">
+                        <p class="c-r1-hding">Adderss:</p>
+                        <div class="c-r1-1">
+                          <p class="">{{ sr.address.lin1 }}</p>
+                          <p class="">{{ sr.address.lin2 }}</p>
+                          <p class="">{{ sr.address.district }}</p>
+                          <p class="">{{ sr.address.pin }}</p>
+                        </div>                         
+                      </div>
+                      <div class="c-r2">
+                        <p class="c-r2-hding">Categories:</p>
+                        <div v-for="(srq, index) in sr.service.categories" :key="index">
+                            <div class="c-r2-1">
+                              <p class="c-r2-1-1">{{ srq.category }}</p>
+                              <p class="c-r2-1-2">{{ srq.quantity }}</p>
+                            </div>                                 
+                        </div>
+                      </div>                                           
                     </div>
                 
                     <button slot="reference" class="popper-btn">
@@ -211,9 +262,14 @@ export default {
     font-weight: bold;
     margin: 0px;
   }
+  .row2-two {
+    font-size: 15px;
+    margin: 0px;    
+    color: #707070;
+  }
   .box-row3 {
     text-align: center;
-    margin-top: -10px;
+    margin-top: 5px;
   }
   .row3-one {
     font-size: 30px;
@@ -235,8 +291,8 @@ export default {
   .popper {
     background-color: #000;
     color: #fff;
-    width: 350px;
-    height: 300px;
+    width: 370px;
+    height: 400px;
     padding: 10px;
     border: none;
   }
@@ -249,4 +305,40 @@ export default {
     height: 30px;
     border-radius: 5px;
   }
+  .c-r {
+    display: flex;
+  }
+  .c-r-1 {
+    font-size: 15px;
+    font-weight: bold;
+  }
+  .c-r-2 {
+    font-size: 15px;
+    margin-left: 8px;
+  }  
+  .c-r1-hding {
+    font-size: 15px;
+    font-weight: bold;
+    margin-left: -280px;
+  }
+  .c-r1-1 {
+    font-size: 15px;
+    margin-left: -200px;
+  }
+  .c-r2-hding {
+    font-size: 15px;
+    font-weight: bold;
+    margin-left: -270px;
+  }
+  .c-r2-1 {
+    font-size: 15px;
+    margin-left: 50px;
+    display: flex;
+  }
+  .c-r2-1-1 {
+
+  }
+  .c-r2-1-2 {
+    margin-left: 10px;
+  }     
 </style>
