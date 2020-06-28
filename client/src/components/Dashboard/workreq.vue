@@ -94,7 +94,6 @@ export default {
     },
     acceptfn(obj) {
       let arr = obj
-      alert(JSON.stringify(arr.orderID))
       let url = 'http://localhost:3000/request/workrequest/f35ce2de4348f6943f9621bed9af307f'
       this.$http.post(url, {
         "orderId": arr.orderID,
@@ -104,11 +103,14 @@ export default {
         .then(function (response) {
           //console.log(response);
           //alert(JSON.stringify(response.data))
-          Vue.$toast.open({
-            message: response.data,
-            type: 'success',
-            position: 'bottom-left'
-          });          
+          
+          if(response.status === 200) {
+            Vue.$toast.open({
+              message: response.data,
+              type: 'success',
+              position: 'top-right'
+            });          
+          }        
         })
         .catch(function (error) {
           //console.log(error);
@@ -129,7 +131,7 @@ export default {
           Vue.$toast.open({
             message: response.data,
             type: 'success',
-            position: 'bottom-left'
+            position: 'top-left'
           });           
         })
         .catch(function (error) {
