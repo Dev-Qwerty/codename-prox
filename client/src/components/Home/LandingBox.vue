@@ -9,12 +9,73 @@
         <button class="btn btn-outline-secondary" type="button">search</button>
       </div>
     </div> -->
+    
     <div class="Grid4">
-      <input type="text" value="location" class="Grid4-box1">
-      <input type="submit" value="search" class="Grid4-box2">
-    </div>    
+      <div class="Grid4-inner">
+        <input type="text" @blur="showtable=false" @click="selectService" @keyup="autosuggest" v-model="keyword" class="Grid4-box1" placeholder="Search services">
+        <!-- <input type="submit" value="search" class="Grid4-box2"> -->
+      </div>
+      <div class="Grid4-inner2" v-show="showtable">
+        <p v-if="!this.keyword && showtable">Most searched services</p>
+        <div v-for="suggestion in suggestions" :key="suggestion">
+          <p>{{ suggestion }}</p>
+        </div>  
+      </div>
+    </div>
+    
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      keyword: '',
+      suggestions: [],
+      showtable: false
+    }
+  },
+  methods: {
+    autosuggest: function() {
+      clearTimeout(this.timeout)
+      this.timeout = setTimeout(() => {
+        let url = "http://localhost:3000/autosuggest"
+        this.$http
+          .post(url,{
+            query: this.keyword
+          }).then(responce => {
+            this.suggestions = responce.data;
+          })
+      },300)
+    },
+    selectService(){
+      this.showtable = true
+    }
+  },
+  created: function(){
+    let url = "http://localhost:3000/autosuggest"
+    this.$http
+      .post(url,{
+        query: this.keyword
+      }).then(responce => {
+        this.suggestions = responce.data;
+      })
+  },
+  watch:{
+    keyword: function(){
+      if(this.keyword == ""){
+        let url = "http://localhost:3000/autosuggest"
+        this.$http
+          .post(url,{
+            query: this.keyword
+          }).then(responce => {
+            this.suggestions = responce.data;
+          })
+      }
+    }
+  }
+}
+</script>
 
 <style scoped>    
   .box {
@@ -51,15 +112,18 @@
     padding-top: 40px;
   } */
   .Grid4 {
-    height: 35px;
+    height: 38px;
     padding-left: 20px;
     margin: 25px;
     display: grid;
-    grid-template-columns: 4fr 1fr;
     border: 1px solid #dedee0;
     border-radius: 30px;
     box-shadow: 2px 4px #dedee0;
   }   
+  .Grid4-inner {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+  }
   .Grid4-box1 {
     border: none;
     background-color: #fff;
@@ -72,9 +136,28 @@
     /* border: 1px solid #aaa; */
     border: none;
     background-color: #fff;
-    color: #aaa;
     width: 70px;
     font-family: Arial;
     font-size: 17px;   
   }   
+  .Grid4-inner2 {
+    display: flex;
+    max-height: 230px;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 15px;
+    padding-left: 20px;
+    overflow-y: auto;
+    position: fixed;
+    width: 76%;
+    top: 264px;
+  }
+  .Grid4-inner2 > p {
+    font-weight: bold;
+    margin-left: -16px;
+  }
+  .Grid4-inner2 > div > p {
+    cursor: pointer;
+  }
+
 </style>
