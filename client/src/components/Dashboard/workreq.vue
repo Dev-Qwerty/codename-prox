@@ -60,8 +60,10 @@
         <p class="ys-header">Your Schedule</p>
         <div class="ys-box ys-sh-all">
           <div v-for="sr in reqarr" v-bind:key="sr.orderID">
-            <p class="ys-box-one">{{ sr.date }}  {{ sr.time }}</p>
-            <p class="ys-box-two">{{ sr.service.subserviceName }}</p>
+            <div class="ys-box-inwrapper">
+              <p class="ys-box-one">{{ sr.date }}  {{ sr.time }}</p>
+              <p class="ys-box-two">{{ sr.service.subserviceName }}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -273,14 +275,17 @@ export default {
   .ys-box {
     width: 80%;
     background-color: #fff;
-    padding: 10px;
+    padding: 20px;
   }
   .ys-sh-all {
     box-shadow: 0 0 5px #DBDBDB;
+  }
+  .ys-box-inwrapper {
+    margin-bottom: 15px;
   } 
   .ys-box-one {
     font-size: 15px;
-    margin-bottom: 5px;
+    margin-bottom: 2px;
     text-decoration: underline;
   }
   .ys-box-two {
