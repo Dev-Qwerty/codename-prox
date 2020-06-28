@@ -110,7 +110,13 @@ export default {
               type: 'success',
               position: 'top-right'
             });          
-          }        
+          } else {
+            Vue.$toast.open({
+              message: "Something went wrong",
+              type: 'error',
+              position: 'top-right'
+            });             
+          }       
         })
         .catch(function (error) {
           //console.log(error);
@@ -128,11 +134,19 @@ export default {
         .then(function (response) {
           //console.log(response);
           //alert(JSON.stringify(response))
-          Vue.$toast.open({
-            message: response.data,
-            type: 'success',
-            position: 'top-left'
-          });           
+          if(response.status === 200) {
+            Vue.$toast.open({
+              message: response.data,
+              type: 'success',
+              position: 'top-right'
+            });          
+          } else {
+            Vue.$toast.open({
+              message: "Something went wrong",
+              type: 'error',
+              position: 'top-right'
+            });             
+          }         
         })
         .catch(function (error) {
           //console.log(error);
