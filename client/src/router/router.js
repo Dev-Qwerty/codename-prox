@@ -11,9 +11,9 @@ import Blog from '../components/Blog/Bmain.vue'
 import Services from '../components/ServicesPage/SMain.vue'
 import Cleaning from '@/components/Services/Cleaning/Cmain.vue'
 import Cmodal from '@/components/Services/Cleaning/Cmodal.vue'
-import cart from '@/components/Services/Cleaning/cart.vue'
-import checkout from '@/components/Services/Cleaning/checkout.vue'
-import PayLaterConfirm from '@/components/Services/Cleaning/PayLaterConfirm.vue'
+import cart from '@/components/Checkout/cart.vue'
+import checkout from '@/components/Checkout/checkout.vue'
+import PayLaterConfirm from '@/components/Checkout/PayLaterConfirm.vue'
 import Dashboard from '@/components/Dashboard/DMain.vue'
 import workreq from '@/components/Dashboard/workreq.vue'
 //import pworks from '@/components/Dashboard/pworks.vue'
@@ -68,32 +68,30 @@ export default new VueRouter({
           path: 'modal',
           name: 'modal',
           component: Cmodal,
-          props: true,
+          props: true
+        },       
+      ]
+    },
+    {
+      path: '/services/cart',
+      name: 'cart',
+      component: cart,
+      props: true,
+      children: [
+        {
+          path: 'checkout',
+          name: 'checkout',
+          component: checkout,
+          props: true,      
           children: [
             {
-              path: 'cart',
-              name: 'cart',
-              component: cart,
+              path: 'confirm',
+              name: 'confirm',
+              component: PayLaterConfirm,
               props: true,
-              children: [
-                {
-                  path: 'checkout',
-                  name: 'checkout',
-                  component: checkout,
-                  props: true,      
-                  children: [
-                    {
-                      path: 'confirm',
-                      name: 'confirm',
-                      component: PayLaterConfirm,
-                      props: true,
-                    }
-                  ]        
-                }
-              ]
             }
-          ]
-        },       
+          ]        
+        }
       ]
     },
     { 

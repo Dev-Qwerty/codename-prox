@@ -97,7 +97,7 @@
 </template>
 
 <script>
-import checkout from '@/components/Services/Cleaning/checkout.vue'
+import checkout from '@/components/Checkout/checkout.vue'
 
 export default {
   name: 'cart',
@@ -154,7 +154,7 @@ export default {
     margin-top: 3px;
     width: 20px;
     height: 20px;
-    background-image: url(../../../assets/arrow.jpg);
+    background-image: url(../../assets/arrow.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;    

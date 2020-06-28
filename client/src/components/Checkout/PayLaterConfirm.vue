@@ -3,7 +3,7 @@
     <div class="Mbg">
       <div class="Mbox">
         <div class="btns">
-          <router-link :to="{ path: '/services/cleaning/modal/cart/checkout' }">
+          <router-link :to="{ path: '/services/cart/checkout' }">
             <div class="cbtn"></div>
           </router-link>          
           <div>
@@ -51,7 +51,7 @@ export default {
     left: 90%;
     width: 30px;
     height: 30px;
-    background-image: url(../../../assets/closebtn.png);
+    background-image: url(../../assets/closebtn.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;        
