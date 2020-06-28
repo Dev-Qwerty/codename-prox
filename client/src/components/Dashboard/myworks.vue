@@ -83,8 +83,8 @@
                       <p>popper content</p>
                     </div>
                 
-                    <button slot="reference">
-                      Details
+                    <button slot="reference" class="popper-btn">
+                      DETAILS
                     </button>
                   </popper>                 
                 </div>                        
@@ -186,7 +186,7 @@ export default {
   }     
   .box-row1 {
     text-align: center;
-    margin-top: 10px;
+    margin-top: 15px;
   }
   .row1-one {
     text-align: center;
@@ -204,7 +204,7 @@ export default {
   }
   .box-row2 {
     text-align: center;
-    margin-top: 10px;
+    margin-top: 15px;
   }
   .row2-one {
     font-size: 21px;
@@ -223,7 +223,7 @@ export default {
     text-align: center
   }
   .row4-one {
-    margin-top: -5px;
+    margin-top: -10px;
     font-size: 14px;
   }
   .yd-header {
@@ -239,5 +239,14 @@ export default {
     height: 300px;
     padding: 10px;
     border: none;
+  }
+  .popper-btn {
+    padding: 5px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    width: 80px;
+    height: 30px;
+    border-radius: 5px;
   }
 </style>
