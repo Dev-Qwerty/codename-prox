@@ -16,6 +16,7 @@ import cart from '@/components/Services/Cleaning/cart.vue'
 import checkout from '@/components/Services/Cleaning/checkout.vue'
 import PayLaterConfirm from '@/components/Services/Cleaning/PayLaterConfirm.vue'
 import Dashboard from '@/components/Dashboard/DMain.vue'
+import Cdashboard from '@/components/CustomerDashboard/CDmain.vue'
 import workreq from '@/components/Dashboard/workreq.vue'
 //import pworks from '@/components/Dashboard/pworks.vue'
 import myworks from '@/components/Dashboard/myworks.vue'
@@ -161,6 +162,10 @@ export default new VueRouter({
         }
       }
     },
+    { 
+      path: '/customerdashboard', 
+      component: Cdashboard
+    },      
     {
       path: '/forgotPassword',
       component: ForgotPassword
