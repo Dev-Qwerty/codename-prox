@@ -38,7 +38,7 @@
       </div>
       <div class="grid3">
         <div class="b1">
-          <router-link class="" :to="{ path: '/services/cleaning' }"> 
+          <router-link class="" :to="{ path: '/services/fabrication' }"> 
             <div class="iBox i4">
               <div class="i4img"></div>
               <p class="i4h">FABRICATION</p>            

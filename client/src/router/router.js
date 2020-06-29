@@ -31,6 +31,8 @@ import Carpentry from '@/components/Services/Carpentry/Carpentry'
 import Ctmodal from '@/components/Services/Carpentry/Ctmodal'
 import Plumbing from '@/components/Services/Plumbing/Plumbing'
 import Pmodal from '@/components/Services/Plumbing/Pmodal'
+import Fabrication from '@/components/Services/Fabrication/Fabrication'
+import Fmodal from '@/components/Services/Fabrication/Fmodal'
 
 Vue.use(VueRouter)
 
@@ -137,6 +139,18 @@ export default new VueRouter({
           path: 'pmodal',
           name: 'pmodal',
           component: Pmodal,
+          props: true
+        },       
+      ]
+    },
+    { 
+      path: '/services/fabrication', 
+      component: Fabrication,    
+      children: [
+        {
+          path: 'fmodal',
+          name: 'fmodal',
+          component: Fmodal,
           props: true
         },       
       ]
