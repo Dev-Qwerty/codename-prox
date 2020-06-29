@@ -54,7 +54,7 @@
           </router-link>
         </div>
         <div class="b2">
-           <router-link class="" :to="{ path: '/services/cleaning' }"> 
+           <router-link class="" :to="{ path: '/services/photography' }"> 
             <div class="iBox i6"></div>
           </router-link>
         </div>      

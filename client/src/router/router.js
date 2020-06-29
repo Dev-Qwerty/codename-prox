@@ -33,6 +33,8 @@ import Plumbing from '@/components/Services/Plumbing/Plumbing'
 import Pmodal from '@/components/Services/Plumbing/Pmodal'
 import Fabrication from '@/components/Services/Fabrication/Fabrication'
 import Fmodal from '@/components/Services/Fabrication/Fmodal'
+import Photography from '@/components/Services/Photography/Photography'
+import Phmodal from '@/components/Services/Photography/Phmodal'
 
 Vue.use(VueRouter)
 
@@ -151,6 +153,18 @@ export default new VueRouter({
           path: 'fmodal',
           name: 'fmodal',
           component: Fmodal,
+          props: true
+        },       
+      ]
+    },
+    { 
+      path: '/services/photography', 
+      component: Photography,    
+      children: [
+        {
+          name: 'phmodal',
+          path: 'phmodal',
+          component: Phmodal,
           props: true
         },       
       ]
