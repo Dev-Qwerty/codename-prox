@@ -7,7 +7,7 @@
             <p class="header-p">CHECKOUT</p>
           </div>
           <div>
-            <router-link :to="{ path: '/services/cleaning/modal/cart' }">
+            <router-link :to="{ path: '/services/cart' }">
               <div class="cbtn"></div>
             </router-link>
           </div>
@@ -74,7 +74,7 @@
 </template>
 
 <script>
-import PayLaterConfirm from '@/components/Services/Cleaning/PayLaterConfirm.vue'
+import PayLaterConfirm from '@/components/Checkout/PayLaterConfirm.vue'
 import moment from 'moment'
 import VueCtkDateTimePicker from 'vue-ctk-date-time-picker';
 import 'vue-ctk-date-time-picker/dist/vue-ctk-date-time-picker.css';
@@ -161,7 +161,7 @@ export default {
     left: 94%;
     width: 30px;
     height: 30px;
-    background-image: url(../../../assets/closebtn.png);
+    background-image: url(../../assets/closebtn.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;        

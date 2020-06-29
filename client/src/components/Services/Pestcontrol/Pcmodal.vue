@@ -3,7 +3,7 @@
     <div class="Mbg">
       <div class="Mbox">
         <div class="Img">
-          <router-link :to="{ path: '/services/cleaning' }" @click.native="closefn">
+          <router-link :to="{ path: '/services/pest-control' }" @click.native="closefn">
             <div class="cbtn"></div>
           </router-link>
         </div>
