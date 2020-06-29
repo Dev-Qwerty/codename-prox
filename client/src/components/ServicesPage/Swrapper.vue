@@ -15,7 +15,7 @@
       </div>
       <div class="grid2">
         <div class="b1">
-          <router-link class="" :to="{ path: '/services/cleaning' }"> 
+          <router-link class="" :to="{ path: '/services/plumbing' }"> 
             <div class="iBox i1">
               <div class="i1img"></div>
               <p class="i1h">PLUMBING</p>

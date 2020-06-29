@@ -29,6 +29,8 @@ import Electronics from '@/components/Services/Electronics/Electronics'
 import Ecmodal from '@/components/Services/Electronics/Ecmodal'
 import Carpentry from '@/components/Services/Carpentry/Carpentry'
 import Ctmodal from '@/components/Services/Carpentry/Ctmodal'
+import Plumbing from '@/components/Services/Plumbing/Plumbing'
+import Pmodal from '@/components/Services/Plumbing/Pmodal'
 
 Vue.use(VueRouter)
 
@@ -123,6 +125,18 @@ export default new VueRouter({
           path: 'ctmodal',
           name: 'ctmodal',
           component: Ctmodal,
+          props: true
+        },       
+      ]
+    },
+    { 
+      path: '/services/plumbing', 
+      component: Plumbing,    
+      children: [
+        {
+          path: 'pmodal',
+          name: 'pmodal',
+          component: Pmodal,
           props: true
         },       
       ]
