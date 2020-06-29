@@ -27,6 +27,8 @@ import ConfirmEmail from '@/components/ConfirmEmail/CEMain.vue'
 import { isNullOrUndefined } from 'util';
 import Electronics from '@/components/Services/Electronics/Electronics'
 import Ecmodal from '@/components/Services/Electronics/Ecmodal'
+import Carpentry from '@/components/Services/Carpentry/Carpentry'
+import Ctmodal from '@/components/Services/Carpentry/Ctmodal'
 
 Vue.use(VueRouter)
 
@@ -109,6 +111,18 @@ export default new VueRouter({
           path: 'ecmodal',
           name: 'ecmodal',
           component: Ecmodal,
+          props: true
+        },       
+      ]
+    },
+    { 
+      path: '/services/carpentry', 
+      component: Carpentry,    
+      children: [
+        {
+          path: 'ctmodal',
+          name: 'ctmodal',
+          component: Ctmodal,
           props: true
         },       
       ]
