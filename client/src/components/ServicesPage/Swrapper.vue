@@ -61,7 +61,7 @@
       </div>   
       <div class="grid4">
         <div class="b3">
-           <router-link class="" :to="{ path: '/services/cleaning' }"> 
+           <router-link class="" :to="{ path: '/services/painting' }"> 
             <div class="iBox i7"></div>
           </router-link>
         </div>

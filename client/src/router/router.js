@@ -35,6 +35,8 @@ import Fabrication from '@/components/Services/Fabrication/Fabrication'
 import Fmodal from '@/components/Services/Fabrication/Fmodal'
 import Photography from '@/components/Services/Photography/Photography'
 import Phmodal from '@/components/Services/Photography/Phmodal'
+import Painting from '@/components/Services/Painting/Painting'
+import Pamodal from '@/components/Services/Painting/Pamodal'
 
 Vue.use(VueRouter)
 
@@ -165,6 +167,18 @@ export default new VueRouter({
           name: 'phmodal',
           path: 'phmodal',
           component: Phmodal,
+          props: true
+        },       
+      ]
+    },
+    { 
+      path: '/services/painting', 
+      component: Painting,    
+      children: [
+        {
+          name: 'pamodal',
+          path: 'pamodal',
+          component: Pamodal,
           props: true
         },       
       ]
