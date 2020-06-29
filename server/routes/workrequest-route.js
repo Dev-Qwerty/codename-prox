@@ -49,6 +49,11 @@ router
                     let selectedWorkersDetails = await selectedWorkers.findOne({orderID: orderId}, '-_id')
                     let declinedWorker = selectedWorkersDetails.selectedWorkers.shift() //Return first worker
                     selectedWorkersDetails.declinedWorkers.push(declinedWorker) //Add declined worker to declined worker array
+                    // check if selected workers array is null
+                    if(selectedWorkersDetails.selectedWorkers.length == 0){
+                        selectedWorkersDetails.selectedWorkers = selectedWorkersDetails.declinedWorkers
+                        selectedWorkersDetails.declinedWorkers.length = 0;
+                    }
                     let newWorker = selectedWorkersDetails.selectedWorkers[0]
 
                     
@@ -98,6 +103,7 @@ router
                         time: work.time,
                     }
                     // sendMessage.sendTextMessage("worker",workerDetails,workDetails);
+                    res.end();
                 }          
             }
         } catch (error) {
