@@ -23,7 +23,7 @@
           </router-link>  
         </div>
         <div class="b1">
-          <router-link class="" :to="{ path: '/services/cleaning' }"> 
+          <router-link class="" :to="{ path: '/services/electrical-and-wiring' }"> 
             <div class="iBox i2"></div>
           </router-link>  
         </div>

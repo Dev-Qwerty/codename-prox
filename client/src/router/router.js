@@ -37,6 +37,8 @@ import Photography from '@/components/Services/Photography/Photography'
 import Phmodal from '@/components/Services/Photography/Phmodal'
 import Painting from '@/components/Services/Painting/Painting'
 import Pamodal from '@/components/Services/Painting/Pamodal'
+import Electrical from '@/components/Services/Electrical/Electrical'
+import Eemodal from '@/components/Services/Electrical/Eemodal'
 
 Vue.use(VueRouter)
 
@@ -179,6 +181,18 @@ export default new VueRouter({
           name: 'pamodal',
           path: 'pamodal',
           component: Pamodal,
+          props: true
+        },       
+      ]
+    },
+    { 
+      path: '/services/electrical-and-wiring', 
+      component: Electrical,    
+      children: [
+        {
+          name: 'eemodal',
+          path: 'eemodal',
+          component: Eemodal,
           props: true
         },       
       ]
