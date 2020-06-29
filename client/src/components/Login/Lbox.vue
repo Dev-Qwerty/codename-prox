@@ -119,7 +119,12 @@ export default {
                     this.$session.start();
                     this.$session.set('jwt', jwtToken);
                     this.$cookies.set("id", response.data.id);
+                    if(response.data.category == "Customer") {
+                      window.location.href = "http://localhost:8080/customerdashboard";
+                    }
+                    else {
                     window.location.href = "http://localhost:8080/dashboard";
+                    }
                }            
             }
           })
