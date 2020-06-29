@@ -71,7 +71,7 @@
           </router-link>
         </div>
         <div class="">
-          <router-link class="" :to="{ path: '/services/cleaning' }">
+          <router-link class="" :to="{ path: '/services/pest-control' }">
             <div class="iBox i9">
               <div class="i9img"></div>
               <p class="i9h">PEST CONTROL</p>              

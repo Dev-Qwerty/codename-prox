@@ -39,6 +39,8 @@ import Painting from '@/components/Services/Painting/Painting'
 import Pamodal from '@/components/Services/Painting/Pamodal'
 import Electrical from '@/components/Services/Electrical/Electrical'
 import Eemodal from '@/components/Services/Electrical/Eemodal'
+import Pestcontrol from '@/components/Services/Pestcontrol/Pestcontrol'
+import Pcmodal from '@/components/Services/Pestcontrol/Pcmodal'
 
 Vue.use(VueRouter)
 
@@ -193,6 +195,18 @@ export default new VueRouter({
           name: 'eemodal',
           path: 'eemodal',
           component: Eemodal,
+          props: true
+        },       
+      ]
+    },
+    { 
+      path: '/services/pest-control', 
+      component: Pestcontrol,    
+      children: [
+        {
+          name: 'pcmodal',
+          path: 'pcmodal',
+          component: Pcmodal,
           props: true
         },       
       ]
