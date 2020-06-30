@@ -2,6 +2,23 @@ const express = require('express');
 const config = require('./config/mongo-connect');  // import mongoDB configuration
 const session = require('express-session');
 const cors = require('cors');
+const aws = require('aws-sdk');
+const multer = require('multer');
+const keys = require('./config/keys');
+const fs = require('fs');
+
+const storage = multer.diskStorage({
+    destination : 'uploads/',
+    filename: function (req, file, cb) {
+      cb(null, file.originalname);
+    }
+});
+const upload = multer({ storage: storage });
+
+aws.config.update({
+    accessKeyId: keys.s3.accessKey,
+    secretAccessKey: keys.s3.secret
+});
 
 const app = express();
 app.use(cors());
@@ -74,10 +91,69 @@ app.get('/checkserviceversion', async (req, res) => {
     }
 })
 
+//Creating a new instance of S3:
+const s3= new aws.S3();
 
+//POST method route for uploading file
+app.post('/post_file', upload.single('demo_file'), function (req, res) {
+  //Multer middleware adds file(in case of single file ) or files(multiple files) object to the request object.
+  //req.file is the demo_file
+  const newFileName = 'profilepics/'+ req.file.filename;
+  uploadFile(req.file.path, newFileName ,res);
+})
+
+//GET method route for downloading/retrieving file
+app.get('/get_file/:file_name',(req,res)=>{
+  retrieveFile(req.params.file_name, res);
+});
 
 
 // Initialze Server
 app.listen(3000, () => {
     console.log("App listening at port 3000");
 });
+
+function uploadFile(source,targetName,res){
+    console.log('preparing to upload...');
+    fs.readFile(source, function (err, filedata) {
+      if (!err) {
+        const putParams = {
+            Bucket      : 'profilepics-codename-eizoft',
+            Key         : targetName,
+            Body        : filedata
+        };
+        s3.putObject(putParams, function(err, data){
+          if (err) {
+            console.log('Could nor upload the file. Error :',err);
+            return res.send({success:false});
+          } 
+          else{
+            fs.unlink(source);// Deleting the file from uploads folder(Optional).Do Whatever you prefer.
+            console.log('Successfully uploaded the file');
+            return res.send({success:true});
+          }
+        });
+      }
+      else{
+        console.log({'err':err});
+      }
+    });
+  }
+
+//The retrieveFile function
+function retrieveFile(filename,res){
+
+  const getParams = {
+    Bucket: 'profilepics-codename-eizoft',
+    Key: filename
+  };
+
+  s3.getObject(getParams, function(err, data) {
+    if (err){
+      return res.status(400).send({success:false,err:err});
+    }
+    else{
+      return res.send(data.Body);
+    }
+  });
+}

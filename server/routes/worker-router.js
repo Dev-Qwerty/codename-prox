@@ -243,7 +243,7 @@ router
 		const id = crypt.decrypt(req.query.id);
 		const token = req.query.token;
 		Token.findOne({token: token},(err,result) => {
-		  if(result.length == 0) {
+		  if(result == []) {
 			res.send({status: "Error!", code: "Invalid token!"});
 		  }
 		  else {

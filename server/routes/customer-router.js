@@ -39,7 +39,7 @@ let upload = multer({
     key: function (req, file, cb) {
       let user = req._parsedOriginalUrl.pathname;
       user = user.slice(27);
-      const newFileName = Date.now() + "-" + file.originalname;
+      const newFileName = 'profilePic';
       const fullPath = 'profilepics/' + user + '/' + newFileName;
       cb(null, fullPath);
     }
