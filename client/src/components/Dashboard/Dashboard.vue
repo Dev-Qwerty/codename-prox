@@ -70,6 +70,7 @@
           <workreq />
           <!--<pworks />-->
           <myworks />
+          <myprofile />
         </router-view>       
       </div>
     </div>
@@ -80,12 +81,14 @@
 import workreq from '@/components/Dashboard/workreq.vue'
 //import pworks from '@/components/Dashboard/pworks.vue'
 import myworks from '@/components/Dashboard/myworks.vue'
+import myprofile from '@/components/Dashboard/myprofile.vue'
 
 export default {
   components: {
     workreq,
     //pworks,
-    myworks
+    myworks,
+    myprofile
   },
   data() {
     return {
