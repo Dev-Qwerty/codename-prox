@@ -17,7 +17,8 @@ const upload = multer({ storage: storage });
 
 aws.config.update({
     accessKeyId: keys.s3.accessKey,
-    secretAccessKey: keys.s3.secret
+    secretAccessKey: keys.s3.secret,
+    region: 'ap-south-1'
 });
 
 const app = express();
@@ -120,7 +121,8 @@ function uploadFile(source,targetName,res){
         const putParams = {
             Bucket      : 'profilepics-codename-eizoft',
             Key         : targetName,
-            Body        : filedata
+            Body        : filedata,
+            ContentType : 'image/jpeg'
         };
         s3.putObject(putParams, function(err, data){
           if (err) {
@@ -145,7 +147,7 @@ function retrieveFile(filename,res){
 
   const getParams = {
     Bucket: 'profilepics-codename-eizoft',
-    Key: filename
+    Key: 'profilepics/'+filename
   };
 
   s3.getObject(getParams, function(err, data) {
@@ -153,6 +155,8 @@ function retrieveFile(filename,res){
       return res.status(400).send({success:false,err:err});
     }
     else{
+        res.set("Content-Type", 'image/png');
+        res.set("Content-Disposition", "inline;");
       return res.send(data.Body);
     }
   });
