@@ -275,6 +275,9 @@ export default {
     padding-top: 15px;
     padding-left: 15%;
   }
+  .sidenav-mid-one:hover {
+    cursor: pointer;
+  }  
   /*.sidenav-mid-one:hover {
     cursor: pointer;
     background-color: #000;
@@ -384,7 +387,10 @@ export default {
     grid-template-columns: 15% 95%;
     padding-top: 15px;
     padding-left: 10%;
-  }     
+  }  
+  .sidenav-bottom-two:hover {
+    cursor: pointer;
+  }        
   .sidenav-bottom-img2 {
     margin-top: 3px;
     margin-left: 18px;
