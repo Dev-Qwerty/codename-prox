@@ -239,6 +239,7 @@ export default {
   methods: {
     apiCall() {
       let url = 'http://localhost:3000/worker/myworks/f35ce2de4348f6943f9621bed9af307f'
+      //let url = 'http://localhost:3000/worker/myworks/' + this.wid
       this.$http.get(url)
       .then((response) => {
         this.myworksarr = response.data
@@ -339,10 +340,11 @@ export default {
     color: #000;    
   }
   .popper {
+    opacity: 0.9;
     background-color: #000;
     color: #fff;
     width: 370px;
-    height: 400px;
+    height: 420px;
     padding: 10px;
     border: none;
   }
@@ -359,29 +361,29 @@ export default {
     display: flex;
   }
   .c-r-1 {
-    font-size: 15px;
+    font-size: 17px;
     font-weight: bold;
   }
   .c-r-2 {
-    font-size: 15px;
+    font-size: 17px;
     margin-left: 8px;
   }  
   .c-r1-hding {
-    font-size: 15px;
+    font-size: 17px;
     font-weight: bold;
     margin-left: -280px;
   }
   .c-r1-1 {
-    font-size: 15px;
+    font-size: 17px;
     margin-left: -200px;
   }
   .c-r2-hding {
-    font-size: 15px;
+    font-size: 17px;
     font-weight: bold;
     margin-left: -270px;
   }
   .c-r2-1 {
-    font-size: 15px;
+    font-size: 17px;
     margin-left: 50px;
     display: flex;
   }

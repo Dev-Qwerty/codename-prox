@@ -20,6 +20,7 @@ import Cdashboard from '@/components/CustomerDashboard/CDmain.vue'
 import workreq from '@/components/Dashboard/workreq.vue'
 //import pworks from '@/components/Dashboard/pworks.vue'
 import myworks from '@/components/Dashboard/myworks.vue'
+import myprofile from '@/components/Dashboard/myprofile.vue'
 import ForgotPassword from '@/components/ForgotPassword/FPMain.vue'
 import UpdateProfile from '@/components/UpdateProfile/UPMain.vue'
 import CompleteProfile from '@/components/CompleteProfile/CPMain.vue'
@@ -260,7 +261,13 @@ export default new VueRouter({
           name: 'myworks',
           component: myworks,
           props: true
-        }              
+        },
+        {
+          path: 'myprofile',
+          name: 'myprofile',
+          component: myprofile,
+          props: true
+        }                       
       ],
       beforeEnter (to, from, next) {
         if(Vue.$cookies.get("pid")==undefined) {

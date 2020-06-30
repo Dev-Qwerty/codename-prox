@@ -55,10 +55,12 @@
         </div>
         <div class="sidenav-line"></div>
         <div class="sidenav-bottom">
-          <div class="sidenav-bottom-one">
-            <div class="sidenav-bottom-img1"></div>
-            <p>My Profile</p>
-          </div>
+          <router-link :to="{name: 'myprofile'}" @click.native="myprofilefn">
+            <div class="sidenav-bottom-one">
+              <div class="sidenav-bottom-img1"></div>
+              <p>My Profile</p>
+            </div>
+          </router-link>
           <a class="sidenav-bottom-two" @click = "logout()">
             <div class="sidenav-bottom-img2"></div>
             <p>Logout</p>
@@ -70,6 +72,7 @@
           <workreq />
           <!--<pworks />-->
           <myworks />
+          <myprofile />
         </router-view>       
       </div>
     </div>
@@ -80,12 +83,14 @@
 import workreq from '@/components/Dashboard/workreq.vue'
 //import pworks from '@/components/Dashboard/pworks.vue'
 import myworks from '@/components/Dashboard/myworks.vue'
+import myprofile from '@/components/Dashboard/myprofile.vue'
 
 export default {
   components: {
     workreq,
     //pworks,
-    myworks
+    myworks,
+    myprofile
   },
   data() {
     return {
@@ -104,7 +109,10 @@ export default {
     },
     myworksfn() {
       
-    },       
+    },    
+    myprofilefn() {
+      
+    },        
     logout() {
       this.$cookies.remove("username");
       this.$cookies.remove("id");
@@ -267,6 +275,9 @@ export default {
     padding-top: 15px;
     padding-left: 15%;
   }
+  .sidenav-mid-one:hover {
+    cursor: pointer;
+  }  
   /*.sidenav-mid-one:hover {
     cursor: pointer;
     background-color: #000;
@@ -376,7 +387,10 @@ export default {
     grid-template-columns: 15% 95%;
     padding-top: 15px;
     padding-left: 10%;
-  }     
+  }  
+  .sidenav-bottom-two:hover {
+    cursor: pointer;
+  }        
   .sidenav-bottom-img2 {
     margin-top: 3px;
     margin-left: 18px;
