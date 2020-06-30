@@ -87,6 +87,7 @@ export default {
     },
     cartfn(){
       EventBus.$emit("routepath", "/services/photography/phmodal")
+      this.$cookies.set("route", "/services/photography/phmodal")
     },
     closefn() {
       this.$cookies.remove("cart") 

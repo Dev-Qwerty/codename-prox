@@ -87,6 +87,7 @@ export default {
     },
     cartfn(){
       EventBus.$emit("routepath", "/services/pest-control/pcmodal")
+      this.$cookies.set("route", "/services/pest-control/pcmodal")
     },
     closefn() {
       this.$cookies.remove("cart") 

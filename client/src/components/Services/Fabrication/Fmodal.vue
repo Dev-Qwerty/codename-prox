@@ -87,6 +87,7 @@ export default {
     },
     cartfn(){
       EventBus.$emit("routepath", "/services/fabrication/fmodal")
+      this.$cookies.set("route", "/services/fabrication/fmodal")
     },
     closefn() {
       this.$cookies.remove("cart") 

@@ -87,6 +87,7 @@ export default {
     },
     cartfn(){
       EventBus.$emit("routepath", "/services/plumbing/pmodal")
+      this.$cookies.set("route", "/services/plumbing/pmodal")
     },
     closefn() {
       this.$cookies.remove("cart") 

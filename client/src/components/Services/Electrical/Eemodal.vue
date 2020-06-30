@@ -87,6 +87,7 @@ export default {
     },
     cartfn(){
       EventBus.$emit("routepath", "/services/electrical-and-wiring/eemodal")
+      this.$cookies.set("route", "/services/electrical-and-wiring/eemodal")
     },
     closefn() {
       this.$cookies.remove("cart") 

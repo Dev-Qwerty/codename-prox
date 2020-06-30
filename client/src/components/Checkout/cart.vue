@@ -108,7 +108,7 @@ export default {
   data() {
     return {
       cartArr: JSON.parse(this.$cookies.get("cart")),
-      path: ''
+      path: this.$cookies.get("route")
     }   
   },
   methods: {

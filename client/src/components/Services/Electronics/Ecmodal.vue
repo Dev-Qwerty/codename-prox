@@ -87,6 +87,7 @@ export default {
     },
     cartfn(){
       EventBus.$emit("routepath", "/services/electronics-and-appliances/ecmodal")
+      this.$cookies.set("route", "/services/electronics-and-appliances/ecmodal")
     },
     closefn() {
       this.$cookies.remove("cart") 

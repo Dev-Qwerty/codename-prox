@@ -87,6 +87,7 @@ export default {
     },
     cartfn(){
       EventBus.$emit("routepath", "/services/painting/pamodal")
+      this.$cookies.set("route", "/services/painting/pamodal")
     },
     closefn() {
       this.$cookies.remove("cart") 
