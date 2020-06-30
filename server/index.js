@@ -128,7 +128,7 @@ function uploadFile(source,targetName,res){
             return res.send({success:false});
           } 
           else{
-            fs.unlink(source);// Deleting the file from uploads folder(Optional).Do Whatever you prefer.
+            fs.unlink(source, function(){console.log("Deleted from localStorage!")});// Deleting the file from uploads folder(Optional).Do Whatever you prefer.
             console.log('Successfully uploaded the file');
             return res.send({success:true});
           }
