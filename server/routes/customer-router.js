@@ -17,35 +17,6 @@ global.fetch = require("node-fetch");
 
 let id = "";
 
-const s3 = new aws.S3({
-  accessKeyId: keys.s3.accessKey || process.env['S3ACCESS'],
-  secretAccessKey: keys.s3.secret || process.env['S3SECRET']
-});
-
-const fileFilter = (req, file, cb) => {
-  const allowedTypes = ["image/jpeg", "image/jpg", "image/png"];
-  if (!allowedTypes.includes(file.mimetype)) {
-    const error = new Error("Incorrect file");
-    error.code = "INCORRECT_FILETYPE";
-    return cb(error, false)
-  }
-  cb(null, true);
-}
-
-let upload = multer({
-  storage: multerS3({
-    s3: s3,
-    bucket: 'codenameprox-pp',
-    key: function (req, file, cb) {
-      let user = req._parsedOriginalUrl.pathname;
-      user = user.slice(27);
-      const newFileName = 'profilePic';
-      const fullPath = 'profilepics/' + user + '/' + newFileName;
-      cb(null, fullPath);
-    }
-  })
-});
-
 const poolData = {
   UserPoolId: keys.cognito.userPoolId || process.env['COGNITOUSERPOOLID'],
   ClientId: keys.cognito.clientId || process.env['COGNITOCLIENTID']
@@ -348,11 +319,6 @@ router.post('/verifyCategory', (req, res) => {
     }
   })
 })
-
-router.post('/uploadProfilePic/:id', upload.array('file', 1), (req, res) => {
-  id = crypt.decrypt(req.params.id);
-  res.json({ file: req.file });
-});
 
 router.get('/getBasicProfile/:id', (req,res) => {
   const id = crypt.decrypt(req.params.id);
