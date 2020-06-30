@@ -1,7 +1,9 @@
 <template>
-  <div class="wr-wrapper">
-    <div class="wr-grid">
-
+  <div class="mp-wrapper">
+    <div class="mp-box">
+      <div class="top-hdn">
+        <p>My Profile</p>  
+      </div>      
 
     </div>
   </div>    
@@ -39,11 +41,28 @@ export default {
 </script>
 
   <style scoped>
-  .wr-grid {
+  .mp-wrapper {
     width: 100%;
-    height: 1500px;
-    display: grid;
-    grid-template-columns: 2fr 1fr;
+    height: 1000px
   }
-
+  .mp-box {
+    /*box-shadow: -5px 5px 5px #DBDBDB;*/
+    box-shadow: 0 0 10px #DBDBDB;
+    width: 60%;
+    height: 500px;
+    background-color: #fff;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 80px;
+  }
+  .top-hdn {
+    font-size: 15px;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    height: 36px;
+    width: 100%;
+    color: #aaa;
+    background-color: #000;
+  }
 </style>
