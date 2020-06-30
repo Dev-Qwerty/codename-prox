@@ -239,15 +239,15 @@ router
 		})
 	  })
 
-	  router.post('/getCompleteProfile/:id', (req,res) => {
-		const id = crypt.decrypt(req.params.id);
-		const token = req.body.token;
+	  router.get('/getCompleteProfile', (req,res) => {
+		const id = crypt.decrypt(req.query.id);
+		const token = req.query.token;
 		Token.findOne({token: token},(err,result) => {
 		  if(result.length == 0) {
 			res.send({status: "Error!", code: "Invalid token!"});
 		  }
 		  else {
-			User.findOne({userID: id}, (err,results) => {
+			Worker.findOne({workerID: id}, (err,results) => {
 			  res.send(results);
 			})
 		  }
