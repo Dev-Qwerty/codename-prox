@@ -43,7 +43,7 @@
 </template>
 
 <script>
-/*import EventBus from '../../../event-bus.js'*/
+import EventBus from '../../../event-bus.js'
 import cart from '@/components/Checkout/cart.vue'
 
 export default {
@@ -84,6 +84,9 @@ export default {
       this.inCart = this.inCart.filter(element => element != obj._id)
       this.cartArr = this.cartArr.filter(element => element._id != obj._id)
       this.$cookies.set("cart", JSON.stringify(this.cartArr), "id")
+    },
+    cartfn(){
+      EventBus.$emit("routepath", "/services/fabrication/fmodal")
     },
     closefn() {
       this.$cookies.remove("cart") 
