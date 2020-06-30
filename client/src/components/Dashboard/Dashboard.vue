@@ -55,10 +55,12 @@
         </div>
         <div class="sidenav-line"></div>
         <div class="sidenav-bottom">
-          <div class="sidenav-bottom-one">
-            <div class="sidenav-bottom-img1"></div>
-            <p>My Profile</p>
-          </div>
+          <router-link :to="{name: 'myprofile'}" @click.native="myprofilefn">
+            <div class="sidenav-bottom-one">
+              <div class="sidenav-bottom-img1"></div>
+              <p>My Profile</p>
+            </div>
+          </router-link>
           <a class="sidenav-bottom-two" @click = "logout()">
             <div class="sidenav-bottom-img2"></div>
             <p>Logout</p>
@@ -107,7 +109,10 @@ export default {
     },
     myworksfn() {
       
-    },       
+    },    
+    myprofilefn() {
+      
+    },        
     logout() {
       this.$cookies.remove("username");
       this.$cookies.remove("id");
