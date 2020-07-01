@@ -32,7 +32,13 @@
         <div class="flex-wrapper">
           <p>Total Number of Works:</p>
           <p class="item2">{{ reqarr.totalWorks }}</p>
-        </div>                                          
+        </div>  
+        <div class="change-avatar">
+          <p>Change Avatar</p> 
+          <router-link :to="{name: 'changeAvatar'}" @click.native="workreqfn">
+            <input type="submit" value="EDIT" class="avatar-btn">
+          </router-link>
+        </div>                                        
       </div>   
     </div>
   </div>    
@@ -103,5 +109,18 @@ export default {
   }
   .item2 {
     margin-left: 10px;
+  }
+  .change-avatar {
+    margin-top: 50px;
+  }
+  .avatar-btn {
+    border-radius: 5px;
+    width: 55px;
+    height: 30px;
+    border: none;
+    background-color: #000;
+    color: #fff;
+    font-size: 14px;
+    margin-top: -5px;
   }
 </style>

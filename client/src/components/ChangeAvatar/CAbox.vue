@@ -1,5 +1,8 @@
 <template>
   <div class = "box-1">
+    <div class="box-top-section">
+      <p>Change Avatar</p>
+    </div>
     <div id="preview">
     <img v-if="url" :src="url" class="Circle"/>
     <div class="Circle" v-else>
@@ -7,14 +10,16 @@
     </div>
     <form action="" method="POST" enctype="multipart/form-data" @submit.prevent="uploadAvatar()">
       <div>
-        <label for="uploadfile" class="sbutton1 atext">Select New Avatar</label>
+        <label for="uploadfile" class="sbutton1 atext" id="one">
+          <p class="one-inside">Select New Avatar</p>
+        </label>
         <input type="file" name="demo_file" id="uploadfile" @change="onFileChange" ref="file" class="sbutton1"> 
       </div>
       <div>
-        <input class="sbutton" type="submit" name="" value="Upload">
+        <input class="sbutton" type="submit" name="" value="Upload" id="two">
       </div>
     </form>
-    <button @click.prevent="deleteAvatar()" class="sbutton1">Delete Avatar</button>
+    <button @click.prevent="deleteAvatar()" class="sbutton1" id="three">Delete Avatar</button>
   </div>
 </template>
 
@@ -67,7 +72,7 @@ export default {
                 position: 'bottom-left'
             });
             this.url = null;
-            window.location.href = 'http://localhost:8080/changeAvatar';
+            window.location.href = 'http://localhost:8080/dashboard/changeAvatar';
           }
         })
       }
@@ -116,23 +121,23 @@ export default {
     display: flex;
   }    
   .box-1 {
-    width: 45%;
-    height: 85%;
+    box-shadow: 0 0 8px #DBDBDB;
+    width: 60%;
+    height: 500px;
     background-color: #fff;
-    top: 11%;
-    left: 28%;
-    position: absolute;
-    box-sizing: border-box;
-    /*transform: translate(-50%, -50%);*/
-    padding-top: 15px;
-    padding-bottom: 5px;
-    padding-left: 50px;
-    padding-right: 50px;
-    border-radius: 10px;
-    border: none;
-    box-shadow: 3px 3px #ceced1
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 80px;
   }
-
+  .box-top-section {
+    font-size: 15px;
+    padding-left: 15px;
+    padding-top: 10px;
+    height: 40px;
+    width: 100%;
+    color: #fff;
+    background-color: #000;
+  }
   .box-1 label {
     font-size: 14px;
     padding-top: 15px;
@@ -148,9 +153,8 @@ export default {
     opacity: 0.9;
     border-radius: 3px;
     box-shadow: 5px 5px #eeefef;
-    font-size: 19px;
     margin-top: 10px;
-    margin-left: 13vw;
+    margin-left: 16vw;
   }
   .sbutton1{
     width: 35%;
@@ -161,16 +165,15 @@ export default {
     opacity: 0.9;
     border-radius: 3px;
     box-shadow: 5px 5px #eeefef;
-    font-size: 19px;
     margin-top: 10px;
-    margin-left: 13vw;
+    margin-left: 16vw;
   }
   .input-box {
     font-size: 14px;
     width: 100%;
     padding-left: 15px;
     margin-top: 30px;
-    height: 50px;
+    height: 55px;
     border: 1px solid #dedee0;
     box-shadow: 4px 4px #eeefef;
   }
@@ -192,8 +195,9 @@ export default {
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 5px;
-    width: 150px;
-    height: 150px;
+    margin-top: 20px;
+    width: 140px;
+    height: 140px;
     background-color: #DBDBDB;
     border-radius: 50%;
     outline-color: #000;
@@ -212,11 +216,29 @@ export default {
     cursor: pointer;
   } 
   .atext {
-    font-size: 21px !important;
-    padding: 0; 
-    margin-top: 3vw;
+  
   }
   .atext:hover{
     cursor: pointer;
+  }
+  #one {
+    margin-top: 45px;
+    text-align: center;
+    font-size: 17px;
+  }
+  #two {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 17px;
+  }
+  #three {
+    font-size: 17px;
+    margin-top: 20px;
+    text-align: center;
+  }
+  .one-inside {
+    position: absolute;
+    top: 53%;
+    margin-left: 60px;
   }
 </style>

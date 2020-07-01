@@ -268,7 +268,12 @@ export default new VueRouter({
           name: 'myprofile',
           component: myprofile,
           props: true
-        }                       
+        },
+        {
+          path: 'changeAvatar',
+          name: 'changeAvatar',
+          component: ChangeAvatar
+        }                              
       ],
       beforeEnter (to, from, next) {
         if(Vue.$cookies.get("pid")==undefined) {
@@ -303,10 +308,6 @@ export default new VueRouter({
     {
       path: '/confirmEmail',
       component: ConfirmEmail
-    },
-    {
-      path: '/changeAvatar',
-      component: ChangeAvatar
-    }           
+    },          
   ]
 })

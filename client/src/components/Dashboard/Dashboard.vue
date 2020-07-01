@@ -132,7 +132,7 @@ export default {
       
     },
     redirectCA() {
-      window.location.href = "http://localhost:8080/changeAvatar";
+      window.location.href = "http://localhost:8080/dashboard/changeAvatar";
     },
     myworksfn() {
       
