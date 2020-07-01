@@ -1,5 +1,8 @@
 <template>
   <div class = "box-1">
+    <div class="box-top-section">
+      <p>Change Avatar</p>
+    </div>
     <div id="preview">
     <img v-if="url" :src="url" class="Circle"/>
     <div class="Circle" v-else>
@@ -116,23 +119,23 @@ export default {
     display: flex;
   }    
   .box-1 {
-    width: 45%;
-    height: 85%;
+    box-shadow: 0 0 8px #DBDBDB;
+    width: 60%;
+    height: 500px;
     background-color: #fff;
-    top: 11%;
-    left: 28%;
-    position: absolute;
-    box-sizing: border-box;
-    /*transform: translate(-50%, -50%);*/
-    padding-top: 15px;
-    padding-bottom: 5px;
-    padding-left: 50px;
-    padding-right: 50px;
-    border-radius: 10px;
-    border: none;
-    box-shadow: 3px 3px #ceced1
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 80px;
   }
-
+  .box-top-section {
+    font-size: 15px;
+    padding-left: 15px;
+    padding-top: 10px;
+    height: 40px;
+    width: 100%;
+    color: #fff;
+    background-color: #000;
+  }
   .box-1 label {
     font-size: 14px;
     padding-top: 15px;
@@ -192,8 +195,9 @@ export default {
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 5px;
-    width: 150px;
-    height: 150px;
+    margin-top: 20px;
+    width: 140px;
+    height: 140px;
     background-color: #DBDBDB;
     border-radius: 50%;
     outline-color: #000;
