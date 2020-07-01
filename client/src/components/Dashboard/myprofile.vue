@@ -56,8 +56,8 @@ export default {
   },
   methods: {
     apiCall() {
-      //let url = 'http://localhost:3000/getCompleteProfile?id=' + this.wid + '&token=' + this.wtoken
-      let url = 'http://localhost:3000/worker/getCompleteProfile?id=3c7eebb2088869c6a1d8b3f3b47bcd36336e2f5b52db771f953002eecb93c61c21a7e67c5e588db44aff6fd57ac37c37&token=4290c3d82149b68fbbe7266ba18df471'
+      let url = 'http://localhost:3000/worker/getCompleteProfile?id=' + this.$cookies.get("id") + '&token=' + this.$cookies.get("pid")
+      //let url = 'http://localhost:3000/worker/getCompleteProfile?id=3c7eebb2088869c6a1d8b3f3b47bcd36336e2f5b52db771f953002eecb93c61c21a7e67c5e588db44aff6fd57ac37c37&token=4290c3d82149b68fbbe7266ba18df471'
       this.$http.get(url)
       .then((response) => {
         this.reqarr = response.data

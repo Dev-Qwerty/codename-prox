@@ -154,7 +154,7 @@ export default {
       this.$cookies.remove("id");
       this.$cookies.remove("pid");
       this.$session.destroy()
-      window.location.href = "http://localhost:8080/"
+      window.location.href = "http://localhost:8080/login"
     },
     apiCall() {
       let url = 'http://localhost:3000/worker/getBasicProfile/' + this.$cookies.get("id");
