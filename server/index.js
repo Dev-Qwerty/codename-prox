@@ -117,7 +117,7 @@ app.get('/delete_file/:file_name', (req,res) => {
   const category = req.query.category;
   const id = req.query.id;
   const file_name = req.params.file_name;
-
+  deleteFile(file_name, res, category, id);
 })
 // Initialze Server
 app.listen(3000, () => {

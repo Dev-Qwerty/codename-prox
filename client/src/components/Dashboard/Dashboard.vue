@@ -10,8 +10,23 @@
             <div class="Circle" v-if="noProfilePic">
               <p class="circle-inside">{{ this.winfo.profile }}</p>
             </div>
-            <div class="Circle ProfilePresent" :style="{ backgroundImage: `url(${profilePic.backgroundImage})` }" v-else>
+            <div class="Circle-1" v-else>
+              <popper
+                trigger="clickToOpen"
+                :options="{
+                  placement: 'right',
+                  modifiers: { offset: { offset: '0,10px' } }
+              }">
+              <div class="popper">
+                <input type="file" name="demo_file" class="fileInput">
+                <button class="btn-success">Upload New Avatar</button>
+                <br>
+                <button class="btn-danger">Delete Avatar</button>
+              </div>
+              <button slot="reference"  class="Circle-1 ProfilePresent" :style="{ backgroundImage: `url(${profilePic.backgroundImage})` }" >
               <p class="circle-inside"></p>
+            </button>
+              </popper>
             </div>
             <p class="profile-name">{{ this.winfo.name }}</p>
             <div class="profile-underline"></div>
@@ -87,13 +102,16 @@ import workreq from '@/components/Dashboard/workreq.vue'
 //import pworks from '@/components/Dashboard/pworks.vue'
 import myworks from '@/components/Dashboard/myworks.vue'
 import myprofile from '@/components/Dashboard/myprofile.vue'
+import Popper from 'vue-popperjs';
+import 'vue-popperjs/dist/vue-popper.css';
 
 export default {
   components: {
     workreq,
     //pworks,
     myworks,
-    myprofile
+    myprofile,
+    'popper': Popper
   },
   data() {
     return {
@@ -102,7 +120,8 @@ export default {
       noProfilePic: true,
       profilePic: {
         backgroundImage: ""
-      }
+      },
+      changePic: false
     }
   },
   methods: {
@@ -168,6 +187,12 @@ export default {
     grid-template-columns: 20% 80%;
     /*height: 676px;*/
   }
+  .fileInput {
+    visibility: hidden;
+    display: block;
+    height: 0;
+    width: 0;
+  }
   .sidenav {
     height: 676px;
     border-left: 1px solid #00000029;    
@@ -189,6 +214,16 @@ export default {
   .Circle {
     padding-top: 10px;
     padding-left: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5px;
+    width: 70px;
+    height: 70px;
+    background-color: #DBDBDB;
+    border-radius: 50%;
+  }
+  .Circle-1 {
+    padding-left: 1px;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 5px;
@@ -421,5 +456,13 @@ export default {
   }
   .ProfilePresent {
     background-size: contain;
+  }
+  .ir-box-three-img {
+    width: 23px;
+    height: 23px;
+    background-image: url('../../assets/ir-tick.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;  
   }             
 </style>
