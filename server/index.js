@@ -189,3 +189,18 @@ function retrieveFile(filename,res){
     }
   });
 }
+
+function deleteFile(filename, res) {
+  const deleteParams = {
+    Bucket: 'profilepics-codename-eizoft',
+    Key: 'profilepics/'+filename
+  }
+  s3.deleteObject(deleteParams, (err,data) => {
+    if(err) {
+      return res.status(400).send({success:false,err:err});
+    }
+    else {
+      return res.send({status: "Success"});
+    }
+  })
+}
