@@ -4,8 +4,7 @@
       <h1>GET A STEP FURTHER</h1>
       <h1>JOIN US.</h1>
     </div>
-    <div class="workersimg">
-    </div>
+    <div class="workersimg"></div>
     <div class= "Wrapper">
       <div class="textarea">
         <div class="heading">
@@ -85,8 +84,8 @@ export default {
 
 <style scoped>
   .box {
-    padding-top: 129px;
-    padding-left: 100px;
+    padding-top: 8%;
+    padding-left: 7%;
     width: 100%;
     height:400px;
     background-color: #eeefef;
@@ -98,6 +97,8 @@ export default {
     font-size: 58px;
   }
   .workersimg {
+    margin-left: auto;
+    margin-right: auto;
     margin-top:20px;
     height: 430px;
     width: 100%;
@@ -107,11 +108,16 @@ export default {
     background-size: contain;
   }
   .Wrapper {
-    margin-left: 12%;
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 80px;
     margin-bottom: 0px;
-    width: 100%;
-    display: flex;
+    width: 80%;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+  }
+  .textarea {
+    /*margin-left: 20%;*/
   }
   .textarea h2 {
     margin: 0px;
@@ -166,15 +172,15 @@ export default {
     font-style: bold;    
   }
  .FeatHeadings h5 {
-    margin-left: -15px;
+    /*margin-left: -15px;*/
     font-size: 23px;
   }
   .row {
     margin: 0px;
-    padding-left: 35px;
+    /*padding-left: 35px;
     padding-right: 40px;
     padding-bottom: 40px;
-    padding-top: 20px;
+    padding-top: 20px;*/
     display: flex;
     justify-content: center;
   }
