@@ -221,7 +221,7 @@ router
 	router.get('/getBasicProfile/:id', (req,res) => {
 		const id = crypt.decrypt(req.params.id)
 		Worker.findOne({workerID: id}, (err,result) => {
-			res.send({name: result.name, type: result.service, rating: result.rating, location: result.address.district, profile: result.name.charAt(0)})
+			res.send({name: result.name, type: result.service, rating: result.rating, location: result.address.district, profile: result.name.charAt(0), profilePicLink: result.profilePicLink})
 		})
 	})
 
