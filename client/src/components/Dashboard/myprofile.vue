@@ -35,7 +35,9 @@
         </div>  
         <div class="change-avatar">
           <p>Change Avatar</p> 
-          <input type="submit" value="EDIT" class="avatar-btn">
+          <router-link :to="{name: 'changeAvatar'}" @click.native="workreqfn">
+            <input type="submit" value="EDIT" class="avatar-btn">
+          </router-link>
         </div>                                        
       </div>   
     </div>
