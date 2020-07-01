@@ -43,6 +43,7 @@ import Electrical from '@/components/Services/Electrical/Electrical'
 import Eemodal from '@/components/Services/Electrical/Eemodal'
 import Pestcontrol from '@/components/Services/Pestcontrol/Pestcontrol'
 import Pcmodal from '@/components/Services/Pestcontrol/Pcmodal'
+import ChangeAvatar from '@/components/ChangeAvatar/CAMain.vue'
 
 Vue.use(VueRouter)
 
@@ -302,6 +303,10 @@ export default new VueRouter({
     {
       path: '/confirmEmail',
       component: ConfirmEmail
+    },
+    {
+      path: '/changeAvatar',
+      component: ChangeAvatar
     }           
   ]
 })
