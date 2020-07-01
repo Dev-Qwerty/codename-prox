@@ -215,9 +215,6 @@ export default {
     padding: 6px 12px;
     cursor: pointer;
   } 
-  .atext {
-  
-  }
   .atext:hover{
     cursor: pointer;
   }
@@ -238,7 +235,7 @@ export default {
   }
   .one-inside {
     position: absolute;
-    top: 53%;
+    top: 25vw;
     margin-left: 60px;
   }
 </style>
