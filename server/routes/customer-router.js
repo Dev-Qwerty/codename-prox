@@ -323,7 +323,7 @@ router.post('/verifyCategory', (req, res) => {
 router.get('/getBasicProfile/:id', (req,res) => {
   const id = crypt.decrypt(req.params.id);
   User.findOne({userID: id}, (err,result) => {
-    res.send({name: result.name, profile: result.name.charAt(0)}) //To Do: after customer dashboard is ready
+    res.send({name: result.name, profile: result.name.charAt(0), profilePicLink: result.profilePicLink}) //To Do: after customer dashboard is ready
   })
 })
 
