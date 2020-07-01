@@ -106,7 +106,13 @@ app.post('/post_file', upload.single('demo_file'), function (req, res) {
   const category = req.query.category;
   const id = req.query.id;
   const newFileName = 'profilepics/'+ req.file.filename;
+  const allowedTypes = ["image/jpeg", "image/jpg", "image/png"];
+  if(!allowedTypes.includes(req.file.mimetype)){
+    res.send({status: "Error!", code: "Invalid format!"});
+  }
+  else {
   uploadFile(req.file.path, newFileName ,res, category,id);
+  }
 })
 
 //GET method route for downloading/retrieving file

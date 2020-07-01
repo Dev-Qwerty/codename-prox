@@ -96,7 +96,7 @@ export default {
         }
         else {
            Vue.$toast.open({
-                message: 'Upload error!',
+                message: 'Upload error! Please check the format! JPEG/JPG/PNG only allowed!',
                 type: 'error',
                 position: 'bottom-left'
             });
