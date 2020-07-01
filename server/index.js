@@ -6,6 +6,9 @@ const aws = require('aws-sdk');
 const multer = require('multer');
 const keys = require('./config/keys');
 const fs = require('fs');
+const User = require('./models/user-model');
+const Worker = require('./models/worker-model');
+const Company = require('./models/company-model');
 
 const storage = multer.diskStorage({
     destination : 'uploads/',
@@ -99,8 +102,10 @@ const s3= new aws.S3();
 app.post('/post_file', upload.single('demo_file'), function (req, res) {
   //Multer middleware adds file(in case of single file ) or files(multiple files) object to the request object.
   //req.file is the demo_file
+  const category = req.query.category;
+  const id = req.query.id;
   const newFileName = 'profilepics/'+ req.file.filename;
-  uploadFile(req.file.path, newFileName ,res);
+  uploadFile(req.file.path, newFileName ,res, category,id);
 })
 
 //GET method route for downloading/retrieving file
@@ -114,7 +119,7 @@ app.listen(3000, () => {
     console.log("App listening at port 3000");
 });
 
-function uploadFile(source,targetName,res){
+function uploadFile(source,targetName,res, category,id){
     console.log('preparing to upload...');
     fs.readFile(source, function (err, filedata) {
       if (!err) {
@@ -132,7 +137,30 @@ function uploadFile(source,targetName,res){
           else{
             fs.unlink(source, function(){console.log("Deleted from localStorage!")});// Deleting the file from uploads folder(Optional).Do Whatever you prefer.
             console.log('Successfully uploaded the file');
-            return res.send({success:true});
+            if(category == 'Customer' || category == 'customer') {
+              let user = {};
+              user.profilePicLink = 'http://localhost:3000/get_file/'+targetName.slice(12);
+              User.findOneAndUpdate({userID: id}, user, (err,doc,results) => {
+                if(err) {
+                  res.send({err: err});
+                }
+                else {
+                  return res.send({success:true});
+                }
+              })
+            }
+            else if(category == 'Worker' || category == 'worker') {
+              let worker = {};
+              worker.profilePicLink = 'http://localhost:3000/get_file/'+targetName.slice(12);
+              Worker.findOneAndUpdate({userID: id}, user, (err,doc,results) => {
+                if(err) {
+                  res.send({err: err});
+                }
+                else {
+                  return res.send({success:true});
+                }
+              })
+            }
           }
         });
       }
