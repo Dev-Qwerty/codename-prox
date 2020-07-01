@@ -10,14 +10,14 @@
     </div>
     <form action="" method="POST" enctype="multipart/form-data" @submit.prevent="uploadAvatar()">
       <div>
-        <label for="uploadfile" class="sbutton1 atext">Select New Avatar</label>
+        <label for="uploadfile" class="sbutton1 atext" id="one">Select New Avatar</label>
         <input type="file" name="demo_file" id="uploadfile" @change="onFileChange" ref="file" class="sbutton1"> 
       </div>
       <div>
-        <input class="sbutton" type="submit" name="" value="Upload">
+        <input class="sbutton" type="submit" name="" value="Upload" id="two">
       </div>
     </form>
-    <button @click.prevent="deleteAvatar()" class="sbutton1">Delete Avatar</button>
+    <button @click.prevent="deleteAvatar()" class="sbutton1" id="three">Delete Avatar</button>
   </div>
 </template>
 
@@ -70,7 +70,7 @@ export default {
                 position: 'bottom-left'
             });
             this.url = null;
-            window.location.href = 'http://localhost:8080/changeAvatar';
+            window.location.href = 'http://localhost:8080/dashboard/changeAvatar';
           }
         })
       }
@@ -153,7 +153,7 @@ export default {
     box-shadow: 5px 5px #eeefef;
     font-size: 19px;
     margin-top: 10px;
-    margin-left: 13vw;
+    margin-left: 16vw;
   }
   .sbutton1{
     width: 35%;
@@ -166,7 +166,7 @@ export default {
     box-shadow: 5px 5px #eeefef;
     font-size: 19px;
     margin-top: 10px;
-    margin-left: 13vw;
+    margin-left: 16vw;
   }
   .input-box {
     font-size: 14px;
@@ -217,10 +217,20 @@ export default {
   } 
   .atext {
     font-size: 21px !important;
-    padding: 0; 
-    margin-top: 3vw;
   }
   .atext:hover{
     cursor: pointer;
+  }
+  #one {
+    margin-top: 50px;
+    text-align: center;
+  }
+  #two {
+    margin-top: 10px;
+    text-align: center;
+  }
+  #three {
+    margin-top: 20px;
+    text-align: center;
   }
 </style>
