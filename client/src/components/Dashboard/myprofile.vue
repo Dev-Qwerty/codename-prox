@@ -116,9 +116,11 @@ export default {
   .avatar-btn {
     border-radius: 5px;
     width: 55px;
-    height: 35px;
+    height: 30px;
     border: none;
     background-color: #000;
     color: #fff;
+    font-size: 14px;
+    margin-top: -5px;
   }
 </style>
