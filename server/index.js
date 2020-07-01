@@ -9,6 +9,7 @@ const fs = require('fs');
 const User = require('./models/user-model');
 const Worker = require('./models/worker-model');
 const Company = require('./models/company-model');
+const crypt = require('./misc/crypt');
 
 const storage = multer.diskStorage({
     destination : 'uploads/',
@@ -145,7 +146,7 @@ function uploadFile(source,targetName,res, category,id){
             if(category == 'Customer' || category == 'customer') {
               let user = {};
               user.profilePicLink = 'http://localhost:3000/get_file/'+targetName.slice(12);
-              User.findOneAndUpdate({userID: id}, user, (err,doc,results) => {
+              User.findOneAndUpdate({userID: crypt.decrypt(id)}, user, (err,doc,results) => {
                 if(err) {
                   res.send({err: err});
                 }
@@ -157,7 +158,7 @@ function uploadFile(source,targetName,res, category,id){
             else if(category == 'Worker' || category == 'worker') {
               let worker = {};
               worker.profilePicLink = 'http://localhost:3000/get_file/'+targetName.slice(12);
-              Worker.findOneAndUpdate({workerID: id}, worker, (err,doc,results) => {
+              Worker.findOneAndUpdate({workerID: crypt.decrypt(id)}, worker, (err,doc,results) => {
                 if(err) {
                   res.send({err: err});
                 }
@@ -208,14 +209,14 @@ function deleteFile(filename, res, category,id) {
       if(category == 'Worker' || category == 'worker') {
         let worker = {};
         worker.profilePicLink =  "";
-        Worker.findOneAndUpdate({workerID: id}, worker, (err,doc,result) => {
+        Worker.findOneAndUpdate({workerID: crypt.decrypt(id)}, worker, (err,doc,result) => {
           return res.send({status: "Success"});
         })
       }
       else if(category == 'Customer' || category == 'customer') {
         let user = {};
         user.profilePicLink = "";
-        User.findOneAndUpdate({userID: id}, user, (err,doc,result) => {
+        User.findOneAndUpdate({userID: crypt.decrypt(id)}, user, (err,doc,result) => {
           return res.send({status: "Success"});
         })
       }

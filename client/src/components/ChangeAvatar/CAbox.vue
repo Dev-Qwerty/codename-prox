@@ -5,30 +5,34 @@
     <div class="Circle" v-else>
     </div>
     </div>
-    <form action="" method="POST">
+    <form action="" method="POST" enctype="multipart/form-data" @submit.prevent="uploadAvatar()">
       <div>
-        <input type="file" name="demo_file" id="uploadfile" @change="onFileChange">
+        <label for="uploadfile" class="sbutton1 atext">Select New Avatar</label>
+        <input type="file" name="demo_file" id="uploadfile" @change="onFileChange" ref="file" class="sbutton1"> 
       </div>
       <div>
-        <input class="sbutton" type="submit" name="" value="Upload" @click.prevent="">
+        <input class="sbutton" type="submit" name="" value="Upload">
       </div>
     </form>
-    <button @click.prevent="deleteAvatar()">Delete Avatar</button>
+    <button @click.prevent="deleteAvatar()" class="sbutton1">Delete Avatar</button>
   </div>
 </template>
 
 <script>
 import Vue from 'vue';
+import axios from 'axios';
 export default {
   data() {
     return {
       url: null,
-      category: 'worker'
+      category: 'worker',
+      fileLink: ""
     }
   },
   methods: {
     onFileChange(e) {
       const file = e.target.files[0];
+      this.fileLink = file;
       this.url = URL.createObjectURL(file);
     },
     apiCall() {
@@ -62,11 +66,44 @@ export default {
                 type: 'success',
                 position: 'bottom-left'
             });
-            window.reload(true);
+            this.url = null;
+            window.location.href = 'http://localhost:8080/changeAvatar';
           }
         })
       }
-    }
+    },
+    async uploadAvatar() {
+      if(this.fileLink == "") {
+        Vue.$toast.open({
+                message: 'Please select a file!',
+                type: 'warning',
+                position: 'bottom-left'
+            });
+      }
+      else {
+      const formData = new FormData();
+      formData.append('demo_file', this.fileLink);
+      let URL = 'http://localhost:3000/post_file?category='+this.category+'&id='+this.$cookies.get("id");
+      await axios.post(URL, formData)
+      .then(response => {
+        if(response.data.success == true) {
+          Vue.$toast.open({
+                message: 'Uploaded successfully!',
+                type: 'success',
+                position: 'bottom-left'
+            });
+            window.location.href = 'http://localhost:8080/dashboard';
+        }
+        else {
+           Vue.$toast.open({
+                message: 'Upload error!',
+                type: 'error',
+                position: 'bottom-left'
+            });
+        }
+      })
+    }    
+  }
   },
   beforeMount() {
     this.apiCall();
@@ -115,6 +152,19 @@ export default {
     margin-top: 10px;
     margin-left: 13vw;
   }
+  .sbutton1{
+    width: 35%;
+    background-color: #000;
+    border: none;
+    color: #fff;
+    height: 40px;
+    opacity: 0.9;
+    border-radius: 3px;
+    box-shadow: 5px 5px #eeefef;
+    font-size: 19px;
+    margin-top: 10px;
+    margin-left: 13vw;
+  }
   .input-box {
     font-size: 14px;
     width: 100%;
@@ -151,5 +201,22 @@ export default {
    .circle-inside {
     font-size: 35px;
     margin: 0 auto;    
+  }
+  input[type="file"] {
+    display: none;
+  }
+  .custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
   } 
+  .atext {
+    font-size: 21px !important;
+    padding: 0; 
+    margin-top: 3vw;
+  }
+  .atext:hover{
+    cursor: pointer;
+  }
 </style>
