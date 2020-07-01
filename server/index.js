@@ -152,7 +152,7 @@ function uploadFile(source,targetName,res, category,id){
             else if(category == 'Worker' || category == 'worker') {
               let worker = {};
               worker.profilePicLink = 'http://localhost:3000/get_file/'+targetName.slice(12);
-              Worker.findOneAndUpdate({userID: id}, user, (err,doc,results) => {
+              Worker.findOneAndUpdate({workerID: id}, worker, (err,doc,results) => {
                 if(err) {
                   res.send({err: err});
                 }
