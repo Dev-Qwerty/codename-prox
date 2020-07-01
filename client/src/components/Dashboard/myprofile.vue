@@ -32,7 +32,11 @@
         <div class="flex-wrapper">
           <p>Total Number of Works:</p>
           <p class="item2">{{ reqarr.totalWorks }}</p>
-        </div>                                          
+        </div>  
+        <div class="change-avatar">
+          <p>Change Avatar</p> 
+          <input type="submit" value="EDIT" class="avatar-btn">
+        </div>                                        
       </div>   
     </div>
   </div>    
@@ -103,5 +107,16 @@ export default {
   }
   .item2 {
     margin-left: 10px;
+  }
+  .change-avatar {
+    margin-top: 50px;
+  }
+  .avatar-btn {
+    border-radius: 5px;
+    width: 55px;
+    height: 35px;
+    border: none;
+    background-color: #000;
+    color: #fff;
   }
 </style>
