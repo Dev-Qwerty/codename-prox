@@ -53,6 +53,10 @@ const UserSchema = new mongoose.Schema({
     completedProfile: {
         type: Boolean,
         default: false
+    },
+    profilePicLink: {
+        type: String,
+        default: ""
     }
 });
 
