@@ -19,7 +19,7 @@
               }">
               <div class="popper">
                 <input type="file" name="demo_file" class="fileInput">
-                <button class="btn-dark">Change Avatar</button>
+                <button class="btn-dark" @click="redirectCA()">Change Avatar</button>
                 </div>
               <button slot="reference"  class="Circle-1 ProfilePresent" :style="{ backgroundImage: `url(${profilePic.backgroundImage})` }" >
               <p class="circle-inside"></p>
@@ -130,6 +130,9 @@ export default {
     }*/  
     workreqfn() {
       
+    },
+    redirectCA() {
+      window.location.href = "http://localhost:8080/changeAvatar";
     },
     myworksfn() {
       
