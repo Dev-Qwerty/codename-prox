@@ -9,7 +9,7 @@
 <style scoped>
   .wrapper {
     width: 100%;
-    height: 700px;
+    height: 720px;
     background-color: #eeefef;
   } 
   .top-header {

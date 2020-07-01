@@ -87,8 +87,8 @@ export default {
   },
   data() {
     return {
-      //wid: this.$cookies.get("id"),
-      //winfo: []
+      wid: this.$cookies.get("id"),
+      winfo: []
     }
   },
   methods: { 
@@ -99,18 +99,30 @@ export default {
       
     },       
     logout() {
-      /*this.$cookies.remove("username");
+      this.$cookies.remove("username");
       this.$cookies.remove("id");
       this.$cookies.remove("pid");
       this.$session.destroy()
-      window.location.href = "http://localhost:8080/"*/
+      window.location.href = "http://localhost:8080/login"
     },
     apiCall() {
-
+      let url = 'http://localhost:3000/worker/getBasicProfile/' + JSON.parse(this.$cookies.get("id"));
+      this.$http.get(url)
+      .then((response) => {
+        this.winfo = response.data
+        alert(this.winfo)
+        /*if(this.winfo.profilePicLink != "") {
+          this.profilePic.backgroundImage = this.winfo.profilePicLink;
+          this.noProfilePic = false;
+        }*/
+      })
+      .catch((error) => {
+        alert(error);
+      })     
     }
   },
   created() {
-   //this.apiCall() 
+   this.apiCall() 
   }
 }        
 </script>

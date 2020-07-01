@@ -4,7 +4,7 @@
     <ul class="navbar-nav mr-auto">
       <!-- <img src="../assets/logo.png" alt="Logo" style="width:40px;"> -->
       <!--<a class="navbar-brand" href="#">UrbanCo</a>-->
-      <router-link class="navbar-brand" :to="{ path: '/' }">UrbanCo</router-link>
+      <router-link class="navbar-brand" :to="{ path: '/' }">CliqServe</router-link>
     </ul>
 
     <!-- Links -->

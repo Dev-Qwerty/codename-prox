@@ -145,7 +145,8 @@ export default {
     padding-bottom: 15px;
   }
   input[type="submit"] {
-    width: 35%;
+    border-radius: 10px;
+    width: 30%;
     background-color: #000;
     border: none;
     color: #fff;
@@ -154,10 +155,11 @@ export default {
     border-radius: 3px;
     box-shadow: 5px 5px #eeefef;
     margin-top: 10px;
-    margin-left: 16vw;
+    margin-left: 17vw;
   }
   .sbutton1{
-    width: 35%;
+    border-radius: 10px;
+    width: 30%;
     background-color: #000;
     border: none;
     color: #fff;
@@ -166,7 +168,7 @@ export default {
     border-radius: 3px;
     box-shadow: 5px 5px #eeefef;
     margin-top: 10px;
-    margin-left: 16vw;
+    margin-left: 17vw;
   }
   .input-box {
     font-size: 14px;
@@ -236,6 +238,6 @@ export default {
   .one-inside {
     position: absolute;
     top: 25vw;
-    margin-left: 60px;
+    margin-left: 40px;
   }
 </style>

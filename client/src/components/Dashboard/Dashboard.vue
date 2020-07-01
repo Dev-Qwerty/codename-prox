@@ -154,7 +154,7 @@ export default {
       this.$cookies.remove("id");
       this.$cookies.remove("pid");
       this.$session.destroy()
-      window.location.href = "http://localhost:8080/"
+      window.location.href = "http://localhost:8080/login"
     },
     apiCall() {
       let url = 'http://localhost:3000/worker/getBasicProfile/' + this.$cookies.get("id");
@@ -282,8 +282,9 @@ export default {
     margin-top: 20px;   
   }
  .sidenav-top-mid-one {
-    display: grid;
-    grid-template-columns: 15% 95%;
+    /*display: grid;
+    grid-template-columns: 15% 95%;*/
+    display: flex;
     padding-top: 0px;
     margin-left: auto;
     margin-right: auto;    
@@ -298,13 +299,14 @@ export default {
     background-size: contain;    
   }   
   .job-title {
-    margin-left: 10px;
+    margin-left: 5px;
     font-size: 17px;
     color: #707070;
   } 
  .sidenav-top-mid-two {
-    display: grid;
-    grid-template-columns: 15% 95%;
+    /*display: grid;
+    grid-template-columns: 15% 95%;*/
+    display: flex;
     margin-top: -4px;
     margin-left: auto;
     margin-right: auto;       
@@ -319,7 +321,7 @@ export default {
     background-size: contain;    
   }   
   .Place {
-    margin-left: 0px;
+    margin-left: 5px;
     font-size: 17px;
     color: #707070;
   }     
