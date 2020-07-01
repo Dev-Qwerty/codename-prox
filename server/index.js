@@ -113,7 +113,12 @@ app.get('/get_file/:file_name',(req,res)=>{
   retrieveFile(req.params.file_name, res);
 });
 
+app.get('/delete_file/:file_name', (req,res) => {
+  const category = req.query.category;
+  const id = req.query.id;
+  const file_name = req.params.file_name;
 
+})
 // Initialze Server
 app.listen(3000, () => {
     console.log("App listening at port 3000");
@@ -190,7 +195,7 @@ function retrieveFile(filename,res){
   });
 }
 
-function deleteFile(filename, res) {
+function deleteFile(filename, res, category,id) {
   const deleteParams = {
     Bucket: 'profilepics-codename-eizoft',
     Key: 'profilepics/'+filename
@@ -200,7 +205,20 @@ function deleteFile(filename, res) {
       return res.status(400).send({success:false,err:err});
     }
     else {
-      return res.send({status: "Success"});
+      if(category == 'Worker' || category == 'worker') {
+        let worker = {};
+        worker.profilePicLink =  "";
+        Worker.findOneAndUpdate({workerID: id}, worker, (err,doc,result) => {
+          return res.send({status: "Success"});
+        })
+      }
+      else if(category == 'Customer' || category == 'customer') {
+        let user = {};
+        user.profilePicLink = "";
+        User.findOneAndUpdate({userID: id}, user, (err,doc,result) => {
+          return res.send({status: "Success"});
+        })
+      }
     }
   })
 }
