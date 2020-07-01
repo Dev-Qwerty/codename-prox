@@ -108,7 +108,7 @@ app.post('/post_file', upload.single('demo_file'), function (req, res) {
   const newFileName = 'profilepics/'+ req.file.filename;
   const allowedTypes = ["image/jpeg", "image/jpg", "image/png"];
   if(!allowedTypes.includes(req.file.mimetype)){
-    res.send({status: "Error!", code: "Invalid format!"});
+    res.send({status: "Error!", code: "Invalid format!", success: false});
   }
   else {
   uploadFile(req.file.path, newFileName ,res, category,id);
