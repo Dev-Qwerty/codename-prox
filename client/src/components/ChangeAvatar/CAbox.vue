@@ -215,9 +215,6 @@ export default {
     padding: 6px 12px;
     cursor: pointer;
   } 
-  .atext {
-  
-  }
   .atext:hover{
     cursor: pointer;
   }

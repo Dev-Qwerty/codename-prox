@@ -7,8 +7,18 @@
       <div class="sidenav">
         <div class="sidenav-top">
           <div class="sidenav-top-top">
-            <div class="Circle" v-if="noProfilePic">
-              <p class="circle-inside">{{ this.winfo.profile }}</p>
+            <div class="Circle-2" v-if="noProfilePic">
+              <popper
+                trigger="clickToOpen"
+                :options="{
+                  placement: 'right',
+                  modifiers: { offset: { offset: '0,10px' } }
+              }">
+              <div class="popper">
+                  <button class="btn-dark" @click="redirectCA()">Change Avatar</button>
+                </div>
+              <button slot="reference" class="Circle-3">{{ this.winfo.profile }}</button>
+              </popper>
             </div>
             <div class="Circle-1" v-else>
               <popper
@@ -18,8 +28,7 @@
                   modifiers: { offset: { offset: '0,10px' } }
               }">
               <div class="popper">
-                <input type="file" name="demo_file" class="fileInput">
-                <button class="btn-dark" @click="redirectCA()">Change Avatar</button>
+                  <button class="btn-dark" @click="redirectCA()">Change Avatar</button>
                 </div>
               <button slot="reference"  class="Circle-1 ProfilePresent" :style="{ backgroundImage: `url(${profilePic.backgroundImage})` }" >
               <p class="circle-inside"></p>
@@ -228,6 +237,23 @@ export default {
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 5px;
+    width: 70px;
+    height: 70px;
+    background-color: #DBDBDB;
+    border-radius: 50%;
+  }
+  .Circle-2 {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5px;
+    width: 70px;
+    height: 70px;
+    background-color: #DBDBDB;
+    border-radius: 50%;
+  }
+  .Circle-3 {
+    margin-left: auto;
+    margin-right: auto;
     width: 70px;
     height: 70px;
     background-color: #DBDBDB;
