@@ -19,10 +19,8 @@
               }">
               <div class="popper">
                 <input type="file" name="demo_file" class="fileInput">
-                <button class="btn-success">Upload New Avatar</button>
-                <br>
-                <button class="btn-danger">Delete Avatar</button>
-              </div>
+                <button class="btn-dark">Change Avatar</button>
+                </div>
               <button slot="reference"  class="Circle-1 ProfilePresent" :style="{ backgroundImage: `url(${profilePic.backgroundImage})` }" >
               <p class="circle-inside"></p>
             </button>
