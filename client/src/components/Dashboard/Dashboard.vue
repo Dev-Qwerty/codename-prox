@@ -7,8 +7,11 @@
       <div class="sidenav">
         <div class="sidenav-top">
           <div class="sidenav-top-top">
-            <div class="Circle">
+            <div class="Circle" v-if="noProfilePic">
               <p class="circle-inside">{{ this.winfo.profile }}</p>
+            </div>
+            <div class="Circle ProfilePresent" :style="{ backgroundImage: `url(${profilePic.backgroundImage})` }" v-else>
+              <p class="circle-inside"></p>
             </div>
             <p class="profile-name">{{ this.winfo.name }}</p>
             <div class="profile-underline"></div>
@@ -95,7 +98,11 @@ export default {
   data() {
     return {
       wid: this.$cookies.get("id"),
-      winfo: []
+      winfo: [],
+      noProfilePic: true,
+      profilePic: {
+        backgroundImage: ""
+      }
     }
   },
   methods: {
@@ -121,10 +128,14 @@ export default {
       window.location.href = "http://localhost:8080/"
     },
     apiCall() {
-      let url = 'http://localhost:3000/worker/getBasicProfile/' + this.wid
+      let url = 'http://localhost:3000/worker/getBasicProfile/' + this.$cookies.get("id");
       this.$http.get(url)
       .then((response) => {
         this.winfo = response.data
+        if(this.winfo.profilePicLink != "") {
+          this.profilePic.backgroundImage = this.winfo.profilePicLink;
+          this.noProfilePic = false;
+        }
       })
       .catch((error) => {
         alert(error);
@@ -134,7 +145,7 @@ export default {
   created() {
    this.apiCall() 
    //this.$router.push('dashboard/workrequests')
-  }
+  },
 }        
 </script>
 
@@ -407,5 +418,8 @@ export default {
   }              
   .dashboard-body {
     background-color: #F5F5F5;
+  }
+  .ProfilePresent {
+    background-size: contain;
   }             
 </style>
