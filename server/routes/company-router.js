@@ -143,7 +143,7 @@ router.post('/forgotPassword', (req,res) => {
   router.get('/getBasicProfile/:id', (req,res) => {
     const id = crypt.decrypt(req.params.id);
     Company.findOne({companyID: id}, (err,result) => {
-      res.send({name: result.name, profile: result.name.charAt(0)}) //To Do: after company dashboard is ready
+      res.send({name: result.name, profile: result.name.charAt(0), profilePicLink: result.profilePicLink}) //To Do: after company dashboard is ready
     })
   })
 
