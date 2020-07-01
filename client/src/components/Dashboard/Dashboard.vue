@@ -298,7 +298,7 @@ export default {
     background-size: contain;    
   }   
   .job-title {
-    margin-left: 10px;
+    margin-left: 35%;
     font-size: 17px;
     color: #707070;
   } 
@@ -319,7 +319,7 @@ export default {
     background-size: contain;    
   }   
   .Place {
-    margin-left: 0px;
+    margin-left: 20%;
     font-size: 17px;
     color: #707070;
   }     
