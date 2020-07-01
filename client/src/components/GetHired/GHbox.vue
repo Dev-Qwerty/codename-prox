@@ -12,7 +12,7 @@
           <h2>We've made a platform for you to</h2>
           <h2>connect with customers</h2> 
         </div>
-        <p>Urban Company provides you an interface to meet with</p>
+        <p>CliqServe provides you an interface to meet with</p>
         <p>your customer to chat and make a deal to get their</p>
         <p>work done. So why waiting..</p>
         <router-link :to="{ path:'wcsignup' }" @click="wcsignupfn">
