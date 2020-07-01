@@ -10,7 +10,9 @@
     </div>
     <form action="" method="POST" enctype="multipart/form-data" @submit.prevent="uploadAvatar()">
       <div>
-        <label for="uploadfile" class="sbutton1 atext" id="one">Select New Avatar</label>
+        <label for="uploadfile" class="sbutton1 atext" id="one">
+          <p class="one-inside">Select New Avatar</p>
+        </label>
         <input type="file" name="demo_file" id="uploadfile" @change="onFileChange" ref="file" class="sbutton1"> 
       </div>
       <div>
@@ -151,7 +153,6 @@ export default {
     opacity: 0.9;
     border-radius: 3px;
     box-shadow: 5px 5px #eeefef;
-    font-size: 19px;
     margin-top: 10px;
     margin-left: 16vw;
   }
@@ -164,7 +165,6 @@ export default {
     opacity: 0.9;
     border-radius: 3px;
     box-shadow: 5px 5px #eeefef;
-    font-size: 19px;
     margin-top: 10px;
     margin-left: 16vw;
   }
@@ -173,7 +173,7 @@ export default {
     width: 100%;
     padding-left: 15px;
     margin-top: 30px;
-    height: 50px;
+    height: 55px;
     border: 1px solid #dedee0;
     box-shadow: 4px 4px #eeefef;
   }
@@ -216,21 +216,29 @@ export default {
     cursor: pointer;
   } 
   .atext {
-    font-size: 21px !important;
+  
   }
   .atext:hover{
     cursor: pointer;
   }
   #one {
-    margin-top: 50px;
+    margin-top: 45px;
     text-align: center;
+    font-size: 17px;
   }
   #two {
     margin-top: 10px;
     text-align: center;
+    font-size: 17px;
   }
   #three {
+    font-size: 17px;
     margin-top: 20px;
     text-align: center;
+  }
+  .one-inside {
+    position: absolute;
+    top: 53%;
+    margin-left: 60px;
   }
 </style>
