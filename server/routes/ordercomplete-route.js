@@ -2,7 +2,7 @@ const express = require('express');
 router = express.Router()
 
 // import models
-const worktokenModel = require('../models/work-token');
+const worktokenModel = require('../models/order-token');
 
 router
     .route('/gettoken/:id')
