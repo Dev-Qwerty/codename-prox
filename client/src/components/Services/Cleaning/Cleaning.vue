@@ -27,7 +27,7 @@
             <div class="BLine"></div>
             <div class="Bbottom">
               <div id="Desc"><p>{{ service.description }}</p></div>
-              <p id="Vdetails">view details  <span id="Vspan">></span></p>  
+              <p id="Vdetails">view details</p>  
               <router-link :to="{name: 'cmodal'}">
                 <input type="submit" value="Add to cart" @click="fn(service)">
               </router-link>
@@ -204,17 +204,21 @@ export default {
     margin-bottom: 0px;
   }
   #Vdetails {
-    margin: 0px;
+    margin-top: 10px;
     font-weight: bold;
     font-size: 15px;
+    border: 1px solid #000;
+    width: 100px;
+    padding-left: 7px;
   }
   
   .Bbottom input[type="submit"] {
     border: none;
     background-color: #000;
     color: #fff;
-    margin-top: 5px;
+    margin-top: 25px;
     margin-left: 130px;
+    margin-bottom: 10px;
     width: 120px;
     height: 50px;
     font-family: Arial;
