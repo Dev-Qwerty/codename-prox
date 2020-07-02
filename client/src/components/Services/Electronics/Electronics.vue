@@ -173,10 +173,10 @@ export default {
   }
   .col {
     padding: 0PX;
-    box-sizing: border-box;
+    /*box-sizing: border-box;*/
     border: 1px solid #000;
     margin: 8px;
-    height: 480px;
+    /*height: 480px;*/
     background-color: #fff;  
   }
   .Btop {
