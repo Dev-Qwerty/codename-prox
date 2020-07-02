@@ -109,6 +109,7 @@ export default {
                     this.$session.start();
                     this.$session.set('jwt', jwtToken);
                     this.$cookies.set("id", response.data.id);
+                    this.$cookies.set("category", response.data.category);
                     window.location.href = "http://localhost:8080/completeProfile";
                }
                else {
@@ -119,6 +120,7 @@ export default {
                     this.$session.start();
                     this.$session.set('jwt', jwtToken);
                     this.$cookies.set("id", response.data.id);
+                    this.$cookies.set("category", response.data.category);
                     if(response.data.category == "Customer") {
                       window.location.href = "http://localhost:8080/customerdashboard";
                     }
