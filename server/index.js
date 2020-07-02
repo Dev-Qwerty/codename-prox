@@ -231,3 +231,19 @@ function deleteFile(filename, res, category,id) {
     }
   })
 }
+
+function checkFileExists(file_name) {
+  const getParams = {
+    Bucket: 'profilepics-codename-eizoft',
+    Key: 'profilepics/'+file_name
+  };
+
+  s3.getObject(getParams, function(err, data) {
+    if (err){
+      return false;
+    }
+    else{
+        return true;
+    }
+  });
+}
