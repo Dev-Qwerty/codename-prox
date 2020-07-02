@@ -143,7 +143,7 @@ router.post('/forgotPassword', (req,res) => {
   router.get('/getBasicProfile/:id', (req,res) => {
     const id = crypt.decrypt(req.params.id);
     Company.findOne({companyID: id}, (err,result) => {
-      res.send({name: result.name, profile: result.name.charAt(0)}) //To Do: after company dashboard is ready
+      res.send({name: result.name, profile: result.name.charAt(0), profilePicLink: result.profilePicLink}) //To Do: after company dashboard is ready
     })
   })
 
@@ -161,9 +161,9 @@ router.post('/forgotPassword', (req,res) => {
 		})
 	  })
     
-    router.post('/getCompleteProfile/:id', (req,res) => {
-      const id = crypt.decrypt(req.params.id);
-      const token = req.body.token;
+    router.get('/getCompleteProfile', (req,res) => {
+      const id = crypt.decrypt(req.query.id);
+      const token = req.query.token;
       Token.findOne({token: token},(err,result) => {
         if(result.length == 0) {
           res.send({status: "Error!", code: "Invalid token!"});

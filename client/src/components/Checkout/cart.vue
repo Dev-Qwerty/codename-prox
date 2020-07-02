@@ -2,7 +2,7 @@
   <div class="cart-wrapper">
     <div class="cart">
       <div class="top-row">
-        <router-link class="arrowIcon" :to="{ path: '/services/cleaning/modal' }"></router-link>
+        <router-link class="arrowIcon" :to="{ path: this.path }"></router-link>
       </div>
       <div class="cart-body">
         <div class="col1-cart">
@@ -97,7 +97,8 @@
 </template>
 
 <script>
-import checkout from '@/components/Services/Cleaning/checkout.vue'
+import checkout from '@/components/Checkout/checkout.vue'
+import EventBus from '../../event-bus.js'
 
 export default {
   name: 'cart',
@@ -106,7 +107,8 @@ export default {
   },
   data() {
     return {
-      cartArr: JSON.parse(this.$cookies.get("cart"))
+      cartArr: JSON.parse(this.$cookies.get("cart")),
+      path: this.$cookies.get("route")
     }   
   },
   methods: {
@@ -128,6 +130,9 @@ export default {
     }
   },
   created() {
+    EventBus.$on("routepath", route => {
+      this.path = route
+    })
   }   
 }
 </script>
@@ -154,7 +159,7 @@ export default {
     margin-top: 3px;
     width: 20px;
     height: 20px;
-    background-image: url(../../../assets/arrow.jpg);
+    background-image: url(../../assets/arrow.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;    

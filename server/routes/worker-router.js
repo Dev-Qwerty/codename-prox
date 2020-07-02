@@ -221,7 +221,7 @@ router
 	router.get('/getBasicProfile/:id', (req,res) => {
 		const id = crypt.decrypt(req.params.id)
 		Worker.findOne({workerID: id}, (err,result) => {
-			res.send({name: result.name, type: result.service, rating: result.rating, location: result.address.district, profile: result.name.charAt(0)})
+			res.send({name: result.name, type: result.service, rating: result.rating, location: result.address.district, profile: result.name.charAt(0), profilePicLink: result.profilePicLink})
 		})
 	})
 
@@ -239,21 +239,20 @@ router
 		})
 	  })
 
-	  router.post('/getCompleteProfile/:id', (req,res) => {
-		const id = crypt.decrypt(req.params.id);
-		const token = req.body.token;
+	  router.get('/getCompleteProfile', (req,res) => {
+		const id = crypt.decrypt(req.query.id);
+		const token = req.query.token;
 		Token.findOne({token: token},(err,result) => {
-		  if(result.length == 0) {
+		  if(result == []) {
 			res.send({status: "Error!", code: "Invalid token!"});
 		  }
 		  else {
-			User.findOne({userID: id}, (err,results) => {
+			Worker.findOne({workerID: id}, (err,results) => {
 			  res.send(results);
 			})
 		  }
 		})
 	  })
-	  
 	  
 
 module.exports = router;

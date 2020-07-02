@@ -90,9 +90,12 @@ export default {
     height: 370px;
     background-color: #fff;
     opacity: 0.9;
-    top: 55%;
+    /*top: 55%;
     left: 25%;
-    position: absolute;
+    position: absolute;*/
+    top: 50vh;
+    left: 25vw;
+    position: absolute;    
     box-sizing: border-box;
     transform: translate(-50%, -50%);
     padding-top: 90px;

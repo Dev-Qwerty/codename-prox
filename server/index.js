@@ -2,6 +2,28 @@ const express = require('express');
 const config = require('./config/mongo-connect');  // import mongoDB configuration
 const session = require('express-session');
 const cors = require('cors');
+const aws = require('aws-sdk');
+const multer = require('multer');
+const keys = require('./config/keys');
+const fs = require('fs');
+const User = require('./models/user-model');
+const Worker = require('./models/worker-model');
+const Company = require('./models/company-model');
+const crypt = require('./misc/crypt');
+
+const storage = multer.diskStorage({
+    destination : 'uploads/',
+    filename: function (req, file, cb) {
+      cb(null, file.originalname);
+    }
+});
+const upload = multer({ storage: storage });
+
+aws.config.update({
+    accessKeyId: keys.s3.accessKey,
+    secretAccessKey: keys.s3.secret,
+    region: 'ap-south-1'
+});
 
 const app = express();
 app.use(cors());
@@ -76,10 +98,136 @@ app.get('/checkserviceversion', async (req, res) => {
     }
 })
 
+//Creating a new instance of S3:
+const s3= new aws.S3();
 
+//POST method route for uploading file
+app.post('/post_file', upload.single('demo_file'), function (req, res) {
+  //Multer middleware adds file(in case of single file ) or files(multiple files) object to the request object.
+  //req.file is the demo_file
+  const category = req.query.category;
+  const id = req.query.id;
+  const newFileName = 'profilepics/'+ req.file.filename;
+  const allowedTypes = ["image/jpeg", "image/jpg", "image/png"];
+  if(!allowedTypes.includes(req.file.mimetype)){
+    res.send({status: "Error!", code: "Invalid format!", success: false});
+  }
+  else {
+  uploadFile(req.file.path, newFileName ,res, category,id);
+  }
+})
 
+//GET method route for downloading/retrieving file
+app.get('/get_file/:file_name',(req,res)=>{
+  retrieveFile(req.params.file_name, res);
+});
 
+app.get('/delete_file/:file_name', (req,res) => {
+  const category = req.query.category;
+  const id = req.query.id;
+  const file_name = req.params.file_name;
+  deleteFile(file_name, res, category, id);
+})
 // Initialze Server
 app.listen(3000, () => {
     console.log("App listening at port 3000");
 });
+
+function uploadFile(source,targetName,res, category,id){
+    console.log('preparing to upload...');
+    fs.readFile(source, function (err, filedata) {
+      if (!err) {
+        const putParams = {
+            Bucket      : 'profilepics-codename-eizoft',
+            Key         : targetName,
+            Body        : filedata,
+            ContentType : 'image/jpeg'
+        };
+        s3.putObject(putParams, function(err, data){
+          if (err) {
+            console.log('Could nor upload the file. Error :',err);
+            return res.send({success:false});
+          } 
+          else{
+            fs.unlink(source, function(){console.log("Deleted from localStorage!")});// Deleting the file from uploads folder(Optional).Do Whatever you prefer.
+            console.log('Successfully uploaded the file');
+            if(category == 'Customer' || category == 'customer') {
+              let user = {};
+              user.profilePicLink = 'http://localhost:3000/get_file/'+targetName.slice(12);
+              User.findOneAndUpdate({userID: crypt.decrypt(id)}, user, (err,doc,results) => {
+                if(err) {
+                  res.send({err: err});
+                }
+                else {
+                  return res.send({success:true});
+                }
+              })
+            }
+            else if(category == 'Worker' || category == 'worker') {
+              let worker = {};
+              worker.profilePicLink = 'http://localhost:3000/get_file/'+targetName.slice(12);
+              Worker.findOneAndUpdate({workerID: crypt.decrypt(id)}, worker, (err,doc,results) => {
+                if(err) {
+                  res.send({err: err});
+                }
+                else {
+                  return res.send({success:true});
+                }
+              })
+            }
+          }
+        });
+      }
+      else{
+        console.log({'err':err});
+      }
+    });
+  }
+
+//The retrieveFile function
+function retrieveFile(filename,res){
+
+  const getParams = {
+    Bucket: 'profilepics-codename-eizoft',
+    Key: 'profilepics/'+filename
+  };
+
+  s3.getObject(getParams, function(err, data) {
+    if (err){
+      return res.status(400).send({success:false,err:err});
+    }
+    else{
+        res.set("Content-Type", 'image/png');
+        res.set("Content-Disposition", "inline;");
+      return res.send(data.Body);
+    }
+  });
+}
+
+function deleteFile(filename, res, category,id) {
+  const deleteParams = {
+    Bucket: 'profilepics-codename-eizoft',
+    Key: 'profilepics/'+filename
+  }
+  s3.deleteObject(deleteParams, (err,data) => {
+    if(err) {
+      return res.status(400).send({success:false,err:err});
+    }
+    else {
+      if(category == 'Worker' || category == 'worker') {
+        let worker = {};
+        worker.profilePicLink =  "";
+        Worker.findOneAndUpdate({workerID: crypt.decrypt(id)}, worker, (err,doc,result) => {
+          return res.send({status: "Success"});
+        })
+      }
+      else if(category == 'Customer' || category == 'customer') {
+        let user = {};
+        user.profilePicLink = "";
+        User.findOneAndUpdate({userID: crypt.decrypt(id)}, user, (err,doc,result) => {
+          return res.send({status: "Success"});
+        })
+      }
+    }
+  })
+}

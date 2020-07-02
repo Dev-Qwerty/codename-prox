@@ -14,7 +14,7 @@
     </div>
     <div class="bottom">
       <div class="b-heading">
-        <h3>Cleaning Services</h3>
+        <h3>Painting Services</h3>
         <div class="Line-small"></div>
       </div>
       <div class="row">
@@ -28,7 +28,7 @@
             <div class="Bbottom">
               <div id="Desc"><p>{{ service.description }}</p></div>
               <p id="Vdetails">view details  <span id="Vspan">></span></p>  
-              <router-link :to="{name: 'cmodal'}">
+              <router-link :to="{name: 'pamodal'}">
                 <input type="submit" value="Add to cart" @click="fn(service)">
               </router-link>
             </div>
@@ -36,7 +36,7 @@
         </div>
       </div>
       <router-view>
-        <Cmodal />
+        <Pamodal />
       </router-view> 
     </div>
        
@@ -44,12 +44,12 @@
 </template>
 
 <script>
-import Cmodal from '@/components/Services/Cleaning/Cmodal.vue'
+import Pamodal from '@/components/Services/Painting/Pamodal.vue'
 /*import EventBus from '../../../event-bus.js'*/
 
 export default {
   components: {
-    Cmodal
+    Pamodal
   },
   data() {
     return {
@@ -65,7 +65,7 @@ export default {
       //window.scrollTo(0,0)
     },
     apiCall() {
-      let url = 'http://localhost:3000/services/5ea50d377c154d280cf37efb'
+      let url = 'http://localhost:3000/services/5ef8c05dd213605c72b6192f'
       this.$http.get(url)
       .then((response) => {
         this.subArr = response.data

@@ -1,6 +1,6 @@
 <template>
   <footer>
-    <h5>UrbanCo</h5>
+    <h5>CliqServe</h5>
   </footer>        
 </template>
 

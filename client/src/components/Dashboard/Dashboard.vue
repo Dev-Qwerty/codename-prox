@@ -7,8 +7,33 @@
       <div class="sidenav">
         <div class="sidenav-top">
           <div class="sidenav-top-top">
-            <div class="Circle">
-              <p class="circle-inside">{{ this.winfo.profile }}</p>
+            <div class="Circle-2" v-if="noProfilePic">
+              <popper
+                trigger="clickToOpen"
+                :options="{
+                  placement: 'right',
+                  modifiers: { offset: { offset: '0,10px' } }
+              }">
+              <div class="popper">
+                  <button class="btn-dark" @click="redirectCA()">Change Avatar</button>
+                </div>
+              <button slot="reference" class="Circle-3">{{ this.winfo.profile }}</button>
+              </popper>
+            </div>
+            <div class="Circle-1" v-else>
+              <popper
+                trigger="clickToOpen"
+                :options="{
+                  placement: 'right',
+                  modifiers: { offset: { offset: '0,10px' } }
+              }">
+              <div class="popper">
+                  <button class="btn-dark" @click="redirectCA()">Change Avatar</button>
+                </div>
+              <button slot="reference"  class="Circle-1 ProfilePresent" :style="{ backgroundImage: `url(${profilePic.backgroundImage})` }" >
+              <p class="circle-inside"></p>
+            </button>
+              </popper>
             </div>
             <p class="profile-name">{{ this.winfo.name }}</p>
             <div class="profile-underline"></div>
@@ -55,10 +80,12 @@
         </div>
         <div class="sidenav-line"></div>
         <div class="sidenav-bottom">
-          <div class="sidenav-bottom-one">
-            <div class="sidenav-bottom-img1"></div>
-            <p>My Profile</p>
-          </div>
+          <router-link :to="{name: 'myprofile'}" @click.native="myprofilefn">
+            <div class="sidenav-bottom-one">
+              <div class="sidenav-bottom-img1"></div>
+              <p>My Profile</p>
+            </div>
+          </router-link>
           <a class="sidenav-bottom-two" @click = "logout()">
             <div class="sidenav-bottom-img2"></div>
             <p>Logout</p>
@@ -70,6 +97,7 @@
           <workreq />
           <!--<pworks />-->
           <myworks />
+          <myprofile />
         </router-view>       
       </div>
     </div>
@@ -80,17 +108,27 @@
 import workreq from '@/components/Dashboard/workreq.vue'
 //import pworks from '@/components/Dashboard/pworks.vue'
 import myworks from '@/components/Dashboard/myworks.vue'
+import myprofile from '@/components/Dashboard/myprofile.vue'
+import Popper from 'vue-popperjs';
+import 'vue-popperjs/dist/vue-popper.css';
 
 export default {
   components: {
     workreq,
     //pworks,
-    myworks
+    myworks,
+    myprofile,
+    'popper': Popper
   },
   data() {
     return {
       wid: this.$cookies.get("id"),
-      winfo: []
+      winfo: [],
+      noProfilePic: true,
+      profilePic: {
+        backgroundImage: ""
+      },
+      changePic: false
     }
   },
   methods: {
@@ -102,21 +140,31 @@ export default {
     workreqfn() {
       
     },
+    redirectCA() {
+      window.location.href = "http://localhost:8080/dashboard/changeAvatar";
+    },
     myworksfn() {
       
-    },       
+    },    
+    myprofilefn() {
+      
+    },        
     logout() {
       this.$cookies.remove("username");
       this.$cookies.remove("id");
       this.$cookies.remove("pid");
       this.$session.destroy()
-      window.location.href = "http://localhost:8080/"
+      window.location.href = "http://localhost:8080/login"
     },
     apiCall() {
-      let url = 'http://localhost:3000/worker/getBasicProfile/' + this.wid
+      let url = 'http://localhost:3000/worker/getBasicProfile/' + this.$cookies.get("id");
       this.$http.get(url)
       .then((response) => {
         this.winfo = response.data
+        if(this.winfo.profilePicLink != "") {
+          this.profilePic.backgroundImage = this.winfo.profilePicLink;
+          this.noProfilePic = false;
+        }
       })
       .catch((error) => {
         alert(error);
@@ -126,7 +174,7 @@ export default {
   created() {
    this.apiCall() 
    //this.$router.push('dashboard/workrequests')
-  }
+  },
 }        
 </script>
 
@@ -148,6 +196,12 @@ export default {
     display: grid;
     grid-template-columns: 20% 80%;
     /*height: 676px;*/
+  }
+  .fileInput {
+    visibility: hidden;
+    display: block;
+    height: 0;
+    width: 0;
   }
   .sidenav {
     height: 676px;
@@ -178,6 +232,33 @@ export default {
     background-color: #DBDBDB;
     border-radius: 50%;
   }
+  .Circle-1 {
+    padding-left: 1px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5px;
+    width: 70px;
+    height: 70px;
+    background-color: #DBDBDB;
+    border-radius: 50%;
+  }
+  .Circle-2 {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5px;
+    width: 70px;
+    height: 70px;
+    background-color: #DBDBDB;
+    border-radius: 50%;
+  }
+  .Circle-3 {
+    margin-left: auto;
+    margin-right: auto;
+    width: 70px;
+    height: 70px;
+    background-color: #DBDBDB;
+    border-radius: 50%;
+  }
   .circle-inside {
     font-size: 35px;
     margin: 0 auto;    
@@ -201,8 +282,9 @@ export default {
     margin-top: 20px;   
   }
  .sidenav-top-mid-one {
-    display: grid;
-    grid-template-columns: 15% 95%;
+    /*display: grid;
+    grid-template-columns: 15% 95%;*/
+    display: flex;
     padding-top: 0px;
     margin-left: auto;
     margin-right: auto;    
@@ -217,13 +299,14 @@ export default {
     background-size: contain;    
   }   
   .job-title {
-    margin-left: 10px;
+    margin-left: 5px;
     font-size: 17px;
     color: #707070;
   } 
  .sidenav-top-mid-two {
-    display: grid;
-    grid-template-columns: 15% 95%;
+    /*display: grid;
+    grid-template-columns: 15% 95%;*/
+    display: flex;
     margin-top: -4px;
     margin-left: auto;
     margin-right: auto;       
@@ -238,7 +321,7 @@ export default {
     background-size: contain;    
   }   
   .Place {
-    margin-left: 0px;
+    margin-left: 5px;
     font-size: 17px;
     color: #707070;
   }     
@@ -267,6 +350,9 @@ export default {
     padding-top: 15px;
     padding-left: 15%;
   }
+  .sidenav-mid-one:hover {
+    cursor: pointer;
+  }  
   /*.sidenav-mid-one:hover {
     cursor: pointer;
     background-color: #000;
@@ -376,7 +462,10 @@ export default {
     grid-template-columns: 15% 95%;
     padding-top: 15px;
     padding-left: 10%;
-  }     
+  }  
+  .sidenav-bottom-two:hover {
+    cursor: pointer;
+  }        
   .sidenav-bottom-img2 {
     margin-top: 3px;
     margin-left: 18px;
@@ -393,5 +482,16 @@ export default {
   }              
   .dashboard-body {
     background-color: #F5F5F5;
+  }
+  .ProfilePresent {
+    background-size: contain;
+  }
+  .ir-box-three-img {
+    width: 23px;
+    height: 23px;
+    background-image: url('../../assets/ir-tick.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;  
   }             
 </style>

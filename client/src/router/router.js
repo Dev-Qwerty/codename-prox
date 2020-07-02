@@ -12,20 +12,38 @@ import Blog from '../components/Blog/Bmain.vue'
 import Services from '../components/ServicesPage/SMain.vue'
 import Cleaning from '@/components/Services/Cleaning/Cmain.vue'
 import Cmodal from '@/components/Services/Cleaning/Cmodal.vue'
-import cart from '@/components/Services/Cleaning/cart.vue'
-import checkout from '@/components/Services/Cleaning/checkout.vue'
-import PayLaterConfirm from '@/components/Services/Cleaning/PayLaterConfirm.vue'
+import cart from '@/components/Checkout/cart.vue'
+import checkout from '@/components/Checkout/checkout.vue'
+import PayLaterConfirm from '@/components/Checkout/PayLaterConfirm.vue'
 import Dashboard from '@/components/Dashboard/DMain.vue'
 import Cdashboard from '@/components/CustomerDashboard/CDmain.vue'
 import workreq from '@/components/Dashboard/workreq.vue'
 //import pworks from '@/components/Dashboard/pworks.vue'
 import myworks from '@/components/Dashboard/myworks.vue'
+import myprofile from '@/components/Dashboard/myprofile.vue'
 import ForgotPassword from '@/components/ForgotPassword/FPMain.vue'
 import UpdateProfile from '@/components/UpdateProfile/UPMain.vue'
 import CompleteProfile from '@/components/CompleteProfile/CPMain.vue'
 import AddAddress from '@/components/AddAddress/AAMain.vue'
 import ConfirmEmail from '@/components/ConfirmEmail/CEMain.vue'
 import { isNullOrUndefined } from 'util';
+import Electronics from '@/components/Services/Electronics/Electronics'
+import Ecmodal from '@/components/Services/Electronics/Ecmodal'
+import Carpentry from '@/components/Services/Carpentry/Carpentry'
+import Ctmodal from '@/components/Services/Carpentry/Ctmodal'
+import Plumbing from '@/components/Services/Plumbing/Plumbing'
+import Pmodal from '@/components/Services/Plumbing/Pmodal'
+import Fabrication from '@/components/Services/Fabrication/Fabrication'
+import Fmodal from '@/components/Services/Fabrication/Fmodal'
+import Photography from '@/components/Services/Photography/Photography'
+import Phmodal from '@/components/Services/Photography/Phmodal'
+import Painting from '@/components/Services/Painting/Painting'
+import Pamodal from '@/components/Services/Painting/Pamodal'
+import Electrical from '@/components/Services/Electrical/Electrical'
+import Eemodal from '@/components/Services/Electrical/Eemodal'
+import Pestcontrol from '@/components/Services/Pestcontrol/Pestcontrol'
+import Pcmodal from '@/components/Services/Pestcontrol/Pcmodal'
+import ChangeAvatar from '@/components/ChangeAvatar/CAMain.vue'
 
 Vue.use(VueRouter)
 
@@ -93,35 +111,129 @@ export default new VueRouter({
       component: Cleaning,    
       children: [
         {
-          path: 'modal',
-          name: 'modal',
+          path: 'cmodal',
+          name: 'cmodal',
           component: Cmodal,
-          props: true,
+          props: true
+        },       
+      ]
+    },
+    { 
+      path: '/services/electronics-and-appliances', 
+      component: Electronics,    
+      children: [
+        {
+          path: 'ecmodal',
+          name: 'ecmodal',
+          component: Ecmodal,
+          props: true
+        },       
+      ]
+    },
+    { 
+      path: '/services/carpentry', 
+      component: Carpentry,    
+      children: [
+        {
+          path: 'ctmodal',
+          name: 'ctmodal',
+          component: Ctmodal,
+          props: true
+        },       
+      ]
+    },
+    { 
+      path: '/services/plumbing', 
+      component: Plumbing,    
+      children: [
+        {
+          path: 'pmodal',
+          name: 'pmodal',
+          component: Pmodal,
+          props: true
+        },       
+      ]
+    },
+    { 
+      path: '/services/fabrication', 
+      component: Fabrication,    
+      children: [
+        {
+          path: 'fmodal',
+          name: 'fmodal',
+          component: Fmodal,
+          props: true
+        },       
+      ]
+    },
+    { 
+      path: '/services/photography', 
+      component: Photography,    
+      children: [
+        {
+          name: 'phmodal',
+          path: 'phmodal',
+          component: Phmodal,
+          props: true
+        },       
+      ]
+    },
+    { 
+      path: '/services/painting', 
+      component: Painting,    
+      children: [
+        {
+          name: 'pamodal',
+          path: 'pamodal',
+          component: Pamodal,
+          props: true
+        },       
+      ]
+    },
+    { 
+      path: '/services/electrical-and-wiring', 
+      component: Electrical,    
+      children: [
+        {
+          name: 'eemodal',
+          path: 'eemodal',
+          component: Eemodal,
+          props: true
+        },       
+      ]
+    },
+    { 
+      path: '/services/pest-control', 
+      component: Pestcontrol,    
+      children: [
+        {
+          name: 'pcmodal',
+          path: 'pcmodal',
+          component: Pcmodal,
+          props: true
+        },       
+      ]
+    },
+    {
+      path: '/services/cart',
+      name: 'cart',
+      component: cart,
+      props: true,
+      children: [
+        {
+          path: 'checkout',
+          name: 'checkout',
+          component: checkout,
+          props: true,      
           children: [
             {
-              path: 'cart',
-              name: 'cart',
-              component: cart,
+              path: 'confirm',
+              name: 'confirm',
+              component: PayLaterConfirm,
               props: true,
-              children: [
-                {
-                  path: 'checkout',
-                  name: 'checkout',
-                  component: checkout,
-                  props: true,      
-                  children: [
-                    {
-                      path: 'confirm',
-                      name: 'confirm',
-                      component: PayLaterConfirm,
-                      props: true,
-                    }
-                  ]        
-                }
-              ]
             }
-          ]
-        },       
+          ]        
+        }
       ]
     },
     { 
@@ -150,7 +262,18 @@ export default new VueRouter({
           name: 'myworks',
           component: myworks,
           props: true
-        }              
+        },
+        {
+          path: 'myprofile',
+          name: 'myprofile',
+          component: myprofile,
+          props: true
+        },
+        {
+          path: 'changeAvatar',
+          name: 'changeAvatar',
+          component: ChangeAvatar
+        }                              
       ],
       beforeEnter (to, from, next) {
         if(Vue.$cookies.get("pid")==undefined) {
@@ -185,6 +308,6 @@ export default new VueRouter({
     {
       path: '/confirmEmail',
       component: ConfirmEmail
-    }           
+    },          
   ]
 })

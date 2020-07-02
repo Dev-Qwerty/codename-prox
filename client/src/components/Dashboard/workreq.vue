@@ -84,6 +84,8 @@ export default {
   methods: {
     apiCall() {
       let url = 'http://localhost:3000/request/workrequest/f35ce2de4348f6943f9621bed9af307f'
+      //let url = 'http://localhost:3000/request/workrequest/' + this.$cookies.get("pid")
+      //alert(url)
       this.$http.get(url)
       .then((response) => {
         this.reqarr = response.data
@@ -95,6 +97,7 @@ export default {
     acceptfn(obj) {
       let arr = obj
       let url = 'http://localhost:3000/request/workrequest/f35ce2de4348f6943f9621bed9af307f'
+      //let url = 'http://localhost:3000/request/workrequest/' + this.wid
       this.$http.post(url, {
         "orderId": arr.orderID,
         "requestId": arr.requestID,
@@ -127,6 +130,7 @@ export default {
     declinefn(obj) {
       let arr = obj
       let url = 'http://localhost:3000/request/workrequest/f35ce2de4348f6943f9621bed9af307f'
+      //let url = 'http://localhost:3000/request/workrequest/' + this.wid
       this.$http.post(url, {
         "orderId": arr.orderID,
         "requestId": arr.requestID,
