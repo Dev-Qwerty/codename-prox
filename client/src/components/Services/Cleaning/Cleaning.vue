@@ -27,7 +27,19 @@
             <div class="BLine"></div>
             <div class="Bbottom">
               <div id="Desc"><p>{{ service.description }}</p></div>
-              <p id="Vdetails">view details</p>  
+              <popper
+                trigger="clickToToggle"
+                :options="{
+                  placement: 'right',
+                  modifiers: { offset: { offset: '0,10px' } }
+                }">
+                <div class="popper">
+                  <h1>hello</h1>       
+                </div>
+            
+                  <p id="Vdetails" slot="reference">view details</p>  
+              
+              </popper>  
               <router-link :to="{name: 'cmodal'}">
                 <input type="submit" value="Add to cart" @click="fn(service)">
               </router-link>
@@ -44,12 +56,15 @@
 </template>
 
 <script>
+import Popper from 'vue-popperjs';
+import 'vue-popperjs/dist/vue-popper.css';
 import Cmodal from '@/components/Services/Cleaning/Cmodal.vue'
 /*import EventBus from '../../../event-bus.js'*/
 
 export default {
   components: {
-    Cmodal
+    Cmodal,
+    'popper': Popper
   },
   data() {
     return {
