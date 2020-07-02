@@ -37,6 +37,7 @@ const companyRouter = require("./routes/company-router");
 const orderRouter = require('./routes/order-router');
 const workerRequest = require('./routes/workrequest-route');
 const loginRouter = require('./routes/login-route');
+const completeOrder = require('./routes/ordercomplete-route');
 
 
 // set relative path
@@ -47,6 +48,7 @@ app.use('/company', [parseUrl,parseJson], companyRouter)
 app.use('/orders', orderRouter)
 app.use('/request', [parseUrl,parseJson], workerRequest)
 app.use('/auth', [parseUrl,parseJson], loginRouter)
+app.use('/completeorder', completeOrder)
 
 app.post('/autosuggest',[parseUrl,parseJson], async (req, res) => {
     try {
