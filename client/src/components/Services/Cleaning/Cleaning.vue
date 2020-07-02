@@ -226,6 +226,9 @@ export default {
     width: 100px;
     padding-left: 7px;
   }
+  #Vdetails:hover {
+    cursor: pointer;
+  }  
   
   .Bbottom input[type="submit"] {
     border: none;
@@ -246,7 +249,7 @@ export default {
     border: none;
     width: 90%;
     height: 80%;
-    background-color: #000;
+    background-color: #fff;
     opacity: 0.9;
   }
 </style>
