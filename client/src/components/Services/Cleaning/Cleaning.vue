@@ -37,10 +37,12 @@
                   <p>{{ service.moreDetail }}</p>    
                 </div>
                 <p id="Vdetails" slot="reference">view details</p>  
-              </popper>  
-              <router-link :to="{name: 'cmodal'}">
-                <input type="submit" value="Add to cart" @click="fn(service)">
-              </router-link>
+              </popper>
+              <div class="card-btn-wrapper">
+                <router-link :to="{name: 'cmodal'}">
+                  <input type="submit" value="Add to cart" @click="fn(service)">
+                </router-link>                
+              </div>  
             </div>
           </div> 
         </div>
@@ -230,14 +232,15 @@ export default {
   #Vdetails:hover {
     cursor: pointer;
   }  
-  
+  .card-btn-wrapper {
+    margin-top: 25px;
+    text-align: center;
+    margin-bottom: 10px;
+  }
   .Bbottom input[type="submit"] {
     border: none;
     background-color: #000;
     color: #fff;
-    margin-top: 25px;
-    margin-left: 130px;
-    margin-bottom: 10px;
     width: 120px;
     height: 50px;
     font-family: Arial;
