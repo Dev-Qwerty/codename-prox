@@ -34,7 +34,7 @@
                   modifiers: { offset: { offset: '0,10px' } }
                 }">
                 <div class="popper">
-                  <h1>hello</h1>       
+                  <p>{{ service.moreDetail }}</p>    
                 </div>
             
                   <p id="Vdetails" slot="reference">view details</p>  
@@ -221,10 +221,10 @@ export default {
   #Vdetails {
     margin-top: 10px;
     font-weight: bold;
-    font-size: 15px;
+    font-size: 14px;
     border: 1px solid #000;
     width: 100px;
-    padding-left: 7px;
+    padding-left: 10px;
   }
   #Vdetails:hover {
     cursor: pointer;
