@@ -57,12 +57,9 @@ export default {
     }
   },
   methods: {
-    cartfn() {
-      window.scrollTo(0,0)
-    },
     fn(obj) {
       this.$cookies.set("sarray", JSON.stringify(obj), "id")
-      //window.scrollTo(0,0)
+      window.scrollTo(0,0)
     },
     apiCall() {
       let url = 'http://localhost:3000/services/5ea50d377c154d280cf37efb'
