@@ -13,3 +13,6 @@ router
             console.log(error)
         }
     })
+
+
+module.exports = router;
