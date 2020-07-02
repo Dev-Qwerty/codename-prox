@@ -177,7 +177,7 @@ export default {
   }
   .Line-small {
     margin-top: 0px;
-    width: 300px;
+    width: 350px;
     height: 2px;
     background-color: #000;    
   }
