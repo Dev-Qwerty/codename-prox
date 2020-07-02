@@ -167,7 +167,7 @@ export default {
     margin-right: auto;
   }
   .b-heading h3 {
-    font-size: 30px;
+    font-size: 29px;
     color: #000;
     font-weight: bold;
     margin-left: -20px;
@@ -179,6 +179,7 @@ export default {
     background-color: #000;    
   }
   .row {
+    margin-bottom: 50px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 20px;

@@ -165,13 +165,15 @@ export default {
   .bottom {
     width: 85%;
     height: 200px;
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 60px;
-    margin-left: 80px;
   }
   .b-heading h3 {
     font-size: 30px;
     color: #000;
     font-weight: bold;
+    margin-left: -20px;
   }
   .Line-small {
     margin-top: 0px;
@@ -180,8 +182,10 @@ export default {
     background-color: #000;    
   }
   .row {
-    margin-left: 20px;
+    margin-bottom: 50px;
     margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 35px;
