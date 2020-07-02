@@ -170,14 +170,14 @@ export default {
     margin-right: auto;
   }
   .b-heading h3 {
-    font-size: 30px;
+    font-size: 28px;
     color: #000;
     font-weight: bold;
     margin-left: -20px;
   }
   .Line-small {
     margin-top: 0px;
-    width: 90px;
+    width: 300px;
     height: 2px;
     background-color: #000;    
   }

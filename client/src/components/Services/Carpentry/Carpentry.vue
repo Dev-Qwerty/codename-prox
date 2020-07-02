@@ -170,7 +170,7 @@ export default {
     margin-top: 60px;
   }
   .b-heading h3 {
-    font-size: 30px;
+    font-size: 29px;
     color: #000;
     font-weight: bold;
     margin-left: -20px;
