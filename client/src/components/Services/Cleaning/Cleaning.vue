@@ -242,4 +242,11 @@ export default {
     box-shadow: 3px 3px #dedee0;
     border-radius: 10px;;
   }    
+  .popper {
+    border: none;
+    width: 90%;
+    height: 80%;
+    background-color: #000;
+    opacity: 0.9;
+  }
 </style>
