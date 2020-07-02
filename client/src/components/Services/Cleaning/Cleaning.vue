@@ -223,8 +223,8 @@ export default {
     font-weight: bold;
     font-size: 14px;
     border: 1px solid #000;
-    width: 100px;
-    padding-left: 10px;
+    width: 95px;
+    padding-left: 8px;
   }
   #Vdetails:hover {
     cursor: pointer;
@@ -246,10 +246,11 @@ export default {
     border-radius: 10px;;
   }    
   .popper {
-    border: none;
+    border: 1px solid #aaa;
     width: 90%;
-    height: 80%;
+    height: 60%;
     background-color: #fff;
+    color: #000;
     opacity: 0.9;
   }
 </style>
