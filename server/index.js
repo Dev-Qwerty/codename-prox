@@ -10,6 +10,7 @@ const User = require('./models/user-model');
 const Worker = require('./models/worker-model');
 const Company = require('./models/company-model');
 const crypt = require('./misc/crypt');
+const path = require('path');
 
 const storage = multer.diskStorage({
     destination : 'uploads/',
@@ -107,15 +108,16 @@ app.post('/post_file', upload.single('demo_file'), function (req, res) {
   //req.file is the demo_file
   const category = req.query.category;
   const id = req.query.id;
-  const newFileName = 'profilepics/'+ req.file.filename;
+  const newFileName = 'profilepics/'+ id.slice(1,6) + path.extname(req.file.path);
+  const FileName = id.slice(1,6) + path.extname(req.file.path);
   const allowedTypes = ["image/jpeg", "image/jpg", "image/png"];
   if(!allowedTypes.includes(req.file.mimetype)){
     res.send({status: "Error!", code: "Invalid format!", success: false});
   }
   else {
-    checkFileExists(req.file.filename, function(err, results) {
+    checkFileExists(FileName, function(err, results) {
       if(results == 1) {
-        deleteExistingFile(req.file.filename, category, id, function(err, results) {
+        deleteExistingFile(FileName, category, id, function(err, results) {
           if(results == 1) {
             console.log("Deleted Existing File!");
             uploadFile(req.file.path, newFileName ,res, category,id);
