@@ -36,9 +36,7 @@
                 <div class="popper">
                   <p>{{ service.moreDetail }}</p>    
                 </div>
-            
-                  <p id="Vdetails" slot="reference">view details</p>  
-              
+                <p id="Vdetails" slot="reference">view details</p>  
               </popper>  
               <router-link :to="{name: 'cmodal'}">
                 <input type="submit" value="Add to cart" @click="fn(service)">

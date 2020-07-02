@@ -27,7 +27,17 @@
             <div class="BLine"></div>
             <div class="Bbottom">
               <div id="Desc"><p>{{ service.description }}</p></div>
-              <p id="Vdetails">view details  <span id="Vspan">></span></p>  
+              <popper
+                trigger="clickToToggle"
+                :options="{
+                  placement: 'right',
+                  modifiers: { offset: { offset: '0,10px' } }
+                }">
+                <div class="popper">
+                  <p>{{ service.moreDetail }}</p>    
+                </div>
+                <p id="Vdetails" slot="reference">view details</p>  
+              </popper> 
               <router-link :to="{name: 'pcmodal'}">
                 <input type="submit" value="Add to cart" @click="fn(service)">
               </router-link>
@@ -44,12 +54,15 @@
 </template>
 
 <script>
+import Popper from 'vue-popperjs';
+import 'vue-popperjs/dist/vue-popper.css';
 import Pcmodal from '@/components/Services/Pestcontrol/Pcmodal.vue'
 /*import EventBus from '../../../event-bus.js'*/
 
 export default {
   components: {
-    Pcmodal
+    Pcmodal,
+    'popper': Popper      
   },
   data() {
     return {
@@ -207,17 +220,23 @@ export default {
     margin-bottom: 0px;
   }
   #Vdetails {
-    margin: 0px;
+    margin-top: 10px;
     font-weight: bold;
-    font-size: 15px;
+    font-size: 14px;
+    border: 1px solid #000;
+    width: 95px;
+    padding-left: 8px;
   }
-  
+  #Vdetails:hover {
+    cursor: pointer;
+  }  
   .Bbottom input[type="submit"] {
     border: none;
     background-color: #000;
     color: #fff;
-    margin-top: 5px;
+    margin-top: 25px;
     margin-left: 130px;
+    margin-bottom: 10px;
     width: 120px;
     height: 50px;
     font-family: Arial;
@@ -226,4 +245,13 @@ export default {
     box-shadow: 3px 3px #dedee0;
     border-radius: 10px;;
   }    
+  .popper {
+    padding-top: 10%;
+    border: 1px solid #aaa;
+    width: 90%;
+    min-height: 60%;
+    background-color: #fff;
+    color: #000;
+    opacity: 0.9;
+  }     
 </style>
