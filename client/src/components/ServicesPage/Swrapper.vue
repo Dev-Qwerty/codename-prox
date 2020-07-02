@@ -15,7 +15,7 @@
       </div>
       <div class="grid2">
         <div class="b1">
-          <router-link class="" :to="{ path: '/services/plumbing' }"> 
+          <router-link class="" :to="{ path: '/services/plumbing' }" @click.native="fn"> 
             <div class="iBox i1">
               <div class="i1img"></div>
               <p class="i1h">PLUMBING</p>
@@ -23,12 +23,12 @@
           </router-link>  
         </div>
         <div class="b1">
-          <router-link class="" :to="{ path: '/services/electrical-and-wiring' }"> 
+          <router-link class="" :to="{ path: '/services/electrical-and-wiring' }" @click.native="fn"> 
             <div class="iBox i2"></div>
           </router-link>  
         </div>
         <div class="b2">
-          <router-link class="" :to="{ path: '/services/electronics-and-appliances' }"> 
+          <router-link class="" :to="{ path: '/services/electronics-and-appliances' }" @click.native="fn"> 
             <div class="iBox i3">
               <div class="i3img"></div>
               <p class="i3h">HOME APPLIANCES</p>   
@@ -38,7 +38,7 @@
       </div>
       <div class="grid3">
         <div class="b1">
-          <router-link class="" :to="{ path: '/services/fabrication' }"> 
+          <router-link class="" :to="{ path: '/services/fabrication' }" @click.native="fn"> 
             <div class="iBox i4">
               <div class="i4img"></div>
               <p class="i4h">FABRICATION</p>            
@@ -46,7 +46,7 @@
           </router-link>  
         </div>
         <div class="b1">
-          <router-link class="" :to="{ path: '/services/carpentry' }"> 
+          <router-link class="" :to="{ path: '/services/carpentry' }" @click.native="fn"> 
             <div class="iBox i5">
               <div class="i5img"></div>
               <p class="i5h">CARPENTRY</p>                 
@@ -54,24 +54,24 @@
           </router-link>
         </div>
         <div class="b2">
-           <router-link class="" :to="{ path: '/services/photography' }"> 
+           <router-link class="" :to="{ path: '/services/photography' }" @click.native="fn"> 
             <div class="iBox i6"></div>
           </router-link>
         </div>      
       </div>   
       <div class="grid4">
         <div class="b3">
-           <router-link class="" :to="{ path: '/services/painting' }"> 
+           <router-link class="" :to="{ path: '/services/painting' }" @click.native="fn"> 
             <div class="iBox i7"></div>
           </router-link>
         </div>
         <div class="b3">
-          <router-link class="" :to="{ path: '/services/cleaning' }"> 
+          <router-link class="" :to="{ path: '/services/cleaning' }" @click.native="fn"> 
             <div class="iBox i8"></div>
           </router-link>
         </div>
         <div class="">
-          <router-link class="" :to="{ path: '/services/pest-control' }">
+          <router-link class="" :to="{ path: '/services/pest-control' }" @click.native="fn">
             <div class="iBox i9">
               <div class="i9img"></div>
               <p class="i9h">PEST CONTROL</p>              
@@ -118,6 +118,7 @@ export default {
   },
   methods: {
     fn() {
+      window.scrollTo(0,0)
     }
   }
 }
