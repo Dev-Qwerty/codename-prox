@@ -17,6 +17,7 @@ const subserviceModel = require('../models/subservice-model');
 const workRequestModel = require('../models/workrequest-model');
 const mainserviceModel = require('../models/mainservice-model');
 const workerModel = require('../models/worker-model');
+const ordertokenModel = require('../models/work-token');
 
 const paytm = require('../config/keys')
 const checksum_lib = require('../config/paymentgateway/checksum')
@@ -76,6 +77,12 @@ router
 
                 newOrder.save();
                 res.json({ "message": "Order placed succesfully" });
+
+                //create and save token
+                let newOrderToken = new ordertokenModel;
+                newOrderToken.orderID = newOrder.orderID;
+                newOrderToken.token = Math.floor(Math.random() * (999999 - 100000)) + 100000;
+                newOrderToken.save()
 
 
                 // function call to find worker for job assigning 
