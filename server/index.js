@@ -108,8 +108,8 @@ app.post('/post_file', upload.single('demo_file'), function (req, res) {
   //req.file is the demo_file
   const category = req.query.category;
   const id = req.query.id;
-  const newFileName = 'profilepics/'+ id.slice(1,6) + path.extname(req.file.path);
-  const FileName = id.slice(1,6) + path.extname(req.file.path);
+  const newFileName = 'profilepics/'+ crypt.encrypt(id.slice(1,6)) + path.extname(req.file.path);
+  const FileName = crypt.encrypt(id.slice(1,6)) + path.extname(req.file.path);
   const allowedTypes = ["image/jpeg", "image/jpg", "image/png"];
   if(!allowedTypes.includes(req.file.mimetype)){
     res.send({status: "Error!", code: "Invalid format!", success: false});
@@ -140,7 +140,8 @@ app.get('/get_file/:file_name',(req,res)=>{
 app.get('/delete_file/:file_name', (req,res) => {
   const category = req.query.category;
   const id = req.query.id;
-  const file_name = req.params.file_name;
+  const fileExt = (req.params.file_name).split('.').pop();
+  const file_name = crypt.encrypt(id.slice(1,6)) +  '.'  +fileExt;
   deleteFile(file_name, res, category, id);
 })
 // Initialze Server
