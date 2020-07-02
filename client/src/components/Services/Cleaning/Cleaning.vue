@@ -161,12 +161,14 @@ export default {
     width: 85%;
     height: 200px;
     margin-top: 60px;
-    margin-left: 80px;
+    margin-left: auto;
+    margin-right: auto;
   }
   .b-heading h3 {
     font-size: 30px;
     color: #000;
     font-weight: bold;
+    margin-left: -20px;
   }
   .Line-small {
     margin-top: 0px;
@@ -175,7 +177,8 @@ export default {
     background-color: #000;    
   }
   .row {
-    margin-left: 20px;
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 20px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
