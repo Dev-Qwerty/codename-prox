@@ -113,7 +113,20 @@ app.post('/post_file', upload.single('demo_file'), function (req, res) {
     res.send({status: "Error!", code: "Invalid format!", success: false});
   }
   else {
-  uploadFile(req.file.path, newFileName ,res, category,id);
+    checkFileExists(req.file.filename, function(err, results) {
+      if(results == 1) {
+        deleteExistingFile(req.file.filename, category, id, function(err, results) {
+          if(results == 1) {
+            console.log("Deleted Existing File!");
+            uploadFile(req.file.path, newFileName ,res, category,id);
+          }
+        })
+      }
+      else {
+        uploadFile(req.file.path, newFileName ,res, category,id);
+      }
+    })
+    //uploadFile(req.file.path, newFileName ,res, category,id);
   }
 })
 
@@ -232,7 +245,7 @@ function deleteFile(filename, res, category,id) {
   })
 }
 
-function checkFileExists(file_name) {
+function checkFileExists(file_name, callback) {
   const getParams = {
     Bucket: 'profilepics-codename-eizoft',
     Key: 'profilepics/'+file_name
@@ -240,10 +253,38 @@ function checkFileExists(file_name) {
 
   s3.getObject(getParams, function(err, data) {
     if (err){
-      return false;
+      callback(err, 0);
     }
     else{
-        return true;
+        callback(null, 1);
     }
   });
+}
+
+function deleteExistingFile(file_name, category, id, callback) {
+  const deleteParams = {
+    Bucket: 'profilepics-codename-eizoft',
+    Key: 'profilepics/'+file_name
+  }
+  s3.deleteObject(deleteParams, (err,data) => {
+    if(err) {
+      callback(err, 0);
+    }
+    else {
+      if(category == 'Worker' || category == 'worker') {
+        let worker = {};
+        worker.profilePicLink =  "";
+        Worker.findOneAndUpdate({workerID: crypt.decrypt(id)}, worker, (err,doc,result) => {
+          callback(null, 1);
+        })
+      }
+      else if(category == 'Customer' || category == 'customer') {
+        let user = {};
+        user.profilePicLink = "";
+        User.findOneAndUpdate({userID: crypt.decrypt(id)}, user, (err,doc,result) => {
+          callback(null,1);
+        })
+      }
+    }
+  })
 }
