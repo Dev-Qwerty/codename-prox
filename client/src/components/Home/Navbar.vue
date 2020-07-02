@@ -33,7 +33,16 @@
       <li class="nav-item">
         <router-link class="btn btn-light" :to="{ path: 'signup' }" tag="button">SignUp</router-link>
       </li>
-
+      <li class="nav-item">
+        <!--<router-link class="nav-link" :to="{ path: '/about' }">About Us</router-link>-->
+        <div class="Profile">
+          
+        </div>
+        <!--<select name="" class="Profile" v-model="category">
+          <option value="dashboard">Dashboard</option>
+          <option value="company">Company</option>
+        </select>-->         
+      </li>
     </ul>
   </nav>
 </template>
@@ -63,5 +72,17 @@ export default {
   }
   .navbar-brand {
     font-size: 22px;
+  }
+  .Profile {
+    margin-left: 5px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    width: 39px;
+    height: 39px;
+    background-image: url('../../assets/p2.png');
+    background-blend-mode: overlay;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;       
   }
 </style>
