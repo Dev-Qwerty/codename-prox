@@ -153,6 +153,7 @@ export default {
       this.$cookies.remove("username");
       this.$cookies.remove("id");
       this.$cookies.remove("pid");
+      this.$cookies.remove("category");
       this.$session.destroy()
       window.location.href = "http://localhost:8080/login"
     },
