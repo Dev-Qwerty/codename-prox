@@ -1,4 +1,5 @@
 const express = require('express');
+router = express.Router()
 
 // import models
 const worktokenModel = require('../models/work-token');
