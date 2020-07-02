@@ -70,7 +70,7 @@ app.use('/company', [parseUrl,parseJson], companyRouter)
 app.use('/orders', orderRouter)
 app.use('/request', [parseUrl,parseJson], workerRequest)
 app.use('/auth', [parseUrl,parseJson], loginRouter)
-app.use('/completeorder', completeOrder)
+app.use('/completeorder', [parseUrl,parseJson], completeOrder)
 
 app.post('/autosuggest',[parseUrl,parseJson], async (req, res) => {
     try {
