@@ -246,9 +246,10 @@ export default {
     border-radius: 10px;;
   }    
   .popper {
+    padding-top: 10%;
     border: 1px solid #aaa;
     width: 90%;
-    height: 60%;
+    min-height: 60%;
     background-color: #fff;
     color: #000;
     opacity: 0.9;
