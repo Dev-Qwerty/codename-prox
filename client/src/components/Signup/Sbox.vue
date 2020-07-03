@@ -43,7 +43,7 @@ export default {
     return {
       email: "",
       phone: null,
-      password: ""
+      password: "",
     }
   },
   methods: {
