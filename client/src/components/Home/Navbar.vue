@@ -34,7 +34,7 @@
         <router-link class="btn btn-light" :to="{ path: 'signup' }" tag="button">SignUp</router-link>
       </li>
       <li class="nav-item">
-        <div class="dropdown show">
+        <div class="dropdown show" v-if="this.cc == 'true'">
           <div class="Profile" data-toggle="dropdown" id="dropdownMenuLink"></div>
 
           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -50,10 +50,26 @@
 
 <script>
 export default {
+  data() {
+    return {
+      cc: 'false'
+    }
+  },
   methods: {
     loginClicked() {
       window.location.href="http://localhost:8080/login";
+    },
+    ccfn() {
+      let category = this.$cookies.get("category")
+      if(category != null) {
+        if(category == "Customer") {
+          this.cc = 'true'
+        }  
+      }
     }
+  },
+  created() {
+    this.ccfn()
   }
 }
 </script>
@@ -75,6 +91,7 @@ export default {
     font-size: 22px;
   }
   .Profile {
+    margin-right: 20px;
     margin-left: 5px;
     border: 1px solid #aaa;
     border-radius: 5px;
@@ -86,29 +103,7 @@ export default {
     background-position: center;
     background-size: cover;       
   }
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-  }
+  .dropdown-menu {
 
-  .dropdown-content a {
-    float: none;
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
   }
-
-  .dropdown-content a:hover {
-    background-color: #ddd;
-  }
-
-  .Profile:hover .dropdown-content {
-    display: block;
-  }  
 </style>
