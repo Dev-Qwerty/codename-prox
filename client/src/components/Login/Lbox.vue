@@ -36,7 +36,7 @@ export default {
       password: "",
       errormsg: "",
       errorstatus: false,
-      captchastatus: false
+      captchastatus: false,
     }
   },
   methods: {
