@@ -8,8 +8,12 @@ const orderTokenSchema = mongoose.Schema({
     status: {
         type: String,
     },
-    token: {
-        type: String,
+    token1: {
+        type: Number,
+        required: true
+    },
+    token2: {
+        type: Number,
         required: true
     }
 })
