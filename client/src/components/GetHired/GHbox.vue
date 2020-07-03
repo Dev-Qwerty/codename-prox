@@ -15,7 +15,7 @@
         <p>your customer to chat and make a deal to get their</p>
         <p>work done. So why waiting..</p>
         <router-link :to="{ path:'wcsignup' }" @click="wcsignupfn">
-          <input type="submit" value="GET HIRED">
+          <input :disabled="(this.cat == 'Customer') || (this.cat == 'Worker')" type="submit" value="GET HIRED">
         </router-link> 
       </div>
       <div class="img">
@@ -73,6 +73,7 @@ export default {
   },
   data() {
     return {
+      cat: this.$cookies.get("category")
     }
   },
   methods: {
