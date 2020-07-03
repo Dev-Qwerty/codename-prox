@@ -2,7 +2,7 @@ const express = require('express');
 router = express.Router()
 
 // import models
-const ordertokenModel = require('../models/order-token');
+const ordertokenModel = require('../models/order-status');
 const orderModel = require('../models/order-model');
 
 router
