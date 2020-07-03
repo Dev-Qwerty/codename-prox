@@ -8,6 +8,7 @@ const subserviceModel = require('../models/subservice-model');
 const workOrderModel = require('../models/order-model');
 const Token = require('../models/token');
 const crypt = require('../misc/crypt');
+const workerZoneModel = require('../models/worker-zone');
 
 const poolData = {
 	UserPoolId: keys.cognito.userPoolId || process.env['COGNITOUSERPOOLID'],
@@ -92,19 +93,28 @@ router.post('/addAddress', (req, res) => {
 	  }
 	  else {
 		const newAddress = req.body.address;
+		const id = req.body.id;
 		let worker = {};
 		worker.address = newAddress;
 		worker.completedProfile = req.body.completedProfile;
-		worker = { $set: worker };
-		Worker.findOneAndUpdate({workerID: crypt.decrypt(req.body.id)}, worker, (err,doc,result) => {
+		workerZoneModel.findOne({pincodes: req.body.address.pincode}, (err,results) => {
 			if(err) {
-				console.log("Error");
+				console.log(err);
 			}
 			else {
-				res.send({status: "Success", user: worker});
+				worker.zone = results.zoneName;
+				Worker.findOneAndUpdate({workerID: crypt.decrypt(id)}, worker, (err,doc,result) => {
+					if(err) {
+						console.log("Error");
+					}
+					else {
+						res.send({status: "Success", user: worker});		
+					}
+				})
 			}
 		})
-		  .catch(err => res.send({ err: err }))
+
+		.catch(err => res.send({ err: err }))
 	  }
 	})
   })
