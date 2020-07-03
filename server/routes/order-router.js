@@ -17,7 +17,7 @@ const subserviceModel = require('../models/subservice-model');
 const workRequestModel = require('../models/workrequest-model');
 const mainserviceModel = require('../models/mainservice-model');
 const workerModel = require('../models/worker-model');
-const ordertokenModel = require('../models/order-token');
+const orderStatusModel = require('../models/order-status');
 
 const paytm = require('../config/keys')
 const checksum_lib = require('../config/paymentgateway/checksum')
@@ -79,7 +79,7 @@ router
                 res.json({ "message": "Order placed succesfully" });
 
                 //create and save token
-                let newOrderToken = new ordertokenModel;
+                let newOrderToken = new orderStatusModel;
                 newOrderToken.orderID = newOrder.orderID;
                 newOrderToken.token = Math.floor(Math.random() * (999999 - 100000)) + 100000;
                 newOrderToken.save()
