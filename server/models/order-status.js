@@ -5,6 +5,9 @@ const orderTokenSchema = mongoose.Schema({
         type: String,
         required: true, 
     },
+    status: {
+        type: String,
+    },
     token: {
         type: String,
         required: true
