@@ -70,9 +70,12 @@ const WorkerSchema = new mongoose.Schema({
            city: "",
            district: "",
            state: "",
-           pincode: "",
-           zone: ""
+           pincode: ""
         }
+    },
+    zone: {
+        type: String,
+        default: ""
     },
     totalWorks: {
         type: Number,
