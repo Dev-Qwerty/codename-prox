@@ -56,7 +56,7 @@
         <div class="btns">
           <div>
             <router-link class="paynowbtn" :to="{name: ''}" @click.native="paynowfn">
-              <input type="submit" value="Pay Now">
+              <input type="submit" value="Pay Now" @click="paynow">
             </router-link> 
           </div>
           <div>
@@ -110,6 +110,21 @@ export default {
        this.date = moment(this.date).format('YYYY-M-D')
        let url = "http://localhost:3000/orders/placeorder/pay-later"
        this.$http
+        .post(url, {
+          service: this.service,
+          address: this.address,
+          date: this.date,
+          time: this.time
+        }).then(response => {
+          alert(response.data.message)
+        }).catch(error => {
+          alert(error)
+        })
+    },
+    paynow() {
+      this.date = moment(this.date).format( 'YYYY-M-D')
+      let url = "http://localhost:3000/orders/placeorder/paynow"
+      this.$http
         .post(url, {
           service: this.service,
           address: this.address,
