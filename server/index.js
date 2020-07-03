@@ -10,6 +10,7 @@ const User = require('./models/user-model');
 const Worker = require('./models/worker-model');
 const Company = require('./models/company-model');
 const crypt = require('./misc/crypt');
+const path = require('path');
 
 const storage = multer.diskStorage({
     destination : 'uploads/',
@@ -107,13 +108,27 @@ app.post('/post_file', upload.single('demo_file'), function (req, res) {
   //req.file is the demo_file
   const category = req.query.category;
   const id = req.query.id;
-  const newFileName = 'profilepics/'+ req.file.filename;
+  const newFileName = 'profilepics/'+ crypt.encrypt(id.slice(1,6)) + path.extname(req.file.path);
+  const FileName = crypt.encrypt(id.slice(1,6)) + path.extname(req.file.path);
   const allowedTypes = ["image/jpeg", "image/jpg", "image/png"];
   if(!allowedTypes.includes(req.file.mimetype)){
     res.send({status: "Error!", code: "Invalid format!", success: false});
   }
   else {
-  uploadFile(req.file.path, newFileName ,res, category,id);
+    checkFileExists(FileName, function(err, results) {
+      if(results == 1) {
+        deleteExistingFile(FileName, category, id, function(err, results) {
+          if(results == 1) {
+            console.log("Deleted Existing File!");
+            uploadFile(req.file.path, newFileName ,res, category,id);
+          }
+        })
+      }
+      else {
+        uploadFile(req.file.path, newFileName ,res, category,id);
+      }
+    })
+    //uploadFile(req.file.path, newFileName ,res, category,id);
   }
 })
 
@@ -125,7 +140,8 @@ app.get('/get_file/:file_name',(req,res)=>{
 app.get('/delete_file/:file_name', (req,res) => {
   const category = req.query.category;
   const id = req.query.id;
-  const file_name = req.params.file_name;
+  const fileExt = (req.params.file_name).split('.').pop();
+  const file_name = crypt.encrypt(id.slice(1,6)) +  '.'  +fileExt;
   deleteFile(file_name, res, category, id);
 })
 // Initialze Server
@@ -226,6 +242,50 @@ function deleteFile(filename, res, category,id) {
         user.profilePicLink = "";
         User.findOneAndUpdate({userID: crypt.decrypt(id)}, user, (err,doc,result) => {
           return res.send({status: "Success"});
+        })
+      }
+    }
+  })
+}
+
+function checkFileExists(file_name, callback) {
+  const getParams = {
+    Bucket: 'profilepics-codename-eizoft',
+    Key: 'profilepics/'+file_name
+  };
+
+  s3.getObject(getParams, function(err, data) {
+    if (err){
+      callback(err, 0);
+    }
+    else{
+        callback(null, 1);
+    }
+  });
+}
+
+function deleteExistingFile(file_name, category, id, callback) {
+  const deleteParams = {
+    Bucket: 'profilepics-codename-eizoft',
+    Key: 'profilepics/'+file_name
+  }
+  s3.deleteObject(deleteParams, (err,data) => {
+    if(err) {
+      callback(err, 0);
+    }
+    else {
+      if(category == 'Worker' || category == 'worker') {
+        let worker = {};
+        worker.profilePicLink =  "";
+        Worker.findOneAndUpdate({workerID: crypt.decrypt(id)}, worker, (err,doc,result) => {
+          callback(null, 1);
+        })
+      }
+      else if(category == 'Customer' || category == 'customer') {
+        let user = {};
+        user.profilePicLink = "";
+        User.findOneAndUpdate({userID: crypt.decrypt(id)}, user, (err,doc,result) => {
+          callback(null,1);
         })
       }
     }

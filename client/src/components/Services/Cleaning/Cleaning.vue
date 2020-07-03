@@ -27,10 +27,22 @@
             <div class="BLine"></div>
             <div class="Bbottom">
               <div id="Desc"><p>{{ service.description }}</p></div>
-              <p id="Vdetails">view details  <span id="Vspan">></span></p>  
-              <router-link :to="{name: 'cmodal'}">
-                <input type="submit" value="Add to cart" @click="fn(service)">
-              </router-link>
+              <popper
+                trigger="clickToToggle"
+                :options="{
+                  placement: 'right',
+                  modifiers: { offset: { offset: '0,10px' } }
+                }">
+                <div class="popper">
+                  <p>{{ service.moreDetail }}</p>    
+                </div>
+                <p id="Vdetails" slot="reference">view details</p>  
+              </popper>
+              <div class="card-btn-wrapper">
+                <router-link :to="{name: 'cmodal'}">
+                  <input type="submit" value="Add to cart" @click="fn(service)">
+                </router-link>                
+              </div>  
             </div>
           </div> 
         </div>
@@ -44,12 +56,15 @@
 </template>
 
 <script>
+import Popper from 'vue-popperjs';
+import 'vue-popperjs/dist/vue-popper.css';
 import Cmodal from '@/components/Services/Cleaning/Cmodal.vue'
 /*import EventBus from '../../../event-bus.js'*/
 
 export default {
   components: {
-    Cmodal
+    Cmodal,
+    'popper': Popper
   },
   data() {
     return {
@@ -57,12 +72,9 @@ export default {
     }
   },
   methods: {
-    cartfn() {
-      window.scrollTo(0,0)
-    },
     fn(obj) {
       this.$cookies.set("sarray", JSON.stringify(obj), "id")
-      //window.scrollTo(0,0)
+      window.scrollTo(0,0)
     },
     apiCall() {
       let url = 'http://localhost:3000/services/5ea50d377c154d280cf37efb'
@@ -151,21 +163,25 @@ export default {
     width: 85%;
     height: 200px;
     margin-top: 60px;
-    margin-left: 80px;
+    margin-left: auto;
+    margin-right: auto;
   }
   .b-heading h3 {
-    font-size: 30px;
+    font-size: 29px;
     color: #000;
     font-weight: bold;
+    margin-left: -20px;
   }
   .Line-small {
     margin-top: 0px;
-    width: 90px;
+    width: 110px;
     height: 2px;
     background-color: #000;    
   }
   .row {
-    margin-left: 20px;
+    margin-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 20px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -173,10 +189,10 @@ export default {
   }
   .col {
     padding: 0PX;
-    box-sizing: border-box;
+    /*box-sizing: border-box;*/
     border: 1px solid #000;
     margin: 8px;
-    height: 480px;
+    /*height: 480px;*/
     background-color: #fff;  
   }
   .Btop {
@@ -207,17 +223,25 @@ export default {
     margin-bottom: 0px;
   }
   #Vdetails {
-    margin: 0px;
+    margin-top: 10px;
     font-weight: bold;
-    font-size: 15px;
+    font-size: 14px;
+    border: 1px solid #000;
+    width: 95px;
+    padding-left: 8px;
   }
-  
+  #Vdetails:hover {
+    cursor: pointer;
+  }  
+  .card-btn-wrapper {
+    margin-top: 25px;
+    text-align: center;
+    margin-bottom: 10px;
+  }
   .Bbottom input[type="submit"] {
     border: none;
     background-color: #000;
     color: #fff;
-    margin-top: 5px;
-    margin-left: 130px;
     width: 120px;
     height: 50px;
     font-family: Arial;
@@ -226,4 +250,13 @@ export default {
     box-shadow: 3px 3px #dedee0;
     border-radius: 10px;;
   }    
+  .popper {
+    padding-top: 10%;
+    border: 1px solid #aaa;
+    width: 90%;
+    min-height: 60%;
+    background-color: #fff;
+    color: #000;
+    opacity: 0.9;
+  }
 </style>
