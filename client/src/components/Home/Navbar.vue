@@ -24,17 +24,17 @@
       <li class="nav-item">
         <router-link class="nav-link" :to="{ path: '/blog' }">Blog</router-link>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" v-if="!(this.cc == 'true')">
         <a class="btn btn-light" @click="loginClicked()" tag="button">Login</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" v-if="!(this.cc == 'true')">
         <a class="nav-link" href="#"> / </a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item signup" v-if="!(this.cc == 'true')">
         <router-link class="btn btn-light" :to="{ path: 'signup' }" tag="button">SignUp</router-link>
       </li>
-      <li class="nav-item">
-        <div class="dropdown show" v-if="this.cc == 'true'">
+      <li class="nav-item" v-if="this.cc == 'true'">
+        <div class="dropdown show">
           <div class="Profile" data-toggle="dropdown" id="dropdownMenuLink"></div>
 
           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -90,8 +90,11 @@ export default {
   .navbar-brand {
     font-size: 22px;
   }
+  .signup {
+    margin-right: 110px;
+  }
   .Profile {
-    margin-right: 20px;
+    margin-right: 110px;
     margin-left: 5px;
     border: 1px solid #aaa;
     border-radius: 5px;
