@@ -36,11 +36,10 @@
       <li class="nav-item" v-if="this.cc == 'true'">
         <div class="dropdown show">
           <div class="Profile" data-toggle="dropdown" id="dropdownMenuLink"></div>
-
           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" href="#">Dashboard</a>
-            <a class="dropdown-item" href="#">My Profile</a>
-            <a class="dropdown-item" href="#">Logout</a>
+            <a class="dropdown-item" @click="dfn">Dashboard</a>
+            <!--<a class="dropdown-item" @click="mpfn">My Profile</a>-->            
+            <a class="dropdown-item" @click="logout">Logout</a>
           </div>
         </div>             
       </li>      
@@ -66,6 +65,20 @@ export default {
           this.cc = 'true'
         }  
       }
+    },
+    logout() {
+      this.$cookies.remove("username");
+      this.$cookies.remove("id");
+      this.$cookies.remove("pid");
+      this.$cookies.remove("category");
+      this.$session.destroy()
+      window.location.href = "http://localhost:8080/login"
+    },
+    dfn() {
+      window.location.href = "http://localhost:8080/customerdashboard"
+    },
+    mpfn() {
+      window.location.href = "http://localhost:8080/customerdashboard/myprofile"
     }
   },
   created() {
@@ -106,7 +119,10 @@ export default {
     background-position: center;
     background-size: cover;       
   }
-  .dropdown-menu {
-
+  .Profile:hover {
+    cursor: pointer;      
+  }  
+  .dropdown-item:hover {
+  cursor: pointer;
   }
 </style>
