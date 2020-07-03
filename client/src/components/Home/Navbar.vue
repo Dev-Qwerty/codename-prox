@@ -34,15 +34,16 @@
         <router-link class="btn btn-light" :to="{ path: 'signup' }" tag="button">SignUp</router-link>
       </li>
       <li class="nav-item">
-        <!--<router-link class="nav-link" :to="{ path: '/about' }">About Us</router-link>-->
-        <div class="Profile">
-          
-        </div>
-        <!--<select name="" class="Profile" v-model="category">
-          <option value="dashboard">Dashboard</option>
-          <option value="company">Company</option>
-        </select>-->         
-      </li>
+        <div class="dropdown show">
+          <div class="Profile" data-toggle="dropdown" id="dropdownMenuLink"></div>
+
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="#">Dashboard</a>
+            <a class="dropdown-item" href="#">My Profile</a>
+            <a class="dropdown-item" href="#">Logout</a>
+          </div>
+        </div>             
+      </li>      
     </ul>
   </nav>
 </template>
@@ -85,4 +86,29 @@ export default {
     background-position: center;
     background-size: cover;       
   }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+
+  .dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+
+  .dropdown-content a:hover {
+    background-color: #ddd;
+  }
+
+  .Profile:hover .dropdown-content {
+    display: block;
+  }  
 </style>
