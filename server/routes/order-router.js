@@ -79,10 +79,11 @@ router
                 res.json({ "message": "Order placed succesfully" });
 
                 //create and save token
-                let newOrderToken = new orderStatusModel;
-                newOrderToken.orderID = newOrder.orderID;
-                newOrderToken.token = Math.floor(Math.random() * (999999 - 100000)) + 100000;
-                newOrderToken.save()
+                let newOrderStatus = new orderStatusModel;
+                newOrderStatus.orderID = newOrder.orderID;
+                newOrderStatus.token1 = Math.floor(Math.random() * (999999 - 100000)) + 100000;
+                newOrderStatus.token2 = Math.floor(Math.random() * (999999 - 100000)) + 100000;
+                newOrderStatus.save()
 
 
                 // function call to find worker for job assigning 
