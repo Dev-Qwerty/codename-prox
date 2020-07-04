@@ -5,33 +5,6 @@
     </div>
     <div class="mid-dashboard">
       <div class="sidenav">
-        <div class="sidenav-top">
-          <div class="sidenav-top-top">
-            <div class="Circle">
-              <!--<p class="circle-inside">{{ this.winfo.profile }}</p>-->
-              <p class="circle-inside">Z</p>
-            </div>
-            <!--<p class="profile-name">{{ this.winfo.name }}</p>-->
-            <p class="profile-name">Zac Snyder</p>
-            <div class="profile-underline"></div>
-          </div>
-          <div class="sidenav-top-mid">
-            <div class="sidenav-top-mid-one">
-              <div class="sidenav-top-mid-one-img"></div>
-              <!--<p class="job-title">{{ this.winfo.type }}</p>-->
-              <p class="job-title">Cleaning</p>
-            </div>
-            <div class="sidenav-top-mid-two">
-              <div class="sidenav-top-mid-two-img"></div>
-              <!--<p class="Place">{{ this.winfo.location }}</p>-->
-              <p class="Place">Kottayam</p>
-            </div>
-          </div>
-          <div class="sidenav-top-bottom">
-            <!--<p>Rating: {{ this.winfo.rating }}</p>-->
-            <p>Rating: 3</p>
-          </div>
-        </div>
         <div class="sidenav-mid">
           <router-link :to="{name: ''}" @click.native="fn">
             <div class="sidenav-mid-one active">
@@ -57,17 +30,6 @@
               <p>Calender</p>
             </div>
           </router-link>           
-        </div>
-        <div class="sidenav-line"></div>
-        <div class="sidenav-bottom">
-          <div class="sidenav-bottom-one">
-            <div class="sidenav-bottom-img1"></div>
-            <p>My Profile</p>
-          </div>
-          <a class="sidenav-bottom-two" @click = "logout()">
-            <div class="sidenav-bottom-img2"></div>
-            <p>Logout</p>
-          </a>          
         </div>
       </div>
       <div class="dashboard-body">         
@@ -134,9 +96,11 @@ export default {
     box-sizing: border-box;
     width: 100%;
     height: 45px;
-    background-color: #000;
+    background-color: #fff;
+    color: #000;
     text-align: center;
     padding-top: 10px;;
+    border: 1px solid #aaa;
   }
   .top-header p {
     color: #aaa;
@@ -150,116 +114,15 @@ export default {
   .sidenav {
     height: 676px;
     border-left: 1px solid #00000029;    
-    background-color: #fff;
-    display: grid;
-    grid-template-rows: 40% 32% 20px 20%;
-  }
-  .sidenav-top {
-    padding-left: 5px;
-    display: grid;
-    grid-template-rows: 40% 40% 20%;    
-  }
-  .sidenav-top-top {
-    margin-top: 25px;
-    margin-bottom: 0px;
-    display: grid;
-    grid-template-rows: 3fr 1fr 1px;
-  }
-  .Circle {
-    padding-top: 10px;
-    padding-left: 20px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 5px;
-    width: 70px;
-    height: 70px;
-    background-color: #DBDBDB;
-    border-radius: 50%;
-  }
-  .circle-inside {
-    font-size: 35px;
-    margin: 0 auto;    
-  } 
-  .profile-name {
-    font-size: 18px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 0px;
-  }  
-  .profile-underline {
-    width: 58%;
-    height: 1px;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: #aaa;
-  }     
-  .sidenav-top-mid {
-    display: grid;
-    grid-template-rows: 30px 30px; 
-    margin-top: 30px;   
-  }
- .sidenav-top-mid-one {
-    display: grid;
-    grid-template-columns: 15% 95%;
-    padding-top: 0px;
-    margin-left: auto;
-    margin-right: auto;    
-  }     
-  .sidenav-top-mid-one-img {
-    margin-top: 3px;
-    height: 16px;
-    width: 16px;
-    background-image: url('../../assets/jobTitle.png');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;    
-  }   
-  .job-title {
-    margin-left: 10%;
-    font-size: 17px;
-    color: #707070;
-  } 
- .sidenav-top-mid-two {
-    display: grid;
-    grid-template-columns: 15% 95%;
-    margin-top: -4px;
-    margin-left: auto;
-    margin-right: auto;       
-  }     
-  .sidenav-top-mid-two-img {
-    margin-top: 3px;
-    height: 16px;
-    width: 16px;
-    background-image: url('../../assets/Place.png');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;    
-  }   
-  .Place {
-    margin-left: 8%;
-    font-size: 17px;
-    color: #707070;
-  }     
-  .sidenav-top-bottom {
-    margin-top: -15px;
-    margin-left: auto;
-    margin-right: auto;   
-    font-size: 18px;
-    /*height: 20px;
-    width: 80%;
-    background-image: url('../../assets/stars.png');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;*/      
+    background-color: #F5F5F5;
   }    
   .sidenav-mid {  
-    margin-top: -20px;
+    margin-top: 0px;
     display: grid;
     grid-template-rows: 1fr 1fr 1fr 1fr;
   }
   .sidenav-mid-one {
-    color: #fff;
-    background-color: #000;
+    color: #000;
     display: grid;
     grid-template-columns: 10% 90%;
     padding-top: 15px;
@@ -274,7 +137,7 @@ export default {
     margin-top: 3px;
     height: 15px;
     width: 15px;
-    background-image: url('../../assets/Wreq.png');
+    background-image: url('../../assets/Pwork.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;    
@@ -390,6 +253,6 @@ export default {
     color: #000;
   }              
   .dashboard-body {
-    background-color: #F5F5F5;
+    background-color: #fff;
   }             
 </style>
