@@ -276,7 +276,6 @@ router.post('/addAddress', (req, res) => {
       let user = {};
       user = {$push: {addresses: newAddress}};
       user.completedProfile = req.body.completedProfile;
-      console.log(user);
       User.findOneAndUpdate({ userID: crypt.decrypt(req.body.id) }, user, (err,doc,result) => {
         if(err) {
           res.send({err: err});
