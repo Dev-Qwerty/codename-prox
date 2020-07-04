@@ -6,7 +6,7 @@
         <div class="dropdown show">
           <div class="Profile" data-toggle="dropdown" id="dropdownMenuLink"></div>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" @click="dfn">Dashboard</a>         
+            <a class="dropdown-item" @click="cfn">Services</a>         
             <a class="dropdown-item" @click="logout">Logout</a>
           </div>
         </div> 
@@ -80,8 +80,8 @@ export default {
     }
   },
   methods: { 
-    workreqfn() {
-      
+    cfn() {
+      window.location.href = "http://localhost:8080/services"
     },
     myworksfn() {
       
