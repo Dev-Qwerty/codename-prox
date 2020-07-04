@@ -83,7 +83,15 @@ export default new VueRouter({
       component: Signup,
       beforeEnter(to,from,next) {
         if(Vue.$cookies.get("pid")!=undefined) {
-          window.location.href = "http://localhost:8080/dashboard";
+          if(Vue.$cookies.get("category") == 'Worker') {
+            window.location.href = "http://localhost:8080/dashboard";
+          }
+          else if(Vue.$cookies.get("category") == 'Customer') {
+            window.location.href = "http://localhost:8080/customerdashboard";
+          }
+          else {
+            window.location.href = "http://localhost:8080/companydashboard"; //To be done in future.
+          }
         }
         else {
           next();
