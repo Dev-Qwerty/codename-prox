@@ -274,10 +274,10 @@ router.post('/addAddress', (req, res) => {
     else {
       const newAddress = req.body.address;
       let user = {};
-      user.addresses = newAddress;
+      user = {$push: {addresses: newAddress}};
       user.completedProfile = req.body.completedProfile;
-      user = { $push: user };
-      User.findOneAndUpdate({ userID: req.body.id }, user, (err,doc,result) => {
+      console.log(user);
+      User.findOneAndUpdate({ userID: crypt.decrypt(req.body.id) }, user, (err,doc,result) => {
         if(err) {
           res.send({err: err});
         }
@@ -323,7 +323,7 @@ router.post('/verifyCategory', (req, res) => {
 router.get('/getBasicProfile/:id', (req,res) => {
   const id = crypt.decrypt(req.params.id);
   User.findOne({userID: id}, (err,result) => {
-    res.send({name: result.name, profile: result.name.charAt(0), profilePicLink: result.profilePicLink}) //To Do: after customer dashboard is ready
+    res.send({name: result.name, profile: result.name.charAt(0), profilePicLink: result.profilePicLink, location: result.address.district }) //To Do: after customer dashboard is ready
   })
 })
 
