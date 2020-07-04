@@ -6,30 +6,48 @@
     <div class="mid-dashboard">
       <div class="sidenav">
         <div class="sidenav-mid">
-          <router-link :to="{name: ''}" @click.native="fn">
-            <div class="sidenav-mid-one active">
-              <div class="sidenav-mid-img1"></div>
-              <p>Work Requests</p>
-            </div>
-          </router-link>
-          <router-link :to="{name: ''}" @click.native="fn">
-            <div class="sidenav-mid-three">
-              <div class="sidenav-mid-img3"></div>
-              <p>My Works</p>
-            </div>
-          </router-link> 
-          <router-link :to="{name: ''}" @click.native="fn">        
-            <div class="sidenav-mid-four">
-              <div class="sidenav-mid-img4"></div>
-              <p>My Income</p>
-            </div>
-          </router-link>
-          <router-link :to="{name: ''}" @click.native="fn">
-            <div class="sidenav-mid-two">
-              <div class="sidenav-mid-img2"></div>
-              <p>Calender</p>
-            </div>
-          </router-link>           
+
+          <div class="sidenav-mid-one">
+            <router-link :to="{name: ''}" @click.native="fn">
+              <div class="wr-1">
+                <div class="sidenav-mid-img1"></div>
+                <p>Bookings</p>
+              </div>
+            </router-link>
+          </div>
+          <div class="sidenav-mid-two">
+            <router-link :to="{name: ''}" @click.native="fn">
+              <div class="wr-1">
+                <div class="sidenav-mid-img2"></div>
+                <p>Order History</p>
+              </div>
+            </router-link>
+          </div>
+          <div class="sidenav-mid-three">
+            <router-link :to="{name: ''}" @click.native="fn">
+              <div class="wr-1">
+                <div class="sidenav-mid-img3"></div>
+                <p>Favorites</p>
+              </div>
+            </router-link>
+          </div>      
+          <div class="sidenav-mid-four">
+            <router-link :to="{name: ''}" @click.native="fn">
+              <div class="wr-1">
+                <div class="sidenav-mid-img4"></div>
+                <p>My Profile</p>
+              </div>
+            </router-link>
+          </div>   
+          <div class="sidenav-mid-five">
+            <router-link :to="{name: ''}" @click.native="fn">
+              <div class="wr-1">
+                <div class="sidenav-mid-img5"></div>
+                <p>Notifications</p>
+              </div>
+            </router-link>
+          </div>                                 
+        
         </div>
       </div>
       <div class="dashboard-body">         
@@ -95,11 +113,11 @@ export default {
     top: 0;
     box-sizing: border-box;
     width: 100%;
-    height: 45px;
+    height: 60px;
     background-color: #fff;
     color: #000;
     text-align: center;
-    padding-top: 10px;;
+    padding-top: 20px;
     border: 1px solid #aaa;
   }
   .top-header p {
@@ -112,146 +130,113 @@ export default {
     /*height: 676px;*/
   }
   .sidenav {
-    height: 676px;
+    /*height: 600px;*/
+    height: calc(100vh - 60px);
+    box-sizing: border-box;    
     border-left: 1px solid #00000029;    
     background-color: #F5F5F5;
   }    
   .sidenav-mid {  
+    height: 350px;
+    box-sizing: border-box;
     margin-top: 0px;
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    font-family: p-medium;
+    font-size: 17px;
   }
+  .wr-1 {
+    width: 60%;
+    height: 35px;
+    border: 1px solid #aaa;
+    display: flex;
+    margin-top: 7%;  
+    padding-left: 5%;
+    padding-top: 2%;
+  }  
   .sidenav-mid-one {
-    color: #000;
-    display: grid;
-    grid-template-columns: 10% 90%;
-    padding-top: 15px;
-    padding-left: 15%;
-  }
-  /*.sidenav-mid-one:hover {
-    cursor: pointer;
-    background-color: #000;
-    color: #fff;
-  }*/     
+    padding-left: 10%;
+  } 
   .sidenav-mid-img1{
-    margin-top: 3px;
-    height: 15px;
-    width: 15px;
-    background-image: url('../../assets/Pwork.png');
+    height: 20px;
+    width: 20px;
+    background-image: url('../../assets/bookings.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;    
   } 
   .sidenav-mid-one p {
-    font-size: 15px;
+    margin-left: 5%;
+    color: #000;
   }     
   .sidenav-mid-two {
-    display: grid;
-    grid-template-columns: 15% 95%;
-    padding-top: 15px;
+    background-color: green;
+    /*padding-top: 15px;*/
     padding-left: 10%;
   } 
   .sidenav-mid-img2 {
-    margin-top: 3px;
-    margin-left: 18px;
-    height: 15px;
-    width: 15px;
-    background-image: url('../../assets/Pwork.png');
+    height: 20px;
+    width: 20px;
+    background-image: url('../../assets/i2.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;    
   }    
   .sidenav-mid-two p {
-    font-size: 15px;
+    margin-left: 5%;
     color: #000;
   }      
   .sidenav-mid-three {
-    display: grid;
-    grid-template-columns: 15% 95%;
-    padding-top: 15px;
+    background-color: yellow;
+    /*padding-top: 15px;*/
     padding-left: 10%;    
   } 
   .sidenav-mid-img3 {
-    margin-top: 3px;
-    margin-left: 18px;
-    height: 15px;
-    width: 15px;
-    background-image: url('../../assets/Mwork.png');
+    height: 20px;
+    width: 20px;
+    background-image: url('../../assets/i3.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;    
   }    
   .sidenav-mid-three p {
-    font-size: 15px;
+    margin-left: 5%;
     color: #000;
   }      
   .sidenav-mid-four {
-    display: grid;
-    grid-template-columns: 15% 95%;
-    padding-top: 15px;
+    background-color: blue;
+    /*padding-top: 15px;*/
     padding-left: 10%;        
   } 
   .sidenav-mid-img4 {
-    margin-top: 3px;
-    margin-left: 18px;
-    height: 15px;
-    width: 15px;
-    background-image: url('../../assets/Mincome.png');
+    height: 20px;
+    width: 20px;
+    background-image: url('../../assets/i4.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;    
   }    
   .sidenav-mid-four p {
-    font-size: 15px;
+    margin-left: 5%;
     color: #000;
-  }  
-  .sidenav-line {
-    border-bottom: 1px solid #00000029;
+  }      
+  .sidenav-mid-five {
+    background-color: aqua;
+    /*padding-top: 15px;*/
+    padding-left: 10%;        
+  }   
+  .sidenav-mid-img5 {
+    height: 20px;
+    width: 20px;
+    background-image: url('../../assets/i4.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;    
+  }   
+  .sidenav-mid-five p {
+    margin-left: 5%;
+    color: #000;
   }    
-  .sidenav-bottom {
-    display: grid;
-    grid-template-rows: 35px 35px;  
-  } 
-  .sidenav-bottom-one {
-    display: grid;
-    grid-template-columns: 15% 95%;
-    padding-top: 15px;
-    padding-left: 10%;
-  }     
-  .sidenav-bottom-img1 {
-    margin-top: 3px;
-    margin-left: 18px;
-    height: 15px;
-    width: 15px;
-    background-image: url('../../assets/Mprofile.png');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;    
-  }   
-  .sidenav-bottom-one p {
-    font-size: 14px;
-    color: #000;
-  }  
-  .sidenav-bottom-two {
-    display: grid;
-    grid-template-columns: 15% 95%;
-    padding-top: 15px;
-    padding-left: 10%;
-  }     
-  .sidenav-bottom-img2 {
-    margin-top: 3px;
-    margin-left: 18px;
-    height: 15px;
-    width: 15px;
-    background-image: url('../../assets/LogOut.png');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;    
-  }   
-  .sidenav-bottom-two p {
-    font-size: 14px;
-    color: #000;
-  }              
   .dashboard-body {
     background-color: #fff;
   }             
