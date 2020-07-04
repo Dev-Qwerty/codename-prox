@@ -63,7 +63,15 @@ export default new VueRouter({
       component: wcSignup,
       beforeEnter(to,from,next) {
         if(Vue.$cookies.get("pid")!=undefined) {
-          window.location.href = "http://localhost:8080/dashboard";
+          if(Vue.$cookies.get("category") == 'Worker') {
+            window.location.href = "http://localhost:8080/dashboard";
+          }
+          else if(Vue.$cookies.get("category") == 'Customer') {
+            window.location.href = "http://localhost:8080/customerdashboard";
+          }
+          else {
+            window.location.href = "http://localhost:8080/companydashboard"; //To be done in future.
+          }
         }
         else {
           next();
@@ -87,7 +95,15 @@ export default new VueRouter({
       component: Login,
       beforeEnter(to,from,next) {
         if(Vue.$cookies.get("pid")!=undefined) {
-          window.location.href = "http://localhost:8080/dashboard";
+          if(Vue.$cookies.get("category") == 'Worker') {
+            window.location.href = "http://localhost:8080/dashboard";
+          }
+          else if(Vue.$cookies.get("category") == 'Customer') {
+            window.location.href = "http://localhost:8080/customerdashboard";
+          }
+          else {
+            window.location.href = "http://localhost:8080/companydashboard"; //To be done in future.
+          }
         }
         else {
           next();
@@ -280,6 +296,12 @@ export default new VueRouter({
           alert("Access Denied! Please login!");
           window.location.href = "http://localhost:8080/login";
         }
+        else if(Vue.$cookies.get("category") == "Customer") {
+          window.location.href = "http://localhost:8080/customerdashboard";
+        }
+        else if(Vue.$cookies.get("category") == "Company") {
+          window.location.href = "http://localhost:8080/companydashboard"; //To be done in future.
+        }
         else {
           next();
         }
@@ -287,7 +309,22 @@ export default new VueRouter({
     },
     { 
       path: '/customerdashboard', 
-      component: Cdashboard
+      component: Cdashboard,
+      beforeEnter(to,from,next) {
+        if(Vue.$cookies.get("pid")==undefined) {
+          alert("Access Denied! Please login!");
+          window.location.href = "http://localhost:8080/login";
+        }
+        else if(Vue.$cookies.get("category") == "Worker") {
+          window.location.href = "http://localhost:8080/dashboard";
+        }
+        else if(Vue.$cookies.get("category") == "Company") {
+          window.location.href = "http://localhost:8080/companydashboard"; //To be done in future.
+        }
+        else {
+          next();
+        }
+      }
     },      
     {
       path: '/forgotPassword',
