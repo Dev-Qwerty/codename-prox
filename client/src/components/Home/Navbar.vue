@@ -107,12 +107,13 @@ export default {
     margin-right: 110px;
   }
   .Profile {
+    margin-top: 2px;
     margin-right: 110px;
     margin-left: 5px;
     border: 1px solid #aaa;
     border-radius: 5px;
-    width: 39px;
-    height: 39px;
+    width: 36px;
+    height: 36px;
     background-image: url('../../assets/p2.png');
     background-blend-mode: overlay;
     background-repeat: no-repeat;

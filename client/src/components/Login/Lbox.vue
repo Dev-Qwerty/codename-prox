@@ -148,7 +148,7 @@ export default {
 <style scoped>    
   .box {
     width: 33%;
-    height: 65%;
+    height: 60vh;
     background-color: #fff;
     top: 58%;
     left: 50%;
