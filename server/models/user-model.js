@@ -17,7 +17,7 @@ const addressSchema = new mongoose.Schema({
     state: {
         type: String
     },
-    pinCode: {
+    pincode: {
         type: Number
     }
 })
