@@ -121,8 +121,9 @@ export default {
     border: 1px solid #aaa;
   }
   .top-header p {
-    color: #aaa;
-    font-size: 17px;
+    color: #000;
+    font-size: 19px;
+    font-family: p-medium;
   }
   .mid-dashboard {
     display: grid;
@@ -138,16 +139,15 @@ export default {
     padding-top: 50%;
   }    
   .sidenav-mid {  
-    height: 300px;
+    height: 310px;
     box-sizing: border-box;
     margin-top: 0px;
     display: grid;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-    
-    font-size: 17px;
+    font-size: 18px;
   }
   .wr-1 {
-    width: 60%;
+    width: 65%;
     height: 35px;
     display: flex;
     margin-top: 5%;  
