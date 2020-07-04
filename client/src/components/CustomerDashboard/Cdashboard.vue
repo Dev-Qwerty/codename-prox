@@ -1,7 +1,16 @@
 <template>
   <div class="dashboard-wrapper">
     <div class="top-header">
-      <p>Customer Dashboard</p>
+      <div class="top-wr">
+        <p>Customer Dashboard</p>
+        <div class="dropdown show">
+          <div class="Profile" data-toggle="dropdown" id="dropdownMenuLink"></div>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" @click="dfn">Dashboard</a>         
+            <a class="dropdown-item" @click="logout">Logout</a>
+          </div>
+        </div> 
+      </div>      
     </div>
     <div class="mid-dashboard">
       <div class="sidenav">
@@ -52,7 +61,6 @@
       </div>
       <div class="dashboard-body">         
         <router-view>
->
         </router-view>       
       </div>
     </div>
@@ -113,18 +121,41 @@ export default {
     top: 0;
     box-sizing: border-box;
     width: 100%;
-    height: 60px;
+    height: 70px;
     background-color: #fff;
     color: #000;
     text-align: center;
     padding-top: 20px;
     border: 1px solid #aaa;
   }
-  .top-header p {
+  .top-wr {
+    margin-left: 45%;
+    display: flex;
+  }
+  .top-wr p {
     color: #000;
     font-size: 19px;
     font-family: p-medium;
+    margin-right: 55%;
   }
+  .Profile {
+    margin-top: -2px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    width: 36px;
+    height: 36px;
+    background-image: url('../../assets/p2.png');
+    background-blend-mode: overlay;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;       
+  }
+  .Profile:hover {
+    cursor: pointer;      
+  }  
+  .dropdown-item:hover {
+  cursor: pointer;
+  }  
   .mid-dashboard {
     display: grid;
     grid-template-columns: 20% 80%;
@@ -132,7 +163,7 @@ export default {
   }
   .sidenav {
     /*height: 600px;*/
-    height: calc(100vh - 60px);
+    height: calc(100vh - 70px);
     box-sizing: border-box;    
     border-left: 1px solid #00000029;    
     background-color: #F5F5F5;
