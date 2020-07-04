@@ -7,7 +7,7 @@
   .wrapper {
     margin-left: 5%;
     width: 90%;
-    height: 630px;
+    height: 87vh;
     background-color: #eeefef;
     margin-bottom: 20px;
   }
