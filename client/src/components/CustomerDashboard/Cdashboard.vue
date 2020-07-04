@@ -135,27 +135,33 @@ export default {
     box-sizing: border-box;    
     border-left: 1px solid #00000029;    
     background-color: #F5F5F5;
+    padding-top: 50%;
   }    
   .sidenav-mid {  
-    height: 350px;
+    height: 300px;
     box-sizing: border-box;
     margin-top: 0px;
     display: grid;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-    font-family: p-medium;
+    
     font-size: 17px;
   }
   .wr-1 {
     width: 60%;
     height: 35px;
-    border: 1px solid #aaa;
     display: flex;
-    margin-top: 7%;  
+    margin-top: 5%;  
     padding-left: 5%;
     padding-top: 2%;
   }  
+  .wr-1:hover {
+    /*border: 1px solid #aaa;*/
+    text-decoration: none;
+    font-family: p-bold;
+  }    
   .sidenav-mid-one {
     padding-left: 10%;
+    font-family: p-medium;
   } 
   .sidenav-mid-img1{
     height: 20px;
@@ -168,9 +174,12 @@ export default {
   .sidenav-mid-one p {
     margin-left: 5%;
     color: #000;
-  }     
+  }  
+  .sidenav-mid-one p:hover {
+    
+  }       
   .sidenav-mid-two {
-    background-color: green;
+    font-family: p-medium;
     /*padding-top: 15px;*/
     padding-left: 10%;
   } 
@@ -187,7 +196,7 @@ export default {
     color: #000;
   }      
   .sidenav-mid-three {
-    background-color: yellow;
+    font-family: p-medium;
     /*padding-top: 15px;*/
     padding-left: 10%;    
   } 
@@ -204,7 +213,7 @@ export default {
     color: #000;
   }      
   .sidenav-mid-four {
-    background-color: blue;
+    font-family: p-medium;
     /*padding-top: 15px;*/
     padding-left: 10%;        
   } 
@@ -221,7 +230,7 @@ export default {
     color: #000;
   }      
   .sidenav-mid-five {
-    background-color: aqua;
+    font-family: p-medium;
     /*padding-top: 15px;*/
     padding-left: 10%;        
   }   
