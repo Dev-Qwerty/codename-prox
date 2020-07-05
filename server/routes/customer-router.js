@@ -352,7 +352,7 @@ router.get('/orderHistory', (req,res) => {
     }
     else {
       Order.find({
-        userID: id,
+        userID: crypt.decrypt(id),
         completed: true
       }, (err,results) => {
         res.send(results);
