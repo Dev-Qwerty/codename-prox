@@ -13,6 +13,8 @@ const fs = require("fs");
 const multerS3 = require("multer-s3")
 const Token = require('../models/token');
 const crypt = require('../misc/crypt');
+const Order = require('../models/order-model');
+const moment = require('moment');
 global.fetch = require("node-fetch");
 
 let id = "";
@@ -335,6 +337,24 @@ router.get('/getCompleteProfile', (req,res) => {
     }
     else {
       User.findOne({userID: id}, (err,results) => {
+        res.send(results);
+      })
+    }
+  })
+})
+
+router.get('/orderHistory', (req,res) => {
+  const id = req.query.id;
+  const token = req.query.token;
+  Token.findOne({token: token}, (err,result) => {
+    if(result.length == 0) {
+      res.send({status: "Error!", code: "Invalid token!"});
+    }
+    else {
+      Order.find({
+        userID: crypt.decrypt(id),
+        completed: true
+      }, (err,results) => {
         res.send(results);
       })
     }
