@@ -44,6 +44,7 @@ import Eemodal from '@/components/Services/Electrical/Eemodal'
 import Pestcontrol from '@/components/Services/Pestcontrol/Pestcontrol'
 import Pcmodal from '@/components/Services/Pestcontrol/Pcmodal'
 import ChangeAvatar from '@/components/ChangeAvatar/CAMain.vue'
+import ProcessPayment from '@/components/Checkout/ProcessPayment'
 
 Vue.use(VueRouter)
 
@@ -235,6 +236,11 @@ export default new VueRouter({
           ]        
         }
       ]
+    },
+    {
+      path: '/processpayment',
+      name: 'processpayment',
+      component: ProcessPayment
     },
     { 
       path: '/dashboard', 

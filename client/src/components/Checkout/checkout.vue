@@ -20,10 +20,10 @@
           <p class="addrheader">Address</p>
           <form class="addr" action="" method="">
             <div>
-              <input class="input-box" type="text" name="uname" placeholder="Full Name" v-model="address.name">
+              <input class="input-box" type="text" name="uname" placeholder="Full Name" v-model="name">
             </div>
             <div>
-              <input class="input-box" type="text" name="contactno" placeholder="Contact Number" v-model="address.number">
+              <input class="input-box" type="text" name="contactno" placeholder="Contact Number" v-model="number">
             </div>
             <div>
               <input class="input-box" type="text" name="flatname" placeholder="Flat name/no." v-model="address.line1">
@@ -55,7 +55,7 @@
         </div> 
         <div class="btns">
           <div>
-            <router-link class="paynowbtn" :to="{name: ''}" @click.native="paynowfn">
+            <router-link class="paynowbtn" :to="{name: 'processpayment'}">
               <input type="submit" value="Pay Now" @click="paynow">
             </router-link> 
           </div>
@@ -78,6 +78,7 @@ import PayLaterConfirm from '@/components/Checkout/PayLaterConfirm.vue'
 import moment from 'moment'
 import VueCtkDateTimePicker from 'vue-ctk-date-time-picker';
 import 'vue-ctk-date-time-picker/dist/vue-ctk-date-time-picker.css';
+import EventBus from '../../event-bus'
 
 export default {
   name: 'checkout',
@@ -101,7 +102,7 @@ export default {
         pin: ''
       },
       date: '',
-      time: ''
+      time: '' 
     }
   },
   methods: {
@@ -127,11 +128,14 @@ export default {
       this.$http
         .post(url, {
           service: this.service,
+          name: this.name,
+          number: this.number,
           address: this.address,
           date: this.date,
           time: this.time
-        }).then(response => {
-          alert(response.data.message)
+        }).then (response => {
+          console.log(response.data)
+          EventBus.$emit("payment", response.data)
         }).catch(error => {
           alert(error)
         })

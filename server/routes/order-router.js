@@ -198,7 +198,7 @@ router
             amount: totalAmount,
             customerId: 'adjfne3',
             customerEmail: 'abc@mailinator.com',
-            customerPhone: req.body.address.number
+            customerPhone: req.body.number
         }
         
         var params = {};
@@ -225,7 +225,7 @@ router
             form_fields += "<input type='hidden' name='CHECKSUMHASH' value='" + checksum + "' >";
 
             res.writeHead(200, { 'Content-Type': 'text/html' });
-            res.write('<html><head><title>Merchant Checkout Page</title></head><body><center><h1>Please do not refresh this page...</h1></center><form method="post" action="' + txn_url + '" name="f1">' + form_fields + '</form><script type="text/javascript">document.f1.submit();</script></body></html>');
+            res.write('<center><h1>Please do not refresh this page...</h1></center><form method="post" action="' + txn_url + '" name="f1">' + form_fields + '</form>');
             res.end();
         });
     })
