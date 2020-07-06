@@ -281,5 +281,6 @@ export default {
     background-color: #fff;
     color: #000;
     opacity: 0.9;
+    font-weight: bold;
   }    
 </style>
