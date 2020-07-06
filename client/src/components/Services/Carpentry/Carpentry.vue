@@ -93,10 +93,13 @@ export default {
           message: "Please login to your account!",
           type: 'error',
           position: 'bottom-left'
-        });         
-        setTimeout(() => {
+        }); 
+        setTimeout(function() {
           window.location.href = "http://localhost:8080/login"
-        }, 3000);
+        }, 3000);                
+        /*setTimeout(() => {
+          window.location.href = "http://localhost:8080/login"
+        },4000);*/
       }
     },
     apiCall() {
