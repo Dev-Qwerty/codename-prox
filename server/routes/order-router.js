@@ -5,6 +5,7 @@ const router = express.Router();
 const uniqueId = require('../misc/unique-id')
 const assignWorker = require('../misc/assign-worker')
 const moment = require('moment')
+const crypt = require('../misc/crypt')
 // const sendMessage = require('../misc/textmessage')
 
 // Middleware for body parsing
@@ -65,8 +66,9 @@ router
                 }
 
                 // create new orderrs
+                let userID = crypt.decrypt(req.params.id)
                 newOrder.orderID = uniqueId.uniqueOrderId();
-                newOrder.userID = "adjfne3";   // TODO : save original userid
+                newOrder.userID = userID;
                 newOrder.date = req.body.date;
                 newOrder.service.subserviceName = service.name;
                 newOrder.service.categories = req.body.service.categories;
@@ -96,7 +98,7 @@ router
                 newWorkRequest.orderID = newOrder.orderID;
                 newWorkRequest.workerID = assignedWorker;
                 newWorkRequest.service = newOrder.service;
-                newWorkRequest.place = req.body.address.line2;
+                newWorkRequest.address = req.body.address;
                 newWorkRequest.amount = newOrder.totalAmount;
                 newWorkRequest.date = req.body.date;
                 newWorkRequest.time = req.body.time;
@@ -161,64 +163,111 @@ router
         res.render('payment')
     })
     .post([parseUrl,parseJson], async (req, res) => {
-        var orderId = uniqueId.uniqueOrderId()
-        
-        global.totalAmount = 0 //total amount variable
-
-        // calculate total amount and category
-        for (let i = 0; i < req.body.service.categories.length; i++) {
-            const serviceDetails = await subserviceModel.find({ categories: { $elemMatch: { _id: req.body.service.categories[i].categoryName } } }, 'categories.$')
-            itemAmount = serviceDetails[0].categories[0].amount * req.body.service.categories[i].quantity // Find amount of each category
-            totalAmount = totalAmount + itemAmount
-        }
-
-        var paymentDetails = {
-            amount: totalAmount,
-            customerId: req.body.customerId,
-            customerEmail: req.body.customerEmail,
-            customerPhone: req.body.customerPhone
-        }
-
-        if(!paymentDetails.amount || !paymentDetails.customerId || !paymentDetails.customerEmail || !paymentDetails.customerPhone) {
-            res.status(400).send('Payment failed')
-        } else {
-            var params = {};
-            params['MID'] = paytm.PaytmConfig.mid;
-            params['WEBSITE'] = paytm.PaytmConfig.website;
-            params['CHANNEL_ID'] = 'WEB';
-            params['INDUSTRY_TYPE_ID'] = 'Retail';
-            params['ORDER_ID'] = orderId;
-            params['ORDER_ID'] = orderId;
-            params['CUST_ID'] = paymentDetails.customerId;
-            params['TXN_AMOUNT'] = paymentDetails.amount;
-            params['CALLBACK_URL'] = 'http://localhost:3000/orders/placeorder/paynow/callback';
-            params['EMAIL'] = paymentDetails.customerEmail;
-            params['MOBILE_NO'] = paymentDetails.customerPhone;
-
-
-            checksum_lib.genchecksum(params, paytm.PaytmConfig.key, function (err, checksum) {
-                var txn_url = "https://securegw-stage.paytm.in/theia/processTransaction"; // for staging
-                // var txn_url = "https://securegw.paytm.in/theia/processTransaction"; // for production
-
-                var form_fields = "";
-                for (var x in params) {
-                    form_fields += "<input type='hidden' name='" + x + "' value='" + params[x] + "' >";
+        try {
+            let completed = true
+            //TODO: check for email and userid when original original userid and email are implemented
+            if (!req.body.service.serviceId || !req.body.number || !req.body.name || !req.body.address.line1 || !req.body.address.line2 || !req.body.address.district || !req.body.address.pin || !req.body.date || !req.body.time || req.body.service.categories == 0) {
+                completed = false
+            } else {
+                for( i = req.body.service.categories.length; i > 0 ; i--){
+                   
+                    if(!req.body.service.categories[i-1].quantity || !req.body.service.categories[i-1]._id || !req.body.service.categories[i-1].category || !req.body.service.categories[i-1].amount ){
+                        completed = false
+                    }
                 }
-                form_fields += "<input type='hidden' name='CHECKSUMHASH' value='" + checksum + "' >";
+            }
 
-                res.writeHead(200, { 'Content-Type': 'text/html' });
-                res.write('<html><head><title>Merchant Checkout Page</title></head><body><center><h1>Please do not refresh this page...</h1></center><form method="post" action="' + txn_url + '" name="f1">' + form_fields + '</form><script type="text/javascript">document.f1.submit();</script></body></html>');
-                res.end();
-            });
+            if (completed) {
+                var orderId = uniqueId.uniqueOrderId()
+        
+                global.totalAmount = 0;  // total amount variable
+                global.newOrder = new orderModel;  // create new order instance
+
+                // calculate total amount and category
+                for (i = 0; i < req.body.service.categories.length; i++) {
+                    const serviceDetails = await subserviceModel.find({ categories: { $elemMatch: { _id: req.body.service.categories[i]._id } } }, 'categories.$')
+                    itemAmount = serviceDetails[0].categories[0].amount * req.body.service.categories[i].quantity; // Find amount of each category
+                    totalAmount = totalAmount + itemAmount;
+                }
+
+
+                // Find subservice details
+                const id = req.body.service.serviceId
+                const service = await subserviceModel.findById(id)
+
+                // Remove _id and amount from req.body.service
+                for(i=0; i<req.body.service.categories.length; i++){
+                    delete req.body.service.categories[i]._id
+                    delete req.body.service.categories[i].amount
+                }
+
+                // create new orderrs
+                newOrder.orderID = orderId;
+                newOrder.userID = "adjfne3";   // TODO : save original userid
+                newOrder.date = req.body.date;
+                newOrder.service.subserviceName = service.name;
+                newOrder.service.categories = req.body.service.categories;
+                newOrder.totalAmount = totalAmount;
+                newOrder.paid = false;
+                newOrder.address = req.body.address;
+                newOrder.time = req.body.time;
+
+                newOrder.save().then(() => {
+                    console.log("order saved")
+                }).catch(err => {
+                    console.log(err)
+                })
+                    
+
+                var paymentDetails = {
+                    amount: totalAmount,
+                    customerId: 'adjfne3', //TODO: use original userId and email
+                    customerEmail: 'abc@mailinator.com',
+                    customerPhone: req.body.number
+                }
+            
+                var params = {};
+                params['MID'] = paytm.PaytmConfig.mid;
+                params['WEBSITE'] = paytm.PaytmConfig.website;
+                params['CHANNEL_ID'] = 'WEB';
+                params['INDUSTRY_TYPE_ID'] = 'Retail';
+                params['ORDER_ID'] = orderId;
+                params['CUST_ID'] = paymentDetails.customerId;
+                params['TXN_AMOUNT'] = paymentDetails.amount;
+                params['CALLBACK_URL'] = 'http://localhost:3000/orders/placeorder/paynow/callback';
+                params['EMAIL'] = paymentDetails.customerEmail;
+                params['MOBILE_NO'] = paymentDetails.customerPhone;
+
+
+                checksum_lib.genchecksum(params, paytm.PaytmConfig.key, function (err, checksum) {
+                    var txn_url = "https://securegw-stage.paytm.in/theia/processTransaction"; // for staging
+                    // var txn_url = "https://securegw.paytm.in/theia/processTransaction"; // for production
+
+                    var form_fields = "";
+                    for (var x in params) {
+                        form_fields += "<input type='hidden' name='" + x + "' value='" + params[x] + "' >";
+                    }
+                    form_fields += "<input type='hidden' name='CHECKSUMHASH' value='" + checksum + "' >";
+
+                    res.writeHead(200, { 'Content-Type': 'text/html' });
+                    res.write('<center><h1>Please do not refresh this page...</h1></center><form method="post" action="' + txn_url + '" name="f1">' + form_fields + '</form>');
+                    res.end();
+                });
+            } else {
+                res.send("failed to place order due to incomplete details")
+                // TODO: show styled message instead of res.send
+            }
+        } catch (error) {
+            console.log(error)
         }
+
+        
     })
 
 router
     .route('/placeorder/paynow/callback')
-    .post(async (req, res) => {
-
+    .post((req, res) => {
         try {
-
             var body = '';
 
 	        req.on('data', function (data) {
@@ -268,11 +317,28 @@ router
 							response += chunk;
 						});
 
-						post_res.on('end', function(){
+						post_res.on('end', async function(){
                             console.log('S2S Response: ', response, "\n");
 
                             var _result = JSON.parse(response);
                             
+                            let serviceKeyWords = []
+                            if(_result.RESPCODE == 01 && _result.STATUS == 'TXN_SUCCESS') {
+                                const serviceDetails = await orderModel.findOne({orderID: _result.ORDERID}, 'service.subserviceName service.categories address orderID -_id') //Find service name and categories form workorder db
+                                serviceKeyWords.push(serviceDetails.service.subserviceName)
+                                for(i = 0; i < serviceDetails.service.categories.length; i++){
+                                    //Loop through subservice categories
+                                    serviceKeyWords.push(serviceDetails.service.categories[i].category)
+                                }
+
+                                // function call to find worker for job assigning 
+                                let assignedWorker = await assignWorker.assignWorker(serviceKeyWords, serviceDetails.address.pin, serviceDetails.orderID);
+                            } else { 
+                                orderModel.deleteOne({orderID: _result.ORDERID}).then(() => {
+                                    console.log("deleted" + _result.ORDERID)
+                                })
+                            }
+
                             // Send response based on the Transaction status (RESPONSE CODE)
                             switch(_result.RESPCODE) {
                                 case '01':
