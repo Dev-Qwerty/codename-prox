@@ -66,9 +66,9 @@ router
                 }
 
                 // create new orderrs
-                let userID = crypt.decrypt(req.params.id)
+                // let userID = crypt.decrypt(req.body.id)
                 newOrder.orderID = uniqueId.uniqueOrderId();
-                newOrder.userID = userID;
+                newOrder.userID = req.body.id;
                 newOrder.date = req.body.date;
                 newOrder.service.subserviceName = service.name;
                 newOrder.service.categories = req.body.service.categories;
