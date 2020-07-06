@@ -39,9 +39,9 @@
                 <p id="Vdetails" slot="reference">view details</p>  
               </popper>
               <div class="card-btn-wrapper">
-                <router-link :to="{name: 'cmodal'}">
+                <!--<router-link :to="{name: 'cmodal'}">-->
                   <input type="submit" value="Add to cart" @click="fn(service)">
-                </router-link>                
+                <!--</router-link>-->                
               </div>  
             </div>
           </div> 
@@ -56,6 +56,7 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import Popper from 'vue-popperjs';
 import 'vue-popperjs/dist/vue-popper.css';
 import Cmodal from '@/components/Services/Cleaning/Cmodal.vue'
@@ -68,13 +69,35 @@ export default {
   },
   data() {
     return {
-      subArr: []
+      subArr: [],
+      cchecker: this.$cookies.get("category")
     }
   },
   methods: {
     fn(obj) {
-      this.$cookies.set("sarray", JSON.stringify(obj), "id")
-      window.scrollTo(0,0)
+      if(this.cchecker != null) {
+        if(this.cchecker == "Customer") {
+          this.$cookies.set("sarray", JSON.stringify(obj), "id")
+          this.$cookies.set("ccr", "http://localhost:8080" + this.$router.currentRoute.path, "id")
+          window.scrollTo(0,0)
+          window.location.href = "http://localhost:8080/services/cleaning/cmodal"
+        } else {
+          Vue.$toast.open({
+            message: "Access Denied!",
+            type: 'error',
+            position: 'bottom-left'
+          });            
+        }
+      } else {
+        Vue.$toast.open({
+          message: "Please login to your cutomer account!",
+          type: 'error',
+          position: 'bottom-left'
+        });         
+        setTimeout(() => {
+          window.location.href = "http://localhost:8080/login"
+        }, 3000);
+      }
     },
     apiCall() {
       let url = 'http://localhost:3000/services/5ea50d377c154d280cf37efb'
