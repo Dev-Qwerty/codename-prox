@@ -256,10 +256,8 @@ router
 
 router
     .route('/placeorder/paynow/callback')
-    .post(async (req, res) => {
-
+    .post((req, res) => {
         try {
-
             var body = '';
 
 	        req.on('data', function (data) {
@@ -309,11 +307,24 @@ router
 							response += chunk;
 						});
 
-						post_res.on('end', function(){
+						post_res.on('end', async function(){
                             console.log('S2S Response: ', response, "\n");
 
                             var _result = JSON.parse(response);
                             
+                            let serviceKeyWords = []
+                            if(_result.RESPCODE == 01 && _result.STATUS == 'TXN_SUCCESS') {
+                                const serviceDetails = await orderModel.findOne({orderID: _result.ORDERID}, 'service.subserviceName service.categories address orderID -_id') //Find service name and categories form workorder db
+                                serviceKeyWords.push(serviceDetails.service.subserviceName)
+                                for(i = 0; i < serviceDetails.service.categories.length; i++){
+                                    //Loop through subservice categories
+                                    serviceKeyWords.push(serviceDetails.service.categories[i].category)
+                                }
+
+                                // function call to find worker for job assigning 
+                                let assignedWorker = await assignWorker.assignWorker(serviceKeyWords, serviceDetails.address.pin, serviceDetails.orderID);
+                            }
+
                             // Send response based on the Transaction status (RESPONSE CODE)
                             switch(_result.RESPCODE) {
                                 case '01':
