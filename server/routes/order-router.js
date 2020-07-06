@@ -244,7 +244,8 @@ router
                     res.end();
                 });
             } else {
-                res.send("failed to place order")
+                res.send("failed to place order due to incomplete details")
+                // TODO: show styled message instead of res.send
             }
         } catch (error) {
             console.log(error)
