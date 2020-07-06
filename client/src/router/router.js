@@ -139,7 +139,7 @@ export default new VueRouter({
           name: 'cmodal',
           component: Cmodal,
           beforeEnter(to,from,next) {
-            if(Vue.$cookies.get("category")!=undefined) {
+            if(Vue.$cookies.get("category") != undefined) {
               if(Vue.$cookies.get("category") == 'Worker') {
                 window.location.href = "http://localhost:8080/services";
               } else {
@@ -162,7 +162,7 @@ export default new VueRouter({
           name: 'ecmodal',
           component: Ecmodal,
           beforeEnter(to,from,next) {
-            if(Vue.$cookies.get("category")!=undefined) {
+            if(Vue.$cookies.get("category") != undefined) {
               if(Vue.$cookies.get("category") == 'Worker') {
                 window.location.href = "http://localhost:8080/services";
               } else {
@@ -185,7 +185,7 @@ export default new VueRouter({
           name: 'ctmodal',
           component: Ctmodal,
           beforeEnter(to,from,next) {
-            if(Vue.$cookies.get("category")!=undefined) {
+            if(Vue.$cookies.get("category") != undefined) {
               if(Vue.$cookies.get("category") == 'Worker') {
                 window.location.href = "http://localhost:8080/services";
               } else {
@@ -208,7 +208,7 @@ export default new VueRouter({
           name: 'pmodal',
           component: Pmodal,
           beforeEnter(to,from,next) {
-            if(Vue.$cookies.get("category")!=undefined) {
+            if(Vue.$cookies.get("category") != undefined) {
               if(Vue.$cookies.get("category") == 'Worker') {
                 window.location.href = "http://localhost:8080/services";
               } else {
@@ -231,7 +231,7 @@ export default new VueRouter({
           name: 'fmodal',
           component: Fmodal,
           beforeEnter(to,from,next) {
-            if(Vue.$cookies.get("category")!=undefined) {
+            if(Vue.$cookies.get("category") != undefined) {
               if(Vue.$cookies.get("category") == 'Worker') {
                 window.location.href = "http://localhost:8080/services";
               } else {
@@ -254,7 +254,7 @@ export default new VueRouter({
           path: 'phmodal',
           component: Phmodal,
           beforeEnter(to,from,next) {
-            if(Vue.$cookies.get("category")!=undefined) {
+            if(Vue.$cookies.get("category") != undefined) {
               if(Vue.$cookies.get("category") == 'Worker') {
                 window.location.href = "http://localhost:8080/services";
               } else {
@@ -277,7 +277,7 @@ export default new VueRouter({
           path: 'pamodal',
           component: Pamodal,
           beforeEnter(to,from,next) {
-            if(Vue.$cookies.get("category")!=undefined) {
+            if(Vue.$cookies.get("category") != undefined) {
               if(Vue.$cookies.get("category") == 'Worker') {
                 window.location.href = "http://localhost:8080/services";
               } else {
@@ -300,7 +300,7 @@ export default new VueRouter({
           path: 'eemodal',
           component: Eemodal,
           beforeEnter(to,from,next) {
-            if(Vue.$cookies.get("category")!=undefined) {
+            if(Vue.$cookies.get("category") != undefined) {
               if(Vue.$cookies.get("category") == 'Worker') {
                 window.location.href = "http://localhost:8080/services";
               } else {
@@ -323,7 +323,7 @@ export default new VueRouter({
           path: 'pcmodal',
           component: Pcmodal,
           beforeEnter(to,from,next) {
-            if(Vue.$cookies.get("category")!=undefined) {
+            if(Vue.$cookies.get("category") != undefined) {
               if(Vue.$cookies.get("category") == 'Worker') {
                 window.location.href = "http://localhost:8080/services";
               } else {
