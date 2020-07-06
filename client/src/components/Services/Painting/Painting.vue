@@ -83,7 +83,7 @@ export default {
           window.location.href = "http://localhost:8080/services/cleaning/cmodal"
         } else {
           Vue.$toast.open({
-            message: "Worker detected",
+            message: "Access Denied!",
             type: 'error',
             position: 'bottom-left'
           });            
