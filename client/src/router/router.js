@@ -341,7 +341,18 @@ export default new VueRouter({
       path: '/services/cart',
       name: 'cart',
       component: cart,
-      props: true,
+      beforeEnter(to,from,next) {
+        if(Vue.$cookies.get("category") != undefined) {
+          if(Vue.$cookies.get("category") == 'Worker') {
+            window.location.href = "http://localhost:8080/services";
+          } else {
+            next()
+          }
+        }
+        else {
+          window.location.href = "http://localhost:8080/login";
+        }
+      }, 
       children: [
         {
           path: 'checkout',
