@@ -83,8 +83,8 @@ router
                 //create and save token
                 let newOrderStatus = new orderStatusModel;
                 newOrderStatus.orderID = newOrder.orderID;
-                newOrderStatus.token1 = Math.floor(Math.random() * (999999 - 100000)) + 100000;
-                newOrderStatus.token2 = Math.floor(Math.random() * (999999 - 100000)) + 100000;
+                newOrderStatus.startToken = Math.floor(Math.random() * (999999 - 100000)) + 100000;
+                newOrderStatus.completeToken = Math.floor(Math.random() * (999999 - 100000)) + 100000;
                 newOrderStatus.save()
 
 
