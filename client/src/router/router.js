@@ -139,7 +139,18 @@ export default new VueRouter({
           path: 'cmodal',
           name: 'cmodal',
           component: Cmodal,
-          props: true
+          beforeEnter(to,from,next) {
+            if(Vue.$cookies.get("category") != undefined) {
+              if(Vue.$cookies.get("category") == 'Worker') {
+                window.location.href = "http://localhost:8080/services";
+              } else {
+                next()
+              }
+            }
+            else {
+              window.location.href = "http://localhost:8080/login";
+            }
+          }  
         },       
       ]
     },
@@ -151,7 +162,18 @@ export default new VueRouter({
           path: 'ecmodal',
           name: 'ecmodal',
           component: Ecmodal,
-          props: true
+          beforeEnter(to,from,next) {
+            if(Vue.$cookies.get("category") != undefined) {
+              if(Vue.$cookies.get("category") == 'Worker') {
+                window.location.href = "http://localhost:8080/services";
+              } else {
+                next()
+              }
+            }
+            else {
+              window.location.href = "http://localhost:8080/login";
+            }
+          } 
         },       
       ]
     },
@@ -163,7 +185,18 @@ export default new VueRouter({
           path: 'ctmodal',
           name: 'ctmodal',
           component: Ctmodal,
-          props: true
+          beforeEnter(to,from,next) {
+            if(Vue.$cookies.get("category") != undefined) {
+              if(Vue.$cookies.get("category") == 'Worker') {
+                window.location.href = "http://localhost:8080/services";
+              } else {
+                next()
+              }
+            }
+            else {
+              window.location.href = "http://localhost:8080/login";
+            }
+          } 
         },       
       ]
     },
@@ -175,7 +208,18 @@ export default new VueRouter({
           path: 'pmodal',
           name: 'pmodal',
           component: Pmodal,
-          props: true
+          beforeEnter(to,from,next) {
+            if(Vue.$cookies.get("category") != undefined) {
+              if(Vue.$cookies.get("category") == 'Worker') {
+                window.location.href = "http://localhost:8080/services";
+              } else {
+                next()
+              }
+            }
+            else {
+              window.location.href = "http://localhost:8080/login";
+            }
+          } 
         },       
       ]
     },
@@ -187,7 +231,18 @@ export default new VueRouter({
           path: 'fmodal',
           name: 'fmodal',
           component: Fmodal,
-          props: true
+          beforeEnter(to,from,next) {
+            if(Vue.$cookies.get("category") != undefined) {
+              if(Vue.$cookies.get("category") == 'Worker') {
+                window.location.href = "http://localhost:8080/services";
+              } else {
+                next()
+              }
+            }
+            else {
+              window.location.href = "http://localhost:8080/login";
+            }
+          } 
         },       
       ]
     },
@@ -199,7 +254,18 @@ export default new VueRouter({
           name: 'phmodal',
           path: 'phmodal',
           component: Phmodal,
-          props: true
+          beforeEnter(to,from,next) {
+            if(Vue.$cookies.get("category") != undefined) {
+              if(Vue.$cookies.get("category") == 'Worker') {
+                window.location.href = "http://localhost:8080/services";
+              } else {
+                next()
+              }
+            }
+            else {
+              window.location.href = "http://localhost:8080/login";
+            }
+          } 
         },       
       ]
     },
@@ -211,7 +277,18 @@ export default new VueRouter({
           name: 'pamodal',
           path: 'pamodal',
           component: Pamodal,
-          props: true
+          beforeEnter(to,from,next) {
+            if(Vue.$cookies.get("category") != undefined) {
+              if(Vue.$cookies.get("category") == 'Worker') {
+                window.location.href = "http://localhost:8080/services";
+              } else {
+                next()
+              }
+            }
+            else {
+              window.location.href = "http://localhost:8080/login";
+            }
+          } 
         },       
       ]
     },
@@ -223,7 +300,18 @@ export default new VueRouter({
           name: 'eemodal',
           path: 'eemodal',
           component: Eemodal,
-          props: true
+          beforeEnter(to,from,next) {
+            if(Vue.$cookies.get("category") != undefined) {
+              if(Vue.$cookies.get("category") == 'Worker') {
+                window.location.href = "http://localhost:8080/services";
+              } else {
+                next()
+              }
+            }
+            else {
+              window.location.href = "http://localhost:8080/login";
+            }
+          }           
         },       
       ]
     },
@@ -235,7 +323,18 @@ export default new VueRouter({
           name: 'pcmodal',
           path: 'pcmodal',
           component: Pcmodal,
-          props: true
+          beforeEnter(to,from,next) {
+            if(Vue.$cookies.get("category") != undefined) {
+              if(Vue.$cookies.get("category") == 'Worker') {
+                window.location.href = "http://localhost:8080/services";
+              } else {
+                next()
+              }
+            }
+            else {
+              window.location.href = "http://localhost:8080/login";
+            }
+          } 
         },       
       ]
     },
@@ -243,7 +342,18 @@ export default new VueRouter({
       path: '/services/cart',
       name: 'cart',
       component: cart,
-      props: true,
+      beforeEnter(to,from,next) {
+        if(Vue.$cookies.get("category") != undefined) {
+          if(Vue.$cookies.get("category") == 'Worker') {
+            window.location.href = "http://localhost:8080/services";
+          } else {
+            next()
+          }
+        }
+        else {
+          window.location.href = "http://localhost:8080/login";
+        }
+      }, 
       children: [
         {
           path: 'checkout',

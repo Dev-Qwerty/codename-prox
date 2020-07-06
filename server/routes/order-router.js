@@ -96,7 +96,7 @@ router
                 newWorkRequest.orderID = newOrder.orderID;
                 newWorkRequest.workerID = assignedWorker;
                 newWorkRequest.service = newOrder.service;
-                newWorkRequest.place = req.body.address.line2;
+                newWorkRequest.address = req.body.address;
                 newWorkRequest.amount = newOrder.totalAmount;
                 newWorkRequest.date = req.body.date;
                 newWorkRequest.time = req.body.time;
