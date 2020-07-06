@@ -80,7 +80,7 @@ export default {
           this.$cookies.set("sarray", JSON.stringify(obj), "id")
           this.$cookies.set("ccr", "http://localhost:8080" + this.$router.currentRoute.path, "id")
           window.scrollTo(0,0)
-          window.location.href = "http://localhost:8080/services/cleaning/cmodal"
+          window.location.href = "http://localhost:8080/services/carpentry/ctmodal"
         } else {
           Vue.$toast.open({
             message: "Access Denied!",
