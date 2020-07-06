@@ -138,7 +138,18 @@ export default new VueRouter({
           path: 'cmodal',
           name: 'cmodal',
           component: Cmodal,
-          props: true
+          beforeEnter(to,from,next) {
+            if(Vue.$cookies.get("category")!=undefined) {
+              if(Vue.$cookies.get("category") == 'Worker') {
+                window.location.href = "http://localhost:8080/services";
+              } else {
+                next()
+              }
+            }
+            else {
+              window.location.href = "http://localhost:8080/login";
+            }
+          }  
         },       
       ]
     },
