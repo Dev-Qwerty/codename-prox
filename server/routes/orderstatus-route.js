@@ -8,8 +8,8 @@ const orderModel = require('../models/order-model');
 router
     .route('/changestatus')
     .post( async (req, res) => {
-        if (req.body.status == "arrived"){
-            let updatedorder = await orderStatusModel.findOneAndUpdate({orderID: req.body.orderID},{status: "Arrived"})
+        if (req.body.status.localeCompare('arrived') == 0){
+            let updatedorder = await orderStatusModel.findOneAndUpdate({orderID: req.body.orderID},{status: "arrived"})
         }
         res.send("status changed")
     })
@@ -19,11 +19,11 @@ router
     .get( async (req, res) => {
         try {
             const orderstatus = await orderStatusModel.findOne({orderID: req.params.id});
-            if(orderstatus.status == 'arrived'){
-                res.send(orderstatus.startToken)
-            }else if(orderstatus.status == 'started'){
-                res.send(orderstatus.completeToken)
-            }else if(orderstatus.status == 'accepted'){
+            if(orderstatus.status.localeCompare('arrived') == 0){
+                res.json({'token':orderstatus.startToken})
+            }else if(orderstatus.status.localeCompare('started') == 0){
+                res.json({'token':orderstatus.completeToken})
+            }else if(orderstatus.status.localeCompare('accepted') == 0){
                 res.send("Work has not been started yet")
             }else{
                 res.send("Work has been completed")
