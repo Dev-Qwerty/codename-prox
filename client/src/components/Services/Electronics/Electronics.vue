@@ -83,14 +83,14 @@ export default {
           window.location.href = "http://localhost:8080/services/electronics-and-appliances/ecmodal"
         } else {
           Vue.$toast.open({
-            message: "Access Denied!",
+            message: "Please login to your customer account!",
             type: 'error',
             position: 'bottom-left'
           });            
         }
       } else {
         Vue.$toast.open({
-          message: "Please login to your cutomer account!",
+          message: "Please login to your account!",
           type: 'error',
           position: 'bottom-left'
         });         
