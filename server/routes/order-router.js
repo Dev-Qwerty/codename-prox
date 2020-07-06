@@ -331,6 +331,10 @@ router
 
                                 // function call to find worker for job assigning 
                                 let assignedWorker = await assignWorker.assignWorker(serviceKeyWords, serviceDetails.address.pin, serviceDetails.orderID);
+                            } else { 
+                                orderModel.deleteOne({orderID: _result.ORDERID}).then(() => {
+                                    console.log("deleted" + _result.ORDERID)
+                                })
                             }
 
                             // Send response based on the Transaction status (RESPONSE CODE)
