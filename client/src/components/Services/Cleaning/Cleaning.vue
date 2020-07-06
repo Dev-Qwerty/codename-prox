@@ -78,6 +78,7 @@ export default {
       if(this.cchecker != null) {
         if(this.cchecker == "Customer") {
           this.$cookies.set("sarray", JSON.stringify(obj), "id")
+          this.$cookies.set("ccr", "http://localhost:8080" + this.$router.currentRoute.path, "id")
           window.scrollTo(0,0)
           window.location.href = "http://localhost:8080/services/cleaning/cmodal"
         } else {
