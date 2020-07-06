@@ -5,6 +5,7 @@ const router = express.Router();
 const uniqueId = require('../misc/unique-id')
 const assignWorker = require('../misc/assign-worker')
 const moment = require('moment')
+const crypt = require('../misc/crypt')
 // const sendMessage = require('../misc/textmessage')
 
 // Middleware for body parsing
@@ -65,8 +66,9 @@ router
                 }
 
                 // create new orderrs
+                let userID = crypt.decrypt(req.params.id)
                 newOrder.orderID = uniqueId.uniqueOrderId();
-                newOrder.userID = "adjfne3";   // TODO : save original userid
+                newOrder.userID = userID;
                 newOrder.date = req.body.date;
                 newOrder.service.subserviceName = service.name;
                 newOrder.service.categories = req.body.service.categories;
