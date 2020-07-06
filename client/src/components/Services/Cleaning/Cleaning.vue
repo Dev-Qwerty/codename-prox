@@ -68,13 +68,20 @@ export default {
   },
   data() {
     return {
-      subArr: []
+      subArr: [],
+      cchecker: this.$cookies.get("category")
     }
   },
   methods: {
     fn(obj) {
-      this.$cookies.set("sarray", JSON.stringify(obj), "id")
-      window.scrollTo(0,0)
+      if(this.cchecker != null) {
+        if(this.cchecker == "Customer") {
+          this.$cookies.set("sarray", JSON.stringify(obj), "id")
+          window.scrollTo(0,0)
+        } 
+      } else {
+        window.location.href = "http://localhost:8080/login"
+      }
     },
     apiCall() {
       let url = 'http://localhost:3000/services/5ea50d377c154d280cf37efb'
