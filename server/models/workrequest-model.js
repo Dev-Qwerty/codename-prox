@@ -36,9 +36,31 @@ const workerRequestSchema = mongoose.Schema({
             }
         }]
     },
-    place: {
-        type: String,
-        requied: true
+    address: {
+        name: {
+            type: String,
+            required: true
+        },
+        phone: {
+            type: Number,
+            required:true
+        },
+        line1: {
+            type: String,
+            require: true
+        },
+        line2: {
+            type: String,
+            required: true
+        },
+        district: {
+            type: String,
+            required: true
+        },
+        pin: {
+            type: Number,
+            required: true
+        }
     },
     amount: {
         type: Number,

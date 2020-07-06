@@ -54,6 +54,14 @@ const orderSchema = mongoose.Schema({
         required: true
     },
     address: {
+        name: {
+            type: String,
+            required: true
+        },
+        phone: {
+            type: Number,
+            required:true
+        },
         line1: {
             type: String,
             require: true
