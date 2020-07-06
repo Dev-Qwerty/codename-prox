@@ -56,6 +56,7 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import Popper from 'vue-popperjs';
 import 'vue-popperjs/dist/vue-popper.css';
 import Eemodal from '@/components/Services/Electrical/Eemodal.vue'
@@ -68,7 +69,8 @@ export default {
   },
   data() {
     return {
-      subArr: []
+      subArr: [],
+      cchecker: this.$cookies.get("category")
     }
   },
   methods: {
@@ -76,8 +78,29 @@ export default {
       window.scrollTo(0,0)
     },
     fn(obj) {
-      this.$cookies.set("sarray", JSON.stringify(obj), "id")
-      //window.scrollTo(0,0)
+      if(this.cchecker != null) {
+        if(this.cchecker == "Customer") {
+          this.$cookies.set("sarray", JSON.stringify(obj), "id")
+          this.$cookies.set("ccr", "http://localhost:8080" + this.$router.currentRoute.path, "id")
+          window.scrollTo(0,0)
+          window.location.href = "http://localhost:8080/services/cleaning/cmodal"
+        } else {
+          Vue.$toast.open({
+            message: "Worker detected",
+            type: 'error',
+            position: 'bottom-left'
+          });            
+        }
+      } else {
+        Vue.$toast.open({
+          message: "Please login to your cutomer account!",
+          type: 'error',
+          position: 'bottom-left'
+        });         
+        setTimeout(() => {
+          window.location.href = "http://localhost:8080/login"
+        }, 3000);
+      }
     },
     apiCall() {
       let url = 'http://localhost:3000/services/5ef99afeb0547867b5f8437c'
