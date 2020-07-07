@@ -75,28 +75,17 @@ export default {
   },
   methods: {
     fn(obj) {
-      if(this.cchecker != null) {
-        if(this.cchecker == "Customer") {
-          this.$cookies.set("sarray", JSON.stringify(obj), "id")
-          this.$cookies.set("ccr", "http://localhost:8080" + this.$router.currentRoute.path, "id")
-          window.scrollTo(0,0)
-          window.location.href = "http://localhost:8080/services/electrical-and-wiring/eemodal"
-        } else {
-          Vue.$toast.open({
-            message: "Please login to your customer account!",
-            type: 'error',
-            position: 'bottom-left'
-          });            
-        }
-      } else {
-        Vue.$toast.open({
+      if(this.cchecker == null) {
+        this.$cookies.set("sarray", JSON.stringify(obj), "id");
+        this.$cookies.set("ccr", "http://localhost:8080" + this.$router.currentRoute.path, "id");
+         Vue.$toast.open({
           message: "Please login to your account!",
           type: 'error',
           position: 'bottom-left'
-        });  
-        setTimeout(() => {
-           window.location.href = "http://localhost:8080/login"
-        }, 3000);              
+        }); 
+        setTimeout(function() {
+          window.location.href = "http://localhost:8080/login"
+        }, 3000);       
       }
     },
     apiCall() {

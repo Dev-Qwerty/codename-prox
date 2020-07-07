@@ -122,7 +122,12 @@ export default {
                     this.$cookies.set("id", response.data.id);
                     this.$cookies.set("category", response.data.category);
                     if(response.data.category == "Customer") {
-                      window.location.href = "http://localhost:8080/customerdashboard";
+                      if(this.$cookies.get("ccr")!=null) {
+                        window.location.href = decodeURIComponent(this.$cookies.get("ccr"));
+                      }
+                      else {
+                        window.location.href = "http://localhost:8080/customerdashboard";
+                      }
                     }
                     else {
                     window.location.href = "http://localhost:8080/dashboard";
