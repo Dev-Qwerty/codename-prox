@@ -80,23 +80,26 @@ export default {
           this.$cookies.set("sarray", JSON.stringify(obj), "id")
           this.$cookies.set("ccr", "http://localhost:8080" + this.$router.currentRoute.path, "id")
           window.scrollTo(0,0)
-          window.location.href = "http://localhost:8080/services/cleaning/cmodal"
+          window.location.href = "http://localhost:8080/services/carpentry/ctmodal"
         } else {
           Vue.$toast.open({
-            message: "Access Denied!",
+            message: "Please login to your customer account!",
             type: 'error',
             position: 'bottom-left'
           });            
         }
       } else {
         Vue.$toast.open({
-          message: "Please login to your cutomer account!",
+          message: "Please login to your account!",
           type: 'error',
           position: 'bottom-left'
-        });         
-        setTimeout(() => {
+        }); 
+        setTimeout(function() {
           window.location.href = "http://localhost:8080/login"
-        }, 3000);
+        }, 3000);                
+        /*setTimeout(() => {
+          window.location.href = "http://localhost:8080/login"
+        },4000);*/
       }
     },
     apiCall() {
@@ -281,5 +284,6 @@ export default {
     background-color: #fff;
     color: #000;
     opacity: 0.9;
+    font-weight: bold;
   }   
 </style>

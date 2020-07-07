@@ -80,10 +80,10 @@ export default {
           this.$cookies.set("sarray", JSON.stringify(obj), "id")
           this.$cookies.set("ccr", "http://localhost:8080" + this.$router.currentRoute.path, "id")
           window.scrollTo(0,0)
-          window.location.href = "http://localhost:8080/services/cleaning/cmodal"
+          window.location.href = "http://localhost:8080/services/plumbing/pmodal"
         } else {
           Vue.$toast.open({
-            message: "Access Denied!",
+            message: "Please login to your account!",
             type: 'error',
             position: 'bottom-left'
           });            
@@ -281,5 +281,6 @@ export default {
     background-color: #fff;
     color: #000;
     opacity: 0.9;
+    font-weight: bold;
   }      
 </style>

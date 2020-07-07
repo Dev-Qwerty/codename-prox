@@ -83,14 +83,14 @@ export default {
           window.location.href = "http://localhost:8080/services/cleaning/cmodal"
         } else {
           Vue.$toast.open({
-            message: "Access Denied!",
+            message: "Please login to your customer account!",
             type: 'error',
             position: 'bottom-left'
           });            
         }
       } else {
         Vue.$toast.open({
-          message: "Please login to your cutomer account!",
+          message: "Please login to your account!",
           type: 'error',
           position: 'bottom-left'
         });         
@@ -281,5 +281,6 @@ export default {
     background-color: #fff;
     color: #000;
     opacity: 0.9;
+    font-weight: bold;
   }
 </style>
