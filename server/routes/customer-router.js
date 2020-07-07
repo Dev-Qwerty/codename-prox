@@ -361,4 +361,16 @@ router.get('/orderHistory', (req,res) => {
   })
 })
 
+router
+  .route('/bookings/:id')
+  .get(async (req, res) => {
+    try {
+      let bookings = await Order.find({userID: req.params.id, completed: false}, 'service address orderID date totalAmount time -_id')
+      res.send(bookings)
+    } catch (error) {
+      res.send("Something went wrong")
+    }
+  })
+
+
 module.exports = router;
