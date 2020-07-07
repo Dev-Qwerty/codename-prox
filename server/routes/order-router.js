@@ -66,9 +66,9 @@ router
                 }
 
                 // create new orderrs
-                let userID = crypt.decrypt(req.params.id)
+                // let userID = crypt.decrypt(req.body.id)
                 newOrder.orderID = uniqueId.uniqueOrderId();
-                newOrder.userID = userID;
+                newOrder.userID = req.body.id;
                 newOrder.date = req.body.date;
                 newOrder.service.subserviceName = service.name;
                 newOrder.service.categories = req.body.service.categories;
@@ -83,8 +83,8 @@ router
                 //create and save token
                 let newOrderStatus = new orderStatusModel;
                 newOrderStatus.orderID = newOrder.orderID;
-                newOrderStatus.token1 = Math.floor(Math.random() * (999999 - 100000)) + 100000;
-                newOrderStatus.token2 = Math.floor(Math.random() * (999999 - 100000)) + 100000;
+                newOrderStatus.startToken = Math.floor(Math.random() * (999999 - 100000)) + 100000;
+                newOrderStatus.completeToken = Math.floor(Math.random() * (999999 - 100000)) + 100000;
                 newOrderStatus.save()
 
 

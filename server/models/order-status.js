@@ -7,12 +7,13 @@ const orderStatusSchema = mongoose.Schema({
     },
     status: {
         type: String,
+        default: "accepted"
     },
-    token1: {
+    startToken: {
         type: Number,
         required: true
     },
-    token2: {
+    completeToken: {
         type: Number,
         required: true
     }
