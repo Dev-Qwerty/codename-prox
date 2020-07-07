@@ -92,6 +92,7 @@ export default {
       this.$cookies.remove("pid");
       this.$cookies.remove("category");
       this.$cookies.remove("ccr");
+      this.$cookies.remove("sarray");
       this.$session.destroy()
       window.location.href = "http://localhost:8080/login"
     },
