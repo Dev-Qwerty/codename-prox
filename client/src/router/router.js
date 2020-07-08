@@ -142,7 +142,7 @@ export default new VueRouter({
           beforeEnter(to,from,next) {
             if(Vue.$cookies.get("category") != undefined) {
               if(Vue.$cookies.get("category") == 'Worker') {
-                window.location.href = "http://localhost:8080/services";
+                window.location.href = "http://localhost:8080/dashboard";
               } else {
                 next()
               }
@@ -165,7 +165,7 @@ export default new VueRouter({
           beforeEnter(to,from,next) {
             if(Vue.$cookies.get("category") != undefined) {
               if(Vue.$cookies.get("category") == 'Worker') {
-                window.location.href = "http://localhost:8080/services";
+                window.location.href = "http://localhost:8080/dashboard";
               } else {
                 next()
               }
@@ -188,7 +188,7 @@ export default new VueRouter({
           beforeEnter(to,from,next) {
             if(Vue.$cookies.get("category") != undefined) {
               if(Vue.$cookies.get("category") == 'Worker') {
-                window.location.href = "http://localhost:8080/services";
+                window.location.href = "http://localhost:8080/dashboard";
               } else {
                 next()
               }
@@ -211,7 +211,7 @@ export default new VueRouter({
           beforeEnter(to,from,next) {
             if(Vue.$cookies.get("category") != undefined) {
               if(Vue.$cookies.get("category") == 'Worker') {
-                window.location.href = "http://localhost:8080/services";
+                window.location.href = "http://localhost:8080/dashboard";
               } else {
                 next()
               }
@@ -234,7 +234,7 @@ export default new VueRouter({
           beforeEnter(to,from,next) {
             if(Vue.$cookies.get("category") != undefined) {
               if(Vue.$cookies.get("category") == 'Worker') {
-                window.location.href = "http://localhost:8080/services";
+                window.location.href = "http://localhost:8080/dashboard";
               } else {
                 next()
               }
@@ -257,7 +257,7 @@ export default new VueRouter({
           beforeEnter(to,from,next) {
             if(Vue.$cookies.get("category") != undefined) {
               if(Vue.$cookies.get("category") == 'Worker') {
-                window.location.href = "http://localhost:8080/services";
+                window.location.href = "http://localhost:8080/dashboard";
               } else {
                 next()
               }
@@ -280,7 +280,7 @@ export default new VueRouter({
           beforeEnter(to,from,next) {
             if(Vue.$cookies.get("category") != undefined) {
               if(Vue.$cookies.get("category") == 'Worker') {
-                window.location.href = "http://localhost:8080/services";
+                window.location.href = "http://localhost:8080/dashboard";
               } else {
                 next()
               }
@@ -303,7 +303,7 @@ export default new VueRouter({
           beforeEnter(to,from,next) {
             if(Vue.$cookies.get("category") != undefined) {
               if(Vue.$cookies.get("category") == 'Worker') {
-                window.location.href = "http://localhost:8080/services";
+                window.location.href = "http://localhost:8080/dashboard";
               } else {
                 next()
               }
@@ -326,7 +326,7 @@ export default new VueRouter({
           beforeEnter(to,from,next) {
             if(Vue.$cookies.get("category") != undefined) {
               if(Vue.$cookies.get("category") == 'Worker') {
-                window.location.href = "http://localhost:8080/services";
+                window.location.href = "http://localhost:8080/dashboard";
               } else {
                 next()
               }
@@ -345,7 +345,7 @@ export default new VueRouter({
       beforeEnter(to,from,next) {
         if(Vue.$cookies.get("category") != undefined) {
           if(Vue.$cookies.get("category") == 'Worker') {
-            window.location.href = "http://localhost:8080/services";
+            window.location.href = "http://localhost:8080/dashboard";
           } else {
             next()
           }

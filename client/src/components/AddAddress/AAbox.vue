@@ -62,7 +62,12 @@ export default {
       .then(response => {
         if(response.data.status == "Success") {
           if(this.category == "Customer" || this.category == "customer") {
+            if(this.$cookies.get("ccr")!=null){
+              window.location.href = decodeURIComponent(this.$cookies.get("ccr"));
+            }
+            else {
             window.location.href = "http://localhost:8080/customerdashboard";
+            }
           }
           else {
           window.location.href = "http://localhost:8080/dashboard";
