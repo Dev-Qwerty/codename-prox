@@ -32,9 +32,8 @@ router
                     await workerRequest.findOneAndUpdate({requestID: requestId}, {workerID: workerId, requestStatus: requestStatus})
                     await orders.findOneAndUpdate({orderID: orderId}, {workerID: workerId})
                     res.send('worker assigned')
-                    let customer = await orders.findOne({orderID: orderId},'userID -_id') // Fetch customer ID
-                    let customerDetails = await customerModel.findOne({userID: customer.userID},'name phone -_id') // Fetch customer details
-                    let work = await orders.findOne({orderID: orderId},'service.subserviceName  date time'); // Fetch work details
+                    let work = await orders.findOne({orderID: orderId},'service.subserviceName address date time'); // Fetch work details
+                    let customerDetails = work.address; // Fetch customer details
                     let workerDetails = await workerModel.findOne({workerID: workerId},'name phoneNo -_id'); // Fetch worker details
                     workDetails = {
                         workerName: workerDetails.name,
@@ -93,7 +92,7 @@ router
                     await workerRequest.findOneAndUpdate({requestID: requestId}, {workerID: newWorker.workerID,dueDate:dueDate})
                     await selectedWorkers.findOneAndUpdate({orderID: orderId}, {selectedWorkers: selectedWorkersDetails.selectedWorkers, declinedWorkers: selectedWorkersDetails.declinedWorkers})
                     // Send SMS to worker
-                    let workerDetails = await workerModel.findOne({workerID: newWorker.workerID},'name phoneNo -_id');
+                    let workerDetails = await workerModel.findOne({workerID: newWorker.workerID},'name phone -_id');
                     // Find work details
                     let work = await orders.findOne({orderID: orderId},'service.subserviceName address.line2 date time');
                     workDetails = {
