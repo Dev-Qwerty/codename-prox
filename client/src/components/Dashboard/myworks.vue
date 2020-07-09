@@ -36,7 +36,7 @@
                 <p class="row2-two">{{ sr.address.line2 }}, {{ sr.address.district }}</p>
               </div>
               <div class="box-row3">
-                <p class="row3-one">{{ sr.date }}</p>
+                <p class="row3-one">11: 30 AM</p>
               </div>
             </div>
           </div>          
@@ -136,7 +136,7 @@ export default {
   .row1-one {
     text-align: center;
     font-size: 25px;
-    font-weight: bold;
+    font-family: lato-black;
     margin: 0px;
   }
   .Line {
@@ -153,11 +153,12 @@ export default {
   }
   .row2-one {
     font-size: 21px;
-    font-weight: bold;
+    font-family: lato-bold;
     margin: 0px;
   }
   .row2-two {
     font-size: 15px;
+    font-family: lato-light;
     margin: 0px;    
     color: #707070;
   }
@@ -166,8 +167,9 @@ export default {
     margin-top: 5px;
   }
   .row3-one {
-    font-size: 30px;
-    color: #aaa;
+    font-size: 45px;
+    color: #000;
+    font-family: lato-light;
   }
   .yd-header {
     font-weight: bold;
