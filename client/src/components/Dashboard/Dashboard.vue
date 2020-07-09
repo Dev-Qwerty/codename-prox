@@ -157,6 +157,7 @@ export default {
       this.$cookies.remove("id");
       this.$cookies.remove("pid");
       this.$cookies.remove("category");
+      this.$cookies.remove("wd-mw-child");
       this.$session.destroy()
       window.location.href = "http://localhost:8080/login"
     },
