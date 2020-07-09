@@ -5,19 +5,22 @@
       <div class="box-wrapper">
         <div v-for="(sr, index) in myworksarr.todaysWork" :key="index">       
           <div class="box">
-            <div class=""> 
-              <div class="box-row1">
-                <p class="row1-one"><span>$</span>{{ sr.totalAmount }}</p>
-                <div class="Line"></div>
+            <router-link :to="{name: 'mwchild'}" @click.native="fn(sr)">
+              <div>
+                <div class="box-row1">
+                  <p class="row1-one"><span>$</span>{{ sr.totalAmount }}</p>
+                  <div class="Line"></div>
+                </div>
+                <div class="box-row2">
+                  <p class="row2-one">{{ sr.service.subserviceName }}</p>
+                  <p class="row2-two">{{ sr.address.line2 }}, {{ sr.address.district }}</p>
+                </div>
+                <div class="box-row3">
+                  <p class="row3-one">02:30 PM</p>
+                  <p class="row3-two">{{ sr.date }}</p>
+                </div>
               </div>
-              <div class="box-row2">
-                <p class="row2-one">{{ sr.service.subserviceName }}</p>
-                <p class="row2-two">{{ sr.address.line2 }}, {{ sr.address.district }}</p>
-              </div>
-              <div class="box-row3">
-                <p class="row3-one">{{ sr.date }}</p>
-              </div>
-            </div>
+            </router-link>  
           </div>          
         </div>
       </div>
@@ -26,7 +29,7 @@
       <div class="box-wrapper">
         <div v-for="(sr, index) in myworksarr.upcommingWorks" :key="index">       
           <div class="box">
-            <router-link :to="{name: 'mwchild'}" @click.native="ufn(sr)">
+            <router-link :to="{name: 'mwchild'}" @click.native="fn(sr)">
               <div>
                 <div class="box-row1">
                   <p class="row1-one"><span>$</span>{{ sr.totalAmount }}</p>
@@ -50,19 +53,22 @@
       <div class="box-wrapper">
         <div v-for="(sr, index) in myworksarr.completedWorks" :key="index">       
           <div class="box">
-            <div class=""> 
-              <div class="box-row1">
-                <p class="row1-one"><span>$</span>{{ sr.totalAmount }}</p>
-                <div class="Line"></div>
+            <router-link :to="{name: 'mwchild'}" @click.native="fn(sr)">
+              <div>
+                <div class="box-row1">
+                  <p class="row1-one"><span>$</span>{{ sr.totalAmount }}</p>
+                  <div class="Line"></div>
+                </div>
+                <div class="box-row2">
+                  <p class="row2-one">{{ sr.service.subserviceName }}</p>
+                  <p class="row2-two">{{ sr.address.line2 }}, {{ sr.address.district }}</p>
+                </div>
+                <div class="box-row3">
+                  <p class="row3-one">02:30 PM</p>
+                  <p class="row3-two">{{ sr.date }}</p>
+                </div>
               </div>
-              <div class="box-row2">
-                <p class="row2-one">{{ sr.service.subserviceName }}</p>
-                <p class="row2-two">{{ sr.address.line2 }}, {{ sr.address.district }}</p>
-              </div>
-              <div class="box-row3">
-                <p class="row3-one">{{ sr.date }}</p>
-              </div>
-            </div>
+            </router-link>  
           </div>          
         </div>
       </div>     
@@ -94,7 +100,7 @@ export default {
         alert(error);
       })     
     },
-    ufn(obj) {
+    fn(obj) {
       this.$cookies.set("wd-mw-child", JSON.stringify(obj), "1d");
     }   
   },
@@ -108,7 +114,6 @@ export default {
   .mw-body {
     padding-top: 10px;
     padding-left: 50px;
-    height: 2000px;
   }
   .ty-header {
     font-weight: bold;

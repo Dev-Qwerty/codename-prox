@@ -1,6 +1,6 @@
 <template>
   <div class="Wrapper">
-      <h1>Hello</h1>
+      <h1>{{ sr }}</h1>
   </div>
 </template>
 
@@ -11,6 +11,7 @@ export default {
   },
   data() {
     return {
+      sr: this.$cookies.get("wd-mw-child")
     }
   },
   methods: { 

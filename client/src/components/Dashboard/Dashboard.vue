@@ -486,6 +486,7 @@ export default {
   }              
   .dashboard-body {
     background-color: #F5F5F5;
+    min-height: 676px;
   }
   .ProfilePresent {
     background-size: contain;

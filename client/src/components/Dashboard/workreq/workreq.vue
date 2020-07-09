@@ -165,7 +165,6 @@ export default {
   <style scoped>
   .wr-grid {
     width: 100%;
-    height: 1500px;
     display: grid;
     grid-template-columns: 2fr 1fr;
   }
