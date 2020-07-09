@@ -97,6 +97,7 @@
           <workreq />
           <!--<pworks />-->
           <myworks />
+          <mwchild />
           <myprofile />
         </router-view>       
       </div>
@@ -108,6 +109,7 @@
 import workreq from '@/components/Dashboard/workreq/workreq.vue'
 //import pworks from '@/components/Dashboard/pworks.vue'
 import myworks from '@/components/Dashboard/myworks/myworks.vue'
+import mwchild from '@/components/Dashboard/myworks/mw-child.vue'
 import myprofile from '@/components/Dashboard/myprofile/myprofile.vue'
 import Popper from 'vue-popperjs';
 import 'vue-popperjs/dist/vue-popper.css';
@@ -117,6 +119,7 @@ export default {
     workreq,
     //pworks,
     myworks,
+    mwchild,
     myprofile,
     'popper': Popper
   },
