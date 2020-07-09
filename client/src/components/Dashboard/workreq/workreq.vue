@@ -226,7 +226,7 @@ export default {
   .ir-box-three-img {
     width: 23px;
     height: 23px;
-    background-image: url('../../assets/ir-tick.png');
+    background-image: url('../../../assets/ir-tick.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;  
@@ -239,7 +239,7 @@ export default {
   .ir-box-four-img {
     width: 19px;
     height: 19px;    
-    background-image: url('../../assets/ir-close-btn.png');
+    background-image: url('../../../assets/ir-close-btn.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;       

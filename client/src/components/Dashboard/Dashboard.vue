@@ -105,10 +105,10 @@
 </template>
 
 <script>
-import workreq from '@/components/Dashboard/workreq.vue'
+import workreq from '@/components/Dashboard/workreq/workreq.vue'
 //import pworks from '@/components/Dashboard/pworks.vue'
-import myworks from '@/components/Dashboard/myworks.vue'
-import myprofile from '@/components/Dashboard/myprofile.vue'
+import myworks from '@/components/Dashboard/myworks/myworks.vue'
+import myprofile from '@/components/Dashboard/myprofile/myprofile.vue'
 import Popper from 'vue-popperjs';
 import 'vue-popperjs/dist/vue-popper.css';
 
