@@ -3,8 +3,8 @@
     <div class="a">
       <div class="aa">
         <div class="aaa">
-          <p>{{ sr.service.subserviceName }}</p>
-          <p><span>Amount: </span>{{ sr.totalAmount }}</p>
+          <p class="aaa-p1">{{ sr.service.subserviceName }}</p>
+          <p class="aaa-p2"><span>Amount: </span>{{ sr.totalAmount }}</p>
         </div>
         <div class="aab">
           <div class="aab-top">
@@ -12,14 +12,16 @@
           </div>
           <div class="aab-body">
             <div class="aab-boxes">
-              <div class="aab-box">
-                <div class="aab-box-col1">
-                  <p>{{ sr.service.categories[0].category }}</p>
-                </div>
-                <div class="aab-box-col2">
-                  <p>{{ sr.service.categories[0].quantity }}</p>
-                </div>
-              </div>               
+              <div v-for="(arr, index) in sr.service.categories" :key="index">
+                <div class="aab-box">
+                  <div class="aab-box-col1">
+                    <p>{{ arr.category }}</p>
+                  </div>
+                  <div class="aab-box-col2">
+                    <p>{{ arr.quantity }}</p>
+                  </div>
+                </div> 
+              </div>              
             </div>
                                                                                                   
           </div>
@@ -92,6 +94,14 @@ export default {
     padding-left: 10%;
     padding-top: 5%;
     margin-bottom: 20px;
+  }
+  .aaa-p1 {
+    font-family: lato-bold;
+    font-size: 22px;
+  }
+  .aaa-p2 {
+    margin-top: -10px;
+    font-size: 15px;
   }
   .aab {
     background-color: #fff;
