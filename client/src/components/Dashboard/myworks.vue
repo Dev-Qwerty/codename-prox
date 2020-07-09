@@ -169,71 +169,10 @@ export default {
     font-size: 30px;
     color: #aaa;
   }
-  .box-row4 {
-    text-align: center
-  }
-  .row4-one {
-    margin-top: -10px;
-    font-size: 14px;
-  }
   .yd-header {
     font-weight: bold;
     margin-top: 30px;
     font-size: 20px;
     color: #000;    
-  }
-  .popper {
-    opacity: 0.9;
-    background-color: #000;
-    color: #fff;
-    width: 370px;
-    height: 420px;
-    padding: 10px;
-    border: none;
-  }
-  .popper-btn {
-    padding: 5px;
-    background-color: #000;
-    color: #fff;
-    border: none;
-    width: 80px;
-    height: 30px;
-    border-radius: 5px;
-  }
-  .c-r {
-    display: flex;
-  }
-  .c-r-1 {
-    font-size: 17px;
-    font-weight: bold;
-  }
-  .c-r-2 {
-    font-size: 17px;
-    margin-left: 8px;
-  }  
-  .c-r1-hding {
-    font-size: 17px;
-    font-weight: bold;
-    margin-left: -280px;
-  }
-  .c-r1-1 {
-    font-size: 17px;
-    margin-left: -200px;
-  }
-  .c-r2-hding {
-    font-size: 17px;
-    font-weight: bold;
-    margin-left: -270px;
-  }
-  .c-r2-1 {
-    font-size: 17px;
-    margin-left: 50px;
-    display: flex;
-  }
-  .c-r2-1-1 {
-
-  }
-  .c-r2-1-2 {
-    margin-left: 10px;
-  }     
+  }   
 </style>
