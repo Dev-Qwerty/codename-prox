@@ -46,6 +46,7 @@
       </div>
     </div>
     <div class="happy-code">
+      <div class="hc-line"></div>
       <input type="submit" value="Arrived" class="btn">
     </div>
   </div>
@@ -163,16 +164,20 @@ export default {
   }
   .happy-code {
     margin-top: 30px;
+  }
+  .hc-line {
     width: 95%;
-    height: 2px;
+    height: 3px;
     background-color: #DBDBDB;
   }
   .btn {
     margin-top: 10px;
-    width: 200px;
-    height: 50px;
-    background-color: #fff;
-    color: #000;
-    border: 3px solid #DBDBDB;
+    width: 180px;
+    height: 40px;
+    background-color: #000;
+    color: #fff;
+    border-right: 20px;
+    box-shadow: -4px 4px 4px #DBDBDB;
+    /*border: 1px solid #DBDBDB;*/
   }
 </style>
