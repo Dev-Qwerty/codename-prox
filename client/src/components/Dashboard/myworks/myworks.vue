@@ -5,8 +5,8 @@
       <div class="box-wrapper">
         <div v-for="(sr, index) in myworksarr.todaysWork" :key="index">       
           <div class="box">
-            <router-link :to="{name: 'mwchild'}" @click.native="fn(sr)">
-              <div>
+            <router-link :to="{name: 'mwchild'}">
+              <div @click="fn(sr)">
                 <div class="box-row1">
                   <p class="row1-one"><span>$</span>{{ sr.totalAmount }}</p>
                   <div class="Line"></div>
@@ -29,8 +29,8 @@
       <div class="box-wrapper">
         <div v-for="(sr, index) in myworksarr.upcommingWorks" :key="index">       
           <div class="box">
-            <router-link :to="{name: 'mwchild'}" @click.native="fn(sr)">
-              <div>
+            <router-link :to="{name: 'mwchild'}">
+              <div @click="fn(sr)">
                 <div class="box-row1">
                   <p class="row1-one"><span>$</span>{{ sr.totalAmount }}</p>
                   <div class="Line"></div>
@@ -53,8 +53,8 @@
       <div class="box-wrapper">
         <div v-for="(sr, index) in myworksarr.completedWorks" :key="index">       
           <div class="box">
-            <router-link :to="{name: 'mwchild'}" @click.native="fn(sr)">
-              <div>
+            <router-link :to="{name: 'mwchild'}">
+              <div @click="fn(sr)">
                 <div class="box-row1">
                   <p class="row1-one"><span>$</span>{{ sr.totalAmount }}</p>
                   <div class="Line"></div>
