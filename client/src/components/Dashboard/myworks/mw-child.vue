@@ -22,8 +22,7 @@
                   </div>
                 </div> 
               </div>              
-            </div>
-                                                                                                  
+            </div>                                                                                      
           </div>
         </div>
       </div>
@@ -77,23 +76,24 @@ export default {
     padding-top: 5%;
   }
   .a {
-    width: 95%;
+    width: 90%;
     display: grid;
     grid-template-columns: 60% 40%;
   }
   .aa {
     display: grid;
     grid-template-rows: 150px max-content;
-    margin-right: 20px;
+    margin-right: 25px;
   }
   .aaa {
     /*box-shadow: 0 0 8px #DBDBDB;*/
     box-shadow: -5px 5px 5px #DBDBDB;
+    border: 1px solid #DBDBDB;
     background-color: #fff;
     color: #000;
     padding-left: 10%;
     padding-top: 5%;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
   }
   .aaa-p1 {
     font-family: lato-bold;
@@ -106,6 +106,7 @@ export default {
   .aab {
     background-color: #fff;
     box-shadow: -5px 5px 5px #DBDBDB;
+    border: 1px solid #DBDBDB;
   }
   .aab-top {
     width: 20%;
@@ -125,6 +126,7 @@ export default {
   .aab-box {
     width: 80%;
     height: 50px;
+    border: 1px solid #DBDBDB;
     box-shadow: -5px 5px 5px #DBDBDB;
     margin-bottom: 20px;
     display: grid;
@@ -136,19 +138,20 @@ export default {
     padding-top: 10px;
   }
   .aab-box-col2 {
-    padding-left: 5%;
+    padding-left: 10%;
     padding-top: 10px;
   }
   .ab {
-    height: 450px;
-    grid-template-rows: 80% 20%;
+    height: 400px;
+    grid-template-rows: 75% 25%;
     display: grid;
   }
   .aba {
     /*border: 1px solid #000*/
     box-shadow: -5px 5px 5px #DBDBDB;
+    border: 1px solid #DBDBDB;
     background-color: #fff;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
   }
   .aba-top {
     width: 35%;
@@ -162,6 +165,9 @@ export default {
     padding-left: 5%;
     padding-top: 5%;
   }
+  .aba-body p {
+    margin-bottom: 10px;
+  }
   #pin {
     margin-right: 5px;
   }
@@ -170,13 +176,16 @@ export default {
   }
   .abb {
     box-shadow: -5px 5px 5px #DBDBDB;
+    border: 1px solid #DBDBDB;
     background-color: #fff;
+    padding-left: 5%;
+    padding-top: 4%;
   }
   .happy-code {
     margin-top: 30px;
   }
   .hc-line {
-    width: 95%;
+    width: 90%;
     height: 3px;
     background-color: #DBDBDB;
   }
