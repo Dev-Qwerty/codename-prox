@@ -17,57 +17,6 @@
               <div class="box-row3">
                 <p class="row3-one">{{ sr.date }}</p>
               </div>
-              <div class="box-row4">
-                <div class="row4-one">
-                  <popper
-                    trigger="clickToToggle"
-                    :options="{
-                      placement: 'right',
-                      modifiers: { offset: { offset: '0,10px' } }
-                    }">
-                    <div class="popper">
-                      <div class="c-r">
-                        <p class="c-r-1">Service:</p>
-                        <P class="c-r-2">{{ sr.service.subserviceName }}</p>
-                      </div>            
-                      <div class="c-r">
-                        <p class="c-r-1">Date:</p>
-                        <P class="c-r-2">{{ sr.date }}</p>
-                      </div>
-                      <div class="c-r">
-                        <p class="c-r-1">Time:</p>
-                        <P class="c-r-2">04: 00 AM</p>
-                      </div>
-                      <div class="c-r">
-                        <p class="c-r-1">Total Amount:</p>
-                        <P class="c-r-2">{{ sr.totalAmount }}</p>
-                      </div> 
-                      <div  class="c-r1">
-                        <p class="c-r1-hding">Adderss:</p>
-                        <div class="c-r1-1">
-                          <p class="">{{ sr.address.lin1 }}</p>
-                          <p class="">{{ sr.address.lin2 }}</p>
-                          <p class="">{{ sr.address.district }}</p>
-                          <p class="">{{ sr.address.pin }}</p>
-                        </div>                         
-                      </div>
-                      <div class="c-r2">
-                        <p class="c-r2-hding">Categories:</p>
-                        <div v-for="(srq, index) in sr.service.categories" :key="index">
-                            <div class="c-r2-1">
-                              <p class="c-r2-1-1">{{ srq.category }}</p>
-                              <p class="c-r2-1-2">{{ srq.quantity }}</p>
-                            </div>                                 
-                        </div>
-                      </div>                                           
-                    </div>
-                
-                    <button slot="reference" class="popper-btn">
-                      DETAILS
-                    </button>
-                  </popper>                 
-                </div>                        
-              </div>
             </div>
           </div>          
         </div>
@@ -88,57 +37,6 @@
               </div>
               <div class="box-row3">
                 <p class="row3-one">{{ sr.date }}</p>
-              </div>
-              <div class="box-row4">
-                <div class="row4-one">
-                  <popper
-                    trigger="clickToToggle"
-                    :options="{
-                      placement: 'right',
-                      modifiers: { offset: { offset: '0,10px' } }
-                    }">
-                    <div class="popper">
-                      <div class="c-r">
-                        <p class="c-r-1">Service:</p>
-                        <P class="c-r-2">{{ sr.service.subserviceName }}</p>
-                      </div>            
-                      <div class="c-r">
-                        <p class="c-r-1">Date:</p>
-                        <P class="c-r-2">{{ sr.date }}</p>
-                      </div>
-                      <div class="c-r">
-                        <p class="c-r-1">Time:</p>
-                        <P class="c-r-2">04: 00 AM</p>
-                      </div>
-                      <div class="c-r">
-                        <p class="c-r-1">Total Amount:</p>
-                        <P class="c-r-2">{{ sr.totalAmount }}</p>
-                      </div> 
-                      <div  class="c-r1">
-                        <p class="c-r1-hding">Adderss:</p>
-                        <div class="c-r1-1">
-                          <p class="">{{ sr.address.lin1 }}</p>
-                          <p class="">{{ sr.address.lin2 }}</p>
-                          <p class="">{{ sr.address.district }}</p>
-                          <p class="">{{ sr.address.pin }}</p>
-                        </div>                         
-                      </div>
-                      <div class="c-r2">
-                        <p class="c-r2-hding">Categories:</p>
-                        <div v-for="(srq, index) in sr.service.categories" :key="index">
-                            <div class="c-r2-1">
-                              <p class="c-r2-1-1">{{ srq.category }}</p>
-                              <p class="c-r2-1-2">{{ srq.quantity }}</p>
-                            </div>                                 
-                        </div>
-                      </div>                                           
-                    </div>
-                
-                    <button slot="reference" class="popper-btn">
-                      DETAILS
-                    </button>
-                  </popper>                 
-                </div>                        
               </div>
             </div>
           </div>          
@@ -161,57 +59,6 @@
               <div class="box-row3">
                 <p class="row3-one">{{ sr.date }}</p>
               </div>
-              <div class="box-row4">
-                <div class="row4-one">
-                  <popper
-                    trigger="clickToToggle"
-                    :options="{
-                      placement: 'right',
-                      modifiers: { offset: { offset: '0,10px' } }
-                    }">
-                    <div class="popper">
-                      <div class="c-r">
-                        <p class="c-r-1">Service:</p>
-                        <P class="c-r-2">{{ sr.service.subserviceName }}</p>
-                      </div>            
-                      <div class="c-r">
-                        <p class="c-r-1">Date:</p>
-                        <P class="c-r-2">{{ sr.date }}</p>
-                      </div>
-                      <div class="c-r">
-                        <p class="c-r-1">Time:</p>
-                        <P class="c-r-2">04: 00 AM</p>
-                      </div>
-                      <div class="c-r">
-                        <p class="c-r-1">Total Amount:</p>
-                        <P class="c-r-2">{{ sr.totalAmount }}</p>
-                      </div> 
-                      <div  class="c-r1">
-                        <p class="c-r1-hding">Adderss:</p>
-                        <div class="c-r1-1">
-                          <p class="">{{ sr.address.lin1 }}</p>
-                          <p class="">{{ sr.address.lin2 }}</p>
-                          <p class="">{{ sr.address.district }}</p>
-                          <p class="">{{ sr.address.pin }}</p>
-                        </div>                         
-                      </div>
-                      <div class="c-r2">
-                        <p class="c-r2-hding">Categories:</p>
-                        <div v-for="(srq, index) in sr.service.categories" :key="index">
-                            <div class="c-r2-1">
-                              <p class="c-r2-1-1">{{ srq.category }}</p>
-                              <p class="c-r2-1-2">{{ srq.quantity }}</p>
-                            </div>                                 
-                        </div>
-                      </div>                                           
-                    </div>
-                
-                    <button slot="reference" class="popper-btn">
-                      DETAILS
-                    </button>
-                  </popper>                 
-                </div>                        
-              </div>
             </div>
           </div>          
         </div>
@@ -223,12 +70,9 @@
 
 <script>
 //import Vue from 'vue';
-import Popper from 'vue-popperjs';
-import 'vue-popperjs/dist/vue-popper.css';
 
 export default {
   components: {
-    'popper': Popper
   },  
   data() {
     return {
