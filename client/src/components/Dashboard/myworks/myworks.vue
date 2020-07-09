@@ -5,7 +5,7 @@
       <div class="box-wrapper">
         <div v-for="(sr, index) in myworksarr.todaysWork" :key="index">       
           <div class="box">
-            <router-link :to="{name: 'mwchild'}">
+            <router-link :to="{ name: 'mwchild' }">
               <div @click="fn(sr)">
                 <div class="box-row1">
                   <p class="row1-one"><span>$</span>{{ sr.totalAmount }}</p>
@@ -29,7 +29,7 @@
       <div class="box-wrapper">
         <div v-for="(sr, index) in myworksarr.upcommingWorks" :key="index">       
           <div class="box">
-            <router-link :to="{name: 'mwchild'}">
+            <router-link :to="{ name: 'mwchild' }">
               <div @click="fn(sr)">
                 <div class="box-row1">
                   <p class="row1-one"><span>$</span>{{ sr.totalAmount }}</p>
@@ -53,7 +53,7 @@
       <div class="box-wrapper">
         <div v-for="(sr, index) in myworksarr.completedWorks" :key="index">       
           <div class="box">
-            <router-link :to="{name: 'mwchild'}">
+            <router-link :to="{ name: 'mwchild' }">
               <div @click="fn(sr)">
                 <div class="box-row1">
                   <p class="row1-one"><span>$</span>{{ sr.totalAmount }}</p>
@@ -137,9 +137,9 @@ export default {
     display: grid;
     grid-template-rows: 1fr 1fr 1fr;
   }    
-  .box:hover {
-    text-emphasis: none;
-  } 
+  a {
+      text-decoration: none;
+  }
   .box-row1 {
     text-align: center;
     margin-top: 20px;

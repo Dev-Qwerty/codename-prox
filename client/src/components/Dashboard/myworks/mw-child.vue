@@ -4,7 +4,7 @@
       <div class="aa">
         <div class="aaa">
           <p class="aaa-p1">{{ sr.service.subserviceName }}</p>
-          <p class="aaa-p2"><span>Amount: </span>{{ sr.totalAmount }}</p>
+          <p class="aaa-p2"><span>Amount:  </span><span>$</span>{{ sr.totalAmount }}</p>
         </div>
         <div class="aab">
           <div class="aab-top">
@@ -41,8 +41,8 @@
           </div>
         </div>
         <div class="abb">
-          <p>02:30 PM</p>
           <p>{{ sr.date }}</p>
+          <p>02:30 PM</p>
         </div>
       </div>
     </div>
