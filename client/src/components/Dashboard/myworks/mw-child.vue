@@ -11,14 +11,17 @@
             <p>Categories</p>
           </div>
           <div class="aab-body">
-            <div class="aab-box">
-              <div class="aab-box-col1">
-                <p>{{ sr.service.categories[0].category }}</p>
-              </div>
-              <div class="aab-box-col2">
-                <p>{{ sr.service.categories[0].quantity }}</p>
-              </div>
-            </div>        
+            <div class="aab-boxes">
+              <div class="aab-box">
+                <div class="aab-box-col1">
+                  <p>{{ sr.service.categories[0].category }}</p>
+                </div>
+                <div class="aab-box-col2">
+                  <p>{{ sr.service.categories[0].quantity }}</p>
+                </div>
+              </div>               
+            </div>
+                                                                                                  
           </div>
         </div>
       </div>
@@ -74,11 +77,10 @@ export default {
   }
   .aa {
     display: grid;
-    grid-template-rows: 1fr 2fr;
+    grid-template-rows: 150px max-content;
     margin-right: 20px;
   }
   .aaa {
-    height: 130px;
     /*box-shadow: 0 0 8px #DBDBDB;*/
     box-shadow: -5px 5px 5px #DBDBDB;
     background-color: #fff;
@@ -88,7 +90,6 @@ export default {
     margin-bottom: 20px;
   }
   .aab {
-    height: 200px;
     background-color: #fff;
     box-shadow: -5px 5px 5px #DBDBDB;
   }
@@ -103,6 +104,9 @@ export default {
   .aab-body {
     padding-left: 5%;
     padding-top: 5%;
+  }
+  .aab-boxes {
+    margin-bottom: 40px;
   }
   .aab-box {
     width: 80%;
