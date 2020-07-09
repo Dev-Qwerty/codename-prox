@@ -26,7 +26,7 @@
       <div class="box-wrapper">
         <div v-for="(sr, index) in myworksarr.upcommingWorks" :key="index">       
           <div class="box">
-            <router-link :to="{name: 'mwchild'}" @click.native="fn">
+            <router-link :to="{name: 'mwchild'}" @click.native="ufn(sr)">
               <div>
                 <div class="box-row1">
                   <p class="row1-one"><span>$</span>{{ sr.totalAmount }}</p>
@@ -94,8 +94,8 @@ export default {
         alert(error);
       })     
     },
-    fnn() {
-
+    ufn(obj) {
+      this.$cookies.set("wd-mw-child", JSON.stringify(obj), "1d");
     }   
   },
   created() {
