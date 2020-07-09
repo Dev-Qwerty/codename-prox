@@ -20,6 +20,7 @@ import Cdashboard from '@/components/CustomerDashboard/CDmain.vue'
 import workreq from '@/components/Dashboard/workreq/workreq.vue'
 //import pworks from '@/components/Dashboard/pworks.vue'
 import myworks from '@/components/Dashboard/myworks/myworks.vue'
+import mwchild from '@/components/Dashboard/myworks/mw-child.vue'
 import myprofile from '@/components/Dashboard/myprofile/myprofile.vue'
 import ForgotPassword from '@/components/ForgotPassword/FPMain.vue'
 import UpdateProfile from '@/components/UpdateProfile/UPMain.vue'
@@ -403,6 +404,12 @@ export default new VueRouter({
           component: myworks,
           props: true
         },
+        {
+          path: 'mwchild',
+          name: 'mwchild',
+          component: mwchild,
+          props: true
+        },        
         {
           path: 'myprofile',
           name: 'myprofile',
