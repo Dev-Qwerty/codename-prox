@@ -45,6 +45,9 @@
         </div>
       </div>
     </div>
+    <div class="happy-code">
+      <input type="submit" value="Arrived" class="btn">
+    </div>
   </div>
 </template>
 
@@ -157,5 +160,19 @@ export default {
   .abb {
     box-shadow: -5px 5px 5px #DBDBDB;
     background-color: #fff;
+  }
+  .happy-code {
+    margin-top: 30px;
+    width: 95%;
+    height: 2px;
+    background-color: #DBDBDB;
+  }
+  .btn {
+    margin-top: 10px;
+    width: 200px;
+    height: 50px;
+    background-color: #fff;
+    color: #000;
+    border: 3px solid #DBDBDB;
   }
 </style>
