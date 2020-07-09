@@ -37,6 +37,7 @@
               </div>
               <div class="box-row3">
                 <p class="row3-one">02:30 PM</p>
+                <p class="row3-two">{{ sr.date }}</p>
               </div>
           
           </div>          
@@ -121,7 +122,7 @@ export default {
   } 
   .box {
     width: 300px;
-    height: 200px;
+    height: 220px;
     background-color: #fff;
     border: 1px solid #F5F5F5; 
     margin-bottom: 30px;
@@ -131,6 +132,7 @@ export default {
   }     
   .box-row1 {
     text-align: center;
+    margin-top: 20px;
   }
   .row1-one {
     text-align: center;
@@ -148,6 +150,7 @@ export default {
   }
   .box-row2 {
     text-align: center;
+    margin-top: 5px;
   }
   .row2-one {
     font-size: 21px;
@@ -157,16 +160,25 @@ export default {
   .row2-two {
     font-size: 15px;
     font-family: lato-light;
-    margin: 0px;    
+    margin-top: -5px;    
     color: #707070;
   }
   .box-row3 {
+    margin-top: -20px;
     text-align: center;
+    display: grid;
+    grid-template-rows: 3fr 1fr;
   }
   .row3-one {
     font-size: 40px;
     color: #000;
     font-family: lato-light;
+  }
+  .row3-two {
+    font-size: 15px;
+    font-family: lato-light;
+    margin-top: -20px;    
+    color: #000;
   }
   .yd-header {
     font-weight: bold;
