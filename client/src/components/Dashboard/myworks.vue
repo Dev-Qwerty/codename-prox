@@ -26,7 +26,7 @@
       <div class="box-wrapper">
         <div v-for="(sr, index) in myworksarr.upcommingWorks" :key="index">       
           <div class="box">
-            <div class=""> 
+    
               <div class="box-row1">
                 <p class="row1-one"><span>$</span>{{ sr.totalAmount }}</p>
                 <div class="Line"></div>
@@ -36,9 +36,9 @@
                 <p class="row2-two">{{ sr.address.line2 }}, {{ sr.address.district }}</p>
               </div>
               <div class="box-row3">
-                <p class="row3-one">11: 30 AM</p>
+                <p class="row3-one">02:30 PM</p>
               </div>
-            </div>
+          
           </div>          
         </div>
       </div>
@@ -121,21 +121,20 @@ export default {
   } 
   .box {
     width: 300px;
-    height: 230px;
-    display: grid;
-    grid-template-rows: 30% 25% 30% 15%;
+    height: 200px;
     background-color: #fff;
     border: 1px solid #F5F5F5; 
     margin-bottom: 30px;
     box-shadow: -5px 5px 5px #DBDBDB;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
   }     
   .box-row1 {
     text-align: center;
-    margin-top: 15px;
   }
   .row1-one {
     text-align: center;
-    font-size: 25px;
+    font-size: 35px;
     font-family: lato-black;
     margin: 0px;
   }
@@ -143,13 +142,12 @@ export default {
     margin-top: 0px;
     margin-left: auto;
     margin-right: auto;
-    height: 1px;
-    width: 150px;
+    height: 2px;
+    width: 200px;
     background-color: #aaa;
   }
   .box-row2 {
     text-align: center;
-    margin-top: 15px;
   }
   .row2-one {
     font-size: 21px;
@@ -164,10 +162,9 @@ export default {
   }
   .box-row3 {
     text-align: center;
-    margin-top: 5px;
   }
   .row3-one {
-    font-size: 45px;
+    font-size: 40px;
     color: #000;
     font-family: lato-light;
   }
