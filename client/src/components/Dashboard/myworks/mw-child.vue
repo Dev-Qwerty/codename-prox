@@ -100,8 +100,8 @@ export default {
     font-size: 22px;
   }
   .aaa-p2 {
-    margin-top: -10px;
-    font-size: 15px;
+    margin-top: -8px;
+    font-size: 16px;
   }
   .aab {
     background-color: #fff;
@@ -109,11 +109,11 @@ export default {
     border: 1px solid #DBDBDB;
   }
   .aab-top {
-    width: 20%;
+    width: 22%;
     height: 35px;
     background-color: #000;
     color: #fff;
-    padding-left: 5px;
+    text-align: center;
     padding-top: 5px;
   }
   .aab-body {
@@ -154,11 +154,11 @@ export default {
     margin-bottom: 25px;
   }
   .aba-top {
-    width: 35%;
+    width: 40%;
     height: 35px;
     background-color: #000;
     color: #fff;
-    padding-left: 5px;
+    text-align: center;
     padding-top: 5px;
   }
   .aba-body {
@@ -179,7 +179,10 @@ export default {
     border: 1px solid #DBDBDB;
     background-color: #fff;
     padding-left: 5%;
-    padding-top: 4%;
+    padding-top: 5%;
+  }
+  .abb p {
+    margin-bottom: 8px;
   }
   .happy-code {
     margin-top: 30px;
