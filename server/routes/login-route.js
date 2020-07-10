@@ -105,7 +105,7 @@ router.post('/login', (req,res) => {
 router.post('/verifyToken', (req,res) => {
   const response = req.body.response;
   request.post({ headers: {'content-type' : 'application/json'}
-               , url: 'https://www.google.com/recaptcha/api/siteverify?secret=6LfsCfYUAAAAAK1Vz4hDsCLIntI0X2jER8nn2iOd&response='+response}
+               , url: 'https://www.google.com/recaptcha/api/siteverify?secret=6Lcpzq8ZAAAAACwReGAzTD5RtDp8VINQslG7eAFr&response='+response}
                , function(error, r, body){
    res.send(body); 
 }); 

@@ -40,10 +40,8 @@ export default {
     }
   },
   methods: {
-    onCaptchaVerified() {
-      this.captchastatus = true;
-      this.login();
-    /*  let url = "http://localhost:3000/auth/verifyToken";
+    onCaptchaVerified(rtoken) {
+      let url = "http://localhost:3000/auth/verifyToken";
       this.$http.post(url, {
         response: rtoken
       })
@@ -66,7 +64,7 @@ export default {
           type: 'warning',
           position: 'bottom-left'
         });
-      })*/
+      })
     },
     login() {
       if(this.captchastatus == false) {
