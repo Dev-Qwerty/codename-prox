@@ -56,7 +56,7 @@ export default {
        serviceroute = this.suggestions[0].split(" ").join("-").toLowerCase();
       }
       this.showSuggest = false;
-      window.location.href = "http://localhost:8080/services/"+serviceroute;
+      window.location.href = location.protocol + "//"+ location.host + "/services/"+ serviceroute;
     }
   },
   created: function(){

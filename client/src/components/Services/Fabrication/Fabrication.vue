@@ -77,14 +77,14 @@ export default {
     fn(obj) {
       if(this.cchecker == null) {
         this.$cookies.set("sarray", JSON.stringify(obj), "id");
-        this.$cookies.set("ccr", "http://localhost:8080" + this.$router.currentRoute.path, "id");
+        this.$cookies.set("ccr", location.protocol + "//"+ location.host + this.$router.currentRoute.path, "id");
          Vue.$toast.open({
           message: "Please login to your account!",
           type: 'error',
           position: 'bottom-left'
         }); 
         setTimeout(function() {
-          window.location.href = "http://localhost:8080/login"
+          window.location.href = location.protocol + "//"+ location.host + "/login";
         }, 3000);       
       }
     },

@@ -40,8 +40,10 @@ export default {
     }
   },
   methods: {
-    onCaptchaVerified(rtoken) {
-      let url = "http://localhost:3000/auth/verifyToken";
+    onCaptchaVerified() {
+      this.captchastatus = true;
+      this.login();
+    /*  let url = "http://localhost:3000/auth/verifyToken";
       this.$http.post(url, {
         response: rtoken
       })
@@ -64,7 +66,7 @@ export default {
           type: 'warning',
           position: 'bottom-left'
         });
-      })
+      })*/
     },
     login() {
       if(this.captchastatus == false) {
@@ -110,7 +112,7 @@ export default {
                     this.$session.set('jwt', jwtToken);
                     this.$cookies.set("id", response.data.id);
                     this.$cookies.set("category", response.data.category);
-                    window.location.href = "http://localhost:8080/completeProfile";
+                    window.location.href = location.protocol + "//"+ location.host + "/completeProfile";
                }
                else {
                 const username = response.data.username;
@@ -126,11 +128,11 @@ export default {
                         window.location.href = decodeURIComponent(this.$cookies.get("ccr"));
                       }
                       else {
-                        window.location.href = "http://localhost:8080/customerdashboard";
+                        window.location.href = location.protocol + "//"+ location.host + "/customerdashboard";
                       }
                     }
                     else {
-                    window.location.href = "http://localhost:8080/dashboard";
+                      window.location.href = location.protocol + "//"+ location.host + "/dashboard";
                     }
                }            
             }
