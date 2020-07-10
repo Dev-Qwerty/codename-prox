@@ -18,4 +18,20 @@
     font-family: "p-bold";
     src: url("./assets/Font/poppins/Poppins-Bold.ttf") format("truetype");
   }
+  @font-face {
+    font-family: "lato-bold";
+    src: url("./assets/Font/lato/Lato-Bold.ttf") format("truetype");
+  }
+  @font-face {
+    font-family: "lato-black";
+    src: url("./assets/Font/lato/Lato-Black.ttf") format("truetype");
+  }  
+  @font-face {
+    font-family: "lato-light";
+    src: url("./assets/Font/lato/Lato-Light.ttf") format("truetype");
+  } 
+  @font-face {
+    font-family: "lato-thin";
+    src: url("./assets/Font/lato/Lato-Thin.ttf") format("truetype");
+  }         
 </style>
