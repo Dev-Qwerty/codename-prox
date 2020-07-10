@@ -95,7 +95,7 @@ export default {
             if(response.data.status == "Success") {
               localStorage.setItem("email", this.email);
               localStorage.setItem("category", this.category);
-              window.location.href = "http://localhost:8080/confirmEmail";
+              window.location.href = location.protocol + "//"+ location.host + "/confirmEmail";
             }
             else {
               Vue.$toast.open({

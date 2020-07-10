@@ -99,7 +99,7 @@ export default {
           if(response.data.status == "Success") {
             localStorage.removeItem("phoneNo");
             localStorage.removeItem("email");
-            window.location.href = "http://localhost:8080/addAddress";
+            window.location.href = location.protocol + "//"+ location.host + "/addAddress";
           }
           else {
             Vue.$toast.open({
@@ -123,7 +123,7 @@ export default {
           if(response.data.status == "Success") {
             localStorage.removeItem("phoneNo");
             localStorage.removeItem("email");
-            window.location.href = "http://localhost:8080/addAddress";
+            window.location.href = location.protocol + "//"+ location.host + "/addAddress";
           }
           else {
             Vue.$toast.open({

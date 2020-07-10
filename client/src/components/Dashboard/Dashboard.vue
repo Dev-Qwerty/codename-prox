@@ -144,7 +144,7 @@ export default {
       
     },
     redirectCA() {
-      window.location.href = "http://localhost:8080/dashboard/changeAvatar";
+      window.location.href = location.protocol + "//"+ location.host + "/dashboard/changeAvatar";
     },
     myworksfn() {
       
@@ -159,7 +159,7 @@ export default {
       this.$cookies.remove("category");
       this.$cookies.remove("wd-mw-child");
       this.$session.destroy()
-      window.location.href = "http://localhost:8080/login"
+      window.location.href = location.protocol + "//"+ location.host + "/login";
     },
     apiCall() {
       let url = 'http://localhost:3000/worker/getBasicProfile/' + this.$cookies.get("id");
@@ -179,7 +179,7 @@ export default {
   created() {
    this.apiCall() 
    //this.$router.push('dashboard/workrequests')
-  },
+  }
 }        
 </script>
 
