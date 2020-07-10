@@ -78,7 +78,7 @@ export default {
         }
         else {
           alert("Password reset successfully!");
-          window.location.href = "http://localhost:8080/login";
+          window.location.href = location.protocol + "//"+ location.host + "/login";
         }
       })
     }

@@ -141,7 +141,7 @@ export default {
       
     },
     redirectCA() {
-      window.location.href = "http://localhost:8080/dashboard/changeAvatar";
+      window.location.href = location.protocol + "//"+ location.host + "/dashboard/changeAvatar";
     },
     myworksfn() {
       
@@ -155,7 +155,7 @@ export default {
       this.$cookies.remove("pid");
       this.$cookies.remove("category");
       this.$session.destroy()
-      this.$router.push('/login');
+      window.location.href = location.protocol + "//"+ location.host + "/login";
     },
     apiCall() {
       let url = 'http://localhost:3000/worker/getBasicProfile/' + this.$cookies.get("id");

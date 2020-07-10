@@ -112,7 +112,7 @@ export default {
                     this.$session.set('jwt', jwtToken);
                     this.$cookies.set("id", response.data.id);
                     this.$cookies.set("category", response.data.category);
-                    window.location.href = "http://localhost:8080/completeProfile";
+                    window.location.href = location.protocol + "//"+ location.host + "/completeProfile";
                }
                else {
                 const username = response.data.username;
