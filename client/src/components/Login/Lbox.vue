@@ -15,7 +15,7 @@
         <input type="checkbox" name="check1" value="">
       </div>
       <div>
-        <vue-recaptcha sitekey="6LfMy68ZAAAAAGJw_zxdSShPDWXh8qkGeOZL37SC" @verify="onCaptchaVerified">
+        <vue-recaptcha sitekey="6Lcpzq8ZAAAAAFq0O96xVrSDoTs2cBiK4ETXhl58" @verify="onCaptchaVerified">
         <input class="sbutton" type="submit" name="" value="Sign in" @click.prevent="onCaptchaVerified">
         </vue-recaptcha>
       </div>
