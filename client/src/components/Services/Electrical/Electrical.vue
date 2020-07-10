@@ -39,9 +39,9 @@
                 <p id="Vdetails" slot="reference">view details</p>  
               </popper>  
               <div class="card-btn-wrapper">
-                <router-link :to="{name: 'cmodal'}">
+                <!-- <router-link :to="{name: 'eemodal'}"> -->
                   <input type="submit" value="Add to cart" @click="fn(service)">
-                </router-link>                
+                <!-- </router-link> -->
               </div> 
             </div>
           </div> 
