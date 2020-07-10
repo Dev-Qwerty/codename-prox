@@ -86,7 +86,12 @@ export default {
         setTimeout(function() {
           window.location.href = location.protocol + "//"+ location.host + "/login";
         }, 3000);       
-      }
+      } else {
+        if(this.cchecker == "Customer") {
+          this.$cookies.set("sarray", JSON.stringify(obj), "id");
+          window.location.href = location.protocol + "//"+ location.host + "/services/pest-control/pcmodal"
+        }
+      } 
     },
     apiCall() {
       let url = 'http://localhost:3000/services/5ef8c0e4d213605c72b61930'

@@ -76,7 +76,6 @@ export default {
   methods: {
     fn(obj) {
       if(this.cchecker == null) {
-        this.$cookies.set("sarray", JSON.stringify(obj), "id");
         this.$cookies.set("ccr", location.protocol + "//"+ location.host + this.$router.currentRoute.path, "id");
          Vue.$toast.open({
           message: "Please login to your account!",
@@ -86,7 +85,12 @@ export default {
         setTimeout(function() {
           window.location.href = location.protocol + "//"+ location.host + "/login";
         }, 3000);       
-      }
+      } else {
+        if(this.cchecker == "Customer") {
+          this.$cookies.set("sarray", JSON.stringify(obj), "id");
+          window.location.href = location.protocol + "//"+ location.host + "/services/electrical-and-wiring/eemodal"
+        }
+      } 
     },
     apiCall() {
       let url = 'http://localhost:3000/services/5ef99afeb0547867b5f8437c'
