@@ -86,7 +86,12 @@ export default {
         setTimeout(function() {
           window.location.href = location.protocol + "//"+ location.host + "/login";
         }, 3000);       
-      }
+      } else {
+        if(this.cchecker == "Customer") {
+          this.$cookies.set("sarray", JSON.stringify(obj), "id");
+          window.location.href = location.protocol + "//"+ location.host + "/services/electronics-and-appliances/ecmodal"
+        }
+      } 
     },
     apiCall() {
       let url = 'http://localhost:3000/services/5ea50cd57c154d280cf37efa'
