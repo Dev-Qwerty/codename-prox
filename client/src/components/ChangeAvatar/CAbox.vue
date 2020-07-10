@@ -72,7 +72,7 @@ export default {
                 position: 'bottom-left'
             });
             this.url = null;
-            this.$router.push('/dashboard');
+            window.location.href = location.protocol + "//"+ location.host + "/dashboard";
           }
         })
       }
@@ -97,8 +97,7 @@ export default {
                 type: 'success',
                 position: 'bottom-left'
             });
-            this.$forceUpdate();
-            this.$router.push('/dashboard/workrequests');
+            window.location.href = location.protocol + "//"+ location.host + "/dashboard/workrequests";
         }
         else {
            Vue.$toast.open({

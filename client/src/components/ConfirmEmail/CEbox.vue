@@ -36,7 +36,7 @@ export default {
         if(response.data.status == "Success") {
           localStorage.removeItem("email");
           localStorage.removeItem("category");
-          window.location.href = "http://localhost:8080/login";
+          window.location.href = location.protocol + "//"+ location.host + "/login";
         }
         else {
           Vue.$toast.open({
