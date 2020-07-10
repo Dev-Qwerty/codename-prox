@@ -66,11 +66,11 @@ export default {
               window.location.href = decodeURIComponent(this.$cookies.get("ccr"));
             }
             else {
-            window.location.href = "http://localhost:8080/customerdashboard";
+            this.$router.push('/customerdashboard');
             }
           }
           else {
-          window.location.href = "http://localhost:8080/dashboard";
+            this.$router.push('/dashboard');
           }
         }
         else {

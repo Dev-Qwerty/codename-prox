@@ -155,7 +155,7 @@ export default {
       this.$cookies.remove("pid");
       this.$cookies.remove("category");
       this.$session.destroy()
-      window.location.href = "http://localhost:8080/login"
+      this.$router.push('/login');
     },
     apiCall() {
       let url = 'http://localhost:3000/worker/getBasicProfile/' + this.$cookies.get("id");
@@ -175,7 +175,7 @@ export default {
   created() {
    this.apiCall() 
    //this.$router.push('dashboard/workrequests')
-  },
+  }
 }        
 </script>
 

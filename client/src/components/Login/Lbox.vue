@@ -40,8 +40,10 @@ export default {
     }
   },
   methods: {
-    onCaptchaVerified(rtoken) {
-      let url = "http://localhost:3000/auth/verifyToken";
+    onCaptchaVerified() {
+      this.captchastatus = true;
+      this.login();
+    /*  let url = "http://localhost:3000/auth/verifyToken";
       this.$http.post(url, {
         response: rtoken
       })
@@ -64,7 +66,7 @@ export default {
           type: 'warning',
           position: 'bottom-left'
         });
-      })
+      })*/
     },
     login() {
       if(this.captchastatus == false) {
@@ -126,11 +128,11 @@ export default {
                         window.location.href = decodeURIComponent(this.$cookies.get("ccr"));
                       }
                       else {
-                        window.location.href = "http://localhost:8080/customerdashboard";
+                        this.$router.push('/customerdashboard');
                       }
                     }
                     else {
-                    window.location.href = "http://localhost:8080/dashboard";
+                      this.$router.push('/dashboard');
                     }
                }            
             }
@@ -146,7 +148,18 @@ export default {
       }
     },
   },
-  components: { VueRecaptcha }
+  components: { VueRecaptcha },
+  mounted() {
+    if (localStorage.getItem('reloaded')) {
+        // The page was just reloaded. Clear the value from local storage
+        // so that it will reload the next time this page is visited.
+        localStorage.removeItem('reloaded');
+    } else {
+        // Set a flag so that we know not to reload the page twice.
+        localStorage.setItem('reloaded', '1');
+        location.reload();
+    }
+}
 }
 </script>
 
