@@ -331,8 +331,71 @@ router
                                     serviceKeyWords.push(serviceDetails.service.categories[i].category)
                                 }
 
+                                //create and save token
+                                let newOrderStatus = new orderStatusModel;
+                                newOrderStatus.orderID = serviceDetails.orderID;
+                                newOrderStatus.startToken = Math.floor(Math.random() * (999999 - 100000)) + 100000;
+                                newOrderStatus.completeToken = Math.floor(Math.random() * (999999 - 100000)) + 100000;
+                                newOrderStatus.save()
+
                                 // function call to find worker for job assigning 
                                 let assignedWorker = await assignWorker.assignWorker(serviceKeyWords, serviceDetails.address.pin, serviceDetails.orderID);
+
+                                 // Create work request
+                                 let newWorkRequest = new workRequestModel;
+                                 newWorkRequest.requestID = uniqueId.uniqueRequestId();
+                                 newWorkRequest.orderID = serviceDetails.orderID;
+                                 newWorkRequest.workerID = assignedWorker;
+                                 newWorkRequest.service = serviceDetails.service;
+                                 newWorkRequest.address = serviceDetails.address;
+                                 newWorkRequest.amount = serviceDetails.totalAmount;
+                                 newWorkRequest.date = serviceDetails.date;
+                                 newWorkRequest.time = serviceDetails.time;
+
+                                // Find dueDate
+                                let today = new Date() // Find today's date
+                                let OrderDate = new Date(serviceDetails.date) // Order date
+                                let hour = moment().hour() // Curent time
+                                //  hour = ((hour + 11) % 12 + 1); // convert to 12hr
+                                let dueDate = new Date() // Current time for setting dueDate
+                                
+                                
+                                if(today.getDate() == OrderDate.getDate()){
+                                    if(hour>=0 && hour <=6){ 
+                                        //set time = 7:30 AM
+                                        dueDate = moment(dueDate).set({hour:7,minute:30,second:0,millisecond:0});
+                                    }else{
+                                        // set time as current time + 15 min
+                                        dueDate = moment(dueDate).add(15, 'minutes');
+                                    }
+                                }else {
+                                    if(hour>=0 && hour <= 6){
+                                        // set time = 7:30 AM of current day
+                                        dueDate = moment(dueDate).set({hour:7,minute:30,second:0,millisecond:0});
+                                    }else if(hour>=22 && hour <24){
+                                        // set time = 7:30 AM of next day
+                                        dueDate = moment().add(1, 'days');
+                                        dueDate = moment(dueDate).set({hour:7,minute:30,second:0,millisecond:0});
+                                    }else {
+                                        // set time as current time + 30 min
+                                        dueDate = moment(dueDate).add(30, 'minutes');
+                                    }
+                                }
+
+                                newWorkRequest.dueDate = dueDate;
+                                newWorkRequest.save();
+
+                                //Find worker name and number
+                                const workerDetails = await workerModel.findOne({workerID: assignedWorker},'name phoneNo -_id');
+                                workDetails = {
+                                    mainserviceName: serviceDetails.service.subserviceName,
+                                    place: serviceDetails.address.line2,
+                                    date: serviceDetails.date,
+                                    time: serviceDetails.time,
+                                }
+                                // sendMessage.sendTextMessage("worker",workerDetails,workDetails);
+                                //TODO:change in paynow also
+
                             } else { 
                                 orderModel.deleteOne({orderID: _result.ORDERID}).then(() => {
                                     console.log("deleted" + _result.ORDERID)
@@ -379,9 +442,6 @@ router
         } catch (error) {
             console.log(error)
         }
-
-        
     })
-    
 
 module.exports = router;
