@@ -148,7 +148,7 @@ router
                 // sendMessage.sendTextMessage("worker",workerDetails,workDetails);
                 //TODO:change in paynow also
             }else {
-                res.json({ "message": "failed to place order" });
+                res.json({"CODE": "00"});
             }
         } catch (error) {
             // TODO : If error is duplicate orderid create new orderid and save that order to database
