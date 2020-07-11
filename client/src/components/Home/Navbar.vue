@@ -56,7 +56,7 @@ export default {
   },
   methods: {
     loginClicked() {
-      window.location.href="http://localhost:8080/login";
+      window.location.href = location.protocol + "//"+ location.host + "/login";
     },
     ccfn() {
       let category = this.$cookies.get("category")
@@ -72,13 +72,13 @@ export default {
       this.$cookies.remove("pid");
       this.$cookies.remove("category");
       this.$session.destroy()
-      window.location.href = "http://localhost:8080/login"
+      window.location.href = location.protocol + "//"+ location.host + "/login";
     },
     dfn() {
-      window.location.href = "http://localhost:8080/customerdashboard"
+      window.location.href = location.protocol + "//"+ location.host + "/customerdashboard";
     },
     mpfn() {
-      window.location.href = "http://localhost:8080/customerdashboard/myprofile"
+      window.location.href = location.protocol + "//"+ location.host + "/customerdashboard/myprofile";
     }
   },
   created() {

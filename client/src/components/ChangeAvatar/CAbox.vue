@@ -72,7 +72,7 @@ export default {
                 position: 'bottom-left'
             });
             this.url = null;
-            window.location.href = 'http://localhost:8080/dashboard/changeAvatar';
+            window.location.href = location.protocol + "//"+ location.host + "/dashboard";
           }
         })
       }
@@ -97,7 +97,7 @@ export default {
                 type: 'success',
                 position: 'bottom-left'
             });
-            window.location.href = 'http://localhost:8080/dashboard';
+            window.location.href = location.protocol + "//"+ location.host + "/dashboard/workrequests";
         }
         else {
            Vue.$toast.open({

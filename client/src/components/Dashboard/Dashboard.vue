@@ -97,6 +97,7 @@
           <workreq />
           <!--<pworks />-->
           <myworks />
+          <mwchild />
           <myprofile />
         </router-view>       
       </div>
@@ -105,10 +106,11 @@
 </template>
 
 <script>
-import workreq from '@/components/Dashboard/workreq.vue'
+import workreq from '@/components/Dashboard/workreq/workreq.vue'
 //import pworks from '@/components/Dashboard/pworks.vue'
-import myworks from '@/components/Dashboard/myworks.vue'
-import myprofile from '@/components/Dashboard/myprofile.vue'
+import myworks from '@/components/Dashboard/myworks/myworks.vue'
+import mwchild from '@/components/Dashboard/myworks/mw-child.vue'
+import myprofile from '@/components/Dashboard/myprofile/myprofile.vue'
 import Popper from 'vue-popperjs';
 import 'vue-popperjs/dist/vue-popper.css';
 
@@ -117,6 +119,7 @@ export default {
     workreq,
     //pworks,
     myworks,
+    mwchild,
     myprofile,
     'popper': Popper
   },
@@ -141,7 +144,7 @@ export default {
       
     },
     redirectCA() {
-      window.location.href = "http://localhost:8080/dashboard/changeAvatar";
+      window.location.href = location.protocol + "//"+ location.host + "/dashboard/changeAvatar";
     },
     myworksfn() {
       
@@ -154,8 +157,9 @@ export default {
       this.$cookies.remove("id");
       this.$cookies.remove("pid");
       this.$cookies.remove("category");
+      this.$cookies.remove("wd-mw-child");
       this.$session.destroy()
-      window.location.href = "http://localhost:8080/login"
+      window.location.href = location.protocol + "//"+ location.host + "/login";
     },
     apiCall() {
       let url = 'http://localhost:3000/worker/getBasicProfile/' + this.$cookies.get("id");
@@ -175,7 +179,7 @@ export default {
   created() {
    this.apiCall() 
    //this.$router.push('dashboard/workrequests')
-  },
+  }
 }        
 </script>
 
@@ -483,6 +487,7 @@ export default {
   }              
   .dashboard-body {
     background-color: #F5F5F5;
+    min-height: 676px;
   }
   .ProfilePresent {
     background-size: contain;

@@ -39,9 +39,9 @@
                 <p id="Vdetails" slot="reference">view details</p>  
               </popper> 
               <div class="card-btn-wrapper">
-                <router-link :to="{name: 'cmodal'}">
+                <!-- <router-link :to="{name: 'pamodal'}"> -->
                   <input type="submit" value="Add to cart" @click="fn(service)">
-                </router-link>                
+                <!-- </router-link> -->
               </div> 
             </div>
           </div> 
@@ -76,17 +76,21 @@ export default {
   methods: {
     fn(obj) {
       if(this.cchecker == null) {
-        this.$cookies.set("sarray", JSON.stringify(obj), "id");
-        this.$cookies.set("ccr", "http://localhost:8080" + this.$router.currentRoute.path, "id");
+        this.$cookies.set("ccr", location.protocol + "//"+ location.host + this.$router.currentRoute.path, "id");
          Vue.$toast.open({
           message: "Please login to your account!",
           type: 'error',
           position: 'bottom-left'
         }); 
         setTimeout(function() {
-          window.location.href = "http://localhost:8080/login"
+          window.location.href = location.protocol + "//"+ location.host + "/login";
         }, 3000);       
-      }
+      } else {
+        if(this.cchecker == "Customer") {
+          this.$cookies.set("sarray", JSON.stringify(obj), "id");
+          window.location.href = location.protocol + "//"+ location.host + "/services/painting/pamodal"
+        }
+      } 
     },
     apiCall() {
       let url = 'http://localhost:3000/services/5ef8c05dd213605c72b6192f'

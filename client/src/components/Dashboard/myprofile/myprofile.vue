@@ -78,7 +78,6 @@ export default {
   <style scoped>
   .mp-wrapper {
     width: 100%;
-    height: 700px
   }
   .mp-box {
     /*box-shadow: -5px 5px 5px #DBDBDB;*/

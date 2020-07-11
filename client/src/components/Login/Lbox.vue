@@ -15,7 +15,7 @@
         <input type="checkbox" name="check1" value="">
       </div>
       <div>
-        <vue-recaptcha sitekey="6LfsCfYUAAAAAEKiFDDFZW9yqlCZpd3G3EFoDy2w" @verify="onCaptchaVerified">
+        <vue-recaptcha sitekey="6Lcpzq8ZAAAAAFq0O96xVrSDoTs2cBiK4ETXhl58" @verify="onCaptchaVerified">
         <input class="sbutton" type="submit" name="" value="Sign in" @click.prevent="onCaptchaVerified">
         </vue-recaptcha>
       </div>
@@ -110,7 +110,7 @@ export default {
                     this.$session.set('jwt', jwtToken);
                     this.$cookies.set("id", response.data.id);
                     this.$cookies.set("category", response.data.category);
-                    window.location.href = "http://localhost:8080/completeProfile";
+                    window.location.href = location.protocol + "//"+ location.host + "/completeProfile";
                }
                else {
                 const username = response.data.username;
@@ -126,11 +126,11 @@ export default {
                         window.location.href = decodeURIComponent(this.$cookies.get("ccr"));
                       }
                       else {
-                        window.location.href = "http://localhost:8080/customerdashboard";
+                        window.location.href = location.protocol + "//"+ location.host + "/customerdashboard";
                       }
                     }
                     else {
-                    window.location.href = "http://localhost:8080/dashboard";
+                      window.location.href = location.protocol + "//"+ location.host + "/dashboard";
                     }
                }            
             }
