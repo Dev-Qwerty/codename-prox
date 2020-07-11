@@ -19,6 +19,7 @@ const workRequestModel = require('../models/workrequest-model');
 const mainserviceModel = require('../models/mainservice-model');
 const workerModel = require('../models/worker-model');
 const orderStatusModel = require('../models/order-status');
+const userModel = require('../models/user-model')
 
 const paytm = require('../config/keys')
 const checksum_lib = require('../config/paymentgateway/checksum')
@@ -29,7 +30,7 @@ router
     .post([parseUrl,parseJson], async (req, res) => {
         try {
             let completed = true
-            if(!req.body.service.serviceId || !req.body.address.line1 || !req.body.address.line2 || !req.body.address.district || !req.body.address.pin || !req.body.date || !req.body.time || req.body.service.categories == 0 ){
+            if(!req.body.service.serviceId || !req.body.address.phone || !req.body.address.name || !req.body.address.line1 || !req.body.address.line2 || !req.body.address.district || !req.body.address.pin || !req.body.date || !req.body.time || req.body.service.categories == 0 ){
                 completed = false
             }else{
                 for( i = req.body.service.categories.length; i > 0 ; i--){
@@ -78,7 +79,7 @@ router
                 newOrder.time = req.body.time;
 
                 newOrder.save();
-                res.json({ "message": "Order placed succesfully" });
+                res.json({"CODE": "01", "ORDERID": newOrder.orderID});
 
                 //create and save token
                 let newOrderStatus = new orderStatusModel;
@@ -145,6 +146,7 @@ router
                     time: req.body.time,
                 }
                 // sendMessage.sendTextMessage("worker",workerDetails,workDetails);
+                //TODO:change in paynow also
             }else {
                 res.json({ "message": "failed to place order" });
             }
@@ -158,15 +160,10 @@ router
 
 router
     .route('/placeorder/paynow')
-    // For payment testing
-    .get((req, res) => {
-        res.render('payment')
-    })
     .post([parseUrl,parseJson], async (req, res) => {
         try {
             let completed = true
-            //TODO: check for email and userid when original original userid and email are implemented
-            if (!req.body.service.serviceId || !req.body.number || !req.body.name || !req.body.address.line1 || !req.body.address.line2 || !req.body.address.district || !req.body.address.pin || !req.body.date || !req.body.time || req.body.service.categories == 0) {
+            if (!req.body.id || !req.body.service.serviceId || !req.body.address.phone || !req.body.address.name || !req.body.address.line1 || !req.body.address.line2 || !req.body.address.district || !req.body.address.pin || !req.body.date || !req.body.time || req.body.service.categories == 0) {
                 completed = false
             } else {
                 for( i = req.body.service.categories.length; i > 0 ; i--){
@@ -202,8 +199,9 @@ router
                 }
 
                 // create new orderrs
+                let userID = crypt.decrypt(req.body.id)
                 newOrder.orderID = orderId;
-                newOrder.userID = "adjfne3";   // TODO : save original userid
+                newOrder.userID = userID;
                 newOrder.date = req.body.date;
                 newOrder.service.subserviceName = service.name;
                 newOrder.service.categories = req.body.service.categories;
@@ -218,12 +216,14 @@ router
                     console.log(err)
                 })
                     
+                // Find user email
+                let userEmail = await userModel.findOne({userID: userID}, 'email -_id')
 
                 var paymentDetails = {
                     amount: totalAmount,
-                    customerId: 'adjfne3', //TODO: use original userId and email
-                    customerEmail: 'abc@mailinator.com',
-                    customerPhone: req.body.number
+                    customerId: userID, 
+                    customerEmail: userEmail.email,
+                    customerPhone: req.body.address.phone
                 }
             
                 var params = {};
@@ -258,6 +258,7 @@ router
                 // TODO: show styled message instead of res.send
             }
         } catch (error) {
+            res.send("Something went wrong!")
             console.log(error)
         }
 
@@ -324,7 +325,7 @@ router
                             
                             let serviceKeyWords = []
                             if(_result.RESPCODE == 01 && _result.STATUS == 'TXN_SUCCESS') {
-                                const serviceDetails = await orderModel.findOne({orderID: _result.ORDERID}, 'service.subserviceName service.categories address orderID -_id') //Find service name and categories form workorder db
+                                const serviceDetails = await orderModel.findOne({orderID: _result.ORDERID}, '-_id') //Find service name and categories form workorder db
                                 serviceKeyWords.push(serviceDetails.service.subserviceName)
                                 for(i = 0; i < serviceDetails.service.categories.length; i++){
                                     //Loop through subservice categories
@@ -341,49 +342,49 @@ router
                                 // function call to find worker for job assigning 
                                 let assignedWorker = await assignWorker.assignWorker(serviceKeyWords, serviceDetails.address.pin, serviceDetails.orderID);
 
-                                 // Create work request
-                                 let newWorkRequest = new workRequestModel;
-                                 newWorkRequest.requestID = uniqueId.uniqueRequestId();
-                                 newWorkRequest.orderID = serviceDetails.orderID;
-                                 newWorkRequest.workerID = assignedWorker;
-                                 newWorkRequest.service = serviceDetails.service;
-                                 newWorkRequest.address = serviceDetails.address;
-                                 newWorkRequest.amount = serviceDetails.totalAmount;
-                                 newWorkRequest.date = serviceDetails.date;
-                                 newWorkRequest.time = serviceDetails.time;
+                                // Create work request
+                                let newWorkRequest = new workRequestModel;
+                                newWorkRequest.requestID = uniqueId.uniqueRequestId();
+                                newWorkRequest.orderID = serviceDetails.orderID;
+                                newWorkRequest.workerID = assignedWorker;
+                                newWorkRequest.service = serviceDetails.service;
+                                newWorkRequest.address = serviceDetails.address;
+                                newWorkRequest.amount = serviceDetails.totalAmount;
+                                newWorkRequest.date = serviceDetails.date;
+                                newWorkRequest.time = serviceDetails.time;
 
-                                // Find dueDate
-                                let today = new Date() // Find today's date
-                                let OrderDate = new Date(serviceDetails.date) // Order date
-                                let hour = moment().hour() // Curent time
-                                //  hour = ((hour + 11) % 12 + 1); // convert to 12hr
-                                let dueDate = new Date() // Current time for setting dueDate
-                                
-                                
-                                if(today.getDate() == OrderDate.getDate()){
-                                    if(hour>=0 && hour <=6){ 
-                                        //set time = 7:30 AM
-                                        dueDate = moment(dueDate).set({hour:7,minute:30,second:0,millisecond:0});
-                                    }else{
-                                        // set time as current time + 15 min
-                                        dueDate = moment(dueDate).add(15, 'minutes');
-                                    }
-                                }else {
-                                    if(hour>=0 && hour <= 6){
-                                        // set time = 7:30 AM of current day
-                                        dueDate = moment(dueDate).set({hour:7,minute:30,second:0,millisecond:0});
-                                    }else if(hour>=22 && hour <24){
-                                        // set time = 7:30 AM of next day
-                                        dueDate = moment().add(1, 'days');
-                                        dueDate = moment(dueDate).set({hour:7,minute:30,second:0,millisecond:0});
+                                    // Find dueDate
+                                    let today = new Date() // Find today's date
+                                    let OrderDate = new Date(serviceDetails.date) // Order date
+                                    let hour = moment().hour() // Curent time
+                                    //  hour = ((hour + 11) % 12 + 1); // convert to 12hr
+                                    let dueDate = new Date() // Current time for setting dueDate
+                                    
+                                    
+                                    if(today.getDate() == OrderDate.getDate()){
+                                        if(hour>=0 && hour <=6){ 
+                                            //set time = 7:30 AM
+                                            dueDate = moment(dueDate).set({hour:7,minute:30,second:0,millisecond:0});
+                                        }else{
+                                            // set time as current time + 15 min
+                                            dueDate = moment(dueDate).add(15, 'minutes');
+                                        }
                                     }else {
-                                        // set time as current time + 30 min
-                                        dueDate = moment(dueDate).add(30, 'minutes');
+                                        if(hour>=0 && hour <= 6){
+                                            // set time = 7:30 AM of current day
+                                            dueDate = moment(dueDate).set({hour:7,minute:30,second:0,millisecond:0});
+                                        }else if(hour>=22 && hour <24){
+                                            // set time = 7:30 AM of next day
+                                            dueDate = moment().add(1, 'days');
+                                            dueDate = moment(dueDate).set({hour:7,minute:30,second:0,millisecond:0});
+                                        }else {
+                                            // set time as current time + 30 min
+                                            dueDate = moment(dueDate).add(30, 'minutes');
+                                        }
                                     }
-                                }
 
-                                newWorkRequest.dueDate = dueDate;
-                                newWorkRequest.save();
+                                    newWorkRequest.dueDate = dueDate;
+                                    newWorkRequest.save();
 
                                 //Find worker name and number
                                 const workerDetails = await workerModel.findOne({workerID: assignedWorker},'name phoneNo -_id');
@@ -395,7 +396,6 @@ router
                                 }
                                 // sendMessage.sendTextMessage("worker",workerDetails,workDetails);
                                 //TODO:change in paynow also
-
                             } else { 
                                 orderModel.deleteOne({orderID: _result.ORDERID}).then(() => {
                                     console.log("deleted" + _result.ORDERID)
@@ -441,6 +441,18 @@ router
 	        });
         } catch (error) {
             console.log(error)
+        }       
+    })
+
+router
+    .route('/orderstatus/:orderid')
+    .get([parseUrl,parseJson], async (req, res) => {
+        try {
+            let orderid = req.params.orderid
+            let order = await orderModel.findOne({orderID: orderid})
+            res.send(order)
+        } catch (error) {
+            console.log(error)   
         }
     })
 

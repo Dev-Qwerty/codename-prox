@@ -14,7 +14,6 @@ import Cleaning from '@/components/Services/Cleaning/Cmain.vue'
 import Cmodal from '@/components/Services/Cleaning/Cmodal.vue'
 import cart from '@/components/Checkout/cart.vue'
 import checkout from '@/components/Checkout/checkout.vue'
-import PayLaterConfirm from '@/components/Checkout/PayLaterConfirm.vue'
 import Dashboard from '@/components/Dashboard/DMain.vue'
 import Cdashboard from '@/components/CustomerDashboard/CDmain.vue'
 import workreq from '@/components/Dashboard/workreq/workreq.vue'
@@ -46,6 +45,7 @@ import Pestcontrol from '@/components/Services/Pestcontrol/Pestcontrol'
 import Pcmodal from '@/components/Services/Pestcontrol/Pcmodal'
 import ChangeAvatar from '@/components/ChangeAvatar/CAMain.vue'
 import ProcessPayment from '@/components/Checkout/ProcessPayment'
+import OrderStatus from '@/components/Checkout/OrderStatus'
 
 Vue.use(VueRouter)
 
@@ -360,15 +360,6 @@ export default new VueRouter({
           path: 'checkout',
           name: 'checkout',
           component: checkout,
-          props: true,      
-          children: [
-            {
-              path: 'confirm',
-              name: 'confirm',
-              component: PayLaterConfirm,
-              props: true,
-            }
-          ]        
         }
       ]
     },
@@ -376,6 +367,11 @@ export default new VueRouter({
       path: '/processpayment',
       name: 'processpayment',
       component: ProcessPayment
+    },
+    {
+      path: '/orderstatus',
+      name: 'orderstatus',
+      component: OrderStatus
     },
     { 
       path: '/dashboard', 

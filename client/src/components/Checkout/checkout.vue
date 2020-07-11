@@ -20,10 +20,10 @@
           <p class="addrheader">Address</p>
           <form class="addr" action="" method="">
             <div>
-              <input class="input-box" type="text" name="uname" placeholder="Full Name" v-model="name">
+              <input class="input-box" type="text" name="uname" placeholder="Full Name" v-model="address.name">
             </div>
             <div>
-              <input class="input-box" type="text" name="contactno" placeholder="Contact Number" v-model="number">
+              <input class="input-box" type="text" name="contactno" placeholder="Contact Number" v-model="address.phone">
             </div>
             <div>
               <input class="input-box" type="text" name="flatname" placeholder="Flat name/no." v-model="address.line1">
@@ -60,21 +60,17 @@
             </router-link> 
           </div>
           <div>
-            <router-link class="paylaterbtn" :to="{name: 'confirm'}" @click.native="paylaterfn">
+            <router-link class="paylaterbtn" :to="{name: 'orderstatus'}">
               <input type="submit" value="Pay Later" @click="paylater">
             </router-link>
           </div> 
         </div>                 
       </div>
-      <router-view>
-        <PayLaterConfirm />
-      </router-view>
     </div>
   </div>  
 </template>
 
 <script>
-import PayLaterConfirm from '@/components/Checkout/PayLaterConfirm.vue'
 import moment from 'moment'
 import VueCtkDateTimePicker from 'vue-ctk-date-time-picker';
 import 'vue-ctk-date-time-picker/dist/vue-ctk-date-time-picker.css';
@@ -83,7 +79,6 @@ import EventBus from '../../event-bus'
 export default {
   name: 'checkout',
   components: {
-    PayLaterConfirm,
     VueCtkDateTimePicker
   },
   data() {
@@ -93,9 +88,9 @@ export default {
         serviceId: this.$cookies.get("sarray")._id,
         categories: JSON.parse(this.$cookies.get("cart"))
       },
-      name: '',
-      number: '',
       address: {
+        name: '',
+        phone: '',
         line1: '',
         line2: '',
         district: '',
@@ -112,12 +107,13 @@ export default {
        let url = "http://localhost:3000/orders/placeorder/pay-later"
        this.$http
         .post(url, {
+          id: this.$cookies.get("id"),
           service: this.service,
           address: this.address,
           date: this.date,
           time: this.time
         }).then(response => {
-          alert(response.data.message)
+          EventBus.$emit("finalorderstatus", response.data)
         }).catch(error => {
           alert(error)
         })
@@ -127,14 +123,12 @@ export default {
       let url = "http://localhost:3000/orders/placeorder/paynow"
       this.$http
         .post(url, {
+          id: this.$cookies.get("id"),
           service: this.service,
-          name: this.name,
-          number: this.number,
           address: this.address,
           date: this.date,
           time: this.time
         }).then (response => {
-          console.log(response.data)
           EventBus.$emit("payment", response.data)
         }).catch(error => {
           alert(error)
