@@ -24,6 +24,11 @@
           <p>time: {{ this.orderDetails.time }}</p>
       </center>
   </div>
+  <div v-else-if="this.orderStatus == '00'">
+      <center>
+          <h2>Failed to place order!</h2>
+      </center>
+  </div>
 </template>
 
 <script>
@@ -37,9 +42,10 @@ export default {
     },
     created() {
         EventBus.$on("finalorderstatus", response => {
-            
             if(response.CODE == '01') {
                 this.fetchOrderStatus(response)
+            } else {
+                this.orderStatus = response.CODE
             }
         })
     },
