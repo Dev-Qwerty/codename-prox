@@ -1,18 +1,6 @@
 <template>
   <div class="Wrapper">
     <div class="cards">
-      <!--<div class="box">
-        <div class="r1">
-          <p class="r1-1"></p>
-          <div class="Line"></div>            
-        </div>
-        <div class="r2">
-          <p class="r2-1"></p>
-        </div>
-        <div class="r3">
-          <p class="r3-1" @click="fn()"></p>
-        </div>  
-      </div>-->   
       <div class="box">
         <div class="r1">
           <p class="r1-1"><span>$</span>99</p>
@@ -25,7 +13,33 @@
         <div class="r3">
           <p class="r3-1" @click="fn()">Book Now</p>
         </div>
-      </div>                
+      </div>
+      <div class="box">
+        <div class="r1">
+          <p class="r1-1"><span>$</span>99</p>
+          <div class="Line"></div>   
+        </div>
+        <div class="r2">
+          <p class="r2-1">Kitchen Cleaning</p>
+          <p class="r2-2">Service Details</p>
+        </div>
+        <div class="r3">
+          <p class="r3-1" @click="fn()">Book Now</p>
+        </div>
+      </div>  
+      <div class="box">
+        <div class="r1">
+          <p class="r1-1"><span>$</span>99</p>
+          <div class="Line"></div>   
+        </div>
+        <div class="r2">
+          <p class="r2-1">Kitchen Cleaning</p>
+          <p class="r2-2">Service Details</p>
+        </div>
+        <div class="r3">
+          <p class="r3-1" @click="fn()">Book Now</p>
+        </div>
+      </div>                              
     </div>
   </div>  
 </template>
