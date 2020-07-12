@@ -33,7 +33,7 @@
             </router-link>
           </div>
           <div class="sidenav-mid-three">
-            <router-link :to="{name: ''}" @click.native="fn">
+            <router-link :to="{name: 'favorites'}" @click.native="fn">
               <div class="wr-1">
                 <div class="sidenav-mid-img3"></div>
                 <p>Favorites</p>
@@ -62,6 +62,8 @@
       <div class="dashboard-body">         
         <router-view>
           <bookings />
+          <bchild />
+          <favorites />
         </router-view>       
       </div>
     </div>
@@ -70,10 +72,14 @@
 
 <script>
 import bookings from '@/components/CustomerDashboard/bookings/bookings.vue'
+import bchild from '@/components/CustomerDashboard/bookings/b-child.vue'
+import favorites from '@/components/CustomerDashboard/favorites/favorites.vue'
 
 export default {
   components: {
-    bookings
+    bookings,
+    bchild,
+    favorites
   },
   data() {
     return {
