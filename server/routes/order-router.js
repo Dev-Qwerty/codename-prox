@@ -411,28 +411,52 @@ router
                                     res.end()
                                     break
                                 case '227':
-                                    res.send(_result.RESPMSG)
+                                    res.writeHead(302, {
+                                        Location: 'http://localhost:8080/orderstatus'
+                                    })
+                                    res.end()
                                     break
                                 case '235':
-                                    res.send(_result.RESPMSG)
+                                    res.writeHead(302, {
+                                        Location: 'http://localhost:8080/orderstatus'
+                                    })
+                                    res.end()
                                     break
                                 case '295':
-                                    res.send(_result.RESPMSG)
+                                    res.writeHead(302, {
+                                        Location: 'http://localhost:8080/orderstatus'
+                                    })
+                                    res.end()
                                     break
                                 case '334':
-                                    res.send('payment failed')
+                                    res.writeHead(302, {
+                                        Location: 'http://localhost:8080/orderstatus'
+                                    })
+                                    res.end()
                                     break
                                 case '400':
-                                    res.send(_result.RESPMSG)
+                                    res.writeHead(302, {
+                                        Location: 'http://localhost:8080/orderstatus'
+                                    })
+                                    res.end()
                                     break
                                 case '401':
-                                    res.send(_result.RESPMSG)
+                                    res.writeHead(302, {
+                                        Location: 'http://localhost:8080/orderstatus'
+                                    })
+                                    res.end()
                                     break
                                 case '402':
-                                    res.send(_result.RESPMSG)
+                                    res.writeHead(302, {
+                                        Location: 'http://localhost:8080/orderstatus'
+                                    })
+                                    res.end()
                                     break
                                 case '810':
-                                    res.send(_result.RESPMSG)
+                                    res.writeHead(302, {
+                                        Location: 'http://localhost:8080/orderstatus'
+                                    })
+                                    res.end()
                             }
 						});
 					});
