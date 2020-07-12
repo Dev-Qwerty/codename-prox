@@ -16,6 +16,7 @@ import cart from '@/components/Checkout/cart.vue'
 import checkout from '@/components/Checkout/checkout.vue'
 import Cdashboard from '@/components/CustomerDashboard/CDmain.vue'
 import bookings from '@/components/CustomerDashboard/bookings/bookings.vue'
+import bchild from '@/components/CustomerDashboard/bookings/b-child.vue'
 import Dashboard from '@/components/Dashboard/DMain.vue'
 import workreq from '@/components/Dashboard/workreq/workreq.vue'
 //import pworks from '@/components/Dashboard/pworks.vue'
@@ -459,7 +460,13 @@ export default new VueRouter({
           name: 'bookings',
           component: bookings,
           props: true
-        }
+        },
+        {
+          path: 'bchild',
+          name: 'bchild',
+          component: bchild,
+          props: true
+        },         
       ]  
     },      
     {

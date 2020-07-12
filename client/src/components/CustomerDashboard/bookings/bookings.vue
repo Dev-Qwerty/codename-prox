@@ -28,7 +28,7 @@
             <p class="r2-1">09:00 AM</p>
           </div>
           <div class="r3">
-            <p class="r3-1">Track Your Booking</p>
+            <p class="r3-1" @click="fn()">Track Your Booking</p>
           </div>
         </div> 
 
@@ -73,6 +73,7 @@ export default {
   },
   methods: { 
     fn() {
+      window.location.href = "http://localhost:8080/customerdashboard/bchild";
     }
   }   
 }       
