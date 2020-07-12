@@ -150,7 +150,7 @@ export default {
   }  
   .ltwo {
     /*background-color: orange;*/
-  }  
+  }
   .dline {
     width: 90%;
     background-color: #aaa;
