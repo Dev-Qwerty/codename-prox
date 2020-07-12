@@ -28,7 +28,9 @@
             <p class="r2-1">09:00 AM</p>
           </div>
           <div class="r3">
+            <router-link :to="{ name: '' }">
             <p class="r3-1" @click="fn()">Track Your Booking</p>
+            </router-link>
           </div>
         </div> 
 
@@ -85,7 +87,7 @@ export default {
     padding-top: 4%;
   }
   .hdn {
-    font-size: 25px;
+    font-size: 24px;
     font-family: p-medium;
   }
   .cards {
@@ -115,7 +117,7 @@ export default {
   }
   .r1-1 {
     text-align: center;
-    font-size: 24px;
+    font-size: 23px;
     font-family: p-medium;
     margin: 0px;
     color: #000;
