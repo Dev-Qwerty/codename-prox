@@ -412,49 +412,49 @@ router
                                     break
                                 case '227':
                                     res.writeHead(302, {
-                                        Location: 'http://localhost:8080/orderstatus'
+                                        Location: 'http://localhost:8080/orderstatus?r='+_result.RESPCODE
                                     })
                                     res.end()
                                     break
                                 case '235':
                                     res.writeHead(302, {
-                                        Location: 'http://localhost:8080/orderstatus'
+                                        Location: 'http://localhost:8080/orderstatus?r='+_result.RESPCODE
                                     })
                                     res.end()
                                     break
                                 case '295':
                                     res.writeHead(302, {
-                                        Location: 'http://localhost:8080/orderstatus'
+                                        Location: 'http://localhost:8080/orderstatus?r='+_result.RESPCODE
                                     })
                                     res.end()
                                     break
                                 case '334':
                                     res.writeHead(302, {
-                                        Location: 'http://localhost:8080/orderstatus'
+                                        Location: 'http://localhost:8080/orderstatus?r='+_result.RESPCODE
                                     })
                                     res.end()
                                     break
                                 case '400':
                                     res.writeHead(302, {
-                                        Location: 'http://localhost:8080/orderstatus'
+                                        Location: 'http://localhost:8080/orderstatus?r='+_result.RESPCODE
                                     })
                                     res.end()
                                     break
                                 case '401':
                                     res.writeHead(302, {
-                                        Location: 'http://localhost:8080/orderstatus'
+                                        Location: 'http://localhost:8080/orderstatus?r='+_result.RESPCODE
                                     })
                                     res.end()
                                     break
                                 case '402':
                                     res.writeHead(302, {
-                                        Location: 'http://localhost:8080/orderstatus'
+                                        Location: 'http://localhost:8080/orderstatus?r='+_result.RESPCODE
                                     })
                                     res.end()
                                     break
                                 case '810':
                                     res.writeHead(302, {
-                                        Location: 'http://localhost:8080/orderstatus'
+                                        Location: 'http://localhost:8080/orderstatus?r='+_result.RESPCODE
                                     })
                                     res.end()
                             }
