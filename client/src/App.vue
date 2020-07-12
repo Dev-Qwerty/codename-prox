@@ -23,6 +23,10 @@
     src: url("./assets/Font/poppins/Poppins-Bold.ttf") format("truetype");
   }
   @font-face {
+    font-family: "p-thin";
+    src: url("./assets/Font/poppins/Poppins-Thin.ttf") format("truetype");
+  }  
+  @font-face {
     font-family: "lato-bold";
     src: url("./assets/Font/lato/Lato-Bold.ttf") format("truetype");
   }

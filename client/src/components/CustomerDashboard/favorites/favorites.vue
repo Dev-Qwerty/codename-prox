@@ -20,9 +20,10 @@
         </div>
         <div class="r2">
           <p class="r2-1">Kitchen Cleaning</p>
+          <p class="r2-2">Service Details</p>
         </div>
         <div class="r3">
-
+          <p class="r3-1" @click="fn()">Book Now</p>
         </div>
       </div>                
     </div>
@@ -59,12 +60,12 @@ export default {
   }   
   .box {
     width: 320px;
-    height: 185px;
+    height: 200px;
     background-color: #fff; 
     box-shadow: 0px 3px 6px #00000029;
     border: 0.5px solid #707070;
     display: grid;
-    grid-template-rows: 1fr 1fr 0.6fr;
+    grid-template-rows: 1fr 0.8fr 1.2fr;
     opacity: 0.9;
     border-radius: 50px;
     overflow: hidden;
@@ -75,7 +76,6 @@ export default {
   .r1 {
     text-align: center;
     padding-top: 15px;
-    background-color: orange;
   }
   .r1-1 {
     text-align: center;
@@ -88,28 +88,33 @@ export default {
     margin-top: -5px;
     margin-left: auto;
     margin-right: auto;
-    height: 1px;
-    width: 100px;
-    background-color: #707070;
+    height: 2px;
+    width: 150px;
+    background-color: #000;
   }
   .r2 {
-    background-color: orchid;
     text-align: center;
-    padding-top: 5px;
+    padding-top: 10px;
   }
   .r2-1 {
-    font-size: 26px;
+    font-size: 27px;
     font-family: p-medium;
     margin: 0px;
     color: #000;
   }
+  .r2-2 {
+    font-size: 18px;
+    font-family: p-medium;
+    margin-top: -2px;
+    color: #000;
+  }  
   .r3 {
-    background-color: purple;
     margin-top: 0px;
     text-align: center;
   }
   .r3-1 {
-    font-size: 20px;
+    margin-top: -5px;
+    font-size: 23px;
     color: #0084E9;
     font-family: p-medium;
   }   
