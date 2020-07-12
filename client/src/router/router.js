@@ -17,6 +17,7 @@ import checkout from '@/components/Checkout/checkout.vue'
 import Cdashboard from '@/components/CustomerDashboard/CDmain.vue'
 import bookings from '@/components/CustomerDashboard/bookings/bookings.vue'
 import bchild from '@/components/CustomerDashboard/bookings/b-child.vue'
+import favorites from '@/components/CustomerDashboard/favorites/favorites.vue'
 import Dashboard from '@/components/Dashboard/DMain.vue'
 import workreq from '@/components/Dashboard/workreq/workreq.vue'
 //import pworks from '@/components/Dashboard/pworks.vue'
@@ -466,7 +467,13 @@ export default new VueRouter({
           name: 'bchild',
           component: bchild,
           props: true
-        },         
+        }, 
+        {
+          path: 'favorites',
+          name: 'favorites',
+          component: favorites,
+          props: true
+        },                
       ]  
     },      
     {
