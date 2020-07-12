@@ -30,7 +30,33 @@
           <div class="r3">
             <p class="r3-1">Track Your Booking</p>
           </div>
-        </div>       
+        </div> 
+
+        <div class="box">
+          <div class="r1">
+            <p class="r1-1">Plumbing</p>
+            <div class="Line"></div>            
+          </div>
+          <div class="r2">
+            <p class="r2-1">09:00 AM</p>
+          </div>
+          <div class="r3">
+            <p class="r3-1">Scheduled</p>
+          </div>
+        </div>  
+
+        <div class="box">
+          <div class="r1">
+            <p class="r1-1">Carpentry</p>
+            <div class="Line"></div>            
+          </div>
+          <div class="r2">
+            <p class="r2-1">09:00 AM</p>
+          </div>
+          <div class="r3">
+            <p class="r3-1">Scheduled</p>
+          </div>
+        </div>                 
       
       </div>
   </div>
@@ -63,9 +89,13 @@ export default {
   }
   .cards {
     padding-left: 2%;
-  }
+    width: 90%;
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;  
+  }   
   .box {
-    width: 350px;
+    width: 320px;
     height: 185px;
     background-color: #fff;
     border: 1px solid #F5F5F5;
