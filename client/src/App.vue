@@ -15,6 +15,10 @@
     src: url("./assets/Font/poppins/Poppins-Medium.ttf") format("truetype");
   }
   @font-face {
+    font-family: "p-regular";
+    src: url("./assets/Font/poppins/Poppins-Regular.ttf") format("truetype");
+  }  
+  @font-face {
     font-family: "p-bold";
     src: url("./assets/Font/poppins/Poppins-Bold.ttf") format("truetype");
   }
