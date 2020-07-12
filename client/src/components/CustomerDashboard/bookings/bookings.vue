@@ -2,23 +2,6 @@
   <div class="Wrapper">
       <p class="hdn">Your Bookings</p>
       <div class="cards">
-        
-        <!--<div class="box">
-          <router-link :to="{ name: '' }">
-            <div @click="fn(sr)">
-              <div class="box-row1">
-                <p class="row1-one">Kitchen Cleaning</p>
-                <div class="Line"></div>
-              </div>
-              <div class="box-row2">
-                <p class="row2-one">09:00 AM</p>
-              </div>
-              <div class="box-row3">
-                <p class="row3-one">Track Your Booking</p>
-              </div>
-            </div>
-          </router-link>  
-        </div>-->
         <div class="box">
           <div class="r1">
             <p class="r1-1">Kitchen Cleaning</p>
@@ -33,7 +16,6 @@
             </router-link>
           </div>
         </div> 
-
         <div class="box">
           <div class="r1">
             <p class="r1-1">Plumbing</p>
@@ -46,7 +28,6 @@
             <p class="r3-1">Scheduled</p>
           </div>
         </div>  
-
         <div class="box">
           <div class="r1">
             <p class="r1-1">Carpentry</p>
@@ -58,8 +39,7 @@
           <div class="r3">
             <p class="r3-1">Scheduled</p>
           </div>
-        </div>                 
-      
+        </div>                      
       </div>
   </div>
 </template>
