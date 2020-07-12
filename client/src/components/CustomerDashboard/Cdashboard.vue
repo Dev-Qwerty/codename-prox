@@ -17,7 +17,7 @@
         <div class="sidenav-mid">
 
           <div class="sidenav-mid-one">
-            <router-link :to="{name: ''}" @click.native="fn">
+            <router-link :to="{name: 'bookings'}" @click.native="fn">
               <div class="wr-1">
                 <div class="sidenav-mid-img1"></div>
                 <p>Bookings</p>
