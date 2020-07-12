@@ -66,22 +66,21 @@ export default {
   }
   .box {
     width: 350px;
-    height: 200px;
+    height: 185px;
     background-color: #fff;
     border: 1px solid #F5F5F5;
     box-shadow: 0px 3px 5px #00000029;
     border-radius: 16px;
     display: grid;
-    grid-template-rows: 30% 30% 40%;
+    grid-template-rows: 1fr 1fr 0.9fr;
     opacity: 0.9;
   }    
   a {
     text-decoration: none;
   }
   .r1 {
-    background-color: aqua;
     text-align: center;
-    margin-top: 5px;
+    padding-top: 15px;
   }
   .r1-1 {
     text-align: center;
@@ -91,7 +90,7 @@ export default {
     color: #000;
   }
   .Line {
-    margin-top: 10px;
+    margin-top: 5px;
     margin-left: auto;
     margin-right: auto;
     height: 1px;
@@ -99,9 +98,8 @@ export default {
     background-color: #707070;
   }
   .r2 {
-    background-color: orange;    
     text-align: center;
-    margin-top: 0px;
+    padding-top: 5px;
   }
   .r2-1 {
     font-size: 26px;
@@ -110,13 +108,12 @@ export default {
     color: #000;
   }
   .r3 {
-    background-color: red;    
     margin-top: 0px;
     text-align: center;
   }
   .r3-1 {
-    font-size: 23px;
-    color: #000;
+    font-size: 20px;
+    color: #0084E9;
     font-family: p-medium;
   } 
 </style>
