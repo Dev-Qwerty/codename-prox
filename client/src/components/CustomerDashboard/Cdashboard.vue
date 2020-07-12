@@ -278,7 +278,10 @@ export default {
   .sidenav-mid-five p {
     margin-left: 5%;
     color: #000;
-  }    
+  }   
+  a {
+    text-decoration: none;
+  } 
   .dashboard-body {
     background-color: #fff;
   }             
