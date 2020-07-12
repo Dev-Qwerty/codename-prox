@@ -61,6 +61,7 @@
       </div>
       <div class="dashboard-body">         
         <router-view>
+          <bookings />
         </router-view>       
       </div>
     </div>
@@ -68,10 +69,11 @@
 </template>
 
 <script>
+import bookings from '@/components/CustomerDashboard/bookings/bookings.vue'
 
 export default {
   components: {
-    
+    bookings
   },
   data() {
     return {
