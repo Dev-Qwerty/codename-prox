@@ -17,6 +17,14 @@ router
         }
     })
 
+//check status
+router
+    .route('/checkstatus/:id')
+    .get( async (req, res) => {
+        let orderstatus = await orderStatusModel.findOne({orderID: req.params.id},'status -_id')
+        res.json({'status': orderstatus.status})
+    })
+
 // fetch token
 router
     .route('/gettoken/:id')
