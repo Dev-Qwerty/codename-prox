@@ -176,6 +176,7 @@ router
 
             if (completed) {
                 var orderId = uniqueId.uniqueOrderId()
+                console.log(orderId)
         
                 global.totalAmount = 0;  // total amount variable
                 global.newOrder = new orderModel;  // create new order instance
@@ -326,6 +327,9 @@ router
                             let serviceKeyWords = []
                             if(_result.RESPCODE == 01 && _result.STATUS == 'TXN_SUCCESS') {
                                 const serviceDetails = await orderModel.findOne({orderID: _result.ORDERID}, '-_id') //Find service name and categories form workorder db
+                                await orderModel.findOneAndUpdate({orderID: _result.ORDERID}, {paid: true}).then(() => {
+                                    console.log('order updated')
+                                })
                                 serviceKeyWords.push(serviceDetails.service.subserviceName)
                                 for(i = 0; i < serviceDetails.service.categories.length; i++){
                                     //Loop through subservice categories
@@ -460,7 +464,6 @@ router
                             }
 						});
 					});
-
 					// post the data
 					post_req.write(post_data);
 					post_req.end();
