@@ -104,6 +104,8 @@ export default {
     paylaterfn(){},
     paylater() {
        this.date = moment(this.date).format('YYYY-M-D')
+       this.$cookies.remove("cart")
+       this.$cookies.remove("r")
        let url = "http://localhost:3000/orders/placeorder/pay-later"
        this.$http
         .post(url, {
@@ -124,6 +126,8 @@ export default {
     },
     paynow() {
       this.date = moment(this.date).format( 'YYYY-M-D')
+      this.$cookies.remove("cart")
+      this.$cookies.remove("r")
       let url = "http://localhost:3000/orders/placeorder/paynow"
       this.$http
         .post(url, {
@@ -138,7 +142,7 @@ export default {
           alert(error)
         })
     }
-  }
+  },
 }
 </script>
 

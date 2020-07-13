@@ -20,6 +20,7 @@ export default {
         }
     },
     created() {
+        // TODO: remove cookie after page is destroyed
         if(this.$cookies.get("r") == null) [
             this.$cookies.set("r", this.$route.query.r, '1d')
         ]

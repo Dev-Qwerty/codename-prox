@@ -20,9 +20,11 @@ const mainserviceModel = require('../models/mainservice-model');
 const workerModel = require('../models/worker-model');
 const orderStatusModel = require('../models/order-status');
 const userModel = require('../models/user-model')
+const failedorderModel = require('../models/failedorder-model')
 
 const paytm = require('../config/keys')
-const checksum_lib = require('../config/paymentgateway/checksum')
+const checksum_lib = require('../config/paymentgateway/checksum');
+const { fail } = require('assert');
 
 
 router
@@ -329,8 +331,8 @@ router
                             var _result = JSON.parse(response);
                             
                             let serviceKeyWords = []
+                            const serviceDetails = await orderModel.findOne({orderID: _result.ORDERID}, '-_id') //Find service name and categories form workorder db
                             if(_result.RESPCODE == 01 && _result.STATUS == 'TXN_SUCCESS') {
-                                const serviceDetails = await orderModel.findOne({orderID: _result.ORDERID}, '-_id') //Find service name and categories form workorder db
                                 await orderModel.findOneAndUpdate({orderID: _result.ORDERID}, {paid: true}).then(() => {
                                     console.log('order updated')
                                 })
@@ -405,9 +407,24 @@ router
                                 // sendMessage.sendTextMessage("worker",workerDetails,workDetails);
                                 //TODO:change in paynow also
                             } else { 
+                                // Delete order from workorders
                                 orderModel.deleteOne({orderID: _result.ORDERID}).then(() => {
                                     console.log("deleted" + _result.ORDERID)
                                 })
+
+                                // create a failed order instance for reference
+                                let newfailedorder = new failedorderModel
+                                newfailedorder.orderID =  serviceDetails.orderID
+                                newfailedorder.userID = serviceDetails.userID
+                                newfailedorder.service = serviceDetails.service
+                                newfailedorder.address = serviceDetails.address
+                                newfailedorder.totalAmount = serviceDetails.totalAmount
+                                newfailedorder.respCode = _result.RESPCODE
+                                newfailedorder.respMsg = _result.RESPMSG
+                                newfailedorder.txnId = _result.TXNID
+                                newfailedorder.txnDate = _result.TXNDATE
+
+                                newfailedorder.save()
                             }
 
                             // Send response based on the Transaction status (RESPONSE CODE)
