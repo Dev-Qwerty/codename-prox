@@ -17,7 +17,7 @@
         <div class="sidenav-mid">
 
           <div class="sidenav-mid-one">
-            <router-link :to="{name: ''}" @click.native="fn">
+            <router-link :to="{name: 'bookings'}" @click.native="fn">
               <div class="wr-1">
                 <div class="sidenav-mid-img1"></div>
                 <p>Bookings</p>
@@ -33,7 +33,7 @@
             </router-link>
           </div>
           <div class="sidenav-mid-three">
-            <router-link :to="{name: ''}" @click.native="fn">
+            <router-link :to="{name: 'favorites'}" @click.native="fn">
               <div class="wr-1">
                 <div class="sidenav-mid-img3"></div>
                 <p>Favorites</p>
@@ -61,6 +61,9 @@
       </div>
       <div class="dashboard-body">         
         <router-view>
+          <bookings />
+          <bchild />
+          <favorites />
         </router-view>       
       </div>
     </div>
@@ -68,10 +71,15 @@
 </template>
 
 <script>
+import bookings from '@/components/CustomerDashboard/bookings/bookings.vue'
+import bchild from '@/components/CustomerDashboard/bookings/b-child.vue'
+import favorites from '@/components/CustomerDashboard/favorites/favorites.vue'
 
 export default {
   components: {
-    
+    bookings,
+    bchild,
+    favorites
   },
   data() {
     return {
@@ -278,7 +286,10 @@ export default {
   .sidenav-mid-five p {
     margin-left: 5%;
     color: #000;
-  }    
+  }   
+  a {
+    text-decoration: none;
+  } 
   .dashboard-body {
     background-color: #fff;
   }             
