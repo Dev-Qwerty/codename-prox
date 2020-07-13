@@ -12,7 +12,8 @@ export default {
       this.$http.get(url)
       .then(response => {
         if(response.data.status == "Success") {
-          this.$baseURL = "http://localhost:3000";
+          this.$serverURLI = "http://localhost:3000";
+          alert(this.$serverURLI);
         }
       })
       .catch(error => {
@@ -21,8 +22,8 @@ export default {
          this.$http.get(url)
          .then(responses => {
            if(responses.data.status == "Success") {
-             this.$baseURL = "https://ec2-13-232-124-20.ap-south-1.compute.amazonaws.com:3000";
-             alert(this.$baseURL);
+             this.$serverURLI = "https://ec2-13-232-124-20.ap-south-1.compute.amazonaws.com:3000";
+             alert(this.$serverURLI);
            }
          })
          .catch(error => {
