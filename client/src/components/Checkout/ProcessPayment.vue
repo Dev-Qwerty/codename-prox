@@ -12,6 +12,7 @@ export default {
         }
     },
     mounted() {
+        // TODO: FIX REFRESH PROBLEM
         EventBus.$on("payment", response => {
             this.paymentResponse = response
         })
