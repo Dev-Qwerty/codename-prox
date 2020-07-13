@@ -60,7 +60,7 @@
             </router-link> 
           </div>
           <div>
-            <router-link class="paylaterbtn" :to="{name: 'orderstatus'}">
+            <router-link class="paylaterbtn" :to="{name: ''}">
               <input type="submit" value="Pay Later" @click="paylater">
             </router-link>
           </div> 
@@ -113,7 +113,11 @@ export default {
           date: this.date,
           time: this.time
         }).then(response => {
-          EventBus.$emit("finalorderstatus", response.data)
+          if(response.data.status == '01'){
+            window.location.href = 'http://localhost:8080/customerdashboard'
+          } else {
+            window.location.href = 'http://localhost:8080/orderstatus'
+          }
         }).catch(error => {
           alert(error)
         })

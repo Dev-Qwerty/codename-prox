@@ -15,7 +15,7 @@ export default {
         EventBus.$on("payment", response => {
             this.paymentResponse = response
         })
-        setTimeout(() => {
+        setInterval(() => {
             document.f1.submit()
         }, 1000);
     }

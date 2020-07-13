@@ -1,65 +1,49 @@
 <template>
-    <div v-if="this.orderStatus == null">
-      <center><h2>Loading...</h2></center>
+    <div>
+        <div>
+      <center><h2>Failed to place order!</h2></center>
   </div>
-  <div v-else-if="this.orderStatus == '01'">
-      <!-- TODO: show failed messages -->
-      <center><h2>Thanks for your order!</h2></center>
+  <div v-if="this.respCode">
       <center>
-          <p>Order ID: {{ this.orderDetails.orderID }}</p>
-          <p>Service: {{ this.orderDetails.service.subserviceName }}</p>
-          <p>Service Details</p>
-          <p v-for="categories in orderDetails.service.categories" v-bind:key="categories.category">
-              Service Name: {{ categories.category }}, quantity: {{ categories.quantity }}
-          </p>
-          <p>Total Amount: {{ this.orderDetails.totalAmount }}</p>
-          <p>Address</p>
-          <p>Name: {{ this.orderDetails.address.name }}</p>
-          <p>Number: {{ this.orderDetails.address.phone }}</p>
-          <p>Flat name/no: {{ this.orderDetails.address.line1 }}</p>
-          <p>Street Address: {{ this.orderDetails.address.line2 }}</p>
-          <p>District: {{ this.orderDetails.address.district }}</p>
-          <p>Pincode: {{ this.orderDetails.address.pin }}</p>
-          <p>Date: {{ this.orderDetails.date }}</p>
-          <p>time: {{ this.orderDetails.time }}</p>
+          <h3>{{ this.respMessage }}</h3>
       </center>
   </div>
-  <div v-else-if="this.orderStatus == '00'">
-      <center>
-          <h2>Failed to place order!</h2>
-      </center>
-  </div>
+    </div>
 </template>
 
 <script>
-import EventBus from '../../event-bus'
 export default {
     data() {
         return {
-            orderStatus: null,
-            orderDetails: null
+            respCode: null,
+            respMessage: null
         }
     },
     created() {
-        EventBus.$on("finalorderstatus", response => {
-            if(response.CODE == '01') {
-                this.fetchOrderStatus(response)
-            } else {
-                this.orderStatus = response.CODE
-            }
-        })
-    },
-    methods: {
-        async fetchOrderStatus(response) {
-            let url = 'http://localhost:3000/orders/orderstatus/' + response.ORDERID
-            await this.$http.get(url)
-                .then(response => {
-                    this.orderDetails = response.data
-                })
-            this.orderStatus = response.CODE
+        if(this.$cookies.get("r") == null) [
+            this.$cookies.set("r", this.$route.query.r, '1d')
+        ]
+        this.respCode = this.$cookies.get("r")
+        if(this.respCode == '227'){
+            this.respMessage = 'Your payment has been declined by your bank. Please contact your bank for any queries.'
+        } else if (this.respCode == '235') {
+            this.respMessage = 'Wallet balance Insufficient.'
+        } else if (this.respCode == '295') {
+            this.respMessage = 'Your payment failed as the UPI ID entered is incorrect.'
+        } else if (this.respCode == '334') {
+            this.respMessage = 'Invalid Order ID'
+        } else if (this.respCode == '400') {
+            this.respMessage = 'Transaction status not confirmed yet.'
+        } else if (this.respCode == '401') {
+            this.respMessage = 'Your payment has been declined by your bank. Please contact your bank for any queries.'
+        } else if (this.respCode == '402') {
+            this.respMessage = 'Looks like the payment is not complete.'
+        } else if (this.respCode == '810') {
+            this.respMessage = 'Payment failed.'
+        } else {
+            this.respMessage = ''
         }
     }
-
 }
 </script>
 
