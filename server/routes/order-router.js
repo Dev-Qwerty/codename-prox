@@ -66,6 +66,8 @@ router
                     delete req.body.service.categories[i].amount
                 }
 
+                req.body.address.phone = `91${req.body.address.phone}`
+
                 // create new orderrs
                 // let userID = crypt.decrypt(req.body.id)
                 newOrder.orderID = uniqueId.uniqueOrderId();
@@ -198,6 +200,8 @@ router
                     delete req.body.service.categories[i]._id
                     delete req.body.service.categories[i].amount
                 }
+
+                req.body.address.phone = `91${req.body.address.phone}`
 
                 // create new orderrs
                 let userID = crypt.decrypt(req.body.id)

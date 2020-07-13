@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const crypto = require('crypto')
 const passport = require('passport');
-const User = require('../models/user-model');
 const nodemailer = require('nodemailer');
 const keys = require('../config/keys');
 const expressSession = require('express-session');
@@ -11,11 +10,16 @@ const multer = require("multer");
 const aws = require("aws-sdk");
 const fs = require("fs");
 const multerS3 = require("multer-s3")
-const Token = require('../models/token');
 const crypt = require('../misc/crypt');
-const Order = require('../models/order-model');
 const moment = require('moment');
 global.fetch = require("node-fetch");
+
+//models
+const User = require('../models/user-model');
+const Order = require('../models/order-model');
+const Token = require('../models/token');
+const OrderStatusModel = require('../models/order-status')
+
 
 let id = "";
 
@@ -365,8 +369,37 @@ router
   .route('/bookings/:id')
   .get(async (req, res) => {
     try {
-      let bookings = await Order.find({userID: req.params.id, completed: false}, 'service address orderID date totalAmount time -_id')
+      let id = req.params.id
+      let bookings = await Order.find({userID: crypt.decrypt(id), completed: false}, 'service address orderID date totalAmount time -_id')
       res.send(bookings)
+    } catch (error) {
+      res.send("Something went wrong")
+    }
+  })
+
+
+router
+  .route('/notifications/:id')
+  .get( async (req, res) => {
+    try {
+      let id = req.params.id
+      let ordersArray = []  // array for storing order details which needs to be send to customer
+      let today = new Date().getFullYear().toString()+ "-" + (new Date().getMonth() + 1).toString() + "-" + new Date().getDate().toString() // todays date in YYYY-MM-DD as string
+      let orders = await Order.find({userID: crypt.decrypt(id),date: today}, 'orderID service.subserviceName -_id');
+      for( i=0; i<orders.length; i++){
+        let OrderStatus = await OrderStatusModel.findOne({orderID: orders[i].orderID}, '-__v -_id').lean()
+        if(OrderStatus != null){
+          OrderStatus.serviceName = orders[i].service.subserviceName;  //save service name to orderstatus object
+          if(OrderStatus.status.localeCompare('arrived') == 0 ){
+            delete OrderStatus.completeToken   // delete completeToken since the work has not been started yet
+            ordersArray.push(OrderStatus)
+          }else if(OrderStatus.status.localeCompare('started') == 0 ){
+            delete OrderStatus.startToken    // delete startToken since work has completed
+            ordersArray.push(OrderStatus)
+          }
+        }
+      }
+      res.send(ordersArray)
     } catch (error) {
       res.send("Something went wrong")
     }
