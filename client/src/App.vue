@@ -4,6 +4,42 @@
   </div>
 </template>
 
+<script>
+export default {
+  methods: {
+    setBaseURL() {
+      let url = "http://localhost:3000/checkServer";
+      this.$http.get(url)
+      .then(response => {
+        if(response.data.status == "Success") {
+          this.$baseURL = "http://localhost:3000";
+        }
+      })
+      .catch(error => {
+       if(error.request) {
+         url = "https://ec2-13-232-124-20.ap-south-1.compute.amazonaws.com:3000/checkServer";
+         this.$http.get(url)
+         .then(responses => {
+           if(responses.data.status == "Success") {
+             this.$baseURL = "https://ec2-13-232-124-20.ap-south-1.compute.amazonaws.com:3000";
+             alert(this.$baseURL);
+           }
+         })
+         .catch(error => {
+           if(error.request) {
+             alert("EC2 down!");           
+             }
+         })
+       }
+      }) 
+    }
+  },
+  beforeMount() {
+    this.setBaseURL();
+  },
+}
+</script>
+
 <style>
   #app {
     font-family: "Avenir", Helvetica, Arial, sans-serif;

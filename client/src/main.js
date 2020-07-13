@@ -42,8 +42,10 @@ Vue.use(VueCryptojs)
 Vue.use(VueToast)
 
 Vue.prototype.$http = Axios
+Vue.prototype.$baseURL = "";
 
 Vue.config.productionTip = false
+
 
 new Vue({
   router,
