@@ -91,7 +91,7 @@ export default {
   },
   methods: {
     apiCall() {
-      let url = 'http://localhost:3000/worker/myworks/' + this.wid
+      let url = this.$serverURLI +'/worker/myworks/' + this.wid
       this.$http.get(url)
       .then((response) => {
         this.myworksarr = response.data

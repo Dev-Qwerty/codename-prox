@@ -39,7 +39,7 @@ export default {
     autosuggest: function() {
       clearTimeout(this.timeout)
       this.timeout = setTimeout(() => {
-        let url = "http://localhost:3000/autosuggest"
+        let url = this.$serverURLI +"/autosuggest"
         this.$http
           .post(url,{
             query: this.keyword
@@ -60,7 +60,7 @@ export default {
     }
   },
   created: function(){
-    let url = "http://localhost:3000/autosuggest"
+    let url = this.$serverURLI +"/autosuggest"
     this.$http
       .post(url,{
         query: this.keyword
@@ -71,7 +71,7 @@ export default {
   watch:{
     keyword: function(){
       if(this.keyword == ""){
-        let url = "http://localhost:3000/autosuggest"
+        let url = this.$serverURLI +"/autosuggest"
         this.$http
           .post(url,{
             query: this.keyword

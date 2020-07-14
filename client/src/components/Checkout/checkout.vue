@@ -106,7 +106,7 @@ export default {
        this.date = moment(this.date).format('YYYY-M-D')
        this.$cookies.remove("cart")
        this.$cookies.remove("r")
-       let url = "http://localhost:3000/orders/placeorder/pay-later"
+       let url = this.$serverURLI + "/orders/placeorder/pay-later"
        this.$http
         .post(url, {
           id: this.$cookies.get("id"),
@@ -128,7 +128,7 @@ export default {
       this.date = moment(this.date).format( 'YYYY-M-D')
       this.$cookies.remove("cart")
       this.$cookies.remove("r")
-      let url = "http://localhost:3000/orders/placeorder/paynow"
+      let url = this.$serverURLI + "/orders/placeorder/paynow"
       this.$http
         .post(url, {
           id: this.$cookies.get("id"),

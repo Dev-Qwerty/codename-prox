@@ -52,7 +52,7 @@ export default {
       this.address.district = this.district;
       this.address.state = this.state;
       this.address.pincode = this.pincode;
-      let url = this.$baseURL + '/' + this.category +'/addAddress';
+      let url = this.$serverURLI + '/' + this.category +'/addAddress';
       this.$http.post(url,{
         token: this.$cookies.get("pid"),
         id: this.$cookies.get('id'),

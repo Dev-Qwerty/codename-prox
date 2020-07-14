@@ -162,7 +162,7 @@ export default {
       window.location.href = location.protocol + "//"+ location.host + "/login";
     },
     apiCall() {
-      let url = 'http://localhost:3000/worker/getBasicProfile/' + this.$cookies.get("id");
+      let url = this.$serverURLI +'/worker/getBasicProfile/' + this.$cookies.get("id");
       this.$http.get(url)
       .then((response) => {
         this.winfo = response.data
