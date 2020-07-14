@@ -93,7 +93,7 @@ export default {
       }
     },
     apiCall() {
-      let url = 'http://localhost:3000/services/5ea50d377c154d280cf37efb'
+      let url = this.$serverURLI +'/services/5ea50d377c154d280cf37efb'
       this.$http.get(url)
       .then((response) => {
         this.subArr = response.data
