@@ -60,7 +60,7 @@
             </router-link> 
           </div>
           <div>
-            <router-link class="paylaterbtn" :to="{name: 'orderstatus'}">
+            <router-link class="paylaterbtn" :to="{name: ''}">
               <input type="submit" value="Pay Later" @click="paylater">
             </router-link>
           </div> 
@@ -104,6 +104,8 @@ export default {
     paylaterfn(){},
     paylater() {
        this.date = moment(this.date).format('YYYY-M-D')
+       this.$cookies.remove("cart")
+       this.$cookies.remove("r")
        let url = "http://localhost:3000/orders/placeorder/pay-later"
        this.$http
         .post(url, {
@@ -113,13 +115,19 @@ export default {
           date: this.date,
           time: this.time
         }).then(response => {
-          EventBus.$emit("finalorderstatus", response.data)
+          if(response.data.status == '01'){
+            window.location.href = 'http://localhost:8080/customerdashboard'
+          } else {
+            window.location.href = 'http://localhost:8080/orderstatus'
+          }
         }).catch(error => {
           alert(error)
         })
     },
     paynow() {
       this.date = moment(this.date).format( 'YYYY-M-D')
+      this.$cookies.remove("cart")
+      this.$cookies.remove("r")
       let url = "http://localhost:3000/orders/placeorder/paynow"
       this.$http
         .post(url, {
@@ -134,7 +142,7 @@ export default {
           alert(error)
         })
     }
-  }
+  },
 }
 </script>
 

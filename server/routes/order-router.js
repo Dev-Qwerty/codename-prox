@@ -20,9 +20,11 @@ const mainserviceModel = require('../models/mainservice-model');
 const workerModel = require('../models/worker-model');
 const orderStatusModel = require('../models/order-status');
 const userModel = require('../models/user-model')
+const failedorderModel = require('../models/failedorder-model')
 
 const paytm = require('../config/keys')
-const checksum_lib = require('../config/paymentgateway/checksum')
+const checksum_lib = require('../config/paymentgateway/checksum');
+const { fail } = require('assert');
 
 
 router
@@ -81,7 +83,7 @@ router
                 newOrder.time = req.body.time;
 
                 newOrder.save();
-                res.json({"CODE": "01", "ORDERID": newOrder.orderID});
+                res.json({"status":"01"})
 
                 //create and save token
                 let newOrderStatus = new orderStatusModel;
@@ -150,7 +152,7 @@ router
                 // sendMessage.sendTextMessage("worker",workerDetails,workDetails);
                 //TODO:change in paynow also
             }else {
-                res.json({"CODE": "00"});
+                res.json({"status": "00"});
             }
         } catch (error) {
             // TODO : If error is duplicate orderid create new orderid and save that order to database
@@ -178,6 +180,7 @@ router
 
             if (completed) {
                 var orderId = uniqueId.uniqueOrderId()
+                console.log(orderId)
         
                 global.totalAmount = 0;  // total amount variable
                 global.newOrder = new orderModel;  // create new order instance
@@ -328,8 +331,11 @@ router
                             var _result = JSON.parse(response);
                             
                             let serviceKeyWords = []
+                            const serviceDetails = await orderModel.findOne({orderID: _result.ORDERID}, '-_id') //Find service name and categories form workorder db
                             if(_result.RESPCODE == 01 && _result.STATUS == 'TXN_SUCCESS') {
-                                const serviceDetails = await orderModel.findOne({orderID: _result.ORDERID}, '-_id') //Find service name and categories form workorder db
+                                await orderModel.findOneAndUpdate({orderID: _result.ORDERID}, {paid: true}).then(() => {
+                                    console.log('order updated')
+                                })
                                 serviceKeyWords.push(serviceDetails.service.subserviceName)
                                 for(i = 0; i < serviceDetails.service.categories.length; i++){
                                     //Loop through subservice categories
@@ -401,43 +407,84 @@ router
                                 // sendMessage.sendTextMessage("worker",workerDetails,workDetails);
                                 //TODO:change in paynow also
                             } else { 
+                                // Delete order from workorders
                                 orderModel.deleteOne({orderID: _result.ORDERID}).then(() => {
                                     console.log("deleted" + _result.ORDERID)
                                 })
+
+                                // create a failed order instance for reference
+                                let newfailedorder = new failedorderModel
+                                newfailedorder.orderID =  serviceDetails.orderID
+                                newfailedorder.userID = serviceDetails.userID
+                                newfailedorder.service = serviceDetails.service
+                                newfailedorder.address = serviceDetails.address
+                                newfailedorder.totalAmount = serviceDetails.totalAmount
+                                newfailedorder.respCode = _result.RESPCODE
+                                newfailedorder.respMsg = _result.RESPMSG
+                                newfailedorder.txnId = _result.TXNID
+                                newfailedorder.txnDate = _result.TXNDATE
+
+                                newfailedorder.save()
                             }
 
                             // Send response based on the Transaction status (RESPONSE CODE)
                             switch(_result.RESPCODE) {
                                 case '01':
-                                    res.send(_result.RESPMSG)
+                                    res.writeHead(302, {
+                                        Location: 'http://localhost:8080/customerdashboard'
+                                    })
+                                    res.end()
                                     break
                                 case '227':
-                                    res.send(_result.RESPMSG)
+                                    res.writeHead(302, {
+                                        Location: 'http://localhost:8080/orderstatus?r='+_result.RESPCODE
+                                    })
+                                    res.end()
                                     break
                                 case '235':
-                                    res.send(_result.RESPMSG)
+                                    res.writeHead(302, {
+                                        Location: 'http://localhost:8080/orderstatus?r='+_result.RESPCODE
+                                    })
+                                    res.end()
                                     break
                                 case '295':
-                                    res.send(_result.RESPMSG)
+                                    res.writeHead(302, {
+                                        Location: 'http://localhost:8080/orderstatus?r='+_result.RESPCODE
+                                    })
+                                    res.end()
                                     break
                                 case '334':
-                                    res.send('payment failed')
+                                    res.writeHead(302, {
+                                        Location: 'http://localhost:8080/orderstatus?r='+_result.RESPCODE
+                                    })
+                                    res.end()
                                     break
                                 case '400':
-                                    res.send(_result.RESPMSG)
+                                    res.writeHead(302, {
+                                        Location: 'http://localhost:8080/orderstatus?r='+_result.RESPCODE
+                                    })
+                                    res.end()
                                     break
                                 case '401':
-                                    res.send(_result.RESPMSG)
+                                    res.writeHead(302, {
+                                        Location: 'http://localhost:8080/orderstatus?r='+_result.RESPCODE
+                                    })
+                                    res.end()
                                     break
                                 case '402':
-                                    res.send(_result.RESPMSG)
+                                    res.writeHead(302, {
+                                        Location: 'http://localhost:8080/orderstatus?r='+_result.RESPCODE
+                                    })
+                                    res.end()
                                     break
                                 case '810':
-                                    res.send(_result.RESPMSG)
+                                    res.writeHead(302, {
+                                        Location: 'http://localhost:8080/orderstatus?r='+_result.RESPCODE
+                                    })
+                                    res.end()
                             }
 						});
 					});
-
 					// post the data
 					post_req.write(post_data);
 					post_req.end();
