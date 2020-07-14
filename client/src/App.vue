@@ -13,7 +13,6 @@ export default {
       .then(response => {
         if(response.data.status == "Success") {
           this.$serverURLI = "http://localhost:3000";
-          alert(this.$serverURLI);
         }
       })
       .catch(error => {
@@ -23,12 +22,11 @@ export default {
          .then(responses => {
            if(responses.data.status == "Success") {
              this.$serverURLI = "https://ec2-13-232-124-20.ap-south-1.compute.amazonaws.com:3000";
-             alert(this.$serverURLI);
            }
          })
          .catch(error => {
            if(error.request) {
-             alert("EC2 down!");           
+             alert("EC2 down!")          
              }
          })
        }
