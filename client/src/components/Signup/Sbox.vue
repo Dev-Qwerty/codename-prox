@@ -49,7 +49,7 @@ export default {
   methods: {
     signUp() {
       if (this.password.length > 6) {
-        let url = "http://localhost:3000/customer/signup";
+        let url = this.$serverURLI +"/customer/signup";
         this.$http
           .post(url, {
             email: this.email,

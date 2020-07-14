@@ -73,6 +73,10 @@ app.use('/request', [parseUrl,parseJson], workerRequest)
 app.use('/auth', [parseUrl,parseJson], loginRouter)
 app.use('/orderstatus', [parseUrl,parseJson], completeOrder)
 
+app.get('/checkServer', (req,res) => {
+  res.send({status: "Success", msg: "Server up!"});
+})
+
 app.post('/autosuggest',[parseUrl,parseJson], async (req, res) => {
     try {
         let query = req.body.query;

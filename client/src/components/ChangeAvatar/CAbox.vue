@@ -41,7 +41,7 @@ export default {
       this.url = URL.createObjectURL(file);
     },
     apiCall() {
-      let URL = 'http://localhost:3000/'+this.category+'/getBasicProfile/'+ this.$cookies.get("id");
+      let URL = this.$serverURLI + '/' +this.category+'/getBasicProfile/'+ this.$cookies.get("id");
       this.$http.get(URL)
       .then(response => {
         if(response.data.profilePicLink !="") {
@@ -62,7 +62,7 @@ export default {
       }
       else {
         const filename = this.url.slice(31);
-        let URL = 'http://localhost:3000/delete_file/'+ filename + '?category='+this.category+'&id='+ this.$cookies.get("id");
+        let URL = this.$serverURLI + '/delete_file/'+ filename + '?category='+this.category+'&id='+ this.$cookies.get("id");
         this.$http.get(URL)
         .then(response => {
           if(response.data.status == "Success") {
@@ -88,7 +88,7 @@ export default {
       else {
       const formData = new FormData();
       formData.append('demo_file', this.fileLink);
-      let URL = 'http://localhost:3000/post_file?category='+this.category+'&id='+this.$cookies.get("id");
+      let URL = this.$serverURLI + '/post_file?category='+this.category+'&id='+this.$cookies.get("id");
       await axios.post(URL, formData)
       .then(response => {
         if(response.data.success == true) {
