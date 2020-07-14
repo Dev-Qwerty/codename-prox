@@ -180,7 +180,6 @@ router
 
             if (completed) {
                 var orderId = uniqueId.uniqueOrderId()
-                console.log(orderId)
         
                 global.totalAmount = 0;  // total amount variable
                 global.newOrder = new orderModel;  // create new order instance
@@ -224,13 +223,13 @@ router
                 })
                     
                 // Find user email
-                let userEmail = await userModel.findOne({userID: userID}, 'email -_id')
+                let User = await userModel.findOne({userID: userID}, 'email phone -_id')
 
                 var paymentDetails = {
                     amount: totalAmount,
                     customerId: userID, 
-                    customerEmail: userEmail.email,
-                    customerPhone: req.body.address.phone
+                    customerEmail: User.email,
+                    customerPhone: User.phone
                 }
             
                 var params = {};
@@ -496,15 +495,183 @@ router
     })
 
 router
-    .route('/orderstatus/:orderid')
-    .get([parseUrl,parseJson], async (req, res) => {
-        try {
-            let orderid = req.params.orderid
-            let order = await orderModel.findOne({orderID: orderid})
-            res.send(order)
-        } catch (error) {
-            console.log(error)   
+    .route('/completeorder/paynow/')
+    .post([parseUrl,parseJson], (req, res) => {
+
+        global.totalAmount = 0;  // total amount variable
+
+        // calculate total amount and category
+        for (i = 0; i < req.body.service.categories.length; i++) {
+            const serviceDetails = await subserviceModel.find({ categories: { $elemMatch: { _id: req.body.service.categories[i]._id } } }, 'categories.$')
+            itemAmount = serviceDetails[0].categories[0].amount * req.body.service.categories[i].quantity; // Find amount of each category
+            totalAmount = totalAmount + itemAmount;
         }
+
+        let userID = crypt.decrypt(req.body.id)
+        // Find user email and phone
+        let User = await userModel.findOne({userID: userID}, 'email phone -_id')
+
+        var paymentDetails = {
+            amount: totalAmount,
+            customerId: userID, 
+            customerEmail: User.email,
+            customerPhone: User.phone
+        }
+
+        var params = {};
+        params['MID'] = paytm.PaytmConfig.mid;
+        params['WEBSITE'] = paytm.PaytmConfig.website;
+        params['CHANNEL_ID'] = 'WEB';
+        params['INDUSTRY_TYPE_ID'] = 'Retail';
+        params['ORDER_ID'] = orderId;
+        params['CUST_ID'] = paymentDetails.customerId;
+        params['TXN_AMOUNT'] = paymentDetails.amount;
+        params['CALLBACK_URL'] = 'http://localhost:3000/orders/completeorder/processpayment';
+        params['EMAIL'] = paymentDetails.customerEmail;
+        params['MOBILE_NO'] = paymentDetails.customerPhone;
+
+
+        checksum_lib.genchecksum(params, paytm.PaytmConfig.key, function (err, checksum) {
+            var txn_url = "https://securegw-stage.paytm.in/theia/processTransaction"; // for staging
+            // var txn_url = "https://securegw.paytm.in/theia/processTransaction"; // for production
+
+            var form_fields = "";
+            for (var x in params) {
+                form_fields += "<input type='hidden' name='" + x + "' value='" + params[x] + "' >";
+            }
+            form_fields += "<input type='hidden' name='CHECKSUMHASH' value='" + checksum + "' >";
+
+            res.writeHead(200, { 'Content-Type': 'text/html' });
+            res.write('<center><h1>Please do not refresh this page...</h1></center><form method="post" action="' + txn_url + '" name="f1">' + form_fields + '</form>');
+            res.end();
+        });
+    })
+
+router
+    .route('/completeorder/processpayment')
+    .post((req, res) => {
+        var body = '';
+
+        req.on('data', function (data) {
+            body += data;
+        });
+
+        req.on('end', function () {
+            var html = "";
+            var post_data = qs.parse(body);
+
+            // received params in callback
+            console.log('Callback Response: ', post_data, "\n");
+
+
+            // verify the checksum
+            var checksumhash = post_data.CHECKSUMHASH;
+            // delete post_data.CHECKSUMHASH;
+            var result = checksum_lib.verifychecksum(post_data, paytm.PaytmConfig.key, checksumhash);
+            console.log("Checksum Result => ", result, "\n");
+        
+
+            // Send Server-to-Server request to verify Order Status
+            var params = {"MID": paytm.PaytmConfig.mid, "ORDERID": post_data.ORDERID};
+
+            checksum_lib.genchecksum(params, paytm.PaytmConfig.key, function (err, checksum) {
+
+                params.CHECKSUMHASH = checksum;
+                post_data = 'JsonData='+JSON.stringify(params);
+
+                var options = {
+                    hostname: 'securegw-stage.paytm.in', // for staging
+                    // hostname: 'securegw.paytm.in', // for production
+                    port: 443,
+                    path: '/merchant-status/getTxnStatus',
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Content-Length': post_data.length
+                    }
+                };
+
+                // Set up the request
+                var response = "";
+                var post_req = https.request(options, function(post_res) {
+                    post_res.on('data', function (chunk) {
+                        response += chunk;
+                    });
+
+                    post_res.on('end', async function(){
+                        console.log('S2S Response: ', response, "\n");
+
+                        var _result = JSON.parse(response);
+                        
+                        if(_result.RESPCODE == 01 && _result.STATUS == 'TXN_SUCCESS') {
+                            await orderModel.findOneAndUpdate({orderID: _result.ORDERID}, {paid: true}).then(() => {
+                                console.log('order updated')
+                            })
+                        }
+
+                        // Send response based on the Transaction status (RESPONSE CODE)
+                        switch(_result.RESPCODE) {
+                            case '01':
+                                res.writeHead(302, {
+                                    Location: 'http://localhost:8080/customerdashboard'
+                                })
+                                res.end()
+                                break
+                            case '227':
+                                res.writeHead(302, {
+                                    Location: 'http://localhost:8080/paymentstatus?s='+_result.RESPCODE
+                                })
+                                res.end()
+                                break
+                            case '235':
+                                res.writeHead(302, {
+                                    Location: 'http://localhost:8080/paymentstatus?s='+_result.RESPCODE
+                                })
+                                res.end()
+                                break
+                            case '295':
+                                res.writeHead(302, {
+                                    Location: 'http://localhost:8080/paymentstatus?s='+_result.RESPCODE
+                                })
+                                res.end()
+                                break
+                            case '334':
+                                res.writeHead(302, {
+                                    Location: 'http://localhost:8080/paymentstatus?s='+_result.RESPCODE
+                                })
+                                res.end()
+                                break
+                            case '400':
+                                res.writeHead(302, {
+                                    Location: 'http://localhost:8080/paymentstatus?s='+_result.RESPCODE
+                                })
+                                res.end()
+                                break
+                            case '401':
+                                res.writeHead(302, {
+                                    Location: 'http://localhost:8080/paymentstatus?s='+_result.RESPCODE
+                                })
+                                res.end()
+                                break
+                            case '402':
+                                res.writeHead(302, {
+                                    Location: 'http://localhost:8080/paymentstatus?s='+_result.RESPCODE
+                                })
+                                res.end()
+                                break
+                            case '810':
+                                res.writeHead(302, {
+                                    Location: 'http://localhost:8080/paymentstatus?s='+_result.RESPCODE
+                                })
+                                res.end()
+                        }
+                    });
+                });
+                // post the data
+                post_req.write(post_data);
+                post_req.end();
+            });
+        });
     })
 
 module.exports = router;
