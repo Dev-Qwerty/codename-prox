@@ -85,7 +85,7 @@ export default {
     signupfn() {
       if((this.password == this.password2) && (this.password.length>6)) {
         if(document.getElementById('checkbox').checked == true) {
-          let url = "http://localhost:3000/"+this.category+'/signup';
+          let url = this.$serverURLI +"/"+this.category+'/signup';
           this.$http.post(url, {
             email: this.email,
             password: this.password,
