@@ -4,17 +4,21 @@
       <div class="box">
         <div class="r1">
           <p class="r1-1">Kitchen Cleaning</p>
-          <div class="Line"></div>            
+          <p class="r1-2">Order ID: OD785108104789069</p>        
         </div>
         <div class="r2">
-          <p class="r2-1">09:00 AM</p>
-        </div>
-        <div class="r3">
-          <router-link :to="{ name: '' }">
-          <p class="r3-1" @click="fn()">Track Your Booking</p>
-          </router-link>
+          <p class="r2-1">START TOKEN: 4386</p>
         </div>
       </div>
+      <div class="box">
+        <div class="r1">
+          <p class="r1-1">Kitchen Cleaning</p>
+          <p class="r1-2">Order ID: OD785108104789069</p>        
+        </div>
+        <div class="r2">
+          <p class="r2-1">START TOKEN: 4386</p>
+        </div>
+      </div>      
     </div>       
   </div>
 </template>
@@ -43,55 +47,52 @@ export default {
   .box-wrapper {
   }   
   .box {
-    width: 80%;
-    height: 185px;
+    width: 85%;
+    height: 110px;
     background-color: #fff;
-    border: 1px solid #F5F5F5;
+    border-radius: 10px;
+    border: 1px solid #00000029;
     box-shadow: 0px 3px 5px #00000029;
-    border-radius: 16px;
     display: grid;
-    grid-template-rows: 1fr 1fr 0.9fr;
-    opacity: 0.9;
+    grid-template-rows: 0.7fr 1fr;
+    margin-bottom: 20px;
   }    
   a {
     text-decoration: none;
   }
   .r1 {
-    text-align: center;
-    padding-top: 15px;
+    border-bottom: 1px solid #00000029;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 100%;
   }
   .r1-1 {
-    text-align: center;
-    font-size: 23px;
+    border-right: 1px solid #00000029;
+    padding-top: 10px;
+    padding-left: 20px;
+    font-size: 18px;
     font-family: p-medium;
     margin: 0px;
-    color: #000;
+    color: #aaa;
   }
-  .Line {
-    margin-top: 5px;
-    margin-left: auto;
-    margin-right: auto;
-    height: 1px;
-    width: 250px;
-    background-color: #707070;
-  }
+  .r1-2 {
+    padding-left: 20px;
+    padding-top: 10px;
+    font-size: 17px;
+    font-family: p-medium;
+    margin: 0px;
+    color: #aaa;
+  }  
   .r2 {
-    text-align: center;
-    padding-top: 5px;
+    text-align: start;
+    height: 100%;
   }
   .r2-1 {
-    font-size: 26px;
+    margin: 0;
+    font-size: 23px;
     font-family: p-medium;
-    margin: 0px;
+    padding-left: 40px;
+    padding-top: 15px;
     color: #000;
   }
-  .r3 {
-    margin-top: 0px;
-    text-align: center;
-  }
-  .r3-1 {
-    font-size: 20px;
-    color: #0084E9;
-    font-family: p-medium;
-  } 
 </style>

@@ -49,7 +49,7 @@
             </router-link>
           </div>   
           <div class="sidenav-mid-five">
-            <router-link :to="{name: ''}" @click.native="fn">
+            <router-link :to="{name: 'notifications'}" @click.native="fn">
               <div class="wr-1">
                 <div class="sidenav-mid-img5"></div>
                 <p>Notifications</p>
