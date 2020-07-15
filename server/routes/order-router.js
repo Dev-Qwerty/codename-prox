@@ -497,54 +497,74 @@ router
 router
     .route('/completeorder/paynow/')
     .post([parseUrl,parseJson], async (req, res) => {
-
-        global.totalAmount = 0;  // total amount variable
-
-        // calculate total amount and category
-        for (i = 0; i < req.body.service.categories.length; i++) {
-            const serviceDetails = await subserviceModel.find({ categories: { $elemMatch: { _id: req.body.service.categories[i]._id } } }, 'categories.$')
-            itemAmount = serviceDetails[0].categories[0].amount * req.body.service.categories[i].quantity; // Find amount of each category
-            totalAmount = totalAmount + itemAmount;
-        }
-
-        let userID = crypt.decrypt(req.body.id)
-        // Find user email and phone
-        let User = await userModel.findOne({userID: userID}, 'email phone -_id')
-
-        var paymentDetails = {
-            amount: totalAmount,
-            customerId: userID, 
-            customerEmail: User.email,
-            customerPhone: User.phone
-        }
-
-        var params = {};
-        params['MID'] = paytm.PaytmConfig.mid;
-        params['WEBSITE'] = paytm.PaytmConfig.website;
-        params['CHANNEL_ID'] = 'WEB';
-        params['INDUSTRY_TYPE_ID'] = 'Retail';
-        params['ORDER_ID'] = req.body.orderId;
-        params['CUST_ID'] = paymentDetails.customerId;
-        params['TXN_AMOUNT'] = paymentDetails.amount;
-        params['CALLBACK_URL'] = 'http://localhost:3000/orders/completeorder/processpayment';
-        params['EMAIL'] = paymentDetails.customerEmail;
-        params['MOBILE_NO'] = paymentDetails.customerPhone;
-
-
-        checksum_lib.genchecksum(params, paytm.PaytmConfig.key, function (err, checksum) {
-            var txn_url = "https://securegw-stage.paytm.in/theia/processTransaction"; // for staging
-            // var txn_url = "https://securegw.paytm.in/theia/processTransaction"; // for production
-
-            var form_fields = "";
-            for (var x in params) {
-                form_fields += "<input type='hidden' name='" + x + "' value='" + params[x] + "' >";
+        try {
+            let completed = true
+            if (!req.body.id || !req.body.service.serviceId || !req.body.address.phone || !req.body.address.name || !req.body.address.line1 || !req.body.address.line2 || !req.body.address.district || !req.body.address.pin || !req.body.date || !req.body.time || req.body.service.categories == 0) {
+                completed = false
+            } else {
+                for( i = req.body.service.categories.length; i > 0 ; i--){
+                    if(!req.body.service.categories[i-1].quantity || !req.body.service.categories[i-1]._id || !req.body.service.categories[i-1].category || !req.body.service.categories[i-1].amount ){
+                        completed = false
+                    }
+                }
             }
-            form_fields += "<input type='hidden' name='CHECKSUMHASH' value='" + checksum + "' >";
 
-            res.writeHead(200, { 'Content-Type': 'text/html' });
-            res.write('<center><h1>Please do not refresh this page...</h1></center><form method="post" action="' + txn_url + '" name="f1">' + form_fields + '</form>');
-            res.end();
-        });
+            if (completed) {
+                global.totalAmount = 0;  // total amount variable
+
+                // calculate total amount and category
+                for (i = 0; i < req.body.service.categories.length; i++) {
+                    const serviceDetails = await subserviceModel.find({ categories: { $elemMatch: { _id: req.body.service.categories[i]._id } } }, 'categories.$')
+                    itemAmount = serviceDetails[0].categories[0].amount * req.body.service.categories[i].quantity; // Find amount of each category
+                    totalAmount = totalAmount + itemAmount;
+                }
+
+                let userID = crypt.decrypt(req.body.id)
+                // Find user email and phone
+                let User = await userModel.findOne({userID: userID}, 'email phone -_id')
+
+                var paymentDetails = {
+                    amount: totalAmount,
+                    customerId: userID, 
+                    customerEmail: User.email,
+                    customerPhone: User.phone
+                }
+
+                var params = {};
+                params['MID'] = paytm.PaytmConfig.mid;
+                params['WEBSITE'] = paytm.PaytmConfig.website;
+                params['CHANNEL_ID'] = 'WEB';
+                params['INDUSTRY_TYPE_ID'] = 'Retail';
+                params['ORDER_ID'] = req.body.orderId;
+                params['CUST_ID'] = paymentDetails.customerId;
+                params['TXN_AMOUNT'] = paymentDetails.amount;
+                params['CALLBACK_URL'] = 'http://localhost:3000/orders/completeorder/processpayment';
+                params['EMAIL'] = paymentDetails.customerEmail;
+                params['MOBILE_NO'] = paymentDetails.customerPhone;
+
+
+                checksum_lib.genchecksum(params, paytm.PaytmConfig.key, function (err, checksum) {
+                    var txn_url = "https://securegw-stage.paytm.in/theia/processTransaction"; // for staging
+                    // var txn_url = "https://securegw.paytm.in/theia/processTransaction"; // for production
+
+                    var form_fields = "";
+                    for (var x in params) {
+                        form_fields += "<input type='hidden' name='" + x + "' value='" + params[x] + "' >";
+                    }
+                    form_fields += "<input type='hidden' name='CHECKSUMHASH' value='" + checksum + "' >";
+
+                    res.writeHead(200, { 'Content-Type': 'text/html' });
+                    res.write('<center><h1>Please do not refresh this page...</h1></center><form method="post" action="' + txn_url + '" name="f1">' + form_fields + '</form>');
+                    res.end();
+                });
+            } else {
+                res.send("failed to place order due to incomplete details")
+                // TODO: show styled message instead of res.send
+            }
+        } catch (error) {
+            res.send('something went wrong')
+            console.log(error)
+        }
     })
 
 router
