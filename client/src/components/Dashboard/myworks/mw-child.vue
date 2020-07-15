@@ -49,9 +49,8 @@
     <div class="happy-code">
       <div class="hc-line"></div>
       <input v-if="this.xvar == 'arrived'" :disabled="(this.yvar == 'start')" type="submit" value="Arrived" class="btn" @click="afn()">
-      <input v-if="this.xvar == 'completed'" type="submit" value="Completed" class="btn" @click="afn()">
-      <input v-if="this.xvar == 'done'" type="submit" value="Confirm" class="btn" @click="afn()">
-      
+      <input v-if="this.xvar == 'completed'" :disabled="(this.yvar == 'end')" type="submit" value="Completed" class="btn" @click="afn()">
+     
       <div class="inwrapper" v-if="this.yvar == 'start'">
         <p>Please enter the start token</p>
         <input type="text">
@@ -60,12 +59,15 @@
         </div>
       </div>
       <div class="inwrapper" v-if="this.yvar == 'end'">
+        <p>Please enter the end token</p>
         <input type="text">
         <div class="inwrapper-btn">
-          <input type="submit" value="End Work" @click="bfn()">  
+          <input type="submit" value="Confirm" @click="bfn()">  
         </div>
       </div>
-      <p v-if="this.yvar == 'finished'">Work completed successfully!!!</p>    
+      <div v-if="this.xvar == 'done'">
+        <p>Work completed successfully!!!</p> 
+      </div>   
     </div>
   </div>
 </template>
@@ -79,7 +81,7 @@ export default {
     return {
       sr: this.$cookies.get("wd-mw-child"),
       xvar: 'arrived',
-      yvar: 'qw'
+      yvar: 'qw121'
     }
   },
   methods: { 
@@ -89,7 +91,7 @@ export default {
       } else if(this.xvar == 'completed') {
         this.yvar = 'end'
       } else {
-        this.yvar = 'finished'
+        this.yvar = 'confirm'
       } 
     },
     bfn() {
@@ -98,9 +100,10 @@ export default {
         this.yvar = 'qw'
       } else if(this.xvar == 'completed') {
         this.xvar = 'done'
-        this.yvar = 'qw'
+        this.yvar = 'qw121'
       } else {
-        this.xvar = 'qw'
+        this.xvar = 'qw121'
+        this.yvar = 'qw121'
       }
     }
   }   
@@ -109,8 +112,8 @@ export default {
 
 <style scoped>
   .Wrapper {
-    padding-left: 5%;
-    padding-top: 5%;
+    padding-left: 3%;
+    padding-top: 2%;
   }
   .a {
     width: 90%;
