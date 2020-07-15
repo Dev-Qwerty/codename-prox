@@ -4,7 +4,8 @@
       <div class="aa">
         <div class="aaa">
           <p class="aaa-p1">{{ sr.service.subserviceName }}</p>
-          <p class="aaa-p2"><span>Amount:  </span><span>$</span>{{ sr.totalAmount }}</p>
+          <p class="aaa-p2"><span>Order ID:  </span>{{ sr._id }}</p>
+          <p class="aaa-p3"><span>Amount:  </span><span>$</span>{{ sr.totalAmount }}</p>
         </div>
         <div class="aab">
           <div class="aab-top">
@@ -53,14 +54,14 @@
      
       <div class="inwrapper" v-if="this.yvar == 'start'">
         <p class="inwrapper-hdn">Enter the start token</p>
-        <input type="text">
+        <input type="text" v-model="start_token">
         <div class="inwrapper-btn">
           <input type="submit" value="Start Work" @click="bfn()">
         </div>
       </div>
       <div class="inwrapper" v-if="this.yvar == 'end'">
-        <p class="inwrapper-hdn">Enter the complete token</p>
-        <input type="text">
+        <p class="inwrapper-hdn">Enter the end token</p>
+        <input type="text" v-model="end_token">
         <div class="inwrapper-btn">
           <input type="submit" value="Confirm" @click="bfn()">  
         </div>
@@ -82,14 +83,44 @@ export default {
       sr: this.$cookies.get("wd-mw-child"),
       xvar: this.$cookies.get("xvar"),
       yvar: this.$cookies.get("yvar"),
+      start_token: '',
+      end_token: ''
     }
   },
   methods: { 
     afn() {
       if(this.xvar == 'arrived') {
+
+        let url = this.$serverURLI + "/orderstatus/changestatus"
+        this.$http
+        .post(url, {
+          orderID: this.sr._id,
+          status: "arrived"
+        }).then(response => {
+          if(response.data.status == '01'){
+            alert("yaay")
+          } else {
+            alert("nope")
+          }
+        }).catch(error => {
+          alert(error)
+        })
+
         this.yvar = 'start'
         this.$cookies.set("yvar", this.yvar, "1d");
       } else if(this.xvar == 'completed') {
+
+        let url = this.$serverURLI + "/orderstatus/changestatus"
+        this.$http
+        .post(url, {
+          orderID: this.sr._id,
+          status: "completed"
+        }).then(response => {
+          alert(JSON.stringify(response))
+        }).catch(error => {
+          alert(error)
+        })
+
         this.yvar = 'end'
         this.$cookies.set("yvar", this.yvar, "1d");
       } else {
@@ -99,11 +130,35 @@ export default {
     },
     bfn() {
       if(this.xvar == 'arrived') {
+     
+        let url = this.$serverURLI + "/orderstatus/changestatus"
+        this.$http
+        .post(url, {
+          orderID: this.sr._id,
+          token: this.start_token
+        }).then(response => {
+          alert(JSON.stringify(response))
+        }).catch(error => {
+          alert(error)
+        })     
+
         this.xvar = 'completed'
         this.$cookies.set("xvar", this.xvar, "1d");
         this.yvar = 'qw'
         this.$cookies.set("yvar", this.yvar, "1d");
       } else if(this.xvar == 'completed') {
+
+        let url = this.$serverURLI + "/orderstatus/changestatus"
+        this.$http
+        .post(url, {
+          orderID: this.sr._id,
+          token: this.end_token
+        }).then(response => {
+          alert(JSON.stringify(response))
+        }).catch(error => {
+          alert(error)
+        }) 
+
         this.xvar = 'done'
         this.$cookies.set("xvar", this.xvar, "1d");
         this.yvar = 'qw121'
@@ -115,7 +170,10 @@ export default {
         this.$cookies.set("yvar", this.yvar, "1d");
       }
     }
-  }   
+  },
+  created() {
+    
+  }
 }       
 </script>
 
@@ -131,7 +189,7 @@ export default {
   }
   .aa {
     display: grid;
-    grid-template-rows: 150px max-content;
+    grid-template-rows: 170px max-content;
     margin-right: 25px;
   }
   .aaa {
@@ -140,18 +198,22 @@ export default {
     border: 1px solid #DBDBDB;
     background-color: #fff;
     color: #000;
-    padding-left: 10%;
-    padding-top: 5%;
+    padding-left: 8%;
+    padding-top: 4%;
     margin-bottom: 25px;
   }
   .aaa-p1 {
     font-family: lato-bold;
-    font-size: 22px;
+    font-size: 23px;
   }
   .aaa-p2 {
     margin-top: -8px;
-    font-size: 16px;
+    font-size: 15px;
   }
+  .aaa-p3 {
+    margin-top: -15px;
+    font-size: 15px;
+  }  
   .aab {
     background-color: #fff;
     box-shadow: -5px 5px 5px #DBDBDB;
