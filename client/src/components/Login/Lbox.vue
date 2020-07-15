@@ -40,10 +40,7 @@ export default {
     }
   },
   methods: {
-    onCaptchaVerified() {
-      this.captchastatus = true;
-      this.login();
-      /*
+    onCaptchaVerified(rtoken) {
       let url = this.$serverURLI+ "/auth/verifyToken";
       this.$http.post(url, {
         response: rtoken
@@ -67,8 +64,7 @@ export default {
           type: 'warning',
           position: 'bottom-left'
         });
-      })
-     */ 
+      }) 
     },
     login() {
       if(this.captchastatus == false) {
