@@ -496,7 +496,7 @@ router
 
 router
     .route('/completeorder/paynow/')
-    .post([parseUrl,parseJson], (req, res) => {
+    .post([parseUrl,parseJson], async (req, res) => {
 
         global.totalAmount = 0;  // total amount variable
 
@@ -523,7 +523,7 @@ router
         params['WEBSITE'] = paytm.PaytmConfig.website;
         params['CHANNEL_ID'] = 'WEB';
         params['INDUSTRY_TYPE_ID'] = 'Retail';
-        params['ORDER_ID'] = orderId;
+        params['ORDER_ID'] = req.body.orderId;
         params['CUST_ID'] = paymentDetails.customerId;
         params['TXN_AMOUNT'] = paymentDetails.amount;
         params['CALLBACK_URL'] = 'http://localhost:3000/orders/completeorder/processpayment';
