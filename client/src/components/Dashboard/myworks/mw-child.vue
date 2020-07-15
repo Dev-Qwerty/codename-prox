@@ -50,8 +50,7 @@
     <div class="happy-code">
       <div class="hc-line"></div>
       <input v-if="this.xvar == 'arrived'" :disabled="(this.yvar == 'start')" type="submit" value="Arrived" class="btn" @click="afn()">
-      <input v-if="this.xvar == 'completed'" :disabled="(this.yvar == 'end')" type="submit" value="Completed" class="btn" @click="afn()">
-     
+      <input v-if="this.xvar == 'completed'" :disabled="(this.yvar == 'end')" type="submit" value="Completed" class="btn" @click="afn()">     
       <div class="inwrapper" v-if="this.yvar == 'start'">
         <p class="inwrapper-hdn">Enter the start token</p>
         <input type="text" v-model="start_token">
@@ -90,79 +89,95 @@ export default {
   methods: { 
     afn() {
       if(this.xvar == 'arrived') {
-
         let url = this.$serverURLI + "/orderstatus/changestatus"
         this.$http
         .post(url, {
           orderID: this.sr._id,
           status: "arrived"
         }).then(response => {
-          if(response.data.status == '01'){
-            alert("yaay")
+          if(response.status == 200 && response.data == 'status changed'){
+            this.yvar = 'start'
+            this.$cookies.set("yvar", this.yvar, "1d");            
           } else {
-            alert("nope")
+            alert("ERROR")
           }
         }).catch(error => {
           alert(error)
         })
-
-        this.yvar = 'start'
-        this.$cookies.set("yvar", this.yvar, "1d");
       } else if(this.xvar == 'completed') {
-
         let url = this.$serverURLI + "/orderstatus/changestatus"
         this.$http
         .post(url, {
           orderID: this.sr._id,
           status: "completed"
         }).then(response => {
-          alert(JSON.stringify(response))
+          if(response.status == 200 && response.data == 'status changed'){
+            this.yvar = 'end'
+            this.$cookies.set("yvar", this.yvar, "1d");           
+          } else {
+            alert("ERROR")
+          }
         }).catch(error => {
           alert(error)
         })
-
-        this.yvar = 'end'
-        this.$cookies.set("yvar", this.yvar, "1d");
       } else {
         this.yvar = 'confirm'
         this.$cookies.set("yvar", this.yvar, "1d");
       } 
     },
     bfn() {
-      if(this.xvar == 'arrived') {
-     
-        let url = this.$serverURLI + "/orderstatus/changestatus"
+      if(this.xvar == 'arrived') {     
+        let url = this.$serverURLI + "/orderstatus/verifytoken"
         this.$http
         .post(url, {
           orderID: this.sr._id,
           token: this.start_token
         }).then(response => {
-          alert(JSON.stringify(response))
+          if(response.status == 200){
+            if(response.data.message == 'done') {
+              this.xvar = 'completed'
+              this.$cookies.set("xvar", this.xvar, "1d");
+              this.yvar = 'qw'
+              this.$cookies.set("yvar", this.yvar, "1d");
+            } else {
+              alert('something went wrong')
+            }     
+          } else {
+            alert("ERROR")
+          }          
         }).catch(error => {
           alert(error)
         })     
-
-        this.xvar = 'completed'
+        /*this.xvar = 'completed'
         this.$cookies.set("xvar", this.xvar, "1d");
         this.yvar = 'qw'
-        this.$cookies.set("yvar", this.yvar, "1d");
+        this.$cookies.set("yvar", this.yvar, "1d");*/
       } else if(this.xvar == 'completed') {
-
-        let url = this.$serverURLI + "/orderstatus/changestatus"
+        let url = this.$serverURLI + "/orderstatus/verifytoken"
         this.$http
         .post(url, {
           orderID: this.sr._id,
           token: this.end_token
         }).then(response => {
-          alert(JSON.stringify(response))
+          if(response.status == 200){
+            if(response.data.message == 'done') {
+              this.xvar = 'done'
+              this.$cookies.set("xvar", this.xvar, "1d");
+              this.yvar = 'qw121'
+              this.$cookies.set("yvar", this.yvar, "1d"); 
+            } else {
+              alert('something went wrong')
+            }     
+          } else {
+            alert("ERROR")
+          } 
         }).catch(error => {
           alert(error)
         }) 
-
-        this.xvar = 'done'
+        /*this.xvar = 'done'
         this.$cookies.set("xvar", this.xvar, "1d");
         this.yvar = 'qw121'
-        this.$cookies.set("yvar", this.yvar, "1d");
+        this.$cookies.set("yvar", this.yvar, "1d");*/
       } else {
         this.xvar = 'qw121'
         this.$cookies.set("xvar", this.xvar, "1d");
@@ -180,7 +195,7 @@ export default {
 <style scoped>
   .Wrapper {
     padding-left: 3%;
-    padding-top: 2%;
+    padding-top: 3%;
   }
   .a {
     width: 90%;
