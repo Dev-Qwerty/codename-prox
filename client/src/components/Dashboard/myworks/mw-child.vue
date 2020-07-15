@@ -48,7 +48,9 @@
     </div>
     <div class="happy-code">
       <div class="hc-line"></div>
-      <input type="submit" value="Arrived" class="btn">
+      <input v-if="this.cdata == 'arrived'" type="submit" value="Arrived" class="btn" @click="cfn()">
+      <input v-else-if="this.cdata == 'completed'" type="submit" value="Completed" class="btn" @click="cfn()">
+      <input v-else-if="this.cdata == 'paynow'" type="submit" value="Pay Now" class="btn" @click="cfn()">
     </div>
   </div>
 </template>
@@ -60,11 +62,19 @@ export default {
   },
   data() {
     return {
-      sr: this.$cookies.get("wd-mw-child")
+      sr: this.$cookies.get("wd-mw-child"),
+      cdata: 'arrived'
     }
   },
   methods: { 
-    fn() {
+    cfn() {
+      if(this.cdata == 'arrived') {
+        this.cdata = 'completed'
+      } else if(this.cdata == 'completed') {
+        this.cdata = 'paynow'
+      } else {
+        this.cdata = 'paynow'
+      }
     }
   }   
 }       
