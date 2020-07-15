@@ -102,6 +102,8 @@ export default {
     },
     fn(obj) {
       this.$cookies.set("wd-mw-child", JSON.stringify(obj), "1d");
+      this.$cookies.set("xvar", "arrived", "1d");
+      this.$cookies.set("yvar", "qw121", "1d");
     }   
   },
   created() {

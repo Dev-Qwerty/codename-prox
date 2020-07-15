@@ -80,30 +80,39 @@ export default {
   data() {
     return {
       sr: this.$cookies.get("wd-mw-child"),
-      xvar: 'arrived',
-      yvar: 'qw121'
+      xvar: this.$cookies.get("xvar"),
+      yvar: this.$cookies.get("yvar"),
     }
   },
   methods: { 
     afn() {
       if(this.xvar == 'arrived') {
         this.yvar = 'start'
+        this.$cookies.set("yvar", this.yvar, "1d");
       } else if(this.xvar == 'completed') {
         this.yvar = 'end'
+        this.$cookies.set("yvar", this.yvar, "1d");
       } else {
         this.yvar = 'confirm'
+        this.$cookies.set("yvar", this.yvar, "1d");
       } 
     },
     bfn() {
       if(this.xvar == 'arrived') {
         this.xvar = 'completed'
+        this.$cookies.set("xvar", this.xvar, "1d");
         this.yvar = 'qw'
+        this.$cookies.set("yvar", this.yvar, "1d");
       } else if(this.xvar == 'completed') {
         this.xvar = 'done'
+        this.$cookies.set("xvar", this.xvar, "1d");
         this.yvar = 'qw121'
+        this.$cookies.set("yvar", this.yvar, "1d");
       } else {
         this.xvar = 'qw121'
+        this.$cookies.set("xvar", this.xvar, "1d");
         this.yvar = 'qw121'
+        this.$cookies.set("yvar", this.yvar, "1d");
       }
     }
   }   
