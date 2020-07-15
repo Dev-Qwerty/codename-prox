@@ -69,7 +69,7 @@ export default {
     },
     fetchTags() {
       if(this.service != "") {
-        let url = "http://localhost:3000/worker/fetchtags?service="+this.service+"&token="+this.$cookies.get("pid");
+        let url = this.$serverURLI +"/worker/fetchtags?service="+this.service+"&token="+this.$cookies.get("pid");
         this.$http.get(url)
         .then(response => {
           this.tags = response.data.tags;
@@ -89,7 +89,7 @@ export default {
       }
     },
     completeProfile() {
-      let url = "http://localhost:3000/"+this.category+"/completeProfile/"+this.$cookies.get('id');
+      let url = this.$serverURLI +"/"+this.category+"/completeProfile/"+this.$cookies.get('id');
       if(this.category == 'Customer') {
         this.$http.post(url, {
           name: this.name,

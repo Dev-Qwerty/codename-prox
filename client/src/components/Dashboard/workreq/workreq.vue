@@ -83,7 +83,7 @@ export default {
   },
   methods: {
     apiCall() {
-      let url = 'http://localhost:3000/request/workrequest/' + this.wid
+      let url = this.$serverURLI +'/request/workrequest/' + this.wid
       this.$http.get(url)
       .then((response) => {
         this.reqarr = response.data
@@ -94,7 +94,7 @@ export default {
     },
     acceptfn(obj) {
       let arr = obj
-      let url = 'http://localhost:3000/request/workrequest/' + this.wid
+      let url = this.$serverURLI +'/request/workrequest/' + this.wid
       this.$http.post(url, {
         "orderId": arr.orderID,
         "requestId": arr.requestID,
@@ -126,7 +126,7 @@ export default {
     },
     declinefn(obj) {
       let arr = obj
-      let url = 'http://localhost:3000/request/workrequest/' + this.wid
+      let url = this.$serverURLI +'/request/workrequest/' + this.wid
       this.$http.post(url, {
         "orderId": arr.orderID,
         "requestId": arr.requestID,

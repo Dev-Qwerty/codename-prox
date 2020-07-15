@@ -42,8 +42,10 @@ Vue.use(VueCryptojs)
 Vue.use(VueToast)
 
 Vue.prototype.$http = Axios
+Vue.prototype.$serverURLI = "http://localhost:3000";
 
 Vue.config.productionTip = false
+
 
 new Vue({
   router,

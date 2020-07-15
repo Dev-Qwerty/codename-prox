@@ -46,7 +46,7 @@ export default {
       formData.append('file',this.file);
       formData.append('userID', this.$cookies.get("username"));
       try{
-        let url = 'http://localhost:3000/customer/uploadProfilePic/'+ this.$cookies.get("username");
+        let url = this.$serverURLI +'/customer/uploadProfilePic/'+ this.$cookies.get("username");
         await axios.post(url,formData);
         this.message = 'Uploaded!!'
       }

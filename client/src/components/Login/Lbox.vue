@@ -40,8 +40,11 @@ export default {
     }
   },
   methods: {
-    onCaptchaVerified(rtoken) {
-      let url = "http://localhost:3000/auth/verifyToken";
+    onCaptchaVerified() {
+      this.captchastatus = true;
+      this.login();
+      /*
+      let url = this.$serverURLI+ "/auth/verifyToken";
       this.$http.post(url, {
         response: rtoken
       })
@@ -65,6 +68,7 @@ export default {
           position: 'bottom-left'
         });
       })
+     */ 
     },
     login() {
       if(this.captchastatus == false) {
@@ -76,7 +80,7 @@ export default {
       }
       else {
         if (this.password.length > 6) {
-        let url = "http://localhost:3000/auth/login";
+        let url = this.$serverURLI + "/auth/login";
         this.$http
           .post(url, {
             username: this.username,

@@ -49,6 +49,7 @@ import Pcmodal from '@/components/Services/Pestcontrol/Pcmodal'
 import ChangeAvatar from '@/components/ChangeAvatar/CAMain.vue'
 import ProcessPayment from '@/components/Checkout/ProcessPayment'
 import OrderStatus from '@/components/Checkout/OrderStatus'
+import PaymentStatus from '@/components/Checkout/PaymentStatus'
 
 Vue.use(VueRouter)
 
@@ -375,6 +376,11 @@ export default new VueRouter({
       path: '/orderstatus',
       name: 'orderstatus',
       component: OrderStatus
+    },
+    {
+      path: '/paymentstatus',
+      name: 'paymentstatus',
+      component: PaymentStatus
     },
     { 
       path: '/dashboard', 

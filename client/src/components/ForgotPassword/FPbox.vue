@@ -49,7 +49,7 @@ export default {
   },
   methods: {
     sendEmail() {
-      let url = "http://localhost:3000/auth/forgotPassword";
+      let url = this.$serverURLI +"/auth/forgotPassword";
       this.$http.post(url, {
         email: this.email
       })
@@ -65,7 +65,7 @@ export default {
       })
     },
     verifyCode() {
-      let url = "http://localhost:3000/auth/confirmFPassword";
+      let url = this.$serverURLI +"/auth/confirmFPassword";
       this.$http.post(url, {
         email: this.email,
         password: this.password,

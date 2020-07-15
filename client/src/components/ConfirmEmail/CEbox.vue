@@ -27,7 +27,7 @@ export default {
   methods: {
     checkCode() {
       this.category = this.category[0].toUpperCase() + this.category.slice(1);
-      let url = "http://localhost:3000/"+this.category+"/confirmEmail";
+      let url = this.$serverURLI +"/"+this.category+"/confirmEmail";
       this.$http.post(url, {
         code: this.code,
         email: this.email
