@@ -53,7 +53,7 @@
       <div class="box-wrapper">
         <div v-for="(sr, index) in myworksarr.completedWorks" :key="index">       
           <div class="box">
-            <router-link :to="{ name: 'mwchild' }">
+            <router-link :to="{ name: '' }">
               <div @click="fn(sr)">
                 <div class="box-row1">
                   <p class="row1-one"><span>$</span>{{ sr.totalAmount }}</p>
