@@ -4,6 +4,7 @@ router = express.Router()
 // import models
 const orderStatusModel = require('../models/order-status');
 const orderModel = require('../models/order-model');
+const workerModel = require('../models/worker-model');
 
 // change work status to arrived
 router
@@ -62,6 +63,8 @@ router
             }else if(orderStatus.status.localeCompare('started') == 0){
                 if(orderStatus.completeToken == req.body.token){
                     let neworderStatus = await orderStatusModel.findOneAndUpdate({orderID: req.body.orderID},{status: "completed"})
+                    let workerid = await orderModel.findOne({orderID: req.body.orderID}, 'workerID -_id') 
+                    let worker = await workerModel.findOneAndUpdate({workerID: workerid.workerID},{$inc:{totalWorks: 1}})
                     res.json({'message': "Work completed"});
                 }else {
                     res.json({'message': "Invalid Token"});
@@ -72,6 +75,7 @@ router
                 res.json({'message': "Work has been completed"})
             }
         } catch (error) {
+            console.log(error)
              res.json({'message': "Something went wrong"})
         }
     })
