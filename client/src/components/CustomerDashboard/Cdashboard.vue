@@ -64,6 +64,7 @@
           <bookings />
           <bchild />
           <favorites />
+          <notifications />
         </router-view>       
       </div>
     </div>
@@ -74,12 +75,14 @@
 import bookings from '@/components/CustomerDashboard/bookings/bookings.vue'
 import bchild from '@/components/CustomerDashboard/bookings/b-child.vue'
 import favorites from '@/components/CustomerDashboard/favorites/favorites.vue'
+import notifications from '@/components/CustomerDashboard/notifications/notifications.vue'
 
 export default {
   components: {
     bookings,
     bchild,
-    favorites
+    favorites,
+    notifications
   },
   data() {
     return {
