@@ -65,9 +65,9 @@
           <input type="submit" value="Confirm" @click="bfn()">  
         </div>
       </div>
-      <div v-if="this.xvar == 'done'">
+      <!--<div v-if="this.xvar == 'done'">
         <p class="inwrapper-end">Work completed successfully!!!</p> 
-      </div>   
+      </div>-->  
     </div>
   </div>
 </template>
@@ -153,7 +153,7 @@ export default {
           token: this.start_token
         }).then(response => {
           if(response.status == 200){
-            if(response.data.message == 'done') {
+            if(response.data.message == 'Work has been arrived') {
               Vue.$toast.open({
                 message: response.data,
                 type: 'success',
@@ -192,7 +192,7 @@ export default {
           token: this.end_token
         }).then(response => {
           if(response.status == 200){
-            if(response.data.message == 'done') {
+            if(response.data.message == 'Work has been completed') {
               Vue.$toast.open({
                 message: response.data,
                 type: 'success',
@@ -202,6 +202,7 @@ export default {
               this.$cookies.set("xvar", this.xvar, "1d");
               this.yvar = 'qw121'
               this.$cookies.set("yvar", this.yvar, "1d"); 
+              window.location.href = this.$serverURLI + "/customerdashboard/myworks";
             } else {
               Vue.$toast.open({
                 message: "Incorrect token!",
