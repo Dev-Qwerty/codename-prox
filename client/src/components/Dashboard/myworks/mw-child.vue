@@ -154,21 +154,21 @@ export default {
         }).then(response => {
           if(response.status == 200){
             if(response.data.message == 'done') {
-            Vue.$toast.open({
-              message: response.data,
-              type: 'success',
-              position: 'bottom-left'
-            });               
+              Vue.$toast.open({
+                message: response.data,
+                type: 'success',
+                position: 'bottom-left'
+              });               
               this.xvar = 'completed'
               this.$cookies.set("xvar", this.xvar, "1d");
               this.yvar = 'qw'
               this.$cookies.set("yvar", this.yvar, "1d");              
             } else {
-            Vue.$toast.open({
-              message: "Something went wrong",
-              type: 'error',
-              position: 'bottom-left'
-            }); 
+              Vue.$toast.open({
+                message: "Incorrect token!",
+                type: 'error',
+                position: 'bottom-left'
+              }); 
             }     
           } else {
             Vue.$toast.open({
@@ -193,21 +193,21 @@ export default {
         }).then(response => {
           if(response.status == 200){
             if(response.data.message == 'done') {
-            Vue.$toast.open({
-              message: response.data,
-              type: 'success',
-              position: 'bottom-left'
-            });                   
+              Vue.$toast.open({
+                message: response.data,
+                type: 'success',
+                position: 'bottom-left'
+              });                   
               this.xvar = 'done'
               this.$cookies.set("xvar", this.xvar, "1d");
               this.yvar = 'qw121'
               this.$cookies.set("yvar", this.yvar, "1d"); 
             } else {
-            Vue.$toast.open({
-              message: "Something went wrong",
-              type: 'error',
-              position: 'bottom-left'
-            }); 
+              Vue.$toast.open({
+                message: "Incorrect token!",
+                type: 'error',
+                position: 'bottom-left'
+              }); 
             }     
           } else {
             Vue.$toast.open({
