@@ -48,9 +48,24 @@
     </div>
     <div class="happy-code">
       <div class="hc-line"></div>
-      <input v-if="this.cdata == 'arrived'" type="submit" value="Arrived" class="btn" @click="cfn()">
-      <input v-else-if="this.cdata == 'completed'" type="submit" value="Completed" class="btn" @click="cfn()">
-      <input v-else-if="this.cdata == 'paynow'" type="submit" value="Pay Now" class="btn" @click="cfn()">
+      <input v-if="this.xvar == 'arrived'" :disabled="(this.yvar == 'start')" type="submit" value="Arrived" class="btn" @click="afn()">
+      <input v-if="this.xvar == 'completed'" type="submit" value="Completed" class="btn" @click="afn()">
+      <input v-if="this.xvar == 'done'" type="submit" value="Confirm" class="btn" @click="afn()">
+      
+      <div class="inwrapper" v-if="this.yvar == 'start'">
+        <p>Please enter the start token</p>
+        <input type="text">
+        <div class="inwrapper-btn">
+          <input type="submit" value="Start Work" @click="bfn()">
+        </div>
+      </div>
+      <div class="inwrapper" v-if="this.yvar == 'end'">
+        <input type="text">
+        <div class="inwrapper-btn">
+          <input type="submit" value="End Work" @click="bfn()">  
+        </div>
+      </div>
+      <p v-if="this.yvar == 'finished'">Work completed successfully!!!</p>    
     </div>
   </div>
 </template>
@@ -63,17 +78,29 @@ export default {
   data() {
     return {
       sr: this.$cookies.get("wd-mw-child"),
-      cdata: 'arrived'
+      xvar: 'arrived',
+      yvar: 'qw'
     }
   },
   methods: { 
-    cfn() {
-      if(this.cdata == 'arrived') {
-        this.cdata = 'completed'
-      } else if(this.cdata == 'completed') {
-        this.cdata = 'paynow'
+    afn() {
+      if(this.xvar == 'arrived') {
+        this.yvar = 'start'
+      } else if(this.xvar == 'completed') {
+        this.yvar = 'end'
       } else {
-        this.cdata = 'paynow'
+        this.yvar = 'finished'
+      } 
+    },
+    bfn() {
+      if(this.xvar == 'arrived') {
+        this.xvar = 'completed'
+        this.yvar = 'qw'
+      } else if(this.xvar == 'completed') {
+        this.xvar = 'done'
+        this.yvar = 'qw'
+      } else {
+        this.xvar = 'qw'
       }
     }
   }   
@@ -196,6 +223,7 @@ export default {
   }
   .happy-code {
     margin-top: 30px;
+    margin-bottom: 30px;
   }
   .hc-line {
     width: 90%;
@@ -211,5 +239,12 @@ export default {
     border-right: 20px;
     box-shadow: -4px 4px 4px #DBDBDB;
     /*border: 1px solid #DBDBDB;*/
+  }
+  .inwrapper{
+    margin-top: 10px;
+    margin-left: 50px;
+  }
+  .inwrapper-btn {
+    margin-top: 20px;
   }
 </style>
