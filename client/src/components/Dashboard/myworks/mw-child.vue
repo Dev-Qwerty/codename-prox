@@ -52,21 +52,21 @@
       <input v-if="this.xvar == 'completed'" :disabled="(this.yvar == 'end')" type="submit" value="Completed" class="btn" @click="afn()">
      
       <div class="inwrapper" v-if="this.yvar == 'start'">
-        <p>Please enter the start token</p>
+        <p class="inwrapper-hdn">Enter the start token</p>
         <input type="text">
         <div class="inwrapper-btn">
           <input type="submit" value="Start Work" @click="bfn()">
         </div>
       </div>
       <div class="inwrapper" v-if="this.yvar == 'end'">
-        <p>Please enter the end token</p>
+        <p class="inwrapper-hdn">Enter the complete token</p>
         <input type="text">
         <div class="inwrapper-btn">
           <input type="submit" value="Confirm" @click="bfn()">  
         </div>
       </div>
       <div v-if="this.xvar == 'done'">
-        <p>Work completed successfully!!!</p> 
+        <p class="inwrapper-end">Work completed successfully!!!</p> 
       </div>   
     </div>
   </div>
@@ -256,7 +256,19 @@ export default {
     margin-top: 10px;
     margin-left: 50px;
   }
-  .inwrapper-btn {
-    margin-top: 20px;
+  .inwrapper-hdn {
+    font-size: 17px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .inwrapper-btn input[type=submit] {
+    margin-top: 15px;
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #000
+  }
+  .inwrapper-end {
+    margin-top: 30px;
+    font-size: 20px;
   }
 </style>
