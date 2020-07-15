@@ -12,11 +12,11 @@
       </div>
       <div class="box">
         <div class="r1">
-          <p class="r1-1">Kitchen Cleaning</p>
+          <p class="r1-1">Full House Deep Cleaning</p>
           <p class="r1-2">Order ID: OD785108104789069</p>        
         </div>
         <div class="r2">
-          <p class="r2-1">START TOKEN: 4386</p>
+          <p class="r2-1">END TOKEN: 4386</p>
         </div>
       </div>      
     </div>       
