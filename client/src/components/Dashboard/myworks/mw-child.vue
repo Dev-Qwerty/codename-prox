@@ -73,6 +73,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 
 export default {
   components: {
@@ -96,10 +97,19 @@ export default {
           status: "arrived"
         }).then(response => {
           if(response.status == 200 && response.data == 'status changed'){
+            Vue.$toast.open({
+              message: response.data,
+              type: 'success',
+              position: 'bottom-left'
+            });             
             this.yvar = 'start'
-            this.$cookies.set("yvar", this.yvar, "1d");            
+            this.$cookies.set("yvar", this.yvar, "1d");                         
           } else {
-            alert("ERROR")
+            Vue.$toast.open({
+              message: "Something went wrong",
+              type: 'error',
+              position: 'bottom-left'
+            });    
           }
         }).catch(error => {
           alert(error)
@@ -112,10 +122,19 @@ export default {
           status: "completed"
         }).then(response => {
           if(response.status == 200 && response.data == 'status changed'){
+            Vue.$toast.open({
+              message: response.data,
+              type: 'success',
+              position: 'bottom-left'
+            });              
             this.yvar = 'end'
-            this.$cookies.set("yvar", this.yvar, "1d");           
+            this.$cookies.set("yvar", this.yvar, "1d");                      
           } else {
-            alert("ERROR")
+            Vue.$toast.open({
+              message: "Something went wrong",
+              type: 'error',
+              position: 'bottom-left'
+            });   
           }
         }).catch(error => {
           alert(error)
@@ -135,15 +154,28 @@ export default {
         }).then(response => {
           if(response.status == 200){
             if(response.data.message == 'done') {
+            Vue.$toast.open({
+              message: response.data,
+              type: 'success',
+              position: 'bottom-left'
+            });               
               this.xvar = 'completed'
               this.$cookies.set("xvar", this.xvar, "1d");
               this.yvar = 'qw'
-              this.$cookies.set("yvar", this.yvar, "1d");
+              this.$cookies.set("yvar", this.yvar, "1d");              
             } else {
-              alert('something went wrong')
+            Vue.$toast.open({
+              message: "Something went wrong",
+              type: 'error',
+              position: 'bottom-left'
+            }); 
             }     
           } else {
-            alert("ERROR")
+            Vue.$toast.open({
+              message: "Something went wrong",
+              type: 'error',
+              position: 'bottom-left'
+            }); 
           }          
         }).catch(error => {
           alert(error)
@@ -161,15 +193,28 @@ export default {
         }).then(response => {
           if(response.status == 200){
             if(response.data.message == 'done') {
+            Vue.$toast.open({
+              message: response.data,
+              type: 'success',
+              position: 'bottom-left'
+            });                   
               this.xvar = 'done'
               this.$cookies.set("xvar", this.xvar, "1d");
               this.yvar = 'qw121'
               this.$cookies.set("yvar", this.yvar, "1d"); 
             } else {
-              alert('something went wrong')
+            Vue.$toast.open({
+              message: "Something went wrong",
+              type: 'error',
+              position: 'bottom-left'
+            }); 
             }     
           } else {
-            alert("ERROR")
+            Vue.$toast.open({
+              message: "Something went wrong",
+              type: 'error',
+              position: 'bottom-left'
+            }); 
           } 
         }).catch(error => {
           alert(error)
