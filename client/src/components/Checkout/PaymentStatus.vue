@@ -1,13 +1,24 @@
 <template>
     <div>
         <div>
-      <center><h2>Payment Failed</h2></center>
-  </div>
-  <div v-if="this.respCode">
-      <center>
-          <h3>{{ this.respMessage }}</h3>
-      </center>
-  </div>
+            <center>
+                <img src="../../assets/oops.png" class="failedimg">
+                <h2>Payment Failed</h2>
+            </center>
+        </div>
+        <div div v-if="this.respCode">
+            <center>
+                <h4>{{ this.respMessage }}</h4>
+                <h4>Don't worry, If your money is deducted, Please contact us</h4>
+            </center>
+        </div>
+        <div>
+            <center>
+                <router-link :to="{path: '/customerdashboard'}">
+                    <button class="backbtn" >Back to dashboard</button>
+                </router-link>
+            </center>
+        </div>
     </div>
 </template>
 
@@ -49,5 +60,18 @@ export default {
 </script>
 
 <style>
-
+.failedimg {
+    width: 325px;
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+.backbtn {
+    margin-top: 10px;
+    width: 15%;
+    height: 45px;
+    border: none;
+    color: #fff;
+    background-color: rgb(15, 14, 14);
+    border-radius: 5px;
+}
 </style>

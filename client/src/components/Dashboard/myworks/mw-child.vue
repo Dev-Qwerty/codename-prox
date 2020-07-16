@@ -4,7 +4,8 @@
       <div class="aa">
         <div class="aaa">
           <p class="aaa-p1">{{ sr.service.subserviceName }}</p>
-          <p class="aaa-p2"><span>Amount:  </span><span>$</span>{{ sr.totalAmount }}</p>
+          <p class="aaa-p2"><span>Order ID:  </span>{{ sr.orderID }}</p>
+          <p class="aaa-p3"><span>Amount:  </span><span>$</span>{{ sr.totalAmount }}</p>
         </div>
         <div class="aab">
           <div class="aab-top">
@@ -48,32 +49,199 @@
     </div>
     <div class="happy-code">
       <div class="hc-line"></div>
-      <input type="submit" value="Arrived" class="btn">
+      <input v-if="this.xvar == 'arrived'" :disabled="(this.yvar == 'start')" type="submit" value="Arrived" class="btn" @click="afn()">
+      <input v-if="this.xvar == 'completed'" :disabled="(this.yvar == 'end')" type="submit" value="Completed" class="btn" @click="afn()">     
+      <div class="inwrapper" v-if="this.yvar == 'start'">
+        <p class="inwrapper-hdn">Enter the start token</p>
+        <input type="text" v-model="start_token">
+        <div class="inwrapper-btn">
+          <input type="submit" value="Start Work" @click="bfn()">
+        </div>
+      </div>
+      <div class="inwrapper" v-if="this.yvar == 'end'">
+        <p class="inwrapper-hdn">Enter the end token</p>
+        <input type="text" v-model="end_token">
+        <div class="inwrapper-btn">
+          <input type="submit" value="Confirm" @click="bfn()">  
+        </div>
+      </div>
+      <!--<div v-if="this.xvar == 'done'">
+        <p class="inwrapper-end">Work completed successfully!!!</p> 
+      </div>-->  
     </div>
   </div>
 </template>
 
 <script>
+import Vue from 'vue'
 
 export default {
   components: {
   },
   data() {
     return {
-      sr: this.$cookies.get("wd-mw-child")
+      sr: this.$cookies.get("wd-mw-child"),
+      xvar: this.$cookies.get("xvar"),
+      yvar: this.$cookies.get("yvar"),
+      start_token: '',
+      end_token: ''
     }
   },
   methods: { 
-    fn() {
+    afn() {
+      if(this.xvar == 'arrived') {
+        let url = this.$serverURLI + "/orderstatus/changestatus"
+        this.$http
+        .post(url, {
+          orderID: this.sr.orderID,
+          status: "arrived"
+        }).then(response => {
+          if(response.status == 200 && response.data == 'status changed'){
+            Vue.$toast.open({
+              message: response.data,
+              type: 'success',
+              position: 'bottom-left'
+            });             
+            this.yvar = 'start'
+            this.$cookies.set("yvar", this.yvar, "1d");                         
+          } else {
+            Vue.$toast.open({
+              message: "Something went wrong",
+              type: 'error',
+              position: 'bottom-left'
+            });    
+          }
+        }).catch(error => {
+          alert(error)
+        })
+      } else if(this.xvar == 'completed') {
+        let url = this.$serverURLI + "/orderstatus/changestatus"
+        this.$http
+        .post(url, {
+          orderID: this.sr.orderID,
+          status: "completed"
+        }).then(response => {
+          if(response.status == 200 && response.data == 'status changed'){
+            Vue.$toast.open({
+              message: response.data,
+              type: 'success',
+              position: 'bottom-left'
+            });              
+            this.yvar = 'end'
+            this.$cookies.set("yvar", this.yvar, "1d");                      
+          } else {
+            Vue.$toast.open({
+              message: "Something went wrong",
+              type: 'error',
+              position: 'bottom-left'
+            });   
+          }
+        }).catch(error => {
+          alert(error)
+        })
+      } else {
+        this.yvar = 'confirm'
+        this.$cookies.set("yvar", this.yvar, "1d");
+      } 
+    },
+    bfn() {
+      if(this.xvar == 'arrived') {     
+        let url = this.$serverURLI + "/orderstatus/verifytoken"
+        this.$http
+        .post(url, {
+          orderID: this.sr.orderID,
+          token: this.start_token
+        }).then(response => {
+          if(response.status == 200){
+            if(response.data.message == 'Work has been arrived') {
+              Vue.$toast.open({
+                message: response.data,
+                type: 'success',
+                position: 'bottom-left'
+              });               
+              this.xvar = 'completed'
+              this.$cookies.set("xvar", this.xvar, "1d");
+              this.yvar = 'qw'
+              this.$cookies.set("yvar", this.yvar, "1d");              
+            } else {
+              Vue.$toast.open({
+                message: "Incorrect token!",
+                type: 'error',
+                position: 'bottom-left'
+              }); 
+            }     
+          } else {
+            Vue.$toast.open({
+              message: "Something went wrong",
+              type: 'error',
+              position: 'bottom-left'
+            }); 
+          }          
+        }).catch(error => {
+          alert(error)
+        })     
+        /*this.xvar = 'completed'
+        this.$cookies.set("xvar", this.xvar, "1d");
+        this.yvar = 'qw'
+        this.$cookies.set("yvar", this.yvar, "1d");*/
+      } else if(this.xvar == 'completed') {
+        let url = this.$serverURLI + "/orderstatus/verifytoken"
+        this.$http
+        .post(url, {
+          orderID: this.sr.orderID,
+          token: this.end_token
+        }).then(response => {
+          if(response.status == 200){
+            if(response.data.message == 'Work has been completed') {
+              Vue.$toast.open({
+                message: response.data,
+                type: 'success',
+                position: 'bottom-left'
+              });                   
+              this.xvar = 'done'
+              this.$cookies.set("xvar", this.xvar, "1d");
+              this.yvar = 'qw121'
+              this.$cookies.set("yvar", this.yvar, "1d"); 
+              window.location.href = location.protocol + "//"+ location.host + "/customerdashboard/myworks";
+            } else {
+              Vue.$toast.open({
+                message: "Incorrect token!",
+                type: 'error',
+                position: 'bottom-left'
+              }); 
+            }     
+          } else {
+            Vue.$toast.open({
+              message: "Something went wrong",
+              type: 'error',
+              position: 'bottom-left'
+            }); 
+          } 
+        }).catch(error => {
+          alert(error)
+        }) 
+        /*this.xvar = 'done'
+        this.$cookies.set("xvar", this.xvar, "1d");
+        this.yvar = 'qw121'
+        this.$cookies.set("yvar", this.yvar, "1d");*/
+      } else {
+        this.xvar = 'qw121'
+        this.$cookies.set("xvar", this.xvar, "1d");
+        this.yvar = 'qw121'
+        this.$cookies.set("yvar", this.yvar, "1d");
+      }
     }
-  }   
+  },
+  created() {
+    
+  }
 }       
 </script>
 
 <style scoped>
   .Wrapper {
-    padding-left: 5%;
-    padding-top: 5%;
+    padding-left: 3%;
+    padding-top: 3%;
   }
   .a {
     width: 90%;
@@ -82,7 +250,7 @@ export default {
   }
   .aa {
     display: grid;
-    grid-template-rows: 150px max-content;
+    grid-template-rows: 170px max-content;
     margin-right: 25px;
   }
   .aaa {
@@ -91,18 +259,22 @@ export default {
     border: 1px solid #DBDBDB;
     background-color: #fff;
     color: #000;
-    padding-left: 10%;
-    padding-top: 5%;
+    padding-left: 8%;
+    padding-top: 4%;
     margin-bottom: 25px;
   }
   .aaa-p1 {
     font-family: lato-bold;
-    font-size: 22px;
+    font-size: 23px;
   }
   .aaa-p2 {
     margin-top: -8px;
-    font-size: 16px;
+    font-size: 15px;
   }
+  .aaa-p3 {
+    margin-top: -15px;
+    font-size: 15px;
+  }  
   .aab {
     background-color: #fff;
     box-shadow: -5px 5px 5px #DBDBDB;
@@ -186,6 +358,7 @@ export default {
   }
   .happy-code {
     margin-top: 30px;
+    margin-bottom: 30px;
   }
   .hc-line {
     width: 90%;
@@ -201,5 +374,24 @@ export default {
     border-right: 20px;
     box-shadow: -4px 4px 4px #DBDBDB;
     /*border: 1px solid #DBDBDB;*/
+  }
+  .inwrapper{
+    margin-top: 10px;
+    margin-left: 50px;
+  }
+  .inwrapper-hdn {
+    font-size: 17px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .inwrapper-btn input[type=submit] {
+    margin-top: 15px;
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #000
+  }
+  .inwrapper-end {
+    margin-top: 30px;
+    font-size: 20px;
   }
 </style>
