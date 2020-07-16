@@ -10,6 +10,7 @@ const orders = require('../models/order-model')
 const selectedWorkers = require('../models/selectedWorkers-model')
 const workerModel = require('../models/worker-model')
 const customerModel = require('../models/user-model')
+const orderStatusModel = require('../models/order-status')
 
 router
     .route('/workrequest/:id')
@@ -31,6 +32,7 @@ router
                 if (requestStatus === 'accepted') {
                     await workerRequest.findOneAndUpdate({requestID: requestId}, {workerID: workerId, requestStatus: requestStatus})
                     await orders.findOneAndUpdate({orderID: orderId}, {workerID: workerId})
+                    await orderStatusModel.findOneAndUpdate({orderID: orderId},{status: 'accepted'})
                     res.send('worker assigned')
                     let work = await orders.findOne({orderID: orderId},'service.subserviceName address date time'); // Fetch work details
                     let customerDetails = work.address; // Fetch customer details

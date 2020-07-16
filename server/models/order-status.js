@@ -7,7 +7,7 @@ const orderStatusSchema = mongoose.Schema({
     },
     status: {
         type: String,
-        default: "accepted"
+        default: "placed"
     },
     startToken: {
         type: Number,
