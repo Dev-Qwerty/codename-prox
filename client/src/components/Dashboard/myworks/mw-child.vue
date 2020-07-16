@@ -4,7 +4,7 @@
       <div class="aa">
         <div class="aaa">
           <p class="aaa-p1">{{ sr.service.subserviceName }}</p>
-          <p class="aaa-p2"><span>Order ID:  </span>{{ sr._id }}</p>
+          <p class="aaa-p2"><span>Order ID:  </span>{{ sr.orderID }}</p>
           <p class="aaa-p3"><span>Amount:  </span><span>$</span>{{ sr.totalAmount }}</p>
         </div>
         <div class="aab">
@@ -93,7 +93,7 @@ export default {
         let url = this.$serverURLI + "/orderstatus/changestatus"
         this.$http
         .post(url, {
-          orderID: this.sr._id,
+          orderID: this.sr.orderID,
           status: "arrived"
         }).then(response => {
           if(response.status == 200 && response.data == 'status changed'){
@@ -118,7 +118,7 @@ export default {
         let url = this.$serverURLI + "/orderstatus/changestatus"
         this.$http
         .post(url, {
-          orderID: this.sr._id,
+          orderID: this.sr.orderID,
           status: "completed"
         }).then(response => {
           if(response.status == 200 && response.data == 'status changed'){
@@ -149,7 +149,7 @@ export default {
         let url = this.$serverURLI + "/orderstatus/verifytoken"
         this.$http
         .post(url, {
-          orderID: this.sr._id,
+          orderID: this.sr.orderID,
           token: this.start_token
         }).then(response => {
           if(response.status == 200){
@@ -188,7 +188,7 @@ export default {
         let url = this.$serverURLI + "/orderstatus/verifytoken"
         this.$http
         .post(url, {
-          orderID: this.sr._id,
+          orderID: this.sr.orderID,
           token: this.end_token
         }).then(response => {
           if(response.status == 200){
@@ -202,7 +202,7 @@ export default {
               this.$cookies.set("xvar", this.xvar, "1d");
               this.yvar = 'qw121'
               this.$cookies.set("yvar", this.yvar, "1d"); 
-              window.location.href = this.$serverURLI + "/customerdashboard/myworks";
+              window.location.href = location.protocol + "//"+ location.host + "/customerdashboard/myworks";
             } else {
               Vue.$toast.open({
                 message: "Incorrect token!",
