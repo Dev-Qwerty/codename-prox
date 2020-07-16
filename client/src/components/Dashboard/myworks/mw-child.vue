@@ -93,7 +93,7 @@ export default {
         let url = this.$serverURLI + "/orderstatus/changestatus"
         this.$http
         .post(url, {
-          orderID: this.sr._id,
+          orderID: this.sr.orderID,
           status: "arrived"
         }).then(response => {
           if(response.status == 200 && response.data == 'status changed'){
@@ -118,7 +118,7 @@ export default {
         let url = this.$serverURLI + "/orderstatus/changestatus"
         this.$http
         .post(url, {
-          orderID: this.sr._id,
+          orderID: this.sr.orderID,
           status: "completed"
         }).then(response => {
           if(response.status == 200 && response.data == 'status changed'){
@@ -149,7 +149,7 @@ export default {
         let url = this.$serverURLI + "/orderstatus/verifytoken"
         this.$http
         .post(url, {
-          orderID: this.sr._id,
+          orderID: this.sr.orderID,
           token: this.start_token
         }).then(response => {
           if(response.status == 200){
@@ -188,7 +188,7 @@ export default {
         let url = this.$serverURLI + "/orderstatus/verifytoken"
         this.$http
         .post(url, {
-          orderID: this.sr._id,
+          orderID: this.sr.orderID,
           token: this.end_token
         }).then(response => {
           if(response.status == 200){
