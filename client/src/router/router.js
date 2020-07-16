@@ -50,6 +50,7 @@ import ChangeAvatar from '@/components/ChangeAvatar/CAMain.vue'
 import ProcessPayment from '@/components/Checkout/ProcessPayment'
 import OrderStatus from '@/components/Checkout/OrderStatus'
 import PaymentStatus from '@/components/Checkout/PaymentStatus'
+import NotFoundPage from '@/components/NotFound/NotFoundPage'
 
 Vue.use(VueRouter)
 
@@ -501,6 +502,10 @@ export default new VueRouter({
     {
       path: '/confirmEmail',
       component: ConfirmEmail
-    },          
+    },
+    {
+      path: '*',
+      component: NotFoundPage
+    }         
   ]
 })
