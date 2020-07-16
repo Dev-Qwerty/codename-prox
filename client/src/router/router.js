@@ -72,13 +72,13 @@ export default new VueRouter({
       beforeEnter(to,from,next) {
         if(Vue.$cookies.get("pid")!=undefined) {
           if(Vue.$cookies.get("category") == 'Worker') {
-            window.location.href = "http://localhost:8080/dashboard";
+            window.location.href = location.protocol +'//' + location.host + "/dashboard";
           }
           else if(Vue.$cookies.get("category") == 'Customer') {
-            window.location.href = "http://localhost:8080/customerdashboard";
+            window.location.href = location.protocol +'//' + location.host + "/customerdashboard";
           }
           else {
-            window.location.href = "http://localhost:8080/companydashboard"; //To be done in future.
+            window.location.href = location.protocol +'//' + location.host + "/companydashboard"; //To be done in future.
           }
         }
         else {
@@ -92,13 +92,13 @@ export default new VueRouter({
       beforeEnter(to,from,next) {
         if(Vue.$cookies.get("pid")!=undefined) {
           if(Vue.$cookies.get("category") == 'Worker') {
-            window.location.href = "http://localhost:8080/dashboard";
+            window.location.href = location.protocol +'//' + location.host + "/dashboard";
           }
           else if(Vue.$cookies.get("category") == 'Customer') {
-            window.location.href = "http://localhost:8080/customerdashboard";
+            window.location.href = location.protocol +'//' + location.host + "/customerdashboard";
           }
           else {
-            window.location.href = "http://localhost:8080/companydashboard"; //To be done in future.
+            window.location.href = location.protocol +'//' + location.host + "/companydashboard"; //To be done in future.
           }
         }
         else {
@@ -112,13 +112,13 @@ export default new VueRouter({
       beforeEnter(to,from,next) {
         if(Vue.$cookies.get("pid")!=undefined) {
           if(Vue.$cookies.get("category") == 'Worker') {
-            window.location.href = "http://localhost:8080/dashboard";
+            window.location.href = location.protocol +'//' + location.host + "/dashboard";
           }
           else if(Vue.$cookies.get("category") == 'Customer') {
-            window.location.href = "http://localhost:8080/customerdashboard";
+            window.location.href = location.protocol +'//' + location.host + "/customerdashboard";
           }
           else {
-            window.location.href = "http://localhost:8080/companydashboard"; //To be done in future.
+            window.location.href = location.protocol +'//' + location.host + "/companydashboard"; //To be done in future.
           }
         }
         else {
@@ -149,13 +149,13 @@ export default new VueRouter({
           beforeEnter(to,from,next) {
             if(Vue.$cookies.get("category") != undefined) {
               if(Vue.$cookies.get("category") == 'Worker') {
-                window.location.href = "http://localhost:8080/dashboard";
+                window.location.href = location.protocol +'//' + location.host + "/dashboard";
               } else {
                 next()
               }
             }
             else {
-              window.location.href = "http://localhost:8080/login";
+              window.location.href = location.protocol +'//' + location.host + "/login";
             }
           }  
         },       
@@ -172,13 +172,13 @@ export default new VueRouter({
           beforeEnter(to,from,next) {
             if(Vue.$cookies.get("category") != undefined) {
               if(Vue.$cookies.get("category") == 'Worker') {
-                window.location.href = "http://localhost:8080/dashboard";
+                window.location.href = location.protocol +'//' + location.host + "/dashboard";
               } else {
                 next()
               }
             }
             else {
-              window.location.href = "http://localhost:8080/login";
+              window.location.href = location.protocol +'//' + location.host + "/login";
             }
           } 
         },       
@@ -195,13 +195,13 @@ export default new VueRouter({
           beforeEnter(to,from,next) {
             if(Vue.$cookies.get("category") != undefined) {
               if(Vue.$cookies.get("category") == 'Worker') {
-                window.location.href = "http://localhost:8080/dashboard";
+                window.location.href = location.protocol +'//' + location.host + "/dashboard";
               } else {
                 next()
               }
             }
             else {
-              window.location.href = "http://localhost:8080/login";
+              window.location.href = location.protocol +'//' + location.host + "/login";
             }
           } 
         },       
@@ -218,13 +218,13 @@ export default new VueRouter({
           beforeEnter(to,from,next) {
             if(Vue.$cookies.get("category") != undefined) {
               if(Vue.$cookies.get("category") == 'Worker') {
-                window.location.href = "http://localhost:8080/dashboard";
+                window.location.href = location.protocol +'//' + location.host + "/dashboard";
               } else {
                 next()
               }
             }
             else {
-              window.location.href = "http://localhost:8080/login";
+              window.location.href = location.protocol +'//' + location.host + "/login";
             }
           } 
         },       
@@ -241,13 +241,13 @@ export default new VueRouter({
           beforeEnter(to,from,next) {
             if(Vue.$cookies.get("category") != undefined) {
               if(Vue.$cookies.get("category") == 'Worker') {
-                window.location.href = "http://localhost:8080/dashboard";
+                window.location.href = location.protocol +'//' + location.host + "/dashboard";
               } else {
                 next()
               }
             }
             else {
-              window.location.href = "http://localhost:8080/login";
+              window.location.href = location.protocol +'//' + location.host + "/login";
             }
           } 
         },       
@@ -264,13 +264,13 @@ export default new VueRouter({
           beforeEnter(to,from,next) {
             if(Vue.$cookies.get("category") != undefined) {
               if(Vue.$cookies.get("category") == 'Worker') {
-                window.location.href = "http://localhost:8080/dashboard";
+                window.location.href = location.protocol +'//' + location.host + "/dashboard";
               } else {
                 next()
               }
             }
             else {
-              window.location.href = "http://localhost:8080/login";
+              window.location.href = location.protocol +'//' + location.host + "/login";
             }
           } 
         },       
@@ -287,13 +287,13 @@ export default new VueRouter({
           beforeEnter(to,from,next) {
             if(Vue.$cookies.get("category") != undefined) {
               if(Vue.$cookies.get("category") == 'Worker') {
-                window.location.href = "http://localhost:8080/dashboard";
+                window.location.href = location.protocol +'//' + location.host + "/dashboard";
               } else {
                 next()
               }
             }
             else {
-              window.location.href = "http://localhost:8080/login";
+              window.location.href = location.protocol +'//' + location.host + "/login";
             }
           } 
         },       
@@ -310,13 +310,13 @@ export default new VueRouter({
           beforeEnter(to,from,next) {
             if(Vue.$cookies.get("category") != undefined) {
               if(Vue.$cookies.get("category") == 'Worker') {
-                window.location.href = "http://localhost:8080/dashboard";
+                window.location.href = location.protocol +'//' + location.host + "/dashboard";
               } else {
                 next()
               }
             }
             else {
-              window.location.href = "http://localhost:8080/login";
+              window.location.href = location.protocol +'//' + location.host + "/login";
             }
           }           
         },       
@@ -333,13 +333,13 @@ export default new VueRouter({
           beforeEnter(to,from,next) {
             if(Vue.$cookies.get("category") != undefined) {
               if(Vue.$cookies.get("category") == 'Worker') {
-                window.location.href = "http://localhost:8080/dashboard";
+                window.location.href = location.protocol +'//' + location.host + "/dashboard";
               } else {
                 next()
               }
             }
             else {
-              window.location.href = "http://localhost:8080/login";
+              window.location.href = location.protocol +'//' + location.host + "/login";
             }
           } 
         },       
@@ -352,13 +352,13 @@ export default new VueRouter({
       beforeEnter(to,from,next) {
         if(Vue.$cookies.get("category") != undefined) {
           if(Vue.$cookies.get("category") == 'Worker') {
-            window.location.href = "http://localhost:8080/dashboard";
+            window.location.href = location.protocol +'//' + location.host + "/dashboard";
           } else {
             next()
           }
         }
         else {
-          window.location.href = "http://localhost:8080/login";
+          window.location.href = location.protocol +'//' + location.host + "/login";
         }
       }, 
       children: [
@@ -432,13 +432,13 @@ export default new VueRouter({
       beforeEnter (to, from, next) {
         if(Vue.$cookies.get("pid")==undefined) {
           alert("Access Denied! Please login!");
-          window.location.href = "http://localhost:8080/login";
+          window.location.href = location.protocol +'//' + location.host + "/login";
         }
         else if(Vue.$cookies.get("category") == "Customer") {
-          window.location.href = "http://localhost:8080/customerdashboard";
+          window.location.href = location.protocol +'//' + location.host + "/customerdashboard";
         }
         else if(Vue.$cookies.get("category") == "Company") {
-          window.location.href = "http://localhost:8080/companydashboard"; //To be done in future.
+          window.location.href = location.protocol +'//' + location.host + "/companydashboard"; //To be done in future.
         }
         else {
           next();
@@ -451,13 +451,13 @@ export default new VueRouter({
       beforeEnter(to,from,next) {
         if(Vue.$cookies.get("pid")==undefined) {
           alert("Access Denied! Please login!");
-          window.location.href = "http://localhost:8080/login";
+          window.location.href = location.protocol +'//' + location.host + "/login";
         }
         else if(Vue.$cookies.get("category") == "Worker") {
-          window.location.href = "http://localhost:8080/dashboard";
+          window.location.href = location.protocol +'//' + location.host + "/dashboard";
         }
         else if(Vue.$cookies.get("category") == "Company") {
-          window.location.href = "http://localhost:8080/companydashboard"; //To be done in future.
+          window.location.href = location.protocol +'//' + location.host + "/companydashboard"; //To be done in future.
         }
         else {
           next();
