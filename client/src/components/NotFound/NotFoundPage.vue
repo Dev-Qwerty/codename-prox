@@ -2,7 +2,7 @@
   <div>
       <center>
           <img src="../../assets/404.svg" class="notfoundpage">
-          <h2 class="notfoundmsg">Oh no, our developer fall asleep while creating this page</h2>
+          <h2 class="notfoundmsg">Oh no, it seems our developer fall asleep while creating this page</h2>
           <router-link :to="{path: '/services'}">
                     <button class="backbutton" >Back to services</button>
                 </router-link>

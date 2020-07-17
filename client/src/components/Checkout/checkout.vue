@@ -104,8 +104,6 @@ export default {
     paylaterfn(){},
     paylater() {
        this.date = moment(this.date).format('YYYY-M-D')
-       this.$cookies.remove("cart")
-       this.$cookies.remove("r")
        let url = this.$serverURLI + "/orders/placeorder/pay-later"
        this.$http
         .post(url, {
@@ -116,6 +114,7 @@ export default {
           time: this.time
         }).then(response => {
           if(response.data.status == '01'){
+            this.$cookies.remove("cart")
             window.location.href = 'http://localhost:8080/customerdashboard'
           } else {
             window.location.href = 'http://localhost:8080/orderstatus'
@@ -127,7 +126,6 @@ export default {
     paynow() {
       this.date = moment(this.date).format( 'YYYY-M-D')
       this.$cookies.remove("cart")
-      this.$cookies.remove("r")
       let url = this.$serverURLI + "/orders/placeorder/paynow"
       this.$http
         .post(url, {
