@@ -15,9 +15,9 @@
               <p class="r2-2">{{ srr.time }}</p>
             </div>
             <div class="r3">
-              <router-link :to="{ name: '' }">
-              <p class="r3-1" @click="fn()">Track Your Booking</p>
-              </router-link>
+              <!--<router-link :to="{ name: '' }">-->
+              <p class="r3-1" @click="fn(srr)">Track Your Booking</p>
+              <!--</router-link>-->
             </div>
           </div>
         </div>
@@ -69,14 +69,14 @@ export default {
       this.$http.get(url)
       .then((response) => {
         this.arr = response.data
-        alert(JSON.stringify(this.arr))
       })
       .catch((error) => {
         alert(error);
       })     
     },
 
-    fn() {
+    fn(obj) {
+      this.$cookies.set("cd-b-child", JSON.stringify(obj), "1d");
       window.location.href = "http://localhost:8080/customerdashboard/bchild";
     }
   },
