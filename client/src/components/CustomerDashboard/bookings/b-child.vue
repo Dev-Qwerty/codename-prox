@@ -123,11 +123,64 @@ export default {
   },
   data() {
     return {
+      placed: false,
+      accepted: false,
+      arrived: false,
+      started: false,
+      completed: false,
+      payment: false,
+      bdata: this.$cookies.get('cd-b-child')
     }
   },
   methods: { 
-    fn() {
-    }
+    fn(obj) {
+      if(obj.status == 'placed') {
+        this.placed = true
+      } else if(obj.status == 'accepted') {
+        this.placed = true
+        this.accepted = true
+      } else if(obj.status == 'arrived') {
+        this.placed = true
+        this.accepted = true  
+        this.arrived = true
+      } else if(obj.status == 'started') {
+        this.placed = true
+        this.accepted = true
+        this.arrived = true
+        this.started = true
+      } else if(obj.status == 'completed') {
+        this.placed = true
+        this.accepted = true
+        this.arrived = true
+        this.started = true        
+        this.created = true
+      } else if(obj.status == 'payment'){
+        this.placed = true
+        this.accepted = true
+        this.arrived = true
+        this.started = true        
+        this.created = true        
+        this.payment = true
+      } else {
+        alert("error")
+      } 
+    },
+
+    apiCall() {
+      let url = this.$serverURLI +'/orderstatus/checkstatus/' + this.bdata.orderID;
+      this.$http.get(url)
+      .then((response) => {
+        this.fn(response.data)
+        /*alert(JSON.stringify(response.data))*/
+      })
+      .catch((error) => {
+        alert(error);
+      })     
+    },
+  },
+
+  created() {
+    this.apiCall();
   }   
 }       
 </script>
