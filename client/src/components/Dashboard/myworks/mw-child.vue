@@ -49,8 +49,10 @@
     </div>
     <div class="happy-code">
       <div class="hc-line"></div>
+
       <input v-if="this.xvar == 'arrived'" :disabled="(this.yvar == 'start')" type="submit" value="Arrived" class="btn" @click="afn()">
       <input v-if="this.xvar == 'completed'" :disabled="(this.yvar == 'end')" type="submit" value="Completed" class="btn" @click="afn()">     
+      
       <div class="inwrapper" v-if="this.yvar == 'start'">
         <p class="inwrapper-hdn">Enter the start token</p>
         <input type="text" v-model="start_token">
@@ -58,6 +60,7 @@
           <input type="submit" value="Start Work" @click="bfn()">
         </div>
       </div>
+
       <div class="inwrapper" v-if="this.yvar == 'end'">
         <p class="inwrapper-hdn">Enter the end token</p>
         <input type="text" v-model="end_token">
@@ -65,10 +68,12 @@
           <input type="submit" value="Confirm" @click="bfn()">  
         </div>
       </div>
+      
       <!--<div v-if="this.xvar == 'done'">
         <p class="inwrapper-end">Work completed successfully!!!</p> 
       </div>-->  
     </div>
+    
   </div>
 </template>
 
@@ -87,8 +92,10 @@ export default {
       end_token: ''
     }
   },
-  methods: { 
+  methods: {
+
     afn() {
+      
       if(this.xvar == 'arrived') {
         let url = this.$serverURLI + "/orderstatus/changestatus"
         this.$http
@@ -96,6 +103,7 @@ export default {
           orderID: this.sr.orderID,
           status: "arrived"
         }).then(response => {
+          
           if(response.status == 200 && response.data == 'status changed'){
             Vue.$toast.open({
               message: response.data,
@@ -104,6 +112,7 @@ export default {
             });             
             this.yvar = 'start'
             this.$cookies.set("yvar", this.yvar, "1d");                         
+          
           } else {
             Vue.$toast.open({
               message: "Something went wrong",
@@ -111,48 +120,39 @@ export default {
               position: 'bottom-left'
             });    
           }
+        
         }).catch(error => {
-          alert(error)
-        })
-      } else if(this.xvar == 'completed') {
-        let url = this.$serverURLI + "/orderstatus/changestatus"
-        this.$http
-        .post(url, {
-          orderID: this.sr.orderID,
-          status: "completed"
-        }).then(response => {
-          if(response.status == 200 && response.data == 'status changed'){
             Vue.$toast.open({
-              message: response.data,
-              type: 'success',
-              position: 'bottom-left'
-            });              
-            this.yvar = 'end'
-            this.$cookies.set("yvar", this.yvar, "1d");                      
-          } else {
-            Vue.$toast.open({
-              message: "Something went wrong",
+              message: error,
               type: 'error',
               position: 'bottom-left'
-            });   
-          }
-        }).catch(error => {
-          alert(error)
+            }); 
         })
-      } else {
+      
+      } else if(this.xvar == 'completed') {
+        
+        this.yvar = 'end'
+        this.$cookies.set("yvar", this.yvar, "1d");   
+     
+     } else {
         this.yvar = 'confirm'
         this.$cookies.set("yvar", this.yvar, "1d");
       } 
     },
+    
     bfn() {
+      
       if(this.xvar == 'arrived') {     
+        
         let url = this.$serverURLI + "/orderstatus/verifytoken"
         this.$http
         .post(url, {
           orderID: this.sr.orderID,
           token: this.start_token
         }).then(response => {
+          
           if(response.status == 200){
+
             if(response.data.message == 'Work has been arrived') {
               Vue.$toast.open({
                 message: response.data,
@@ -163,6 +163,7 @@ export default {
               this.$cookies.set("xvar", this.xvar, "1d");
               this.yvar = 'qw'
               this.$cookies.set("yvar", this.yvar, "1d");              
+            
             } else {
               Vue.$toast.open({
                 message: "Incorrect token!",
@@ -170,6 +171,7 @@ export default {
                 position: 'bottom-left'
               }); 
             }     
+          
           } else {
             Vue.$toast.open({
               message: "Something went wrong",
@@ -177,32 +179,44 @@ export default {
               position: 'bottom-left'
             }); 
           }          
+        
         }).catch(error => {
-          alert(error)
+            Vue.$toast.open({
+              message: error,
+              type: 'error',
+              position: 'bottom-left'
+            });           
         })     
+        
         /*this.xvar = 'completed'
         this.$cookies.set("xvar", this.xvar, "1d");
         this.yvar = 'qw'
         this.$cookies.set("yvar", this.yvar, "1d");*/
+        
       } else if(this.xvar == 'completed') {
-        let url = this.$serverURLI + "/orderstatus/verifytoken"
+
+        /*let url = this.$serverURLI + "/orderstatus/verifytoken"
         this.$http
         .post(url, {
           orderID: this.sr.orderID,
           token: this.end_token
         }).then(response => {
+          
           if(response.status == 200){
+            
             if(response.data.message == 'Work has been completed') {
               Vue.$toast.open({
                 message: response.data,
                 type: 'success',
                 position: 'bottom-left'
-              });                   
+              });     
+
               this.xvar = 'done'
               this.$cookies.set("xvar", this.xvar, "1d");
               this.yvar = 'qw121'
               this.$cookies.set("yvar", this.yvar, "1d"); 
               window.location.href = location.protocol + "//"+ location.host + "/customerdashboard/myworks";
+            
             } else {
               Vue.$toast.open({
                 message: "Incorrect token!",
@@ -210,6 +224,7 @@ export default {
                 position: 'bottom-left'
               }); 
             }     
+          
           } else {
             Vue.$toast.open({
               message: "Something went wrong",
@@ -217,14 +232,18 @@ export default {
               position: 'bottom-left'
             }); 
           } 
+        
         }).catch(error => {
           alert(error)
-        }) 
+        })*/
+        
         /*this.xvar = 'done'
         this.$cookies.set("xvar", this.xvar, "1d");
         this.yvar = 'qw121'
         this.$cookies.set("yvar", this.yvar, "1d");*/
+      
       } else {
+        
         this.xvar = 'qw121'
         this.$cookies.set("xvar", this.xvar, "1d");
         this.yvar = 'qw121'
