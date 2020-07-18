@@ -1,24 +1,22 @@
 <template>
   <div class="Wrapper">
     <div class="box-wrapper">
-      <div class="box">
-        <div class="r1">
-          <p class="r1-1">Kitchen Cleaning</p>
-          <p class="r1-2">Order ID: OD785108104789069</p>        
-        </div>
-        <div class="r2">
-          <p class="r2-1">START TOKEN: 4386</p>
-        </div>
+
+      <div v-for="srr in arr" v-bind:key="srr.orderID">
+
+        <div class="box">
+          <div class="r1">
+            <p class="r1-1">{{ srr.serviceName }}</p>
+            <p class="r1-2"><span>Order ID: </span>{{ srr.orderID }}</p>
+            <p class="r1-3"><span>Status: </span>{{ srr.status }}</p>         
+          </div>
+          <div class="r2">
+            <p v-if="srr.startToken" class="r2-1"><span  class="r2-1-1"> START TOKEN: </span><span class="r2-1-2">{{ srr.startToken }}</span></p>
+            <!--<p v-if="this.arr.completeToken" class="r2-1"><span> END TOKEN: </span>{{ this.arr.completeToken }}</p>-->
+          </div>
+        </div>    
+
       </div>
-      <div class="box">
-        <div class="r1">
-          <p class="r1-1">Full House Deep Cleaning</p>
-          <p class="r1-2">Order ID: OD785108104789069</p>        
-        </div>
-        <div class="r2">
-          <p class="r2-1">END TOKEN: 4386</p>
-        </div>
-      </div>      
     </div>       
   </div>
 </template>
@@ -31,7 +29,7 @@ export default {
   data() {
     return {
       cid: this.$cookies.get("id"),
-      narr: []
+      arr: []
     }
   },
   methods: {
@@ -64,8 +62,8 @@ export default {
   .box-wrapper {
   }   
   .box {
-    width: 85%;
-    height: 110px;
+    width: 90%;
+    height: 90px;
     background-color: #fff;
     border-radius: 10px;
     border: 1px solid #00000029;
@@ -80,36 +78,53 @@ export default {
   .r1 {
     border-bottom: 1px solid #00000029;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     height: 100%;
   }
   .r1-1 {
     border-right: 1px solid #00000029;
-    padding-top: 10px;
-    padding-left: 20px;
-    font-size: 18px;
+    padding-top: 6px;
+    padding-left: 15px;
+    font-size: 16px;
     font-family: p-medium;
     margin: 0px;
-    color: #aaa;
+    color: #000;
   }
   .r1-2 {
-    padding-left: 20px;
-    padding-top: 10px;
-    font-size: 17px;
+    padding-top: 6px;
+    padding-left: 15px;
+    font-size: 16px;
     font-family: p-medium;
     margin: 0px;
-    color: #aaa;
-  }  
+    color: #000;
+  } 
+  .r1-3{
+    border-left: 1px solid #00000029;
+    padding-top: 6px;
+    padding-left: 15px;
+    font-size: 16px;
+    font-family: p-medium;
+    margin: 0px;
+    color: #000;
+  }       
   .r2 {
     text-align: start;
     height: 100%;
   }
   .r2-1 {
     margin: 0;
-    font-size: 23px;
     font-family: p-medium;
     padding-left: 40px;
-    padding-top: 15px;
+    padding-top: 10px;
     color: #000;
+  }
+  .r2-1-1 {
+    font-size: 20px;
+  }  
+  .r2-1-2 {
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    font-size: 20px;
+    margin-left: 10px;
   }
 </style>
