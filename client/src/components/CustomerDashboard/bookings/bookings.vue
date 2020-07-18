@@ -51,13 +51,31 @@ export default {
   },
   data() {
     return {
+      cid: this.$cookies.get("id"),
+      arr: []      
     }
   },
-  methods: { 
+  methods: {
+    apiCall() {
+      let url = this.$serverURLI +'/customer/bookings/' + this.cid 
+      this.$http.get(url)
+      .then((response) => {
+        this.arr = response.data
+        alert(JSON.stringify(this.arr))
+      })
+      .catch((error) => {
+        alert(error);
+      })     
+    },
+
     fn() {
       window.location.href = "http://localhost:8080/customerdashboard/bchild";
     }
-  }   
+  },
+
+  created() {
+   this.apiCall()
+  }        
 }       
 </script>
 
