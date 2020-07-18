@@ -30,11 +30,28 @@ export default {
   },
   data() {
     return {
+      cid: this.$cookies.get("id"),
+      narr: []
     }
   },
-  methods: { 
+  methods: {
+    apiCall() {
+      let url = this.$serverURLI +'/customer/notifications/' + this.cid 
+      this.$http.get(url)
+      .then((response) => {
+        this.arr = response.data
+        alert(JSON.stringify(this.arr))
+      })
+      .catch((error) => {
+        alert(error);
+      })     
+    },
     fn() {
-    }
+
+    }   
+  },
+  created() {
+   this.apiCall()
   }   
 }       
 </script>
