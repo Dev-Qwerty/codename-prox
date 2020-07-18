@@ -120,7 +120,7 @@ export default {
   }
   .r1 {
     text-align: center;
-    padding-top: 15px;
+    padding-top: 18px;
   }
   .r1-1 {
     text-align: center;
@@ -130,7 +130,7 @@ export default {
     color: #000;
   }
   .Line {
-    margin-top: 5px;
+    margin-top: 2px;
     margin-left: auto;
     margin-right: auto;
     height: 1px;
@@ -139,7 +139,7 @@ export default {
   }
   .r2 {
     text-align: center;
-    padding-top: 5px;
+    padding-top: 10px;
   }
   .r2-1 {
     font-size: 26px;
@@ -155,7 +155,7 @@ export default {
     color: #aaa;
   }  
   .r3 {
-    margin-top: -10px;
+    margin-top: -12px;
     text-align: center;
   }
   .r3-1 {

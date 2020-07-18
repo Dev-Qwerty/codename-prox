@@ -67,10 +67,10 @@
         </div>
       </div>
     </div>
-    <div>
+    <!--<div>
       <div class="dline"></div>
       <p class="dhdn">Details</p>
-    </div>
+    </div>-->
   </div>
 </template>
 
