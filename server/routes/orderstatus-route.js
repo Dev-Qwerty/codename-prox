@@ -43,10 +43,11 @@ router
             }else if(orderStatus.status.localeCompare('started') == 0){
                 if(orderStatus.completeToken == req.body.token){
                     let neworderStatus = await orderStatusModel.findOneAndUpdate({orderID: req.body.orderID},{status: "completed"})
-                    let order = await orderModel.findOneAndUpdate({orderID: req.body.orderID},{completed: true})
+                    let order = await orderModel.findOneAndUpdate({orderID: req.body.orderID},{completed: true},{new: true})
                     let workerid = await orderModel.findOne({orderID: req.body.orderID}, 'workerID -_id') 
                     let worker = await workerModel.findOneAndUpdate({workerID: workerid.workerID},{$inc:{totalWorks: 1}})
-                    res.json({'message': "Work completed"});
+                    res.json({'message': "Work completed",'paid':order.paid});
+                    console.log(order)
                 }else {
                     res.json({'message': "Invalid Token"});
                 }
