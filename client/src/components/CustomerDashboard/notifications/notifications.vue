@@ -3,7 +3,6 @@
     <div class="box-wrapper">
 
       <div v-for="srr in arr" v-bind:key="srr.orderID">
-
         <div class="box">
           <div class="r1">
             <p class="r1-1">{{ srr.serviceName }}</p>
@@ -15,7 +14,6 @@
             <!--<p v-if="this.arr.completeToken" class="r2-1"><span> END TOKEN: </span>{{ this.arr.completeToken }}</p>-->
           </div>
         </div>    
-
       </div>
     </div>       
   </div>
@@ -38,7 +36,6 @@ export default {
       this.$http.get(url)
       .then((response) => {
         this.arr = response.data
-        alert(JSON.stringify(this.arr))
       })
       .catch((error) => {
         alert(error);
