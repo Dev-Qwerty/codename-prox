@@ -1,7 +1,43 @@
 <template>
   <div class="Wrapper">
     <p class="hdn">Track Your Bookings</p>
+
     <div class="t-wrapper">
+
+      <div class="row1-tick">
+        <div class="tone">
+          <div class="tcircle"></div>
+        </div>
+        <div class="ttwo">
+          <p class="thdn">Placed</p>
+        </div>
+      </div>
+      <div class="row2-line">
+        <div class="lone">
+          <div class="lline"></div>
+        </div>
+        <div class="ltwo">
+          
+        </div>
+      </div>
+
+      <div class="row1-tick">
+        <div class="tone">
+          <div class="tcircle"></div>
+        </div>
+        <div class="ttwo">
+          <p class="thdn">Accepted</p>
+        </div>
+      </div>
+      <div class="row2-line">
+        <div class="lone">
+          <div class="lline"></div>
+        </div>
+        <div class="ltwo">
+          
+        </div>
+      </div>
+
       <div class="row1-tick">
         <div class="tone">
           <div class="tcircle"></div>
@@ -18,12 +54,13 @@
           
         </div>
       </div>
+
       <div class="row1-tick">
         <div class="tone">
           <div class="tcircle"></div>
         </div>
         <div class="ttwo">
-          <p class="thdn">Work Started</p> 
+          <p class="thdn">Started</p> 
         </div>
       </div>
       <div class="row2-line">
@@ -34,12 +71,13 @@
 
         </div>
       </div>
+
       <div class="row1-tick">
         <div class="tone">
           <div class="tcircle"></div>
         </div>
         <div class="ttwo">
-          <p class="thdn">Work Completed</p>
+          <p class="thdn">Completed</p>
         </div>
       </div>
       <div class="row2-line">
@@ -50,6 +88,7 @@
 
         </div>
       </div>
+
       <div class="row1-tick">
         <div class="tone">
           <div class="tcircle"></div>
@@ -66,11 +105,14 @@
 
         </div>
       </div>
+
     </div>
+
     <!--<div>
       <div class="dline"></div>
       <p class="dhdn">Details</p>
     </div>-->
+  
   </div>
 </template>
 
@@ -93,7 +135,7 @@ export default {
 <style scoped>
   .Wrapper {
     padding-left: 3%;
-    padding-top: 4%;
+    padding-top: 3%;
   }
   .hdn {
     font-size: 23px;
@@ -103,10 +145,11 @@ export default {
     width: 50%;
     height: 400px;
     margin-left: 2%;
-    margin-top: 2%;
+    margin-top: 0%;
     margin-bottom: 2%;
     display: grid;
-    grid-template-rows: 8% 17% 8% 17% 8% 17% 8% 17%;
+    grid-template-rows: 8% 17% 8% 17% 8% 17% 8% 17% 8% 17% 8% 17%;
+    /*background-color: burlywood;*/
   }
   .row1-tick {
     display: grid;
@@ -118,14 +161,15 @@ export default {
   .tcircle {
     width: 32px;
     height: 32px;
-    /*background-color: #000;*/
-    background-image: url('../../../assets/track.png');
+    margin-left: auto;
+    margin-right: auto;    
+    background-color: #aaa;
+    border-radius: 50%;
+    /*background-image: url('../../../assets/track.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;    
-    border-radius: 50%;
-    margin-left: auto;
-    margin-right: auto;
+    border-radius: 50%;*/
   }  
   .thdn {
     font-size: 20px;
@@ -144,7 +188,7 @@ export default {
   .lline {
     width: 3px;
     height: 100%;
-    background-color: #000;
+    background-color: #aaa;
     margin-left: auto;
     margin-right: auto;
   }  

@@ -163,4 +163,7 @@ export default {
     color: #0084E9;
     font-family: p-medium;
   } 
+  .r3-1:hover {
+    cursor: pointer;
+  }
 </style>
