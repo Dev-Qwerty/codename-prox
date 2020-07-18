@@ -49,6 +49,7 @@
     </div>
     <div class="happy-code">
       <div class="hc-line"></div>
+
       <input v-if="this.xvar == 'arrived'" :disabled="(this.yvar == 'start')" type="submit" value="Arrived" class="btn" @click="afn()">
       <input v-if="this.xvar == 'completed'" :disabled="(this.yvar == 'end')" type="submit" value="Completed" class="btn" @click="afn()">     
       
@@ -59,6 +60,7 @@
           <input type="submit" value="Start Work" @click="bfn()">
         </div>
       </div>
+
       <div class="inwrapper" v-if="this.yvar == 'end'">
         <p class="inwrapper-hdn">Enter the end token</p>
         <input type="text" v-model="end_token">
@@ -129,33 +131,8 @@ export default {
       
       } else if(this.xvar == 'completed') {
         
-        let url = this.$serverURLI + "/orderstatus/changestatus"
-        this.$http
-        .post(url, {
-          orderID: this.sr.orderID,
-          status: "completed"
-        }).then(response => {
-          
-          if(response.status == 200 && response.data == 'status changed'){
-            Vue.$toast.open({
-              message: response.data,
-              type: 'success',
-              position: 'bottom-left'
-            });              
-            this.yvar = 'end'
-            this.$cookies.set("yvar", this.yvar, "1d");                      
-          
-          } else {
-            Vue.$toast.open({
-              message: "Something went wrong",
-              type: 'error',
-              position: 'bottom-left'
-            });   
-          }
-        
-        }).catch(error => {
-          alert(error)
-        })
+        this.yvar = 'end'
+        this.$cookies.set("yvar", this.yvar, "1d");   
      
      } else {
         this.yvar = 'confirm'
@@ -175,6 +152,7 @@ export default {
         }).then(response => {
           
           if(response.status == 200){
+
             if(response.data.message == 'Work has been arrived') {
               Vue.$toast.open({
                 message: response.data,
@@ -203,7 +181,11 @@ export default {
           }          
         
         }).catch(error => {
-          alert(error)
+            Vue.$toast.open({
+              message: error,
+              type: 'error',
+              position: 'bottom-left'
+            });           
         })     
         
         /*this.xvar = 'completed'
@@ -212,7 +194,8 @@ export default {
         this.$cookies.set("yvar", this.yvar, "1d");*/
         
       } else if(this.xvar == 'completed') {
-        let url = this.$serverURLI + "/orderstatus/verifytoken"
+
+        /*let url = this.$serverURLI + "/orderstatus/verifytoken"
         this.$http
         .post(url, {
           orderID: this.sr.orderID,
@@ -226,7 +209,8 @@ export default {
                 message: response.data,
                 type: 'success',
                 position: 'bottom-left'
-              });                   
+              });     
+
               this.xvar = 'done'
               this.$cookies.set("xvar", this.xvar, "1d");
               this.yvar = 'qw121'
@@ -251,7 +235,7 @@ export default {
         
         }).catch(error => {
           alert(error)
-        }) 
+        })*/
         
         /*this.xvar = 'done'
         this.$cookies.set("xvar", this.xvar, "1d");
@@ -259,6 +243,7 @@ export default {
         this.$cookies.set("yvar", this.yvar, "1d");*/
       
       } else {
+        
         this.xvar = 'qw121'
         this.$cookies.set("xvar", this.xvar, "1d");
         this.yvar = 'qw121'
