@@ -26,26 +26,6 @@ router
         res.json({'status': orderstatus.status})
     })
 
-// fetch token
-router
-    .route('/gettoken/:id')
-    .get( async (req, res) => {
-        try {
-            const orderstatus = await orderStatusModel.findOne({orderID: req.params.id});
-            if(orderstatus.status.localeCompare('arrived') == 0){
-                res.json({'message':orderstatus.startToken})
-            }else if(orderstatus.status.localeCompare('started') == 0){
-                res.json({'message':orderstatus.completeToken})
-            }else if(orderstatus.status.localeCompare('accepted') == 0){
-                res.json({'message': "Work has not been started yet"})
-            }else{
-                res.json({'message': "Work has been completed"})
-            }
-        } catch (error) {
-            console.log(error)
-        }
-    })
-
 
 //verify token
 router
@@ -63,6 +43,7 @@ router
             }else if(orderStatus.status.localeCompare('started') == 0){
                 if(orderStatus.completeToken == req.body.token){
                     let neworderStatus = await orderStatusModel.findOneAndUpdate({orderID: req.body.orderID},{status: "completed"})
+                    let order = await orderModel.findOneAndUpdate({orderID: req.body.orderID},{completed: true})
                     let workerid = await orderModel.findOne({orderID: req.body.orderID}, 'workerID -_id') 
                     let worker = await workerModel.findOneAndUpdate({workerID: workerid.workerID},{$inc:{totalWorks: 1}})
                     res.json({'message': "Work completed"});
