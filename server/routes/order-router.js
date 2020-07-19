@@ -694,4 +694,11 @@ router
         });
     })
 
+
+router
+    .route('/order/cancel')
+    .post([parseJson, parseUrl], (req, res) => {
+        
+    })
+
 module.exports = router;
