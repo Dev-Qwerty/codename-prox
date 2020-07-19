@@ -5,11 +5,15 @@ const userfineSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    fine: {
-        type: Number,
-        required: true
-    }
+    fine: [{
+        orderid: {
+            type: String,
+        },
+        amount: {
+            type: Number,
+        }
+    }]
 })
 
-const userfine = mongoose.model('userfine', userfineSchema)
+const userfine = mongoose.model('userfines', userfineSchema)
 module.exports = userfine

@@ -21,6 +21,7 @@ const workerModel = require('../models/worker-model');
 const orderStatusModel = require('../models/order-status');
 const userModel = require('../models/user-model')
 const failedorderModel = require('../models/failedorder-model')
+const userfineModel = require('../models/userfine-model')
 
 const paytm = require('../config/keys')
 const checksum_lib = require('../config/paymentgateway/checksum');
@@ -696,9 +697,25 @@ router
 
 
 router
-    .route('/order/cancel')
-    .post([parseJson, parseUrl], (req, res) => {
-        
+    .route('/cancel')
+    .post([parseJson, parseUrl], async (req, res) => {
+        try {
+            const fine = {}
+            const orderId = req.body.orderId
+            const userId = await orderModel.findOne({orderID: orderId}, 'userID -_id')
+            fine.orderID = orderId
+            fine.amount = 100
+            const userfine = await userfineModel.update(
+                {userID: userId.userID},
+                { $push: { fine: {
+                    orderID: orderId,
+                    amount: 100
+                }}}
+            )
+            res.send(userfine)
+        } catch (error) {
+            res.send(error)
+        } 
     })
 
 module.exports = router;
