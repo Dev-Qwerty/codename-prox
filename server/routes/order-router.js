@@ -700,11 +700,8 @@ router
     .route('/cancel')
     .post([parseJson, parseUrl], async (req, res) => {
         try {
-            const fine = {}
             const orderId = req.body.orderId
             const userId = await orderModel.findOne({orderID: orderId}, 'userID -_id')
-            fine.orderID = orderId
-            fine.amount = 100
             const userfine = await userfineModel.update(
                 {userID: userId.userID},
                 { $push: { fine: {

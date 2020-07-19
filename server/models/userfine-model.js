@@ -6,7 +6,7 @@ const userfineSchema = mongoose.Schema({
         required: true
     },
     fine: [{
-        orderid: {
+        orderID: {
             type: String,
         },
         amount: {
