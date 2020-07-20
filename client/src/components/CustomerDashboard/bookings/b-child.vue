@@ -1,299 +1,221 @@
 <template>
   <div class="Wrapper">
-    <p class="hdn">Track Your Bookings</p>
 
-    <div class="t-wrapper">
+    <div class="page-wrapper">
 
-      <div v-if="!this.os.placed" class="row1-tick">
-        <div class="tone">
-          <div class="tcircle"></div>
-        </div>
-        <div class="ttwo">
-          <p class="thdn">Placed</p>
-        </div>
-      </div>
-      <div v-if="!this.os.placed" class="row2-line">
-        <div class="lone">
-          <div class="lline"></div>
-        </div>
-        <div class="ltwo">
-          
-        </div>
-      </div>
+      <div class="track-section">
+        <p class="hdn">Track Your Bookings</p>
+  
+        <div class="track-box">
+          <!-- Placed -->
+          <div v-if="!this.os.placed" class="row1-tick">
+            <div class="tone">
+              <div class="tcircle"></div>
+            </div>
+            <div class="ttwo">
+              <p class="thdn">Placed</p>
+            </div>
+          </div>
+          <div v-if="!this.os.placed" class="row2-line">
+            <div class="lone">
+              <div class="lline"></div>
+            </div>
+            <div class="ltwo">
+              
+            </div>
+          </div>
+          <div v-if="this.os.placed" class="row1-tick">
+            <div class="tone">
+              <div class="tcircle-black"></div>
+            </div>
+            <div class="ttwo">
+              <p class="thdn">Placed</p>
+            </div>
+          </div>
+          <div v-if="this.os.placed" class="row2-line">
+            <div class="lone">
+              <div class="lline-black"></div>
+            </div>
+            <div class="ltwo">
+              
+            </div>
+          </div>
 
-      <div v-if="this.os.placed" class="row1-tick">
-        <div class="tone">
-          <div class="tcircle-black"></div>
-        </div>
-        <div class="ttwo">
-          <p class="thdn">Placed</p>
-        </div>
-      </div>
-      <div v-if="this.os.placed" class="row2-line">
-        <div class="lone">
-          <div class="lline-black"></div>
-        </div>
-        <div class="ltwo">
-          
-        </div>
-      </div>
+          <!-- Accepted -->
+          <div v-if="!this.os.accepted" class="row1-tick">
+            <div class="tone">
+              <div class="tcircle"></div>
+            </div>
+            <div class="ttwo">
+              <p class="thdn">Accepted</p>
+            </div>
+          </div>
+          <div v-if="!this.os.accepted" class="row2-line">
+            <div class="lone">
+              <div class="lline"></div>
+            </div>
+            <div class="ltwo">
+              
+            </div>
+          </div>
+          <div v-if="this.os.accepted" class="row1-tick">
+            <div class="tone">
+              <div class="tcircle-black"></div>
+            </div>
+            <div class="ttwo">
+              <p class="thdn">Accepted</p>
+            </div>
+          </div>
+          <div v-if="this.os.accepted" class="row2-line">
+            <div class="lone">
+              <div class="lline-black"></div>
+            </div>
+            <div class="ltwo">
+              
+            </div>
+          </div>
 
-      <div v-if="!this.os.accepted" class="row1-tick">
-        <div class="tone">
-          <div class="tcircle"></div>
-        </div>
-        <div class="ttwo">
-          <p class="thdn">Accepted</p>
-        </div>
-      </div>
-      <div v-if="!this.os.accepted" class="row2-line">
-        <div class="lone">
-          <div class="lline"></div>
-        </div>
-        <div class="ltwo">
-          
-        </div>
-      </div>
+          <!-- Arrived -->
+          <div v-if="!this.os.arrived" class="row1-tick">
+            <div class="tone">
+              <div class="tcircle"></div>
+            </div>
+            <div class="ttwo">
+              <p class="thdn">Arrived</p>
+            </div>
+          </div>
+          <div v-if="!this.os.arrived" class="row2-line">
+            <div class="lone">
+              <div class="lline"></div>
+            </div>
+            <div class="ltwo">
+              
+            </div>
+          </div>
+          <div v-if="this.os.arrived" class="row1-tick">
+            <div class="tone">
+              <div class="tcircle-black"></div>
+            </div>
+            <div class="ttwo">
+              <p class="thdn">Arrived</p>
+            </div>
+          </div>
+          <div v-if="this.os.arrived" class="row2-line">
+            <div class="lone">
+              <div class="lline-black"></div>
+            </div>
+            <div class="ltwo">
+              
+            </div>
+          </div>      
 
-      <div v-if="this.os.accepted" class="row1-tick">
-        <div class="tone">
-          <div class="tcircle-black"></div>
-        </div>
-        <div class="ttwo">
-          <p class="thdn">Accepted</p>
-        </div>
-      </div>
-      <div v-if="this.os.accepted" class="row2-line">
-        <div class="lone">
-          <div class="lline-black"></div>
-        </div>
-        <div class="ltwo">
-          
-        </div>
-      </div>
+          <!-- Started -->
+          <div v-if="!this.os.started" class="row1-tick">
+            <div class="tone">
+              <div class="tcircle"></div>
+            </div>
+            <div class="ttwo">
+              <p class="thdn">Started</p>
+            </div>
+          </div>
+          <div v-if="!this.os.started" class="row2-line">
+            <div class="lone">
+              <div class="lline"></div>
+            </div>
+            <div class="ltwo">
+              
+            </div>
+          </div>
+          <div v-if="this.os.started" class="row1-tick">
+            <div class="tone">
+              <div class="tcircle-black"></div>
+            </div>
+            <div class="ttwo">
+              <p class="thdn">Started</p>
+            </div>
+          </div>
+          <div v-if="this.os.started" class="row2-line">
+            <div class="lone">
+              <div class="lline-black"></div>
+            </div>
+            <div class="ltwo">
+              
+            </div>
+          </div>
 
-      <div v-if="!this.os.arrived" class="row1-tick">
-        <div class="tone">
-          <div class="tcircle"></div>
-        </div>
-        <div class="ttwo">
-          <p class="thdn">Arrived</p>
-        </div>
-      </div>
-      <div v-if="!this.os.arrived" class="row2-line">
-        <div class="lone">
-          <div class="lline"></div>
-        </div>
-        <div class="ltwo">
-          
-        </div>
-      </div>
+          <!-- Completed -->
+          <div v-if="!this.os.completed" class="row1-tick">
+            <div class="tone">
+              <div class="tcircle"></div>
+            </div>
+            <div class="ttwo">
+              <p class="thdn">Completed</p>
+            </div>
+          </div>
+          <div v-if="!this.os.completed" class="row2-line">
+            <div class="lone">
+              <div class="lline"></div>
+            </div>
+            <div class="ltwo">
+              
+            </div>
+          </div>
+          <div v-if="this.os.completed" class="row1-tick">
+            <div class="tone">
+              <div class="tcircle-black"></div>
+            </div>
+            <div class="ttwo">
+              <p class="thdn">Completed</p>
+            </div>
+          </div>
+          <div v-if="this.os.completed" class="row2-line">
+            <div class="lone">
+              <div class="lline-black"></div>
+            </div>
+            <div class="ltwo">
+              
+            </div>
+          </div>
 
-      <div v-if="this.os.arrived" class="row1-tick">
-        <div class="tone">
-          <div class="tcircle-black"></div>
-        </div>
-        <div class="ttwo">
-          <p class="thdn">Arrived</p>
-        </div>
-      </div>
-      <div v-if="this.os.arrived" class="row2-line">
-        <div class="lone">
-          <div class="lline-black"></div>
-        </div>
-        <div class="ltwo">
-          
-        </div>
-      </div>      
+          <!-- payment -->
+          <div v-if="!this.os.payment" class="row1-tick">
+            <div class="tone">
+              <div class="tcircle"></div>
+            </div>
+            <div class="ttwo">
+              <p class="thdn">Payment</p>
+            </div>
+          </div>
+          <div class="row2-line">
+            <div class="lone">
 
-      <div v-if="!this.os.started" class="row1-tick">
-        <div class="tone">
-          <div class="tcircle"></div>
-        </div>
-        <div class="ttwo">
-          <p class="thdn">Started</p>
-        </div>
-      </div>
-      <div v-if="!this.os.started" class="row2-line">
-        <div class="lone">
-          <div class="lline"></div>
-        </div>
-        <div class="ltwo">
-          
-        </div>
-      </div>
+            </div>
+            <div class="ltwo">
 
-      <div v-if="this.os.started" class="row1-tick">
-        <div class="tone">
-          <div class="tcircle-black"></div>
-        </div>
-        <div class="ttwo">
-          <p class="thdn">Started</p>
+            </div>
+          </div>
+          <div v-if="this.os.payment" class="row1-tick">
+            <div class="tone">
+              <div class="tcircle-black"></div>
+            </div>
+            <div class="ttwo">
+              <p class="thdn">Payment</p>
+            </div>
+          </div>
+          <div class="row2-line">
+            <div class="lone">
+
+            </div>
+            <div class="ltwo">
+
+            </div>
+          </div>
         </div>
       </div>
-      <div v-if="this.os.started" class="row2-line">
-        <div class="lone">
-          <div class="lline-black"></div>
-        </div>
-        <div class="ltwo">
-          
-        </div>
+      
+      <div class="details-section">
+        <p class="hdn">Booking Detals</p>
       </div>
-
-      <div v-if="!this.os.completed" class="row1-tick">
-        <div class="tone">
-          <div class="tcircle"></div>
-        </div>
-        <div class="ttwo">
-          <p class="thdn">Completed</p>
-        </div>
-      </div>
-      <div v-if="!this.os.completed" class="row2-line">
-        <div class="lone">
-          <div class="lline"></div>
-        </div>
-        <div class="ltwo">
-          
-        </div>
-      </div>
-
-      <div v-if="this.os.completed" class="row1-tick">
-        <div class="tone">
-          <div class="tcircle-black"></div>
-        </div>
-        <div class="ttwo">
-          <p class="thdn">Completed</p>
-        </div>
-      </div>
-      <div v-if="this.os.completed" class="row2-line">
-        <div class="lone">
-          <div class="lline-black"></div>
-        </div>
-        <div class="ltwo">
-          
-        </div>
-      </div>
-
-      <div v-if="!this.os.payment" class="row1-tick">
-        <div class="tone">
-          <div class="tcircle"></div>
-        </div>
-        <div class="ttwo">
-          <p class="thdn">Payment</p>
-        </div>
-      </div>
-      <div class="row2-line">
-        <div class="lone">
-
-        </div>
-        <div class="ltwo">
-
-        </div>
-      </div>
-
-      <div v-if="this.os.payment" class="row1-tick">
-        <div class="tone">
-          <div class="tcircle-black"></div>
-        </div>
-        <div class="ttwo">
-          <p class="thdn">Payment</p>
-        </div>
-      </div>
-      <div class="row2-line">
-        <div class="lone">
-
-        </div>
-        <div class="ltwo">
-
-        </div>
-      </div>
-
-
-      <!--<div class="row1-tick">
-        <div class="tone">
-          <div class="tcircle"></div>
-        </div>
-        <div class="ttwo">
-          <p class="thdn">Accepted</p>
-        </div>
-      </div>
-      <div class="row2-line">
-        <div class="lone">
-          <div class="lline"></div>
-        </div>
-        <div class="ltwo">
-          
-        </div>
-      </div>
-
-      <div class="row1-tick">
-        <div class="tone">
-          <div class="tcircle"></div>
-        </div>
-        <div class="ttwo">
-          <p class="thdn">Arrived</p>
-        </div>
-      </div>
-      <div class="row2-line">
-        <div class="lone">
-          <div class="lline"></div>
-        </div>
-        <div class="ltwo">
-          
-        </div>
-      </div>
-
-      <div class="row1-tick">
-        <div class="tone">
-          <div class="tcircle"></div>
-        </div>
-        <div class="ttwo">
-          <p class="thdn">Started</p> 
-        </div>
-      </div>
-      <div class="row2-line">
-        <div class="lone">
-          <div class="lline"></div>
-        </div>
-        <div class="ltwo">
-
-        </div>
-      </div>
-
-      <div class="row1-tick">
-        <div class="tone">
-          <div class="tcircle"></div>
-        </div>
-        <div class="ttwo">
-          <p class="thdn">Completed</p>
-        </div>
-      </div>
-      <div class="row2-line">
-        <div class="lone">
-          <div class="lline"></div>
-        </div>
-        <div class="ltwo">
-
-        </div>
-      </div>
-
-      <div v-if="!this.os.payment" class="row1-tick">
-        <div class="tone">
-          <div class="tcircle"></div>
-        </div>
-        <div class="ttwo">
-          <p class="thdn">Payment</p>
-        </div>
-      </div>
-      <div class="row2-line">
-        <div class="lone">
-
-        </div>
-        <div class="ltwo">
-
-        </div>
-      </div>-->
-
     </div>
 
     <!--<div>
@@ -376,29 +298,44 @@ export default {
 
 <style scoped>
   .Wrapper {
-    padding-left: 3%;
-    padding-top: 3%;
+    padding-left: 2%;
+    padding-top: 2%;
   }
   .hdn {
     font-size: 23px;
     font-family: p-regular;
   }
-  .t-wrapper {
-    width: 50%;
-    height: 400px;
-    margin-left: 2%;
-    margin-top: 0%;
-    margin-bottom: 2%;
+  .page-wrapper {
+    margin-left: 0%;
+    width: 95%;
     display: grid;
-    grid-template-rows: 8% 17% 8% 17% 8% 17% 8% 17% 8% 17% 8% 17%;
-    /*background-color: burlywood;*/
+    grid-template-columns: 40% 60%;
+  }
+  .track-section {
+    /*background-color: red;*/
+  }
+  .details-section {
+    background-color: blueviolet;
+    border-left: 1px solid #000;
+  }
+  .track-box {
+    margin-top: 0px;
+    margin-left: 20px;
+    background-color: #fff;
+    /*border: 1px solid #000;*/
+    height: 550px;
+    width: 400px;
+    display: grid;
+    grid-template-rows: 32px 1fr 32px 1fr 32px 1fr 32px 1fr 32px 1fr 32px 1fr ;
+    /*grid-template-rows: 5.17% 11.5% 5.17% 11.5% 5.17% 11.5% 5.17% 11.5% 5.17% 11.5% 5.17% 11.5%;*/ 
+    /*grid-template-rows: 8% 17% 8% 17% 8% 17% 8% 17% 8% 17% 8% 17%;*/
   }
   .row1-tick {
     display: grid;
-    grid-template-columns: 10% 90%;
+    grid-template-columns: 12% 88%;
   }
   .tone {
-    
+
   }
   .tcircle {
     width: 32px;
@@ -407,11 +344,6 @@ export default {
     margin-right: auto;    
     background-color: #aaa;
     border-radius: 50%;
-    /*background-image: url('../../../assets/track.png');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;    
-    border-radius: 50%;*/
   }  
   .tcircle-black {
     width: 32px;
@@ -429,14 +361,15 @@ export default {
     font-family: p-medium;
   }
   .ttwo {
-  
+    
   }
   .row2-line {
+
     display: grid;
-    grid-template-columns: 10% 90%;    
+    grid-template-columns: 12% 88%;    
   }  
   .lone {
-    /*background-color: green;*/
+    
   }
   .lline {
     width: 3px;
@@ -453,7 +386,7 @@ export default {
     margin-right: auto;
   }   
   .ltwo {
-    /*background-color: orange;*/
+    
   }
   .dline {
     width: 90%;
