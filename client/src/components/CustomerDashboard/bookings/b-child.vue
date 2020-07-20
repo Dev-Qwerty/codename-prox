@@ -74,7 +74,7 @@
 
       <div v-if="!this.os.arrived" class="row1-tick">
         <div class="tone">
-          <div class="tcircle-black"></div>
+          <div class="tcircle"></div>
         </div>
         <div class="ttwo">
           <p class="thdn">Arrived</p>
@@ -82,7 +82,7 @@
       </div>
       <div v-if="!this.os.arrived" class="row2-line">
         <div class="lone">
-          <div class="lline-black"></div>
+          <div class="lline"></div>
         </div>
         <div class="ltwo">
           
@@ -369,7 +369,7 @@ export default {
       } else if(obj.status == 'arrived') {
         this.os.placed = true;
         this.os.accepted = true; 
-        this.os.arrived = true;
+        this.os.arrived = true;        
         this.$cookies.set('orderstatus', this.os, '1d');
       } else if(obj.status == 'started') {
         this.os.placed = true;
@@ -402,7 +402,7 @@ export default {
       this.$http.get(url)
       .then((response) => {
         this.fn(response.data)
-        /*alert(JSON.stringify(response.data))*/
+        alert(JSON.stringify(response.data))
       })
       .catch((error) => {
         alert(error);
