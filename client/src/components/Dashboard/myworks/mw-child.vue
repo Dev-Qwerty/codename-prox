@@ -155,7 +155,7 @@ export default {
 
             if(response.data.message == 'Work started') {
               Vue.$toast.open({
-                message: response.data,
+                message: response.data.message,
                 type: 'success',
                 position: 'bottom-left'
               });               
@@ -194,7 +194,7 @@ export default {
         
       } else if(this.xvar == 'completed') {
 
-        /*let url = this.$serverURLI + "/orderstatus/verifytoken"
+        let url = this.$serverURLI + "/orderstatus/verifytoken"
         this.$http
         .post(url, {
           orderID: this.sr.orderID,
@@ -203,9 +203,9 @@ export default {
           
           if(response.status == 200){
             
-            if(response.data.message == 'Work has been completed') {
+            if(response.data.message == 'Work completed') {
               Vue.$toast.open({
-                message: response.data,
+                message: response.data.message,
                 type: 'success',
                 position: 'bottom-left'
               });     
@@ -214,7 +214,7 @@ export default {
               this.$cookies.set("xvar", this.xvar, "1d");
               this.yvar = 'qw121'
               this.$cookies.set("yvar", this.yvar, "1d"); 
-              window.location.href = location.protocol + "//"+ location.host + "/customerdashboard/myworks";
+              //window.location.href = location.protocol + "//"+ location.host + "/customerdashboard/myworks";
             
             } else {
               Vue.$toast.open({
@@ -222,7 +222,7 @@ export default {
                 type: 'error',
                 position: 'bottom-left'
               }); 
-            }     
+            } 
           
           } else {
             Vue.$toast.open({
@@ -230,11 +230,11 @@ export default {
               type: 'error',
               position: 'bottom-left'
             }); 
-          } 
+          }
         
         }).catch(error => {
           alert(error)
-        })*/
+        })
         
         /*this.xvar = 'done'
         this.$cookies.set("xvar", this.xvar, "1d");
