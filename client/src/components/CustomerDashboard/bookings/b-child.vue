@@ -106,40 +106,6 @@
         </div>
       </div>      
 
-      <!--<div v-if="!this.os.arrived" class="row1-tick">
-        <div class="tone">
-          <div class="tcircle"></div>
-        </div>
-        <div class="ttwo">
-          <p class="thdn">Arrived</p>
-        </div>
-      </div>
-      <div v-if="!this.os.arrived" class="row2-line">
-        <div class="lone">
-          <div class="lline"></div>
-        </div>
-        <div class="ltwo">
-          
-        </div>
-      </div>
-
-      <div v-if="this.os.arrived" class="row1-tick">
-        <div class="tone">
-          <div class="tcircle-black"></div>
-        </div>
-        <div class="ttwo">
-          <p class="thdn">Arrived</p>
-        </div>
-      </div>
-      <div v-if="this.os.arrived" class="row2-line">
-        <div class="lone">
-          <div class="lline-black"></div>
-        </div>
-        <div class="ltwo">
-          
-        </div>
-      </div>
-
       <div v-if="!this.os.started" class="row1-tick">
         <div class="tone">
           <div class="tcircle"></div>
@@ -157,7 +123,7 @@
         </div>
       </div>
 
-      <div v-if="this.oso.started" class="row1-tick">
+      <div v-if="this.os.started" class="row1-tick">
         <div class="tone">
           <div class="tcircle-black"></div>
         </div>
@@ -182,7 +148,7 @@
           <p class="thdn">Completed</p>
         </div>
       </div>
-      <div v-if="!this.os.conpleted" class="row2-line">
+      <div v-if="!this.os.completed" class="row2-line">
         <div class="lone">
           <div class="lline"></div>
         </div>
@@ -216,12 +182,12 @@
           <p class="thdn">Payment</p>
         </div>
       </div>
-      <div v-if="!this.os.payment" class="row2-line">
+      <div class="row2-line">
         <div class="lone">
-          <div class="lline"></div>
+
         </div>
         <div class="ltwo">
-          
+
         </div>
       </div>
 
@@ -233,16 +199,14 @@
           <p class="thdn">Payment</p>
         </div>
       </div>
-      <div v-if="this.os.payment" class="row2-line">
+      <div class="row2-line">
         <div class="lone">
-          <div class="lline-black"></div>
+
         </div>
         <div class="ltwo">
-          
+
         </div>
-      </div>-->
-
-
+      </div>
 
 
       <!--<div class="row1-tick">
@@ -277,7 +241,7 @@
         <div class="ltwo">
           
         </div>
-      </div>-->
+      </div>
 
       <div class="row1-tick">
         <div class="tone">
@@ -313,7 +277,7 @@
         </div>
       </div>
 
-      <div class="row1-tick">
+      <div v-if="!this.os.payment" class="row1-tick">
         <div class="tone">
           <div class="tcircle"></div>
         </div>
@@ -328,7 +292,7 @@
         <div class="ltwo">
 
         </div>
-      </div>
+      </div>-->
 
     </div>
 
@@ -347,12 +311,6 @@ export default {
   },
   data() {
     return {
-      /*placed: false,
-      accepted: false,
-      arrived: false,
-      started: false,
-      completed: false,
-      payment: false,*/
       os: this.$cookies.get('orderstatus'), 
       bdata: this.$cookies.get('cd-b-child')
     }
@@ -382,14 +340,14 @@ export default {
         this.os.accepted = true;
         this.os.arrived = true;
         this.os.started = true;
-        this.os.created = true;
+        this.os.completed = true;
         this.$cookies.set('orderstatus', this.os, '1d');       
       } else if(obj.status == 'payment'){
         this.os.placed = true;
         this.os.accepted = true;
         this.os.arrived = true;
         this.os.started = true;
-        this.os.created = true;
+        this.os.completed = true;
         this.os.payment = true;
         this.$cookies.set('orderstatus', this.os, '1d');    
       } else {
@@ -402,7 +360,7 @@ export default {
       this.$http.get(url)
       .then((response) => {
         this.fn(response.data)
-        alert(JSON.stringify(response.data))
+        //alert(JSON.stringify(response.data))
       })
       .catch((error) => {
         alert(error);
