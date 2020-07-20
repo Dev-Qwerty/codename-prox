@@ -10,8 +10,12 @@
             <p class="r1-3"><span>Status: </span>{{ srr.status }}</p>         
           </div>
           <div class="r2">
-            <p v-if="srr.startToken" class="r2-1"><span  class="r2-1-1"> START TOKEN: </span><span class="r2-1-2">{{ srr.startToken }}</span></p>
-            <!--<p v-if="srr.completeToken" class="r2-1"><span> END TOKEN: </span>{{ this.arr.completeToken }}</p>-->
+            <div v-if="srr.completeToken">
+              <p class="r2-1"><span  class="r2-1-1"> END TOKEN: </span><span class="r2-1-2">{{ srr.completeToken }}</span></p>
+            </div>
+            <div v-if="srr.startToken">
+              <p class="r2-1"><span> START TOKEN: </span>{{ this.arr.startToken }}</p>
+            </div>
           </div>
         </div>    
       </div>

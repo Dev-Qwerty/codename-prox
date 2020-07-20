@@ -153,7 +153,7 @@ export default {
           
           if(response.status == 200){
 
-            if(response.data.message == 'Work has been arrived') {
+            if(response.data.message == 'Work started') {
               Vue.$toast.open({
                 message: response.data,
                 type: 'success',
@@ -171,14 +171,13 @@ export default {
                 position: 'bottom-left'
               }); 
             }     
-          
           } else {
             Vue.$toast.open({
               message: "Something went wrong",
               type: 'error',
               position: 'bottom-left'
             }); 
-          }          
+          }         
         
         }).catch(error => {
             Vue.$toast.open({
