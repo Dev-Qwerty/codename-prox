@@ -216,19 +216,21 @@
       <div class="details-section">
         <p class="hdn">Booking Detals</p>
         <div class="d-oo1">
-          <p>Service Name: {{ bdata.service.subserviceName }}</p>
-          <p>Order ID: {{ bdata.orderID }}</p>
-          <p>Total Amount: {{ bdata.totalAmount }}</p>
-          <p>Date: {{ bdata.date }}</p>
-          <p>Time: {{ bdata.time }}</p>
-          <p>Name: {{ bdata.address.name }}</p>
-          <p>Phone: {{ bdata.address.phone }}</p>
-          <p>Address:</p>
-          <p>{{ bdata.address.line1 }}</p>
-          <p>{{ bdata.address.line2 }}</p>
-          <p>{{ bdata.address.district }}</p>
-          <p>Pin: {{ bdata.address.pin }}</p>
-          <p>Sub Services:</p>
+          <p class="oo11"><span class="xoo11">Name:</span>{{ bdata.service.subserviceName }}</p>
+          <p class="oo11"><span class="xoo11">Order ID:</span>{{ bdata.orderID }}</p>
+          <p class="oo11"><span class="xoo11">Amount:</span>{{ bdata.totalAmount }}</p>
+          <p class="oo11"><span class="xoo11">Date:</span>{{ bdata.date }}</p>
+          <p class="oo11"><span class="xoo11">Time:</span>{{ bdata.time }}</p>
+          <p class="oo11"><span class="xoo11">Name:</span>{{ bdata.address.name }}</p>
+          <p class="oo11"><span class="xoo11">Phone:</span>{{ bdata.address.phone }}</p>
+          <p class="oo11"><span class="xoo11">Address:</span></p>
+          <div class="yoo11">
+            <p class="oo11">{{ bdata.address.line1 }}</p>
+            <p class="oo11">{{ bdata.address.line2 }}</p>
+            <p class="oo11">{{ bdata.address.district }}</p>
+            <p class="oo11"><span class="xoo11">Pin:</span>{{ bdata.address.pin }}</p>
+          </div>
+          <p class="oo11"><span class="xoo11">Sub Services:</span></p>
         </div>
       </div>
     </div>
@@ -401,5 +403,15 @@ export default {
   .d-oo1 {
     font-family: p-medium;
     /*margin-left: 40px;*/
+  }
+  .oo11 {
+    margin-bottom: 7px;
+  }
+  .xoo11 {
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  .yoo11 {
+    padding-left: 30px;
   }
 </style>
