@@ -91,7 +91,6 @@ export default {
   },
   methods: {
     apiCall() {
-      alert(this.wid)
       let url = this.$serverURLI +'/worker/myworks/' + this.wid
       this.$http.get(url)
       .then((response) => {
