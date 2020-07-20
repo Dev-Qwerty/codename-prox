@@ -69,9 +69,9 @@
         </div>
       </div>
       
-      <!--<div v-if="this.xvar == 'done'">
+      <div v-if="this.xvar == 'done'">
         <p class="inwrapper-end">Work completed successfully!!!</p> 
-      </div>-->  
+      </div>  
     </div>
     
   </div>
@@ -214,7 +214,9 @@ export default {
               this.$cookies.set("xvar", this.xvar, "1d");
               this.yvar = 'qw121'
               this.$cookies.set("yvar", this.yvar, "1d"); 
-              //window.location.href = location.protocol + "//"+ location.host + "/customerdashboard/myworks";
+              setTimeout(function(){
+                window.location.href = location.protocol + "//"+ location.host + "/dashboard/myworks"
+              },5000);
             
             } else {
               Vue.$toast.open({
