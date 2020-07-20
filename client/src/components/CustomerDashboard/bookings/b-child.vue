@@ -215,6 +215,20 @@
       
       <div class="details-section">
         <p class="hdn">Booking Detals</p>
+        <div class="d-oo1">
+          <p>Name: {{ bdata.service.subserviceName }}</p>
+          <p>Order ID: {{ bdata.orderID }}</p>
+          <p>Total Amount: {{ bdata.totalAmount }}</p>
+          <p>Date: {{ bdata.date }}</p>
+          <p>Time: {{ bdata.time }}</p>
+          <p>Name: {{ bdata.address.name }}</p>
+          <p>Phone: {{ bdata.address.phone }}</p>
+          <p>Address: </p>
+          <p>{{ bdata.address.line1 }}</p>
+          <p>{{ bdata.address.line2 }}</p>
+          <p>{{ bdata.address.district }}</p>
+          <p>Pin: {{ bdata.address.pin }}</p>
+        </div>
       </div>
     </div>
 
