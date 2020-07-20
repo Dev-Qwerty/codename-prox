@@ -231,6 +231,14 @@
             <p class="oo11"><span class="xoo11">Pin:</span>{{ bdata.address.pin }}</p>
           </div>
           <p class="oo11"><span class="xoo11">Sub Services:</span></p>
+          <div class="yoo11">
+            <div v-for="(srq, index) in bdata.service.categories" :key="index">
+              <div class="oo11a">
+                <p class="oo11"><span class="xoo11">Category:</span>{{ srq.category }}</p>
+                <p class="oo11"><span class="xoo11">Quantity:</span>{{ srq.quantity }}</p>
+              </div>                                 
+            </div> 
+          </div>         
         </div>
       </div>
     </div>
@@ -402,6 +410,7 @@ export default {
   }
   .d-oo1 {
     font-family: p-medium;
+    font-size: 17px;
     /*margin-left: 40px;*/
   }
   .oo11 {
@@ -413,5 +422,8 @@ export default {
   }
   .yoo11 {
     padding-left: 30px;
+  }
+  .oo11a {
+    margin-bottom: 5px;
   }
 </style>
