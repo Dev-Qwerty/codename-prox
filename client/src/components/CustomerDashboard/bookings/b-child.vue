@@ -4,7 +4,7 @@
 
     <div class="t-wrapper">
 
-      <div class="row1-tick">
+      <div v-if="!this.os.placed" class="row1-tick">
         <div class="tone">
           <div class="tcircle"></div>
         </div>
@@ -12,7 +12,7 @@
           <p class="thdn">Placed</p>
         </div>
       </div>
-      <div class="row2-line">
+      <div v-if="!this.os.placed" class="row2-line">
         <div class="lone">
           <div class="lline"></div>
         </div>
@@ -21,7 +21,231 @@
         </div>
       </div>
 
-      <div class="row1-tick">
+      <div v-if="this.os.placed" class="row1-tick">
+        <div class="tone">
+          <div class="tcircle-black"></div>
+        </div>
+        <div class="ttwo">
+          <p class="thdn">Placed</p>
+        </div>
+      </div>
+      <div v-if="this.os.placed" class="row2-line">
+        <div class="lone">
+          <div class="lline-black"></div>
+        </div>
+        <div class="ltwo">
+          
+        </div>
+      </div>
+
+      <div v-if="!this.os.accepted" class="row1-tick">
+        <div class="tone">
+          <div class="tcircle"></div>
+        </div>
+        <div class="ttwo">
+          <p class="thdn">Accepted</p>
+        </div>
+      </div>
+      <div v-if="!this.os.accepted" class="row2-line">
+        <div class="lone">
+          <div class="lline"></div>
+        </div>
+        <div class="ltwo">
+          
+        </div>
+      </div>
+
+      <div v-if="this.os.accepted" class="row1-tick">
+        <div class="tone">
+          <div class="tcircle-black"></div>
+        </div>
+        <div class="ttwo">
+          <p class="thdn">Accepted</p>
+        </div>
+      </div>
+      <div v-if="this.os.accepted" class="row2-line">
+        <div class="lone">
+          <div class="lline-black"></div>
+        </div>
+        <div class="ltwo">
+          
+        </div>
+      </div>
+
+      <div v-if="!this.os.arrived" class="row1-tick">
+        <div class="tone">
+          <div class="tcircle-black"></div>
+        </div>
+        <div class="ttwo">
+          <p class="thdn">Arrived</p>
+        </div>
+      </div>
+      <div v-if="!this.os.arrived" class="row2-line">
+        <div class="lone">
+          <div class="lline-black"></div>
+        </div>
+        <div class="ltwo">
+          
+        </div>
+      </div>
+
+      <div v-if="this.os.arrived" class="row1-tick">
+        <div class="tone">
+          <div class="tcircle-black"></div>
+        </div>
+        <div class="ttwo">
+          <p class="thdn">Arrived</p>
+        </div>
+      </div>
+      <div v-if="this.os.arrived" class="row2-line">
+        <div class="lone">
+          <div class="lline-black"></div>
+        </div>
+        <div class="ltwo">
+          
+        </div>
+      </div>      
+
+      <!--<div v-if="!this.os.arrived" class="row1-tick">
+        <div class="tone">
+          <div class="tcircle"></div>
+        </div>
+        <div class="ttwo">
+          <p class="thdn">Arrived</p>
+        </div>
+      </div>
+      <div v-if="!this.os.arrived" class="row2-line">
+        <div class="lone">
+          <div class="lline"></div>
+        </div>
+        <div class="ltwo">
+          
+        </div>
+      </div>
+
+      <div v-if="this.os.arrived" class="row1-tick">
+        <div class="tone">
+          <div class="tcircle-black"></div>
+        </div>
+        <div class="ttwo">
+          <p class="thdn">Arrived</p>
+        </div>
+      </div>
+      <div v-if="this.os.arrived" class="row2-line">
+        <div class="lone">
+          <div class="lline-black"></div>
+        </div>
+        <div class="ltwo">
+          
+        </div>
+      </div>
+
+      <div v-if="!this.os.started" class="row1-tick">
+        <div class="tone">
+          <div class="tcircle"></div>
+        </div>
+        <div class="ttwo">
+          <p class="thdn">Started</p>
+        </div>
+      </div>
+      <div v-if="!this.os.started" class="row2-line">
+        <div class="lone">
+          <div class="lline"></div>
+        </div>
+        <div class="ltwo">
+          
+        </div>
+      </div>
+
+      <div v-if="this.oso.started" class="row1-tick">
+        <div class="tone">
+          <div class="tcircle-black"></div>
+        </div>
+        <div class="ttwo">
+          <p class="thdn">Started</p>
+        </div>
+      </div>
+      <div v-if="this.os.started" class="row2-line">
+        <div class="lone">
+          <div class="lline-black"></div>
+        </div>
+        <div class="ltwo">
+          
+        </div>
+      </div>
+
+      <div v-if="!this.os.completed" class="row1-tick">
+        <div class="tone">
+          <div class="tcircle"></div>
+        </div>
+        <div class="ttwo">
+          <p class="thdn">Completed</p>
+        </div>
+      </div>
+      <div v-if="!this.os.conpleted" class="row2-line">
+        <div class="lone">
+          <div class="lline"></div>
+        </div>
+        <div class="ltwo">
+          
+        </div>
+      </div>
+
+      <div v-if="this.os.completed" class="row1-tick">
+        <div class="tone">
+          <div class="tcircle-black"></div>
+        </div>
+        <div class="ttwo">
+          <p class="thdn">Completed</p>
+        </div>
+      </div>
+      <div v-if="this.os.completed" class="row2-line">
+        <div class="lone">
+          <div class="lline-black"></div>
+        </div>
+        <div class="ltwo">
+          
+        </div>
+      </div>
+
+      <div v-if="!this.os.payment" class="row1-tick">
+        <div class="tone">
+          <div class="tcircle"></div>
+        </div>
+        <div class="ttwo">
+          <p class="thdn">Payment</p>
+        </div>
+      </div>
+      <div v-if="!this.os.payment" class="row2-line">
+        <div class="lone">
+          <div class="lline"></div>
+        </div>
+        <div class="ltwo">
+          
+        </div>
+      </div>
+
+      <div v-if="this.os.payment" class="row1-tick">
+        <div class="tone">
+          <div class="tcircle-black"></div>
+        </div>
+        <div class="ttwo">
+          <p class="thdn">Payment</p>
+        </div>
+      </div>
+      <div v-if="this.os.payment" class="row2-line">
+        <div class="lone">
+          <div class="lline-black"></div>
+        </div>
+        <div class="ltwo">
+          
+        </div>
+      </div>-->
+
+
+
+
+      <!--<div class="row1-tick">
         <div class="tone">
           <div class="tcircle"></div>
         </div>
@@ -53,7 +277,7 @@
         <div class="ltwo">
           
         </div>
-      </div>
+      </div>-->
 
       <div class="row1-tick">
         <div class="tone">
@@ -123,44 +347,51 @@ export default {
   },
   data() {
     return {
-      placed: false,
+      /*placed: false,
       accepted: false,
       arrived: false,
       started: false,
       completed: false,
-      payment: false,
+      payment: false,*/
+      os: this.$cookies.get('orderstatus'), 
       bdata: this.$cookies.get('cd-b-child')
     }
   },
   methods: { 
     fn(obj) {
       if(obj.status == 'placed') {
-        this.placed = true
+        this.os.placed = true;
+        this.$cookies.set('orderstatus', this.os, '1d');
       } else if(obj.status == 'accepted') {
-        this.placed = true
-        this.accepted = true
+        this.os.placed = true;
+        this.os.accepted = true;
+        this.$cookies.set('orderstatus', this.os, '1d');
       } else if(obj.status == 'arrived') {
-        this.placed = true
-        this.accepted = true  
-        this.arrived = true
+        this.os.placed = true;
+        this.os.accepted = true; 
+        this.os.arrived = true;
+        this.$cookies.set('orderstatus', this.os, '1d');
       } else if(obj.status == 'started') {
-        this.placed = true
-        this.accepted = true
-        this.arrived = true
-        this.started = true
+        this.os.placed = true;
+        this.os.accepted = true;
+        this.os.arrived = true;
+        this.os.started = true;
+        this.$cookies.set('orderstatus', this.os, '1d');
       } else if(obj.status == 'completed') {
-        this.placed = true
-        this.accepted = true
-        this.arrived = true
-        this.started = true        
-        this.created = true
+        this.os.placed = true;
+        this.os.accepted = true;
+        this.os.arrived = true;
+        this.os.started = true;
+        this.os.created = true;
+        this.$cookies.set('orderstatus', this.os, '1d');       
       } else if(obj.status == 'payment'){
-        this.placed = true
-        this.accepted = true
-        this.arrived = true
-        this.started = true        
-        this.created = true        
-        this.payment = true
+        this.os.placed = true;
+        this.os.accepted = true;
+        this.os.arrived = true;
+        this.os.started = true;
+        this.os.created = true;
+        this.os.payment = true;
+        this.$cookies.set('orderstatus', this.os, '1d');    
       } else {
         alert("error")
       } 
@@ -224,6 +455,17 @@ export default {
     background-size: contain;    
     border-radius: 50%;*/
   }  
+  .tcircle-black {
+    width: 32px;
+    height: 32px;
+    margin-left: auto;
+    margin-right: auto;    
+    background-image: url('../../../assets/track.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;    
+    border-radius: 50%;    
+  }
   .thdn {
     font-size: 20px;
     font-family: p-medium;
@@ -245,6 +487,13 @@ export default {
     margin-left: auto;
     margin-right: auto;
   }  
+  .lline-black {
+    width: 3px;
+    height: 100%;
+    background-color: #000;
+    margin-left: auto;
+    margin-right: auto;
+  }   
   .ltwo {
     /*background-color: orange;*/
   }

@@ -77,6 +77,7 @@ export default {
 
     fn(obj) {
       this.$cookies.set("cd-b-child", JSON.stringify(obj), "1d");
+      this.$cookies.set("orderstatus", JSON.stringify({"placed": false, "accepted": false, "arrived": false, "started": false, "completed": false, "payment": false}), "1d");
       window.location.href = "http://localhost:8080/customerdashboard/bchild";
     }
   },
