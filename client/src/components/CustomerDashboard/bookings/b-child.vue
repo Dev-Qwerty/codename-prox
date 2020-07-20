@@ -216,26 +216,22 @@
       <div class="details-section">
         <p class="hdn">Booking Detals</p>
         <div class="d-oo1">
-          <p>Name: {{ bdata.service.subserviceName }}</p>
+          <p>Service Name: {{ bdata.service.subserviceName }}</p>
           <p>Order ID: {{ bdata.orderID }}</p>
           <p>Total Amount: {{ bdata.totalAmount }}</p>
           <p>Date: {{ bdata.date }}</p>
           <p>Time: {{ bdata.time }}</p>
           <p>Name: {{ bdata.address.name }}</p>
           <p>Phone: {{ bdata.address.phone }}</p>
-          <p>Address: </p>
+          <p>Address:</p>
           <p>{{ bdata.address.line1 }}</p>
           <p>{{ bdata.address.line2 }}</p>
           <p>{{ bdata.address.district }}</p>
           <p>Pin: {{ bdata.address.pin }}</p>
+          <p>Sub Services:</p>
         </div>
       </div>
     </div>
-
-    <!--<div>
-      <div class="dline"></div>
-      <p class="dhdn">Details</p>
-    </div>-->
   
   </div>
 </template>
@@ -312,30 +308,25 @@ export default {
 
 <style scoped>
   .Wrapper {
-    padding-left: 2%;
-    padding-top: 2%;
+    padding-left: 3%;
+    padding-top: 3%;
   }
   .hdn {
     font-size: 23px;
     font-family: p-regular;
   }
   .page-wrapper {
-    margin-left: 0%;
+    margin-left: 2%;
     width: 95%;
     display: grid;
-    grid-template-columns: 40% 60%;
+    grid-template-columns: 50% 50%;
   }
   .track-section {
     /*background-color: red;*/
   }
-  .details-section {
-    /*background-color: blueviolet;*/
-    border-left: 1px solid #aaa;
-    padding-left: 2%;
-  }
   .track-box {
     margin-top: 0px;
-    margin-left: 20px;
+    margin-left: 40px;
     background-color: #fff;
     /*border: 1px solid #000;*/
     height: 550px;
@@ -402,14 +393,13 @@ export default {
   .ltwo {
     
   }
-  .dline {
-    width: 90%;
-    background-color: #aaa;
-    height: 1px;
+  .details-section {
+    /*background-color: blueviolet;*/
+    border-left: 1px solid #aaa;
+    padding-left: 3%;
   }
-  .dhdn {
-    font-size: 23px;
-    font-family: p-regular;
-    margin-top: 1%;    
+  .d-oo1 {
+    font-family: p-medium;
+    /*margin-left: 40px;*/
   }
 </style>

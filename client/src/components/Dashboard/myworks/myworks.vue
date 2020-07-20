@@ -64,7 +64,7 @@
                   <p class="row2-two">{{ sr.address.line2 }}, {{ sr.address.district }}</p>
                 </div>
                 <div class="box-row3">
-                  <p class="row3-one">02:30 PM</p>
+                  <p class="row3-one">{{ sr.time }}</p>
                   <p class="row3-two">{{ sr.date }}</p>
                 </div>
               </div>
@@ -91,6 +91,7 @@ export default {
   },
   methods: {
     apiCall() {
+      alert(this.wid)
       let url = this.$serverURLI +'/worker/myworks/' + this.wid
       this.$http.get(url)
       .then((response) => {
