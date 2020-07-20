@@ -315,8 +315,9 @@ export default {
     /*background-color: red;*/
   }
   .details-section {
-    background-color: blueviolet;
-    border-left: 1px solid #000;
+    /*background-color: blueviolet;*/
+    border-left: 1px solid #aaa;
+    padding-left: 2%;
   }
   .track-box {
     margin-top: 0px;
@@ -326,8 +327,7 @@ export default {
     height: 550px;
     width: 400px;
     display: grid;
-    grid-template-rows: 32px 1fr 32px 1fr 32px 1fr 32px 1fr 32px 1fr 32px 1fr ;
-    /*grid-template-rows: 5.17% 11.5% 5.17% 11.5% 5.17% 11.5% 5.17% 11.5% 5.17% 11.5% 5.17% 11.5%;*/ 
+    grid-template-rows: 32px 1fr 32px 1fr 32px 1fr 32px 1fr 32px 1fr 32px 1fr ; 
     /*grid-template-rows: 8% 17% 8% 17% 8% 17% 8% 17% 8% 17% 8% 17%;*/
   }
   .row1-tick {
