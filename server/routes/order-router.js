@@ -7,6 +7,7 @@ const assignWorker = require('../misc/assign-worker')
 const moment = require('moment')
 const crypt = require('../misc/crypt')
 // const sendMessage = require('../misc/textmessage')
+const lodash = require('lodash')
 
 // Middleware for body parsing
 const parseUrl = express.urlencoded({ extended: false })
@@ -21,6 +22,7 @@ const workerModel = require('../models/worker-model');
 const orderStatusModel = require('../models/order-status');
 const userModel = require('../models/user-model')
 const failedorderModel = require('../models/failedorder-model')
+const userfineModel = require('../models/userfine-model')
 
 const paytm = require('../config/keys')
 const checksum_lib = require('../config/paymentgateway/checksum');
@@ -691,6 +693,40 @@ router
                 post_req.end();
             });
         });
+    })
+
+
+router
+    .route('/cancel')
+    .post([parseJson, parseUrl], async (req, res) => {
+        try {
+            const orderId = req.body.orderId
+            const userId = await orderModel.findOne({orderID: orderId}, 'userID -_id')
+            const user = await userfineModel.findOne({userID: userId.userID})
+            
+            // updates fine if user is already present
+            if(user != null) {
+                await userfineModel.update(
+                    {userID: userId.userID},
+                    { $push: { fine: {
+                        orderID: orderId,
+                        amount: 100
+                    }}}
+                )
+                res.send("fine updated")
+            } else {
+                // Adds users and fine since user is not present
+                let fine = []
+                fine.push({orderID: orderId, amount: 100})
+                let newuserfine = new userfineModel
+                newuserfine.userID = userId.userID
+                newuserfine.fine = fine
+                await newuserfine.save()
+                res.send('fine added')
+            }
+        } catch (error) {
+            res.send(error)
+        } 
     })
 
 module.exports = router;
