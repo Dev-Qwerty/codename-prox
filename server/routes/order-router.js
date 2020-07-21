@@ -7,6 +7,7 @@ const assignWorker = require('../misc/assign-worker')
 const moment = require('moment')
 const crypt = require('../misc/crypt')
 // const sendMessage = require('../misc/textmessage')
+const lodash = require('lodash')
 
 // Middleware for body parsing
 const parseUrl = express.urlencoded({ extended: false })
@@ -702,14 +703,28 @@ router
         try {
             const orderId = req.body.orderId
             const userId = await orderModel.findOne({orderID: orderId}, 'userID -_id')
-            const userfine = await userfineModel.update(
-                {userID: userId.userID},
-                { $push: { fine: {
-                    orderID: orderId,
-                    amount: 100
-                }}}
-            )
-            res.send(userfine)
+            const user = await userfineModel.findOne({userID: userId.userID})
+            
+            // updates fine if user is already present
+            if(user != null) {
+                await userfineModel.update(
+                    {userID: userId.userID},
+                    { $push: { fine: {
+                        orderID: orderId,
+                        amount: 100
+                    }}}
+                )
+                res.send("fine updated")
+            } else {
+                // Adds users and fine since user is not present
+                let fine = []
+                fine.push({orderID: orderId, amount: 100})
+                let newuserfine = new userfineModel
+                newuserfine.userID = userId.userID
+                newuserfine.fine = fine
+                await newuserfine.save()
+                res.send('fine added')
+            }
         } catch (error) {
             res.send(error)
         } 
