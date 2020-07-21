@@ -1,9 +1,9 @@
 <template>
   <div class="Container">
-    <div class="top-box">
+    <!-- <div class="top-box">
       <router-link class="arrowIcon" :to="{ path: '/services' }"></router-link>
       <h3>Back to services</h3>
-    </div>
+    </div> -->
     <div class="mid">
       <div class="mid-box">
         <h1>Quality Services</h1>

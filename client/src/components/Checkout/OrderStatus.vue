@@ -14,7 +14,7 @@
         <div>
             <center>
                 <router-link :to="{path: '/services'}">
-                    <button class="backbtn" >Back to services</button>
+                    <button @click="backtoservices" class="backbtn" >Back to services</button>
                 </router-link>
             </center>
         </div>
@@ -53,6 +53,12 @@ export default {
             this.respMessage = 'Payment failed.'
         } else {
             this.respMessage = ''
+        }
+    },
+    methods: {
+        backtoservices() {
+            this.$cookies.remove("cart")
+            this.$cookies.remove("r")
         }
     }
 }

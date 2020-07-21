@@ -72,10 +72,9 @@ router
 
                 req.body.address.phone = `91${req.body.address.phone}`
 
-                // create new orderrs
-                // let userID = crypt.decrypt(req.body.id)
+                // create new orders
                 newOrder.orderID = uniqueId.uniqueOrderId();
-                newOrder.userID = req.body.id;
+                newOrder.userID = crypt.decrypt(req.body.id);
                 newOrder.date = req.body.date;
                 newOrder.service.subserviceName = service.name;
                 newOrder.service.categories = req.body.service.categories;
