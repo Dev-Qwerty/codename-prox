@@ -370,7 +370,7 @@ router
   .get(async (req, res) => {
     try {
       let id = req.params.id
-      let bookings = await Order.find({userID: crypt.decrypt(id),$or:[{completed: false, paid: false},{completed:true, paid: false},{completed: false, paid: true}]}, 'service address orderID date totalAmount time -_id')
+      let bookings = await Order.find({userID: crypt.decrypt(id),$or:[{completed: false, paid: false},{completed:true, paid: false},{completed: false, paid: true}]}, 'service address orderID date totalAmount time paid -_id')
       console.log(bookings.length)
       res.send(bookings)
     } catch (error) {
