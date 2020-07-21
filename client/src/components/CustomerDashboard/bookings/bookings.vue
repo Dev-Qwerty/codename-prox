@@ -20,32 +20,8 @@
               <!--</router-link>-->
             </div>
           </div>
-        </div>
-
-        <!--<div class="box">
-          <div class="r1">
-            <p class="r1-1">Plumbing</p>
-            <div class="Line"></div>            
-          </div>
-          <div class="r2">
-            <p class="r2-1">09:00 AM</p>
-          </div>
-          <div class="r3">
-            <p class="r3-1">Scheduled</p>
-          </div>
-        </div>  
-        <div class="box">
-          <div class="r1">
-            <p class="r1-1">Carpentry</p>
-            <div class="Line"></div>            
-          </div>
-          <div class="r2">
-            <p class="r2-1">09:00 AM</p>
-          </div>
-          <div class="r3">
-            <p class="r3-1">Scheduled</p>
-          </div>
-        </div>-->                      
+        </div>                   
+      
       </div>
   
   </div>
@@ -77,6 +53,7 @@ export default {
 
     fn(obj) {
       this.$cookies.set("cd-b-child", JSON.stringify(obj), "1d");
+      this.$cookies.set("orderstatus", JSON.stringify({"placed": false, "accepted": false, "arrived": false, "started": false, "completed": false, "payment": false}), "1d");
       window.location.href = "http://localhost:8080/customerdashboard/bchild";
     }
   },
