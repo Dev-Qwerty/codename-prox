@@ -7,7 +7,6 @@ const assignWorker = require('../misc/assign-worker')
 const moment = require('moment')
 const crypt = require('../misc/crypt')
 // const sendMessage = require('../misc/textmessage')
-const lodash = require('lodash')
 
 // Middleware for body parsing
 const parseUrl = express.urlencoded({ extended: false })
@@ -500,7 +499,7 @@ router
     .post([parseUrl,parseJson], async (req, res) => {
         try {
             let completed = true
-            if (!req.body.id || !req.body.service.serviceId || !req.body.address.phone || !req.body.address.name || !req.body.address.line1 || !req.body.address.line2 || !req.body.address.district || !req.body.address.pin || !req.body.date || !req.body.time || req.body.service.categories == 0) {
+            if (!req.body.id || req.body.orderId || !req.body.service.serviceId || req.body.service.categories == 0) {
                 completed = false
             } else {
                 for( i = req.body.service.categories.length; i > 0 ; i--){
