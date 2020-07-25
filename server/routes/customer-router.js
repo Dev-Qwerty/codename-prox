@@ -407,5 +407,12 @@ router
     }
   })
 
+  router.get('/fetchAddresses/:id', (req,res)=> {
+    const id = req.params.id;
+    User.find({userID: crypt.decrypt(id), address: {}}, (err,results) => {
+      res.send(results);
+    })
+  })
+
 
 module.exports = router;
