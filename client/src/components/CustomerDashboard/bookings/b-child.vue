@@ -196,7 +196,7 @@
           </div>
           <div v-if="this.os.payment" class="row1-tick">
             <div class="tone">
-              <div class="tcircle-black"></div>
+              <div class="tcircle"></div>
             </div>
             <div class="ttwo">
               <p class="thdn">Payment</p>
@@ -285,16 +285,23 @@ export default {
         this.os.completed = true;
         this.$cookies.set('orderstatus', this.os, '1d');       
       } else if(obj.status == 'payment'){
-        this.os.placed = true;
+        /*this.os.placed = true;
         this.os.accepted = true;
         this.os.arrived = true;
         this.os.started = true;
         this.os.completed = true;
         this.os.payment = true;
-        this.$cookies.set('orderstatus', this.os, '1d');    
+        this.$cookies.set('orderstatus', this.os, '1d');*/    
       } else {
         alert("error")
       } 
+    },
+
+    paidfn() {
+      if(this.bdata.paid == true) {
+        this.os.payment = true;
+        this.$cookies.set('orderstatus', this.os, '1d');
+      }
     },
 
     apiCall() {
@@ -302,6 +309,7 @@ export default {
       this.$http.get(url)
       .then((response) => {
         this.fn(response.data)
+        this.paidfn();
         //alert(JSON.stringify(response.data))
       })
       .catch((error) => {
