@@ -190,11 +190,9 @@
             <div class="lone">
             </div>
             <div class="ltwo-payment">
-              <p>Your work cost is estimated to be Rs. 400</p>
-              <p>Click to pay.</p>
-              <div>
-                <input type="submit">
-              </div>
+              <p class="pone">Your work cost is estimated to be <span class="pone-bold">Rs. {{ bdata.totalAmount }}</span></p>
+              <p class="ptwo">Click to pay.</p>
+              <input class="pthree" type="submit" value="Pay Now">
             </div>
           </div>
           <div v-if="this.os.payment" class="row1-tick">
@@ -221,7 +219,7 @@
         <div class="d-oo1">
           <p class="oo11"><span class="xoo11">Name:</span>{{ bdata.service.subserviceName }}</p>
           <p class="oo11"><span class="xoo11">Order ID:</span>{{ bdata.orderID }}</p>
-          <p class="oo11"><span class="xoo11">Amount:</span>{{ bdata.totalAmount }}</p>
+          <!--<p class="oo11"><span class="xoo11">Amount:</span>{{ bdata.totalAmount }}</p>-->
           <p class="oo11"><span class="xoo11">Date:</span>{{ bdata.date }}</p>
           <p class="oo11"><span class="xoo11">Time:</span>{{ bdata.time }}</p>
           <p class="oo11"><span class="xoo11">Name:</span>{{ bdata.address.name }}</p>
@@ -368,7 +366,7 @@ export default {
     height: 32px;
     margin-left: auto;
     margin-right: auto;    
-    background-color: #aaa;
+    background-color: #DFDEDE;
     border-radius: 50%;
   }  
   .tcircle-black {
@@ -400,7 +398,7 @@ export default {
   .lline {
     width: 3px;
     height: 100%;
-    background-color: #aaa;
+    background-color: #DFDEDE;
     margin-left: auto;
     margin-right: auto;
   }  
@@ -412,8 +410,27 @@ export default {
     margin-right: auto;
   }   
   .ltwo-payment {
-    background-color: aqua;
-    font-family: p-medium;  
+    font-family: p-medium;
+    padding-top: 5px;  
+  }
+  .pone {
+    font-size: 16px;
+    margin-bottom: 0;
+  }
+  .pone-bold {
+    font-weight: bold;
+  }
+  .ptwo {
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+  .pthree {
+    width: 100px;
+    height: 40px;
+    font-family: p-medium;
+    background-color: #DFDEDE;
+    border: none;
+    color: #000;
   }
   .details-section {
     /*background-color: blueviolet;*/
