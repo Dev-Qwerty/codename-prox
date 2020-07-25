@@ -186,7 +186,7 @@
               <p class="thdn">Payment</p>
             </div>
           </div>
-          <div class="row2-line">
+          <div v-if="!this.os.payment" class="row2-line">
             <div class="lone">
 
             </div>
@@ -196,13 +196,13 @@
           </div>
           <div v-if="this.os.payment" class="row1-tick">
             <div class="tone">
-              <div class="tcircle"></div>
+              <div class="tcircle-black"></div>
             </div>
             <div class="ttwo">
               <p class="thdn">Payment</p>
             </div>
           </div>
-          <div class="row2-line">
+          <div v-if="this.os.payment" class="row2-line">
             <div class="lone">
 
             </div>
