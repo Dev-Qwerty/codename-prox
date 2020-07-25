@@ -186,12 +186,15 @@
               <p class="thdn">Payment</p>
             </div>
           </div>
-          <div v-if="!this.os.payment" class="row2-line">
+          <div v-if="!this.os.payment && this.os.completed" class="row2-line">
             <div class="lone">
-
             </div>
-            <div class="ltwo">
-
+            <div class="ltwo-payment">
+              <p>Your work cost is estimated to be Rs. 400</p>
+              <p>Click to pay.</p>
+              <div>
+                <input type="submit">
+              </div>
             </div>
           </div>
           <div v-if="this.os.payment" class="row1-tick">
@@ -408,8 +411,9 @@ export default {
     margin-left: auto;
     margin-right: auto;
   }   
-  .ltwo {
-    
+  .ltwo-payment {
+    background-color: aqua;
+    font-family: p-medium;  
   }
   .details-section {
     /*background-color: blueviolet;*/
