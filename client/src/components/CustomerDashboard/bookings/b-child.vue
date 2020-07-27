@@ -186,12 +186,13 @@
               <p class="thdn">Payment</p>
             </div>
           </div>
-          <div class="row2-line">
+          <div v-if="!this.os.payment && this.os.completed" class="row2-line">
             <div class="lone">
-
             </div>
-            <div class="ltwo">
-
+            <div class="ltwo-payment">
+              <p class="pone">Your work cost is estimated to be <span class="pone-bold">Rs. {{ bdata.totalAmount }}</span></p>
+              <p class="ptwo">Click to pay.</p>
+              <input class="pthree" type="submit" value="Pay Now">
             </div>
           </div>
           <div v-if="this.os.payment" class="row1-tick">
@@ -202,7 +203,7 @@
               <p class="thdn">Payment</p>
             </div>
           </div>
-          <div class="row2-line">
+          <div v-if="this.os.payment" class="row2-line">
             <div class="lone">
 
             </div>
@@ -218,7 +219,7 @@
         <div class="d-oo1">
           <p class="oo11"><span class="xoo11">Name:</span>{{ bdata.service.subserviceName }}</p>
           <p class="oo11"><span class="xoo11">Order ID:</span>{{ bdata.orderID }}</p>
-          <p class="oo11"><span class="xoo11">Amount:</span>{{ bdata.totalAmount }}</p>
+          <!--<p class="oo11"><span class="xoo11">Amount:</span>{{ bdata.totalAmount }}</p>-->
           <p class="oo11"><span class="xoo11">Date:</span>{{ bdata.date }}</p>
           <p class="oo11"><span class="xoo11">Time:</span>{{ bdata.time }}</p>
           <p class="oo11"><span class="xoo11">Name:</span>{{ bdata.address.name }}</p>
@@ -285,16 +286,23 @@ export default {
         this.os.completed = true;
         this.$cookies.set('orderstatus', this.os, '1d');       
       } else if(obj.status == 'payment'){
-        this.os.placed = true;
+        /*this.os.placed = true;
         this.os.accepted = true;
         this.os.arrived = true;
         this.os.started = true;
         this.os.completed = true;
         this.os.payment = true;
-        this.$cookies.set('orderstatus', this.os, '1d');    
+        this.$cookies.set('orderstatus', this.os, '1d');*/    
       } else {
         alert("error")
       } 
+    },
+
+    paidfn() {
+      if(this.bdata.paid == true) {
+        this.os.payment = true;
+        this.$cookies.set('orderstatus', this.os, '1d');
+      }
     },
 
     apiCall() {
@@ -302,6 +310,7 @@ export default {
       this.$http.get(url)
       .then((response) => {
         this.fn(response.data)
+        this.paidfn();
         //alert(JSON.stringify(response.data))
       })
       .catch((error) => {
@@ -357,7 +366,7 @@ export default {
     height: 32px;
     margin-left: auto;
     margin-right: auto;    
-    background-color: #aaa;
+    background-color: #DFDEDE;
     border-radius: 50%;
   }  
   .tcircle-black {
@@ -389,7 +398,7 @@ export default {
   .lline {
     width: 3px;
     height: 100%;
-    background-color: #aaa;
+    background-color: #DFDEDE;
     margin-left: auto;
     margin-right: auto;
   }  
@@ -400,8 +409,28 @@ export default {
     margin-left: auto;
     margin-right: auto;
   }   
-  .ltwo {
-    
+  .ltwo-payment {
+    font-family: p-medium;
+    padding-top: 5px;  
+  }
+  .pone {
+    font-size: 16px;
+    margin-bottom: 0;
+  }
+  .pone-bold {
+    font-weight: bold;
+  }
+  .ptwo {
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+  .pthree {
+    width: 100px;
+    height: 40px;
+    font-family: p-medium;
+    background-color: #DFDEDE;
+    border: none;
+    color: #000;
   }
   .details-section {
     /*background-color: blueviolet;*/
