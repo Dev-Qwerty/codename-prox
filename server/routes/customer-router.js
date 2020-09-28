@@ -407,5 +407,12 @@ router
     }
   })
 
+  router.get('/fetchAddresses/:id', (req,res)=> {
+    const id = req.params.id;
+    User.findOne({userID: crypt.decrypt(id)}, (err,results) => {
+      res.send(results.addresses);
+    })
+  })
+
 
 module.exports = router;
