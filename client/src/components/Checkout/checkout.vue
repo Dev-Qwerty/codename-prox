@@ -126,7 +126,7 @@ export default {
     paynow() {
       this.date = moment(this.date).format( 'YYYY-M-D')
       this.$cookies.remove("cart")
-      let url = this.$serverURLI + "/orders/placeorder/paynow"
+      let url = this.$serverURLI + "/orders/processpayment"
       this.$http
         .post(url, {
           id: this.$cookies.get("id"),

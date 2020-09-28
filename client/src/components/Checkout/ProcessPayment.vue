@@ -1,5 +1,12 @@
 <template>
-  <div v-html="this.paymentResponse"></div>
+    <div>
+    <div v-if="paymentResponse == null">
+        <center>
+            <h1>Please do not refresh this page...</h1>
+        </center>
+    </div>
+    <div v-else v-html="this.paymentResponse"></div>
+    </div>
 </template>
 
 <script>
@@ -17,7 +24,7 @@ export default {
             this.paymentResponse = response
         })
         setInterval(() => {
-            document.f1.submit()
+            document.paytm.submit()
         }, 1000);
     }
 }
